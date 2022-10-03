@@ -5,6 +5,15 @@ import { trpc } from "../utils/trpc";
 const Home: NextPage = () => {
   const hello = trpc.useQuery(["example.hello", { text: "from tRPC" }]);
 
+  const {data, error, isLoading} = trpc.useQuery(['example.hello']);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>{error.message}</div>;
+  }
   return (
     <>
       <Head>

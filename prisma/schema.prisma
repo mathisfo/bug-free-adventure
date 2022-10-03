@@ -51,8 +51,12 @@ model User {
     email         String?   @unique
     emailVerified DateTime?
     image         String?
-    accounts      Account[]
-    sessions      Session[]
+    createdAt     DateTime  @default(now())
+    updatedAt     DateTime  @updatedAt
+
+    accounts   Account[]
+    sessions   Session[]
+    LoginToken LoginToken[]
 }
 
 model VerificationToken {
@@ -61,4 +65,12 @@ model VerificationToken {
     expires    DateTime
 
     @@unique([identifier, token])
+}
+
+model LoginToken {
+    id        String   @unique @default(uuid())
+    createdAt DateTime @default(now())
+    user      User     @relation(fields: [id], references: [id])
+    userId    String
+    redirect  String   @default("/")
 }

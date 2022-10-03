@@ -14,6 +14,18 @@ export const exampleRouter = createRouter()
       };
     },
   })
+  .query("bopsi", {
+    input: z
+      .object({
+        text: z.string().nullish(),
+      }).nullish(),
+    resolve({ input }) {
+      return {
+        greeting: `Hello ${input?.text ?? "bopsi!"}`,
+      };
+    }
+      
+  })
   .query("getAll", {
     async resolve({ ctx }) {
       return await ctx.prisma.example.findMany();
