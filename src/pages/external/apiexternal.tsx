@@ -1,26 +1,33 @@
 import { useQuery } from "react-query";
-import { z } from "zod";
+import { any, z } from "zod";
 import { trpc } from "../../utils/trpc";
 import type { AppRouter } from "../../server/router";
 import { createTRPCClient } from "@trpc/client";
 import { stringify } from "superjson";
 
 const ExternalApi = () => {
-  const client = createTRPCClient<AppRouter>({
-    url: "/api/trpc",
-  });
+  const { data: results, isSuccess } = trpc.useQuery([
+    "example.getLearnerActivity",
+  ]);
 
-  const handleApi = () => {
-    client.query("example.getLearnerActivity").then((res) => {
-      console.log(res);
-    });
-    //client.query("example.external-api").then((res) => console.log(res));
-  };
+  if (!isSuccess) {
+    <p>Loading..</p>;
+  }
+
+  console.table(results);
+
+  const foo = results.keys();
 
   return (
     <>
       <h1>External API</h1>
-      <button onClick={handleApi}>Click</button>
+      <div>
+        {foo.array.forEach((element: any) => {
+          {
+            element;
+          }
+        })}
+      </div>
     </>
   );
 };
