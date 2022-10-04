@@ -1,5 +1,6 @@
 import { createRouter } from "./context";
 import { z } from "zod";
+import { resolve } from "path";
 
 export const exampleRouter = createRouter()
   .query("hello", {
@@ -24,6 +25,15 @@ export const exampleRouter = createRouter()
       const res = await fetch("https://v2.jokeapi.dev/joke/Any").then((res) =>
         res.json()
       );
+      return res;
+    },
+  })
+  .query("getLearnerActivity", {
+    async resolve() {
+      const res = await fetch("http://localhost:4000/api").then((res) =>
+        res.json()
+      );
+
       return res;
     },
   });
