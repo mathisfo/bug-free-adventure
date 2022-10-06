@@ -9,7 +9,7 @@ const LearnerActivitySchema = z.object({
       id: z.string(),
       name: z.string(),
       state: z.object({
-        topics: z.object({}),
+        topics: z.any(),
         activities: z.object({}),
       }),
     }),
