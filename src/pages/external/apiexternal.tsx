@@ -7,27 +7,28 @@ import { stringify } from "superjson";
 
 const ExternalApi = () => {
   const { data: results, isSuccess } = trpc.useQuery([
-    "example.getLearnerActivity",
+    "learneractivity.getLearnerActivity",
+  ]);
+
+  const { data: joke, isSuccess: jokeSuccess } = trpc.useQuery([
+    "example.joke",
   ]);
 
   if (!isSuccess) {
     <p>Loading..</p>;
   }
 
-  console.table(results);
+  if (!jokeSuccess) {
+    <p>Loading..</p>;
+  }
 
-  const foo = results.keys();
+  console.table(results);
 
   return (
     <>
       <h1>External API</h1>
-      <div>
-        {foo.array.forEach((element: any) => {
-          {
-            element;
-          }
-        })}
-      </div>
+      <div>{joke?.joke}</div>
+      <div>{results?.lastActivityId}</div>
     </>
   );
 };
