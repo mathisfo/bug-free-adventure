@@ -1,0 +1,1401 @@
+
+
+{
+  "lastActivityId": "while_loops.j_digits",
+  "lastActivityRes": -1,
+  "learner": {
+    "id": "norway22169",
+    "name": "undefined",
+    "state": {
+      "topics": {
+        "Variables and Operations": {
+          "values": {
+            "Examples": { "k": 0, "p": 0.17 },
+            "Challenges": { "k": 0, "p": 0 },
+            "Coding": { "k": 0, "p": 0 }
+          },
+          "sequencing": { "Examples": 1, "Challenges": 0, "Coding": 0 },
+          "overall": { "k": 0, "p": 0.06 }
+        },
+        "Strings": {
+          "values": {
+            "Examples": { "k": 0, "p": 0 },
+            "Challenges": { "k": 0, "p": 0.14 },
+            "Coding": { "k": 0, "p": 0 }
+          },
+          "sequencing": { "Examples": 1, "Challenges": 0, "Coding": 0 },
+          "overall": { "k": 0, "p": 0.05 }
+        },
+        "Boolean Expressions": {
+          "values": {
+            "Examples": { "k": 0, "p": 0 },
+            "Challenges": { "k": 0, "p": 0 },
+            "Coding": { "k": 0, "p": 0 }
+          },
+          "sequencing": { "Examples": 1, "Challenges": 0, "Coding": 0 },
+          "overall": { "k": 0, "p": 0 }
+        },
+        "If-Else": {
+          "values": {
+            "Examples": { "k": 0, "p": 0 },
+            "Challenges": { "k": 0, "p": 0 },
+            "Coding": { "k": 0, "p": 0 }
+          },
+          "sequencing": { "Examples": 1, "Challenges": 0, "Coding": 0 },
+          "overall": { "k": 0, "p": 0 }
+        },
+        "While Loops": {
+          "values": {
+            "Examples": { "k": 0, "p": 0 },
+            "Challenges": { "k": 0, "p": 0 },
+            "Coding": { "k": 0, "p": 0 }
+          },
+          "sequencing": { "Examples": 0.7, "Challenges": 1, "Coding": 0 },
+          "overall": { "k": 0, "p": 0 }
+        },
+        "For Loops": {
+          "values": {
+            "Examples": { "k": 0, "p": 0 },
+            "Challenges": { "k": 0, "p": 0 },
+            "Coding": { "k": 0, "p": 0 }
+          },
+          "sequencing": { "Examples": 1, "Challenges": 0, "Coding": 0 },
+          "overall": { "k": 0, "p": 0 }
+        },
+        "Objects and Classes": {
+          "values": {
+            "Examples": { "k": 0, "p": 0 },
+            "Challenges": { "k": 0, "p": 0 },
+            "Coding": { "k": 0, "p": 0 }
+          },
+          "sequencing": { "Examples": 1, "Challenges": 0, "Coding": 0 },
+          "overall": { "k": 0, "p": 0 }
+        },
+        "Nested Loops": {
+          "values": {
+            "Examples": { "k": 0, "p": 0 },
+            "Challenges": { "k": 0, "p": 0 },
+            "Coding": { "k": 0, "p": 0 }
+          },
+          "sequencing": { "Examples": 1, "Challenges": 0.3, "Coding": 0 },
+          "overall": { "k": 0, "p": 0 }
+        },
+        "Arrays": {
+          "values": {
+            "Examples": { "k": 0, "p": 0 },
+            "Challenges": { "k": 0, "p": 0 },
+            "Coding": { "k": 0, "p": 0 }
+          },
+          "sequencing": { "Examples": 1, "Challenges": 0, "Coding": 0 },
+          "overall": { "k": 0, "p": 0 }
+        },
+        "Two-Dimensional Arrays": {
+          "values": {
+            "Examples": { "k": 0, "p": 0 },
+            "Challenges": { "k": 0, "p": 0 },
+            "Coding": { "k": 0, "p": 0 }
+          },
+          "sequencing": { "Examples": 1, "Challenges": 0, "Coding": 0 },
+          "overall": { "k": 0, "p": 0 }
+        },
+        "Exception handling": {
+          "values": {
+            "Examples": { "k": 0, "p": 0 },
+            "Challenges": { "k": 0, "p": 0 },
+            "Coding": { "k": 0, "p": 0 }
+          },
+          "sequencing": { "Examples": 1, "Challenges": 0.3, "Coding": 0 },
+          "overall": { "k": 0, "p": 0 }
+        },
+        "File processing": {
+          "values": {
+            "Examples": { "k": 0, "p": 0 },
+            "Challenges": { "k": 0, "p": 0 },
+            "Coding": { "k": 0, "p": 0 }
+          },
+          "sequencing": { "Examples": 1, "Challenges": 0.3, "Coding": 0 },
+          "overall": { "k": 0, "p": 0 }
+        },
+        "ArrayLists": {
+          "values": {
+            "Examples": { "k": 0, "p": 0 },
+            "Challenges": { "k": 0, "p": 0 },
+            "Coding": { "k": 0, "p": 0 }
+          },
+          "sequencing": { "Examples": 1, "Challenges": 0.7, "Coding": 0.3 },
+          "overall": { "k": 0, "p": 0 }
+        },
+        "Inheritance": {
+          "values": {
+            "Examples": { "k": 0, "p": 0 },
+            "Challenges": { "k": 0, "p": 0 },
+            "Coding": { "k": 0, "p": 0 }
+          },
+          "sequencing": { "Examples": 1, "Challenges": 0.3, "Coding": 0 },
+          "overall": { "k": 0, "p": 0 }
+        }
+      },
+      "activities": {
+        "Variables and Operations": {
+          "Examples": {
+            "artithmetic.inc_dec_operators": {
+              "values": {
+                "k": 0,
+                "p": 1,
+                "a": 4,
+                "s": -1,
+                "t": -1,
+                "aSeq": ""
+              },
+              "sequencing": 0
+            },
+            "arithmetic.f_to_c_conversion": {
+              "values": {
+                "k": 0,
+                "p": 0,
+                "a": 0,
+                "s": -1,
+                "t": -1,
+                "aSeq": ""
+              },
+              "sequencing": 0
+            },
+            "arithmetic.time_conversion": {
+              "values": {
+                "k": 0,
+                "p": 0,
+                "a": 0,
+                "s": -1,
+                "t": -1,
+                "aSeq": ""
+              },
+              "sequencing": 0.7
+            },
+            "artihmetic.vending_machine": {
+              "values": {
+                "k": 0,
+                "p": 0,
+                "a": 0,
+                "s": -1,
+                "t": -1,
+                "aSeq": ""
+              },
+              "sequencing": 0
+            },
+            "arithmetic.bmi_calculator": {
+              "values": {
+                "k": 0,
+                "p": 0,
+                "a": 0,
+                "s": -1,
+                "t": -1,
+                "aSeq": ""
+              },
+              "sequencing": 1
+            },
+            "arithmetic.pythagorean_theorem": {
+              "values": {
+                "k": 0,
+                "p": 0,
+                "a": 0,
+                "s": -1,
+                "t": -1,
+                "aSeq": ""
+              },
+              "sequencing": 0.3
+            }
+          },
+          "Challenges": {
+            "JDecInc2": {
+              "values": {
+                "k": 0,
+                "p": 0,
+                "a": 1,
+                "s": 0,
+                "t": -1,
+                "aSeq": "0"
+              },
+              "sequencing": 0
+            },
+            "JDecInc3": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "FahrenheitToCelsius": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "DisplayTime2": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "VendingMachine2": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "BmiCalculator2": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "PythagoreanTheorem2": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            }
+          },
+          "Coding": {
+            "second_in_days": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "rectangle_perimeter": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "days_to_week_conversion": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "percentage_correctness": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "compute_average": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            }
+          }
+        },
+        "Strings": {
+          "Examples": {
+            "strings.substring": {
+              "values": {
+                "k": 0,
+                "p": 0,
+                "a": 0,
+                "s": -1,
+                "t": -1,
+                "aSeq": ""
+              },
+              "sequencing": 0
+            },
+            "strings.addition": {
+              "values": {
+                "k": 0,
+                "p": 0,
+                "a": 0,
+                "s": -1,
+                "t": -1,
+                "aSeq": ""
+              },
+              "sequencing": 0.3
+            },
+            "strings.escape_chars": {
+              "values": {
+                "k": 0,
+                "p": 0,
+                "a": 0,
+                "s": -1,
+                "t": -1,
+                "aSeq": ""
+              },
+              "sequencing": 1
+            },
+            "strings.equals": {
+              "values": {
+                "k": 0,
+                "p": 0,
+                "a": 0,
+                "s": -1,
+                "t": -1,
+                "aSeq": ""
+              },
+              "sequencing": 0.7
+            },
+            "strings.charAt": {
+              "values": {
+                "k": 0,
+                "p": 0,
+                "a": 0,
+                "s": -1,
+                "t": -1,
+                "aSeq": ""
+              },
+              "sequencing": 0
+            }
+          },
+          "Challenges": {
+            "Initials2": {
+              "values": {
+                "k": 0,
+                "p": 1,
+                "a": 1,
+                "s": 1,
+                "t": -1,
+                "aSeq": "1"
+              },
+              "sequencing": 0
+            },
+            "Initials3": {
+              "values": {
+                "k": 0,
+                "p": 0,
+                "a": 1,
+                "s": 0,
+                "t": -1,
+                "aSeq": "0"
+              },
+              "sequencing": 0
+            },
+            "StringAddition2": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "JEscapeChar2": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "JEscapeChar3": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "JStringEqual2": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "JCharAt2": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            }
+          },
+          "Coding": {
+            "first_half": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "non_start": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "make_out_word": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "repeat_last_char": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "first_last_swap": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "end_characters": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "is_is_substring_or_ not_is_not_substring": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            }
+          }
+        },
+        "Boolean Expressions": {
+          "Examples": {
+            "booleans.phone_age": {
+              "values": {
+                "k": 0,
+                "p": 0,
+                "a": 0,
+                "s": -1,
+                "t": -1,
+                "aSeq": ""
+              },
+              "sequencing": 0
+            },
+            "booleans.fail_course": {
+              "values": {
+                "k": 0,
+                "p": 0,
+                "a": 0,
+                "s": -1,
+                "t": -1,
+                "aSeq": ""
+              },
+              "sequencing": 0
+            },
+            "booleans.rent_car": {
+              "values": {
+                "k": 0,
+                "p": 0,
+                "a": 0,
+                "s": -1,
+                "t": -1,
+                "aSeq": ""
+              },
+              "sequencing": 0.3
+            },
+            "booleans.hot_dry": {
+              "values": {
+                "k": 0,
+                "p": 0,
+                "a": 0,
+                "s": -1,
+                "t": -1,
+                "aSeq": ""
+              },
+              "sequencing": 0.7
+            },
+            "booleans.three_booleans": {
+              "values": {
+                "k": 0,
+                "p": 0,
+                "a": 0,
+                "s": -1,
+                "t": -1,
+                "aSeq": ""
+              },
+              "sequencing": 1
+            }
+          },
+          "Challenges": {
+            "JPhoneAge2": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "JFailCourse2": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "JFailCourse3": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "JRentCar2": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "JRentCar3": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "JBooleanDryHot2": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "JBooleanDryHot3": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "JBooleanDryHot4": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "JThreeBoolean2": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "JThreeBoolean3": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            }
+          },
+          "Coding": {
+            "love6": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "is_special": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "check_start_end_character": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "squirrel_play": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "in_order": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            }
+          }
+        },
+        "If-Else": {
+          "Examples": {
+            "ifelse.if_else_num": {
+              "values": {
+                "k": 0,
+                "p": 0,
+                "a": 0,
+                "s": -1,
+                "t": -1,
+                "aSeq": ""
+              },
+              "sequencing": 1
+            },
+            "ifelse.if_else_wage": {
+              "values": {
+                "k": 0,
+                "p": 0,
+                "a": 0,
+                "s": -1,
+                "t": -1,
+                "aSeq": ""
+              },
+              "sequencing": 0
+            },
+            "ifelse.if_else_if_grade": {
+              "values": {
+                "k": 0,
+                "p": 0,
+                "a": 0,
+                "s": -1,
+                "t": -1,
+                "aSeq": ""
+              },
+              "sequencing": 0
+            },
+            "ifelse.nested_if_temperature": {
+              "values": {
+                "k": 0,
+                "p": 0,
+                "a": 0,
+                "s": -1,
+                "t": -1,
+                "aSeq": ""
+              },
+              "sequencing": 0.7
+            },
+            "ifelse.nested_if_min_max": {
+              "values": {
+                "k": 0,
+                "p": 0,
+                "a": 0,
+                "s": -1,
+                "t": -1,
+                "aSeq": ""
+              },
+              "sequencing": 0.3
+            }
+          },
+          "Challenges": {
+            "ifElseOddEven": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "JIfElseWages2": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "JIfElseIfGrade2": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "JNestedIfTemperature2": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "JNestedIfMaxOfThree": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            }
+          },
+          "Coding": {
+            "sortaSum": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "twoAsOne": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "greenTicket": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "without2": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "in1To10": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            }
+          }
+        },
+        "While Loops": {
+          "Examples": {
+            "while_loops.divisor": {
+              "values": {
+                "k": 0,
+                "p": 0,
+                "a": 0,
+                "s": -1,
+                "t": -1,
+                "aSeq": ""
+              },
+              "sequencing": 0
+            },
+            "while_loops.inputs": {
+              "values": {
+                "k": 0,
+                "p": 0,
+                "a": 0,
+                "s": -1,
+                "t": -1,
+                "aSeq": ""
+              },
+              "sequencing": 0.3
+            },
+            "while_loops.j_average": {
+              "values": {
+                "k": 0,
+                "p": 0,
+                "a": 0,
+                "s": -1,
+                "t": -1,
+                "aSeq": ""
+              },
+              "sequencing": 0
+            },
+            "while_loops.j_check_adjacent": {
+              "values": {
+                "k": 0,
+                "p": 0,
+                "a": 0,
+                "s": -1,
+                "t": -1,
+                "aSeq": ""
+              },
+              "sequencing": 0.7
+            },
+            "while_loops.j_digits": {
+              "values": {
+                "k": 0,
+                "p": 0,
+                "a": 0,
+                "s": -1,
+                "t": -1,
+                "aSeq": ""
+              },
+              "sequencing": 0
+            },
+            "while_loops.win_percentage": {
+              "values": {
+                "k": 0,
+                "p": 0,
+                "a": 0,
+                "s": -1,
+                "t": -1,
+                "aSeq": ""
+              },
+              "sequencing": 0
+            }
+          },
+          "Challenges": {
+            "JLargestDivisor": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "JInput2": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "JInput3": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "JInput4": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "JAverageEvenNums": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "JAverageDouble": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "JAdjacentConsecutives": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "JAdjacentGreater": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "JSumDigits": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 1
+            },
+            "JReverseNumber": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "JWinPercentageInput": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "JWinPercentageWonEqual": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            }
+          },
+          "Coding": {
+            "while1_coding": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "while2_coding": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "while3_coding": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "while4_coding": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "while5_coding": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "smallest_integer": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            }
+          }
+        },
+        "For Loops": {
+          "Examples": {
+            "for_loops.j_for_one": {
+              "values": {
+                "k": 0,
+                "p": 0,
+                "a": 0,
+                "s": -1,
+                "t": -1,
+                "aSeq": ""
+              },
+              "sequencing": 1
+            },
+            "for_loops.j_for_two": {
+              "values": {
+                "k": 0,
+                "p": 0,
+                "a": 0,
+                "s": -1,
+                "t": -1,
+                "aSeq": ""
+              },
+              "sequencing": 0.7
+            },
+            "for_loops.j_for_three": {
+              "values": {
+                "k": 0,
+                "p": 0,
+                "a": 0,
+                "s": -1,
+                "t": -1,
+                "aSeq": ""
+              },
+              "sequencing": 0.3
+            },
+            "for_loops.j_squares": {
+              "values": {
+                "k": 0,
+                "p": 0,
+                "a": 0,
+                "s": -1,
+                "t": -1,
+                "aSeq": ""
+              },
+              "sequencing": 0
+            }
+          },
+          "Challenges": {
+            "JForOne2": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "JForTwo2": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "JForThree2": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "JWriteSquaresOdd": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "JWriteSquaresRange": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            }
+          },
+          "Coding": {
+            "for1_coding": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "for2_coding": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "for3_coding": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "for4_coding": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "sum_square_difference": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "largest_prime_factor": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "largest_palindrome_product": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            }
+          }
+        },
+        "Objects and Classes": {
+          "Examples": {
+            "objects.classes.point": {
+              "values": {
+                "k": 0,
+                "p": 0,
+                "a": 0,
+                "s": -1,
+                "t": -1,
+                "aSeq": ""
+              },
+              "sequencing": 1
+            },
+            "objects.classes.tv": {
+              "values": {
+                "k": 0,
+                "p": 0,
+                "a": 0,
+                "s": -1,
+                "t": -1,
+                "aSeq": ""
+              },
+              "sequencing": 0.7
+            },
+            "objects.classes.account": {
+              "values": {
+                "k": 0,
+                "p": 0,
+                "a": 0,
+                "s": -1,
+                "t": -1,
+                "aSeq": ""
+              },
+              "sequencing": 0
+            },
+            "objects.classes.loan": {
+              "values": {
+                "k": 0,
+                "p": 0,
+                "a": 0,
+                "s": -1,
+                "t": -1,
+                "aSeq": ""
+              },
+              "sequencing": 0.3
+            }
+          },
+          "Challenges": {
+            "PointTester2": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "TVTester2": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "Transactions2": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "LoanTester2": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            }
+          },
+          "Coding": {
+            "object_classes_1": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "object_classes_2": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "object_classes_3": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "object_classes_4": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            }
+          }
+        },
+        "Nested Loops": {
+          "Examples": {
+            "nested_for.star_patterns": {
+              "values": {
+                "k": 0,
+                "p": 0,
+                "a": 0,
+                "s": -1,
+                "t": -1,
+                "aSeq": ""
+              },
+              "sequencing": 0.7
+            },
+            "nested_for.repeated_sequence": {
+              "values": {
+                "k": 0,
+                "p": 0,
+                "a": 0,
+                "s": -1,
+                "t": -1,
+                "aSeq": ""
+              },
+              "sequencing": 1
+            }
+          },
+          "Challenges": {
+            "JStars2": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "JRepeatedSequence2": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0.3
+            }
+          },
+          "Coding": {
+            "nested_loops_1": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "nested_loops_2": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "symmetrical_array": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            }
+          }
+        },
+        "Arrays": {
+          "Examples": {
+            "arrays.j_array_basic": {
+              "values": {
+                "k": 0,
+                "p": 0,
+                "a": 0,
+                "s": -1,
+                "t": -1,
+                "aSeq": ""
+              },
+              "sequencing": 1
+            },
+            "arrays.j_array_fill": {
+              "values": {
+                "k": 0,
+                "p": 0,
+                "a": 0,
+                "s": -1,
+                "t": -1,
+                "aSeq": ""
+              },
+              "sequencing": 0
+            },
+            "arrays.j_array_change": {
+              "values": {
+                "k": 0,
+                "p": 0,
+                "a": 0,
+                "s": -1,
+                "t": -1,
+                "aSeq": ""
+              },
+              "sequencing": 0
+            },
+            "arrays.j_array_process_elements": {
+              "values": {
+                "k": 0,
+                "p": 0,
+                "a": 0,
+                "s": -1,
+                "t": -1,
+                "aSeq": ""
+              },
+              "sequencing": 0.7
+            },
+            "arrays.j_array_min_max": {
+              "values": {
+                "k": 0,
+                "p": 0,
+                "a": 0,
+                "s": -1,
+                "t": -1,
+                "aSeq": ""
+              },
+              "sequencing": 0
+            },
+            "arrays.j_temperature": {
+              "values": {
+                "k": 0,
+                "p": 0,
+                "a": 0,
+                "s": -1,
+                "t": -1,
+                "aSeq": ""
+              },
+              "sequencing": 0
+            },
+            "arrays.j_array_rotate": {
+              "values": {
+                "k": 0,
+                "p": 0,
+                "a": 0,
+                "s": -1,
+                "t": -1,
+                "aSeq": ""
+              },
+              "sequencing": 0
+            },
+            "arrays.j_search_array": {
+              "values": {
+                "k": 0,
+                "p": 0,
+                "a": 0,
+                "s": -1,
+                "t": -1,
+                "aSeq": ""
+              },
+              "sequencing": 0.3
+            }
+          },
+          "Challenges": {
+            "JArrayBasic2": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "JArrayBasic3": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "JArrayFillUserInput": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "JArraySwapAdjacentElements": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "JAverageArrayElements": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "JArrayMin": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "JTemperatureListDaysAboveThreshold": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "JArrayRotateLeftTwice": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "JArrayRotateRight": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "JArrayRotateRightTwice": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "JSearchArrayTotalCounts": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "JSearchArrayCountsEach": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            }
+          },
+          "Coding": {
+            "arrays_1": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "arrays_2": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "arrays_3": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "array_4": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "fixing_order_of_numbers": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            }
+          }
+        },
+        "Two-Dimensional Arrays": {
+          "Examples": {
+            "arrays2d.j_array2d_basic": {
+              "values": {
+                "k": 0,
+                "p": 0,
+                "a": 0,
+                "s": -1,
+                "t": -1,
+                "aSeq": ""
+              },
+              "sequencing": 1
+            },
+            "arrays2d.j_print_medals": {
+              "values": {
+                "k": 0,
+                "p": 0,
+                "a": 0,
+                "s": -1,
+                "t": -1,
+                "aSeq": ""
+              },
+              "sequencing": 0.7
+            },
+            "arrays2d.j_soda_survery": {
+              "values": {
+                "k": 0,
+                "p": 0,
+                "a": 0,
+                "s": -1,
+                "t": -1,
+                "aSeq": ""
+              },
+              "sequencing": 0.3
+            }
+          },
+          "Challenges": {
+            "JArrays2dBasic2": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "JArrays2dBasic3": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "JPrintMedalsRowColumnTotal": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "JSodaSurverySodaAvg": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "JSodaSurverySodaRespondentAvg": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            }
+          },
+          "Coding": {
+            "pcrs_2d_arrays_1": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "pcrs_2d_arrays_2": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "pcrs_2d_arrays_3": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            }
+          }
+        },
+        "Exception handling": {
+          "Examples": {
+            "exceptions.j_check_age": {
+              "values": {
+                "k": 0,
+                "p": 0,
+                "a": 0,
+                "s": -1,
+                "t": -1,
+                "aSeq": ""
+              },
+              "sequencing": 1
+            },
+            "exceptions.j_check_producut_code": {
+              "values": {
+                "k": 0,
+                "p": 0,
+                "a": 0,
+                "s": -1,
+                "t": -1,
+                "aSeq": ""
+              },
+              "sequencing": 0.7
+            }
+          },
+          "Challenges": {
+            "JCheckAge2": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "JCheckProductCode2": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0.3
+            }
+          },
+          "Coding": {}
+        },
+        "File processing": {
+          "Examples": {
+            "files.j_work_hours": {
+              "values": {
+                "k": 0,
+                "p": 0,
+                "a": 0,
+                "s": -1,
+                "t": -1,
+                "aSeq": ""
+              },
+              "sequencing": 0.7
+            },
+            "files.j_input_stat": {
+              "values": {
+                "k": 0,
+                "p": 0,
+                "a": 0,
+                "s": -1,
+                "t": -1,
+                "aSeq": ""
+              },
+              "sequencing": 1
+            }
+          },
+          "Challenges": {
+            "JWorkHours2": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "JInputStat2": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0.3
+            }
+          },
+          "Coding": {}
+        },
+        "ArrayLists": {
+          "Examples": {
+            "arraylist.vocabulary": {
+              "values": {
+                "k": 0,
+                "p": 0,
+                "a": 0,
+                "s": -1,
+                "t": -1,
+                "aSeq": ""
+              },
+              "sequencing": 1
+            }
+          },
+          "Challenges": {
+            "JVocabulary2": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0.7
+            }
+          },
+          "Coding": {
+            "array_lst_1": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0.3
+            }
+          }
+        },
+        "Inheritance": {
+          "Examples": {
+            "inheritance.animals": {
+              "values": {
+                "k": 0,
+                "p": 0,
+                "a": 0,
+                "s": -1,
+                "t": -1,
+                "aSeq": ""
+              },
+              "sequencing": 0.7
+            },
+            "inheritance.point": {
+              "values": {
+                "k": 0,
+                "p": 0,
+                "a": 0,
+                "s": -1,
+                "t": -1,
+                "aSeq": ""
+              },
+              "sequencing": 1
+            }
+          },
+          "Challenges": {
+            "AnimalTester2": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0.3
+            },
+            "InheritancePointTester2": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            }
+          },
+          "Coding": {
+            "inheritance_1": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            },
+            "inheritance_2": {
+              "values": { "k": 0, "p": 0, "a": 0, "s": 0, "t": -1, "aSeq": "" },
+              "sequencing": 0
+            }
+          }
+        }
+      }
+    }
+  },
+  "groups": [],
+  "recommendation": [],
+  "recommendationKC": [],
+  "feedback": {},
+  "logs": [],
+  "ownBadges": [],
+  "rmcCount": {}
+}
