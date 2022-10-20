@@ -1,9 +1,10 @@
-import { mockAPI } from "../../server/router/learneractivity/learnerActivityRouter";
+
+import { topicAnalytics } from '../../server/schema/LearnerActivitySchema';
 import { trpc } from "../../utils/trpc";
 
 const ExternalApi = () => {
   const {
-    data: results,
+    data: learnerAnalytics,
     isSuccess,
     isLoading,
   } = trpc.useQuery(["learneractivity.getMockAPI"]);
@@ -11,24 +12,23 @@ const ExternalApi = () => {
   if (!isSuccess || isLoading) {
     return <p>Loading..</p>;
   }
-
-
-
-  console.log("TOPICS ", results?.learner.state.topics[0]);
+  
 
   return (
     <>
-      <h1>Hey</h1>
-      <h2>Topics</h2>
-      {Object.entries(results?.learner.state.topics).map((topic) => (
-        <div key={topic[0]}>
-          <h1 key={topic[0]}>{topic[0]}</h1>
-          <h2>Challenges</h2>
-          <p>Your progress:</p>
-          <p>{topic[1].values.Challenges.p}</p>
+      <h1>Hey, {learnerAnalytics.learner.id}</h1>
+      <h2>Your topics: </h2>
 
-        </div>
-      ))}
+        {learnerAnalytics.analytics.map((topic: topicAnalytics) => (
+
+          <div key={topic.topic}>
+            <h3>{topic.topic}</h3>
+            <p>Example Progress: {topic.progress.examples}</p>
+
+          </div>
+
+        ))}
+
     </>
   );
 };
