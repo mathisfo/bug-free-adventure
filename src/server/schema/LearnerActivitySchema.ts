@@ -26,6 +26,6 @@ export const learnerActivitySchema = z.object({
   analytics: z.array(topicAnalyticsSchema),
 });
 
-export type topicProgress = z.infer<typeof topicProgressSchema>;
-export type topicAnalytics = z.infer<typeof topicAnalyticsSchema>;
-export type learnerAnalyticsAPIResponse = z.infer<typeof learnerActivitySchema>;
+export type TopicProgress = z.infer<typeof topicProgressSchema>;
+export type TopicAnalytics = z.infer<typeof topicAnalyticsSchema>;
+export type LearnerAnalyticsAPIResponse = z.infer<typeof learnerActivitySchema>;

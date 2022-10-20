@@ -1,5 +1,5 @@
 
-import { topicAnalytics } from '../../server/schema/LearnerActivitySchema';
+import { TopicAnalytics } from '../../server/schema/LearnerActivitySchema';
 import { trpc } from "../../utils/trpc";
 
 const ExternalApi = () => {
@@ -19,7 +19,7 @@ const ExternalApi = () => {
       <h1>Hey, {learnerAnalytics.learner.id}</h1>
       <h2>Your topics: </h2>
 
-        {learnerAnalytics.analytics.map((topic: topicAnalytics) => (
+        {learnerAnalytics.analytics.map((topic: TopicAnalytics) => (
 
           <div key={topic.topic}>
             <h3>{topic.topic}</h3>
