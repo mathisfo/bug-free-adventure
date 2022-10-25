@@ -4,9 +4,7 @@ import {
   Sequencing,
 } from "./types/LearnerActivityBFFApi";
 
-
-export function reMapLearnerActivity(api: any) {
-
+export function reMapLearnerActivityUtil(api: any) {
   const remapped: LearnerActivityBFFApi = {
     learner: {
       id: "",

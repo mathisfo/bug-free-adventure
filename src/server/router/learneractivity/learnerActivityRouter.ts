@@ -2,7 +2,7 @@ import { z } from "zod";
 import { createRouter } from "../context";
 import { toJson } from "really-relaxed-json";
 import { learnerActivitySchema } from "../../schema/LearnerActivitySchema";
-import { reMapLearnerActivity } from "../../bff/learnerActivityController";
+import { reMapLearnerActivityUtil } from "../../bff/learnerActivityUtil";
 
 const options = {
   method: "GET",
@@ -22,13 +22,12 @@ export const learnerActivityRouter = createRouter()
   })
   .query("getMockAPI", {
     async resolve() {
-
       const unfilteredAPI = await fetch(externalAPIURL, options)
         .then((response) => response.text())
         .then((text) => toJson(text))
         .then((j) => JSON.parse(j));
 
-      const api = reMapLearnerActivity(unfilteredAPI);
+      const api = reMapLearnerActivityUtil(unfilteredAPI);
 
       return learnerActivitySchema.parse(api);
     },
