@@ -7,7 +7,7 @@ export const topicProgressSchema = z.object({
 });
 
 export const topicAnalyticsSchema = z.object({
-  topic: z.string(),
+  name: z.string(),
   progress: topicProgressSchema,
   sequencing: z.object({
     examples: z.number(),
@@ -23,7 +23,7 @@ export const learnerActivitySchema = z.object({
     name: z.string(),
     lastActivityId: z.string(),
   }),
-  analytics: z.array(topicAnalyticsSchema),
+  topicanalytics: z.array(topicAnalyticsSchema),
 });
 
 export type TopicProgress = z.infer<typeof topicProgressSchema>;

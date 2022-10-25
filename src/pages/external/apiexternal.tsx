@@ -19,10 +19,10 @@ const ExternalApi = () => {
       <h1>Hey, {learnerAnalytics.learner.id}</h1>
       <h2>Your topics: </h2>
 
-        {learnerAnalytics.analytics.map((topic: TopicAnalytics) => (
+        {learnerAnalytics.topicanalytics.map((topic: TopicAnalytics) => (
 
-          <div key={topic.topic}>
-            <h3>{topic.topic}</h3>
+          <div key={topic.name}>
+            <h3>{topic.name}</h3>
             <p>Example Progress: {topic.progress.examples}</p>
 
           </div>
