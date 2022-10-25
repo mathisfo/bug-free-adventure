@@ -22,9 +22,6 @@ export const learnerActivityRouter = createRouter()
   })
   .query("getMockAPI", {
     async resolve() {
-      const res = await fetch("http://localhost:4000/mockAPI").then(
-        (response) => response.json()
-      );
 
       const unfilteredAPI = await fetch(externalAPIURL, options)
         .then((response) => response.text())
@@ -33,6 +30,6 @@ export const learnerActivityRouter = createRouter()
 
       const api = reMapLearnerActivity(unfilteredAPI);
 
-      return learnerActivitySchema.parse(res);
+      return learnerActivitySchema.parse(api);
     },
   });
