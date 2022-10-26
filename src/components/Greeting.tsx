@@ -1,6 +1,6 @@
 const Greeting = ({name}: {name: string}) => {
     return ( 
-        <div className="grid text-xl text-gray-700 rounded my-8">Hey, {name}!</div>
+        <div className="grid text-3xl text-color rounded my-8 justify-center">Hey, {name}!</div>
     )
 }
 
