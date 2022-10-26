@@ -29,6 +29,8 @@ export const learnerActivityRouter = createRouter()
 
       const api = reMapLearnerActivityUtil(unfilteredAPI);
 
+      console.log("API", api.topicanalytics);
+
       return learnerActivitySchema.parse(api);
     },
   });

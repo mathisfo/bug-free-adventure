@@ -11,7 +11,12 @@ export function reMapLearnerActivityUtil(api: any) {
       name: "",
       lastActivityId: "",
     },
-    topicanalytics: [],
+    topicAnalytics: [],
+    activityAnalytics: {
+      examples: [],
+      challenges: [],
+      coding: [],
+    },
   };
 
   const progress: Progress = {
@@ -54,7 +59,103 @@ export function reMapLearnerActivityUtil(api: any) {
 
     topicObj.overallProgress = topic.overall.p;
 
-    remapped.topicanalytics.push(topicObj);
+    remapped.topicAnalytics.push(topicObj);
+
+    for (const type in api.learner.state.activities[key].Examples) {
+      const activity = {
+        relatedTopic: "",
+        activityName: "",
+        visited: false,
+        attempts: 0,
+        successRate: 0,
+        t: 0,
+        aSeq: "",
+        sequencing: 0.1,
+        type: "",
+      };
+      activity.relatedTopic = key;
+      activity.type = "example";
+      activity.activityName = type;
+
+      if (api.learner.state.activities[key].Examples[type].values.p == 1) {
+        activity.visited = true;
+      }
+      activity.attempts =
+        api.learner.state.activities[key].Examples[type].values.a;
+      activity.successRate =
+        api.learner.state.activities[key].Examples[type].values.s;
+      activity.t = api.learner.state.activities[key].Examples[type].values.t;
+      activity.aSeq =
+        api.learner.state.activities[key].Examples[type].values.aSeq;
+      activity.sequencing =
+        api.learner.state.activities[key].Examples[type].sequencing;
+
+      remapped.activityAnalytics.examples.push(activity);
+    }
+
+    for (const type in api.learner.state.activities[key].Challenges) {
+      const activity = {
+        relatedTopic: "",
+        activityName: "",
+        visited: false,
+        attempts: 0,
+        successRate: 0,
+        t: 0,
+        aSeq: "",
+        sequencing: 0.1,
+        type: "",
+      };
+
+      activity.relatedTopic = key;
+      activity.type = "challenge";
+      activity.activityName = type;
+
+      if (api.learner.state.activities[key].Challenges[type].values.p == 1) {
+        activity.visited = true;
+      }
+      activity.attempts =
+        api.learner.state.activities[key].Challenges[type].values.a;
+      activity.successRate =
+        api.learner.state.activities[key].Challenges[type].values.s;
+      activity.t = api.learner.state.activities[key].Challenges[type].values.t;
+      activity.aSeq =
+        api.learner.state.activities[key].Challenges[type].values.aSeq;
+      activity.sequencing =
+        api.learner.state.activities[key].Challenges[type].sequencing;
+
+      remapped.activityAnalytics.challenges.push(activity);
+    }
+
+    for (const type in api.learner.state.activities[key].Coding) {
+      const activity = {
+        relatedTopic: "",
+        activityName: "",
+        visited: false,
+        attempts: 0,
+        successRate: 0,
+        t: 0,
+        aSeq: "",
+        sequencing: 0.1,
+        type: "",
+      };
+      activity.relatedTopic = key;
+      activity.type = "coding";
+      activity.activityName = type;
+      if (api.learner.state.activities[key].Coding[type].values.p == 1) {
+        activity.visited = true;
+      }
+      activity.attempts =
+        api.learner.state.activities[key].Coding[type].values.a;
+      activity.successRate =
+        api.learner.state.activities[key].Coding[type].values.s;
+      activity.t = api.learner.state.activities[key].Coding[type].values.t;
+      activity.aSeq =
+        api.learner.state.activities[key].Coding[type].values.aSeq;
+      activity.sequencing =
+        api.learner.state.activities[key].Coding[type].sequencing;
+
+      remapped.activityAnalytics.coding.push(activity);
+    }
   }
 
   const j = JSON.stringify(remapped);
