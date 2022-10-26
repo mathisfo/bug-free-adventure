@@ -14,6 +14,7 @@ const ExternalApi = () => {
   if (!isSuccess || isLoading) {
     return <p>Loading..</p>;
   }
+  
 
   return (
     <>
