@@ -20,11 +20,3 @@ export const exampleRouter = createRouter()
       return await ctx.prisma.example.findMany();
     },
   })
-  .query("external-api", {
-    async resolve() {
-      const res = await fetch("https://v2.jokeapi.dev/joke/Any").then((res) =>
-        res.json()
-      );
-      return res;
-    },
-  });

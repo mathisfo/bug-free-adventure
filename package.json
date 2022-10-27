@@ -26,6 +26,7 @@
     "react-dom": "18.2.0",
     "react-minimal-pie-chart": "^8.3.0",
     "react-query": "^3.39.2",
+    "really-relaxed-json": "^0.3.1",
     "superjson": "^1.10.0",
     "tw-elements": "^1.0.0-alpha12",
     "zod": "^3.18.0"
