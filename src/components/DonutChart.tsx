@@ -27,7 +27,7 @@ const DonutChart = () => {
     return learnerAnalytics.topicAnalytics.map((e) => e.overallProgress).reduce((acc, val) => { return acc + val *100;},0 );
   };
 
-  const data = [
+  const data: any = [
     {
       title: "To go",
       value: `${overallProgress()}`,
