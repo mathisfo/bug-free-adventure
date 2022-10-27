@@ -15,5 +15,6 @@ export const appRouter = createRouter()
   .merge("activities.", activitiesRouter);
 
 
+
 // export type definition of API
 export type AppRouter = typeof appRouter;
