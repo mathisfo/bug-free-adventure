@@ -4,7 +4,7 @@ import Sidebar from "../../components/Sidebar";
 const Settings = () => {
   return (
     <div>
-      <MenuBar name="Johanne" />
+      <MenuBar  />
       <div className="back-layer grid h-full w-full grid-cols-5 pt-4">
         <style global jsx>{`
           html,

@@ -3,8 +3,10 @@ import MenuBar from "../../components/MenuBar";
 import Sidebar from "../../components/Sidebar";
 import DonutChart from "../../components/DonutChart";
 import CourseStatus from "../../components/CourseStatus";
+import { trpc } from "../../utils/trpc";
 
 const Courses = () => {
+
   const exercises = [
     {
       course: "Java",
@@ -31,7 +33,7 @@ const Courses = () => {
 
   return (
     <div>
-      <MenuBar name="Johanne" />
+      <MenuBar />
       <div className="back-layer grid h-full w-full grid-cols-5 pt-4">
         <style global jsx>{`
           html,
@@ -54,7 +56,7 @@ const Courses = () => {
             </div>
 
             <div className="w-2/5 items-center px-20">
-              <DonutChart progress={45} />
+              <DonutChart />
             </div>
           </div>
           <CourseStatus />

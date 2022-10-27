@@ -43,5 +43,11 @@
     .icon {
        @apply bg-indigo-300 dark:bg-[#6f69ee];
     }
+    .loading-spinner {
+        @apply text-[#d1d5db] opacity-25;
+    }
+    .loading {
+        @apply bg-[#d1d5db] opacity-25;
+    }
     
 }

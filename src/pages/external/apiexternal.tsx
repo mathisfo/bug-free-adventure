@@ -9,7 +9,7 @@ const ExternalApi = () => {
     data: learnerAnalytics,
     isSuccess,
     isLoading,
-  } = trpc.useQuery(["learneractivity.getMockAPI"]);
+  } = trpc.useQuery(["learneractivity.getLearnerActivity"]);
 
   if (!isSuccess || isLoading) {
     return <p>Loading..</p>;
