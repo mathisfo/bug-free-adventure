@@ -1,3 +1,47 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+@layer components {
+    .background-color {
+       @apply bg-white dark:bg-[#141627];
+    }
+    .sidebar-background-color {
+        @apply bg-[#F5F5F5] dark:sidebar-dark
+    }
+    .sidebar-dark {
+        @apply bg-gradient-to-tr from-[#2D1735] via-[#20233D] to-[#20233D];
+    }
+    .text-color {
+        @apply text-gray-700 dark:text-white;
+    }
+    .text-color-light {
+        @apply text-gray-400 dark:opacity-75;
+    }
+    .fill-color-light {
+        @apply bg-gray-200 dark:bg-gray-400;
+    }
+    .back-layer {
+        @apply bg-gradient-to-r from-indigo-300 to-cyan-500 dark:dark-back-layer;
+    }
+    .dark-back-layer {
+        @apply bg-gradient-to-r from-[#454a6f] to-[#71759a];
+    }
+    .assignment-background {
+        @apply bg-gradient-to-tr from-[#D4D5E5] via-[#DEDFEF] to-[#F4F8FC] dark:course-card-dark;
+    }
+    .course-card {
+        @apply bg-gradient-to-tr from-[#C7DDFE] via-blue-100 to-[#E4EFFF] dark:course-card-dark;
+    }
+    .course-card-dark {
+        @apply bg-gradient-to-tr from-[#1c1f37] to-[#2F3358];
+    }
+    .second-course-card {
+        @apply bg-gradient-to-tr from-[#FED1D3] via-rose-100 to-[#FFEEEF] dark:course-card-dark;
+    }
+    .icon {
+       @apply bg-indigo-300 dark:bg-[#6f69ee];
+    }
+    
+}
