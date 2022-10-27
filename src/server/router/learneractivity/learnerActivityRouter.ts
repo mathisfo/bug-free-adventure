@@ -15,13 +15,6 @@ const externalAPIURL =
 export const learnerActivityRouter = createRouter()
   .query("getLearnerActivity", {
     async resolve() {
-      const res = await fetch("http://localhost:4000/api").then((response) =>
-        response.json()
-      );
-    },
-  })
-  .query("getMockAPI", {
-    async resolve() {
       const unfilteredAPI = await fetch(externalAPIURL, options)
         .then((response) => response.text())
         .then((text) => toJson(text))

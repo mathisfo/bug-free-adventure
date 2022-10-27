@@ -1,24 +1,19 @@
-const CourseStatus = () => {
-  const modules = [
-    { category: "Strings", progress: 100 },
-    { category: "Variables", progress: 0 },
-    { category: "Operators", progress: 20 },
-    { category: "Boolean Expressions", progress: 0 },
-  ];
+import { trpc } from "../utils/trpc";
 
+const CourseStatus = () => {
   const doneIcon = (
     <div className="flex flex-row items-center gap-1">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"
-        stroke-width="1.5"
+        strokeWidth="1.5"
         stroke="currentColor"
-        className="h-6 w-6"
+        className="h-5 w-5 text-emerald-400 dark:text-green-400"
       >
         <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
           d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
         />
       </svg>
@@ -34,7 +29,7 @@ const CourseStatus = () => {
         viewBox="0 0 24 24"
         strokeWidth={1.5}
         stroke="currentColor"
-        className="h-6 w-6"
+        className="h-5 w-5 text-rose-400 dark:test-rose-500"
       >
         <path
           strokeLinecap="round"
@@ -52,19 +47,37 @@ const CourseStatus = () => {
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"
-        stroke-width="1.5"
+        strokeWidth="1.5"
         stroke="currentColor"
-        className="h-6 w-6"
+        className="h-5 w-5 text-blue-400 dark:text-[#6f69ee]"
       >
         <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
           d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
         />
       </svg>
       In progress
     </div>
   );
+
+  const {
+    data: learnerAnalytics,
+    isSuccess,
+    isLoading,
+  } = trpc.useQuery(["learneractivity.getLearnerActivity"]);
+
+  if (!isSuccess || isLoading) {
+    return <div className="rounded-md p-4 w-full mx-auto">
+    <div className="animate-pulse flex space-x-4">
+      <div className="flex-1 space-y-6 py-1">
+        <div className="h-8 loading rounded"></div>
+          <div className="h-8 loading rounded"></div>
+          <div className="h-8 loading rounded"></div>
+        </div>
+      </div>
+  </div>;
+  }
 
   return (
     <div className="background-color relative w-full  overflow-x-auto rounded-lg">
@@ -77,17 +90,17 @@ const CourseStatus = () => {
           </tr>
         </thead>
         <tbody>
-          {modules.map((module) => {
+          {learnerAnalytics.topicAnalytics.map((topic) => {
             return (
               <tr
-                key={module.category}
-                className="text-md background-color border-b hover:bg-gray-50 dark:border-gray-700 hover:dark:bg-[#3F485F] "
+                key={topic.name}
+                className="text-md background-color cursor-pointer border-b hover:bg-gray-50 dark:border-gray-700 hover:dark:bg-[#3F485F] "
               >
-                <th className="py-4 px-6">{module.category}</th>
+                <th className="py-4 px-6">{topic.name}</th>
                 <td className="py-4 px-6">
-                  {module.progress == 100
+                  {topic.overallProgress == 100
                     ? doneIcon
-                    : module.progress > 0
+                    : topic.overallProgress > 0
                     ? inProgressIcon
                     : notStartedIcon}
                 </td>
@@ -95,10 +108,10 @@ const CourseStatus = () => {
                   <div className="fill-color-light mx-4 h-2 w-2/3 rounded">
                     <div
                       className={`h-2 rounded bg-blue-400 dark:bg-[#f97316]`}
-                      style={{ width: module.progress + "%" }}
+                      style={{ width: topic.overallProgress *100+ "%" }}
                     ></div>
                   </div>
-                  <div className="text-xs">{module.progress} %</div>
+                  <div className="text-xs">{topic.overallProgress *100} %</div>
                 </td>
               </tr>
             );
