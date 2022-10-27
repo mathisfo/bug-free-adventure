@@ -1,7 +1,9 @@
-const Greeting = ({name}: {name: string}) => {
-    return ( 
-        <div className="grid text-3xl text-color rounded my-8 justify-center">Hey, {name}!</div>
-    )
-}
+const Greeting = ({ name }: { name: string }) => {
+  return (
+    <div className="text-color my-8 grid justify-center rounded text-3xl">
+      Hey, {name}!
+    </div>
+  );
+};
 
-export default Greeting
+export default Greeting;

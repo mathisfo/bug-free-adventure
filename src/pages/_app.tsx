@@ -8,7 +8,7 @@ import type { AppType } from "next/app";
 import type { AppRouter } from "../server/router";
 import type { Session } from "next-auth";
 import "../styles/globals.css";
-import { ThemeProvider } from 'next-themes'
+import { ThemeProvider } from "next-themes";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -22,7 +22,6 @@ const MyApp: AppType<{ session: Session | null }> = ({
     </ThemeProvider>
   );
 };
-
 
 const getBaseUrl = () => {
   if (typeof window !== "undefined") return ""; // browser should use relative url
