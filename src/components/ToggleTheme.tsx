@@ -12,7 +12,7 @@ const ToggleTheme = () => {
       viewBox="0 0 24 24"
       strokeWidth="1.5"
       stroke="currentColor"
-      className="text-color h-8 w-8 hover:scale-105"
+      className="text-color h-8 w-8 hover:scale-105 transition duration-300 ease-in-out"
     >
       <path
         strokeLinecap="round"
@@ -28,7 +28,7 @@ const ToggleTheme = () => {
       viewBox="0 0 24 24"
       strokeWidth="1.5"
       stroke="currentColor"
-      className="text-color h-8 w-8 hover:scale-105"
+      className="text-color h-8 w-8 hover:scale-105 transition duration-300 ease-in-out"
     >
       <path
         strokeLinecap="round"

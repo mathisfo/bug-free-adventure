@@ -5,10 +5,6 @@ import { trpc } from "../utils/trpc";
 
 const DonutChart = () => {
   const { theme } = useTheme();
-  const [size, setSize] = useState(270);
-
-  const [hovered, setHovered] = useState<number | undefined>(undefined);
-
   const {
     data: learnerAnalytics,
     isSuccess,
@@ -24,13 +20,13 @@ const DonutChart = () => {
   }
 
   const overallProgress = () => {
-    return learnerAnalytics.topicAnalytics.map((e) => e.overallProgress).reduce((acc, val) => { return acc + val *100;},0 );
+    return learnerAnalytics.topicAnalytics.map((e) => e.overallProgress).reduce((acc, val) => { return acc + val / learnerAnalytics.topicAnalytics.length *100;},0 );
   };
 
   const data: any = [
     {
       title: "To go",
-      value: `${overallProgress()}`,
+      value: `${Math.round(overallProgress())}`,
 
       color: `${theme == "dark" ? "#f97316" : "#60a5fa"}`,
     },
@@ -44,7 +40,7 @@ const DonutChart = () => {
         data={data}
         totalValue={100}
         background="#d1d5db"
-        startAngle={size}
+        startAngle={270}
         style={{ height: "176px" }}
         rounded
         lineWidth= {25}
@@ -56,14 +52,7 @@ const DonutChart = () => {
         })}
         labelPosition={0}
         animate
-        onMouseOver={(_, index) => {
-          setHovered(index);
-          setSize(272);
-        }}
-        onMouseOut={() => {
-          setHovered(undefined);
-          setSize(270);
-        }}
+
       />
     </>
   );
