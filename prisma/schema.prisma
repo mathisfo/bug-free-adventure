@@ -62,3 +62,49 @@ model VerificationToken {
 
     @@unique([identifier, token])
 }
+
+model Course {
+    id         Int      @id @default(autoincrement())
+    courseName String
+    modules    Module[]
+}
+
+model ActivityResource {
+    id       Int    @id @default(autoincrement())
+    type     type
+    name     String
+    url      String
+    relation Module @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+    moduleId Int
+}
+
+model Module {
+    id               Int                @id @default(autoincrement())
+    moduleName       String
+    order            Int
+    ActivityResource ActivityResource[]
+    relation         Course             @relation(fields: [courseId], references: [id], onDelete: Cascade)
+    courseId         Int
+}
+
+enum type {
+    EXAMPLE
+    CHALLENGE
+    CODING
+}
+
+model User1 {
+    id    Int    @id @default(autoincrement())
+    email String @unique
+    name  String
+    posts Post[]
+}
+
+model Post {
+    id        Int     @id @default(autoincrement())
+    title     String
+    content   String
+    published Boolean
+    user      User1   @relation(fields: [userId], references: [id])
+    userId    Int
+}
