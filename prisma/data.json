@@ -1,11 +1,11 @@
 [
   {
-    "id": "Variables and Operations",
-    "name": "Variables and Operations",
+    "module": {
+      "id": "Variables and Operations",
+      "name": "Variables and Operations",
 
-    "order": 1
-  },
-  {
+      "order": 1
+    },
     "EXAMPLES": [
       {
         "id": "artithmetic.inc_dec_operators",
@@ -103,13 +103,14 @@
       }
     ]
   },
-  {
-    "id": "Strings",
-    "name": "Strings",
 
-    "order": 2
-  },
   {
+    "module": {
+      "id": "Strings",
+      "name": "Strings",
+
+      "order": 2
+    },
     "EXAMPLES": [
       {
         "id": "strings.substring",
@@ -214,12 +215,12 @@
   },
 
   {
-    "id": "Boolean Expressions",
-    "name": "Boolean Expressions",
+    "module": {
+      "id": "Boolean Expressions",
+      "name": "Boolean Expressions",
 
-    "order": 3
-  },
-  {
+      "order": 3
+    },
     "EXAMPLES": [
       {
         "id": "booleans.phone_age",
@@ -327,13 +328,14 @@
       }
     ]
   },
-  {
-    "id": "If-Else",
-    "name": "If-Else",
 
-    "order": 4
-  },
   {
+    "module": {
+      "id": "If-Else",
+      "name": "If-Else",
+
+      "order": 4
+    },
     "EXAMPLES": [
       {
         "id": "ifelse.if_else_num",
@@ -418,12 +420,12 @@
   },
 
   {
-    "id": "While Loops",
-    "name": "While Loops",
+    "module": {
+      "id": "While Loops",
+      "name": "While Loops",
 
-    "order": 5
-  },
-  {
+      "order": 5
+    },
     "EXAMPLES": [
       {
         "id": "while_loops.divisor",
@@ -553,12 +555,12 @@
   },
 
   {
-    "id": "For Loops",
-    "name": "For Loops",
+    "module": {
+      "id": "For Loops",
+      "name": "For Loops",
 
-    "order": 6
-  },
-  {
+      "order": 6
+    },
     "EXAMPLES": [
       {
         "id": "for_loops.j_for_one",
@@ -648,12 +650,12 @@
   },
 
   {
-    "id": "Objects and Classes",
-    "name": "Objects and Classes",
+    "module": {
+      "id": "Objects and Classes",
+      "name": "Objects and Classes",
 
-    "order": 7
-  },
-  {
+      "order": 7
+    },
     "EXAMPLES": [
       {
         "id": "objects.classes.point",
@@ -723,12 +725,12 @@
   },
 
   {
-    "id": "Nested Loops",
-    "name": "Nested Loops",
+    "module": {
+      "id": "Nested Loops",
+      "name": "Nested Loops",
 
-    "order": 8
-  },
-  {
+      "order": 8
+    },
     "EXAMPLES": [
       {
         "id": "nested_for.star_patterns",
@@ -771,13 +773,14 @@
       }
     ]
   },
-  {
-    "id": "Arrays",
-    "name": "Arrays",
 
-    "order": 9
-  },
   {
+    "module": {
+      "id": "Arrays",
+      "name": "Arrays",
+
+      "order": 9
+    },
     "EXAMPLES": [
       {
         "id": "arrays.j_array_basic",
@@ -910,12 +913,13 @@
       }
     ]
   },
+
   {
-    "id": "Two-Dimensional Arrays",
-    "name": "Two-Dimensional Arrays",
-    "order": 10
-  },
-  {
+    "module": {
+      "id": "Two-Dimensional Arrays",
+      "name": "Two-Dimensional Arrays",
+      "order": 10
+    },
     "EXAMPLES": [
       {
         "id": "arrays2d.j_array2d_basic",
@@ -978,13 +982,14 @@
       }
     ]
   },
-  {
-    "id": "Exception handling",
-    "name": "Exception handling",
 
-    "order": 11
-  },
   {
+    "module": {
+      "id": "Exception handling",
+      "name": "Exception handling",
+
+      "order": 11
+    },
     "EXAMPLES": [
       {
         "id": "exceptions.j_check_age",
@@ -1011,13 +1016,14 @@
     ],
     "CODING": []
   },
-  {
-    "id": "File processing",
-    "name": "File processing",
 
-    "order": 12
-  },
   {
+    "module": {
+      "id": "File processing",
+      "name": "File processing",
+
+      "order": 12
+    },
     "EXAMPLES": [
       {
         "id": "files.j_work_hours",
@@ -1044,13 +1050,14 @@
     ],
     "CODING": []
   },
-  {
-    "id": "ArrayLists",
-    "name": "ArrayLists",
 
-    "order": 13
-  },
   {
+    "module": {
+      "id": "ArrayLists",
+      "name": "ArrayLists",
+
+      "order": 13
+    },
     "EXAMPLES": [
       {
         "id": "arraylist.vocabulary",
@@ -1073,13 +1080,14 @@
       }
     ]
   },
-  {
-    "id": "Inheritance",
-    "name": "Inheritance",
 
-    "order": 14
-  },
   {
+    "module": {
+      "id": "Inheritance",
+      "name": "Inheritance",
+
+      "order": 14
+    },
     "EXAMPLES": [
       {
         "id": "inheritance.animals",
