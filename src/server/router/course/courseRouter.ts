@@ -1,3 +1,4 @@
+import { z } from "zod";
 import { createRouter } from "../context";
 
 export const courseRouter = createRouter()
@@ -7,7 +8,17 @@ export const courseRouter = createRouter()
     },
   })
   .query("getModuleOnCourseName", {
-    async resolve({ ctx }) {
-      return await ctx.prisma.module.findMany();
+    input: z
+      .object({
+        courseNameInput: z.string(),
+      }),
+    async resolve({ ctx, input }) {
+      return await ctx.prisma.module.findMany({
+        where: {
+          relation: {
+            courseName: input.courseNameInput
+          }
+        }
+      });
     },
   });
