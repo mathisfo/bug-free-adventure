@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { PieChart } from "react-minimal-pie-chart";
 import { useTheme } from "next-themes";
 import { trpc } from "../utils/trpc";
