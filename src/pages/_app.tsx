@@ -9,17 +9,31 @@ import type { AppRouter } from "../server/router";
 import type { Session } from "next-auth";
 import "../styles/globals.css";
 import { ThemeProvider } from "next-themes";
+import Sidebar2 from "../components/Sidebar2";
+import { useRouter } from "next/router";
+import Head from "next/head";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
   pageProps: { session, ...pageProps },
 }) => {
+  const router = useRouter()
   return (
+    <>
+    <Head>
+    <html className="h-full back-layer" />
+        <body className="h-full" />
+      </Head>
     <ThemeProvider attribute="class" enableSystem={false}>
       <SessionProvider session={session}>
+    
+        <Sidebar2>
         <Component {...pageProps} />
+        </Sidebar2>
+
       </SessionProvider>
     </ThemeProvider>
+    </>
   );
 };
 

@@ -13,7 +13,7 @@ const Greeting = () => {
 
         <div className=" flex"> 
           <div className="flex-1 space-y-6 py-1">
-              <div className="animate-pulse h-12 my-8 bg-slate-200 rounded mx-4 opacity-25 "></div>
+              <div className="animate-pulse h-12 my-8 bg-slate-200 rounded opacity-25 "></div>
             </div>
           </div>
         
@@ -22,7 +22,7 @@ const Greeting = () => {
 
 
   return (
-    <div className="text-color my-8 grid justify-center rounded text-3xl">
+    <div className="text-color my-8 grid justify-center rounded text-2xl">
       Hey, {learnerAnalytics.learner.id}!
     </div>
   );

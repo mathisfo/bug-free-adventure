@@ -4,8 +4,9 @@ import Sidebar from "../../components/Sidebar";
 import DonutChart from "../../components/DonutChart";
 import CourseStatus from "../../components/CourseStatus";
 import { trpc } from "../../utils/trpc";
+import { NextPage } from "next";
 
-const Courses = () => {
+const Courses: NextPage = () => {
 
   const exercises = [
     {
@@ -33,18 +34,6 @@ const Courses = () => {
 
   return (
     <div>
-      <MenuBar />
-      <div className="back-layer grid h-full w-full grid-cols-5 pt-4">
-        <style global jsx>{`
-          html,
-          body,
-          body > div:first-child,
-          div#__next,
-          div#__next > div {
-            height: 100%;
-          }
-        `}</style>
-        <Sidebar target="/courses"></Sidebar>
         <div className="background-color col-span-4 mr-4 h-full rounded-r-lg p-16 ">
           <div className="text-color mb-8 text-3xl font-semibold">Java</div>
           <div className="mb-24 flex flex-row">
@@ -62,7 +51,6 @@ const Courses = () => {
           <CourseStatus />
         </div>
       </div>
-    </div>
   );
 };
 
