@@ -21,8 +21,8 @@ const MyApp: AppType<{ session: Session | null }> = ({
   return (
     <>
     <Head>
-    <html className="h-full back-layer" />
-        <body className="h-full" />
+    <html className="" />
+        <body className="antialiased back-layer overflow-hidden" />
       </Head>
     <ThemeProvider attribute="class" enableSystem={false}>
       <SessionProvider session={session}>

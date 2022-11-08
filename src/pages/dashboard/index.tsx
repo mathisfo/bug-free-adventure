@@ -1,5 +1,3 @@
-import Sidebar from "../../components/Sidebar";
-import MenuBar from "../../components/MenuBar";
 import CourseCard from "../../components/CourseCard";
 import Assignments from "../../components/Assignments";
 import { NextPage } from "next";
@@ -25,7 +23,7 @@ const Dashboard: NextPage = () => {
   ];
 
   return (
-    <div className="h-full mr-8">
+    <div className="h-full">
         <div className="background-color col-span-4 rounded-r-lg p-14 h-full w-full ">
       
           <div className="text-color mb-4 text-xl font-semibold">
