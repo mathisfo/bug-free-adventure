@@ -18,10 +18,6 @@ const MyApp: AppType<{ session: Session | null }> = ({
 }) => {
   return (
     <>
-      <Head>
-        <html className="" />
-        <body className="back-layer overflow-hidden antialiased" />
-      </Head>
       <ThemeProvider attribute="class" enableSystem={false}>
         <SessionProvider session={session}>
           <Sidebar2>
