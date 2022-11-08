@@ -5,7 +5,6 @@ import { ChartBarIcon, FolderIcon } from "@heroicons/react/24/outline";
 import Greeting from "./Greeting";
 import ToggleTheme from "./ToggleTheme";
 import { useRouter } from "next/router";
-import Image from "next/image";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");

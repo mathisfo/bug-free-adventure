@@ -9,30 +9,26 @@ import type { AppRouter } from "../server/router";
 import type { Session } from "next-auth";
 import "../styles/globals.css";
 import { ThemeProvider } from "next-themes";
-import Sidebar2 from "../components/Sidebar2";
-import { useRouter } from "next/router";
 import Head from "next/head";
+import Sidebar2 from "../components/Sidebar2";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
   pageProps: { session, ...pageProps },
 }) => {
-  const router = useRouter()
   return (
     <>
-    <Head>
-    <html className="" />
-        <body className="antialiased back-layer overflow-hidden" />
+      <Head>
+        <html className="" />
+        <body className="back-layer overflow-hidden antialiased" />
       </Head>
-    <ThemeProvider attribute="class" enableSystem={false}>
-      <SessionProvider session={session}>
-    
-        <Sidebar2>
-        <Component {...pageProps} />
-        </Sidebar2>
-
-      </SessionProvider>
-    </ThemeProvider>
+      <ThemeProvider attribute="class" enableSystem={false}>
+        <SessionProvider session={session}>
+          <Sidebar2>
+            <Component {...pageProps} />
+          </Sidebar2>
+        </SessionProvider>
+      </ThemeProvider>
     </>
   );
 };
