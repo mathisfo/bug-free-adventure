@@ -1,5 +1,3 @@
-import Sidebar from "../../components/Sidebar";
-import MenuBar from "../../components/MenuBar";
 import CourseCard from "../../components/CourseCard";
 import Assignments from "../../components/Assignments";
 

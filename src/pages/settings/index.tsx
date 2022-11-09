@@ -1,6 +1,3 @@
-import MenuBar from "../../components/MenuBar";
-import Sidebar from "../../components/Sidebar";
-
 const Settings = () => {
   return (
     <div>

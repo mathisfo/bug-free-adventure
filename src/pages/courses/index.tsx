@@ -1,9 +1,6 @@
 import ContinueCard from "../../components/ContinueCard";
-import MenuBar from "../../components/MenuBar";
-import Sidebar from "../../components/Sidebar";
 import DonutChart from "../../components/DonutChart";
 import CourseStatus from "../../components/CourseStatus";
-import { trpc } from "../../utils/trpc";
 
 const Courses = () => {
 
