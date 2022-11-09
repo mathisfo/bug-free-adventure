@@ -31,7 +31,7 @@ const Courses = () => {
   return (
     <div>
 
-        <div className="background-color col-span-4 mr-4 h-screen rounded-r-lg p-14 ">
+        <div className="background-color col-span-4 mr-4 h-screen rounded-r-lg p-14">
           <div className="text-color mb-8 text-3xl font-semibold">Java</div>
           <div className="mb-24 flex flex-row">
             <div className="w-3/5 ">

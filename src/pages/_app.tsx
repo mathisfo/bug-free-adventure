@@ -18,9 +18,19 @@ const MyApp: AppType<{ session: Session | null }> = ({
   return (
     <ThemeProvider attribute="class" enableSystem={false}>
       <SessionProvider session={session}>
-        <Sidebar>
-        <Component {...pageProps} />
-        </Sidebar>
+        <div className="bg-gradient-to-r from-indigo-300 to-cyan-500 bg-fixed pt-4 pl-4 pr-4">
+          <style global jsx>{`
+            html,
+            body {
+              height: 100%;
+              overflow: hidden;
+              position: fixed;
+            }
+          `}</style>
+          <Sidebar>
+            <Component {...pageProps} />
+          </Sidebar>
+        </div>
       </SessionProvider>
     </ThemeProvider>
   );
