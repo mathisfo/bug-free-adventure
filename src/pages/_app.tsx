@@ -18,7 +18,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
   return (
     <ThemeProvider attribute="class" enableSystem={false}>
       <SessionProvider session={session}>
-        <div className="bg-gradient-to-r from-indigo-300 to-cyan-500 bg-fixed pt-4 pl-4 pr-4">
+        <div className="fixed w-full">
           <style global jsx>{`
             html,
             body {

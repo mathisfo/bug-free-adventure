@@ -170,13 +170,13 @@ const Sidebar = ({ children }: { children: React.ReactElement }) => {
           </div>
         </div>
       </div>
-      <div className="grid-col-2 background-color relative col-span-4 grid overflow-auto rounded-r-lg ">
+      <div className="grid-col-2 background-color relative col-span-4 grid rounded-r-lg overflow-auto">
         <div className="absolute right-8 top-8">
-          <div className="mr-8">
+          <div className="mr-8 ">
             <ToggleTheme />
           </div>
         </div>
-        <div className="py-4 w-full">{children}</div>
+        <div className="py-4 w-full ">{children}</div>
       </div>
     </div>
   );

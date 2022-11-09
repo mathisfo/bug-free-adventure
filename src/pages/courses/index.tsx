@@ -30,7 +30,6 @@ const Courses = () => {
 
   return (
     <div>
-
         <div className="background-color col-span-4 mr-4 h-screen rounded-r-lg p-14">
           <div className="text-color mb-8 text-3xl font-semibold">Java</div>
           <div className="mb-24 flex flex-row">
@@ -46,6 +45,9 @@ const Courses = () => {
             </div>
           </div>
           <CourseStatus />
+      <div className="h-16 background-color">
+
+      </div>
         </div>
     </div>
   );

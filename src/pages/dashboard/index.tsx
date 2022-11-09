@@ -1,3 +1,4 @@
+
 import CourseCard from "../../components/CourseCard";
 import Assignments from "../../components/Assignments";
 
