@@ -1,4 +1,7 @@
 
+import {
+  CommandLineIcon
+} from "@heroicons/react/24/outline";
 import { useRouter } from "next/router";
 
 const CourseCard = ({
@@ -17,22 +20,6 @@ const CourseCard = ({
   iconColor: string;
 }) => {
     const router = useRouter();
-  const computer_svg = (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      strokeWidth="1.5"
-      stroke="currentColor"
-      className="h-8 w-8 text-white"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0021 18V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v12a2.25 2.25 0 002.25 2.25z"
-      />
-    </svg>
-  );
 
   const onClick = async (target: string, e: React.MouseEvent) => {
     e.preventDefault();
@@ -45,7 +32,7 @@ const CourseCard = ({
         <div
           className={` w-12 rounded-3xl p-2 ${iconColor} items-end dark:bg-[#6f69ee] `}
         >
-          {computer_svg}
+          <CommandLineIcon className="text-white"></CommandLineIcon>
         </div>
         <div className="text-color px-4 py-4 text-2xl font-semibold">
           {course}

@@ -1,66 +1,10 @@
+
+import {
+  CheckCircleIcon, EllipsisHorizontalCircleIcon, XCircleIcon
+} from "@heroicons/react/24/outline";
 import { trpc } from "../utils/trpc";
 
 const CourseStatus = () => {
-  const doneIcon = (
-    <div className="flex flex-row items-center gap-1">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth="1.5"
-        stroke="currentColor"
-        className="h-5 w-5 text-emerald-400 dark:text-green-400"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-        />
-      </svg>
-      Done
-    </div>
-  );
-
-  const notStartedIcon = (
-    <div className="flex flex-row items-center gap-1">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth={1.5}
-        stroke="currentColor"
-        className="h-5 w-5 text-rose-400 dark:test-rose-500"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"
-        />
-      </svg>
-      Not started
-    </div>
-  );
-
-  const inProgressIcon = (
-    <div className="flex flex-row items-center gap-1">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth="1.5"
-        stroke="currentColor"
-        className="h-5 w-5 text-blue-400 dark:text-[#6f69ee]"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-        />
-      </svg>
-      In progress
-    </div>
-  );
-
   const {
     data: learnerAnalytics,
     isSuccess,
@@ -99,10 +43,10 @@ const CourseStatus = () => {
                 <th className="py-4 px-6">{topic.name}</th>
                 <td className="py-4 px-6">
                   {topic.overallProgress == 100
-                    ? doneIcon
+                    ? <div className="flex flex-row items-center gap-1"><CheckCircleIcon className="h-5 w-5 text-emerald-400 dark:text-green-400"></CheckCircleIcon>Done</div>
                     : topic.overallProgress > 0
-                    ? inProgressIcon
-                    : notStartedIcon}
+                    ? <div className="flex flex-row items-center gap-1"><EllipsisHorizontalCircleIcon className="h-5 w-5 text-blue-400 dark:text-[#6f69ee]"></EllipsisHorizontalCircleIcon>In progress</div>
+                    : <div className="flex flex-row items-center gap-1"><XCircleIcon className="h-5 w-5 text-rose-400 dark:test-rose-500"></XCircleIcon>Not started</div>}
                 </td>
                 <td className="flex flex-row py-4 px-6">
                   <div className="fill-color-light mx-4 h-2 w-2/3 rounded">
