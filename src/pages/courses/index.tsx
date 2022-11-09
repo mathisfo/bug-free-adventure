@@ -1,9 +1,6 @@
 import ContinueCard from "../../components/ContinueCard";
-import MenuBar from "../../components/MenuBar";
-import Sidebar from "../../components/Sidebar";
 import DonutChart from "../../components/DonutChart";
 import CourseStatus from "../../components/CourseStatus";
-import { trpc } from "../../utils/trpc";
 
 const Courses = () => {
 
@@ -33,19 +30,7 @@ const Courses = () => {
 
   return (
     <div>
-      <MenuBar />
-      <div className="back-layer grid h-full w-full grid-cols-5 pt-4">
-        <style global jsx>{`
-          html,
-          body,
-          body > div:first-child,
-          div#__next,
-          div#__next > div {
-            height: 100%;
-          }
-        `}</style>
-        <Sidebar target="/courses"></Sidebar>
-        <div className="background-color col-span-4 mr-4 h-full rounded-r-lg p-16 ">
+        <div className="background-color col-span-4 mr-4 h-screen rounded-r-lg p-14">
           <div className="text-color mb-8 text-3xl font-semibold">Java</div>
           <div className="mb-24 flex flex-row">
             <div className="w-3/5 ">
@@ -60,8 +45,10 @@ const Courses = () => {
             </div>
           </div>
           <CourseStatus />
-        </div>
+      <div className="h-16 background-color">
+
       </div>
+        </div>
     </div>
   );
 };
