@@ -1,9 +1,10 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
 import Greeting from "./Greeting";
-import { ChartBarIcon, FolderIcon, Cog6ToothIcon } from "@heroicons/react/24/outline";
+import { ChartBarIcon, FolderIcon, Cog6ToothIcon, UserCircleIcon } from "@heroicons/react/24/outline";
 import { trpc } from "../utils/trpc";
 import { Disclosure } from "@headlessui/react";
+import { HiOutlineLogout } from "react-icons/hi";
+
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -53,13 +54,13 @@ const Sidebar = ({ children }: { children: React.ReactElement }) => {
     "text-violet-800 dark:text-white bg-indigo-100 dark:bg-[#6f69ee] dark:hover:bg-[#847FF7] hover:text-gray-900 hover:bg-indigo-50";
 
   return (
-    <div className="sidebar-background-color relative ml-4 h-full rounded-l-lg border-r-2 py-16 ">
+    <div className="background-color inset-y-0 relative ml-4 h-full rounded-l-lg border-r-2 py-16 ">
       <div className="flex flex-shrink-0 justify-center px-2">
               <Greeting />
             </div>
       <div className="mt-5 flex flex-grow flex-col">
               <nav
-                className="flex-1 space-y-1 bg-white px-2"
+                className="flex-1 space-y-1 background-color px-2"
                 aria-label="Sidebar"
               >
                 {navigation.map((item) =>
@@ -130,7 +131,7 @@ const Sidebar = ({ children }: { children: React.ReactElement }) => {
                                 key={subItem.name}
                                 as="a"
                                 href={subItem.href}
-                                className="group flex w-full items-center rounded-md py-2 pl-11 pr-2 text-sm font-medium text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                                className="group flex w-full items-center rounded-md py-2 pl-11 pr-2 text-sm font-medium text-gray-700 dark:text-gray-400 dark:hover:bg-[#503597] dark:hover:text-white hover:bg-indigo-50"
                               >
                                 {subItem.name}
                               </Disclosure.Button>
@@ -142,6 +143,28 @@ const Sidebar = ({ children }: { children: React.ReactElement }) => {
                   )
                 )}
               </nav>
+            </div>
+            <div className="flex flex-shrink-0 border-t border-gray-200 p-4 w-full absolute bottom-4">
+            <a href="#" className="group block w-full flex-shrink-0">
+              <div className="flex items-center space-x-2">
+                  <div>
+                    <UserCircleIcon className="w-8 h-8 text-color"></UserCircleIcon>
+                    </div>
+                    {isLoading || !isSuccess ? (
+                      <div className="ml-3">
+                        <div
+                          className="spinner-border inline-block h-6 w-6 animate-spin rounded-full border-4 text-gray-300"
+                          role="status"
+                        ></div>
+                      </div>
+                    ) : (
+                      <div className="text-color">
+                        {learnerAnalytics.learner.id}
+                      </div>
+                    )}
+                    <div><HiOutlineLogout className="text-color h-6 w-6 ml-14"></HiOutlineLogout></div>
+                </div>
+              </a>
             </div>
     </div>
   );

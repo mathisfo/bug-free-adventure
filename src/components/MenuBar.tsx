@@ -30,22 +30,6 @@ const MenuBar = () => {
       <div className="mr-8">
         <ToggleTheme />
       </div>
-      {isLoading || !isSuccess ? (
-        <div className="flex items-center justify-center">
-          <div
-            className="spinner-border inline-block h-6 w-6 animate-spin rounded-full border-4 text-gray-300"
-            role="status"
-          >
-            <span className="visually-hidden">Loading...</span>
-          </div>
-        </div>
-      ) : (
-        <div className="text-color">{learnerAnalytics.learner.id}</div>
-      )}
-
-      <div className="icon w-12 items-end rounded-3xl p-2">
-        {profilePicture}
-      </div>
     </div>
   );
 };
