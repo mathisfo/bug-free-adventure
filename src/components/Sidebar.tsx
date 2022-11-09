@@ -56,8 +56,8 @@ const Sidebar = ({ children }: { children: React.ReactElement }) => {
 
   return (
     <div className="grid grid-cols-5 back-layer px-2 pt-2 ">
-      <div className="grid grid-col-1 w-72 h-screen z-index-2">
-    <div className="background-color inset-y-0 relative rounded-l-lg border-r-4 py-16 ">
+      <div className="grid grid-col-1 h-screen z-index-2">
+    <div className="background-color relative rounded-l-lg border-r-4 py-8 ">
       <div className="flex flex-shrink-0 justify-center px-2">
               <Greeting />
             </div>
@@ -172,13 +172,13 @@ const Sidebar = ({ children }: { children: React.ReactElement }) => {
           
     </div>
     </div>
-    <div className="grid grid-col-2 col-span-4 h-screen overflow-auto relative background-color ">
+    <div className="grid grid-col-2 col-span-4 h-screen overflow-auto relative background-color rounded-r-lg ">
     <div className="absolute right-8 top-8">
       <div className="mr-8">
         <ToggleTheme />
       </div>
     </div>
-      <div className="py-4w-full rounded-r-lg">
+      <div className="py-4w-full">
                       {children}
       </div>
     </div>
