@@ -4,6 +4,7 @@ import { ChartBarIcon, FolderIcon, Cog6ToothIcon, UserCircleIcon } from "@heroic
 import { trpc } from "../utils/trpc";
 import { Disclosure } from "@headlessui/react";
 import { HiOutlineLogout } from "react-icons/hi";
+import ToggleTheme from "./ToggleTheme";
 
 
 function classNames(...classes: string[]) {
@@ -54,7 +55,9 @@ const Sidebar = ({ children }: { children: React.ReactElement }) => {
     "text-violet-800 dark:text-white bg-indigo-100 dark:bg-[#6f69ee] dark:hover:bg-[#847FF7] hover:text-gray-900 hover:bg-indigo-50";
 
   return (
-    <div className="background-color inset-y-0 relative ml-4 h-full rounded-l-lg border-r-2 py-16 ">
+    <div className="grid grid-cols-5 back-layer px-2 pt-2 h-screen">
+      <div className="grid grid-col-1 w-72 h-full">
+    <div className="background-color inset-y-0 relative  rounded-l-lg border-r-2 py-16 ">
       <div className="flex flex-shrink-0 justify-center px-2">
               <Greeting />
             </div>
@@ -166,6 +169,19 @@ const Sidebar = ({ children }: { children: React.ReactElement }) => {
                 </div>
               </a>
             </div>
+          
+    </div>
+    </div>
+    <div className="grid grid-col-2 col-span-4 ">
+    <div className="absolute right-8 top-8 flex flex-row items-center gap-4">
+      <div className="mr-8">
+        <ToggleTheme />
+      </div>
+    </div>
+      <div className="py-4 background-color w-full rounded-r-lg">
+                      {children}
+      </div>
+    </div>
     </div>
   );
 };

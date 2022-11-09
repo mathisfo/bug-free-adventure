@@ -9,6 +9,7 @@ import type { AppRouter } from "../server/router";
 import type { Session } from "next-auth";
 import "../styles/globals.css";
 import { ThemeProvider } from "next-themes";
+import Sidebar from "../components/Sidebar";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -17,7 +18,9 @@ const MyApp: AppType<{ session: Session | null }> = ({
   return (
     <ThemeProvider attribute="class" enableSystem={false}>
       <SessionProvider session={session}>
+      <Sidebar>
         <Component {...pageProps} />
+        </Sidebar>
       </SessionProvider>
     </ThemeProvider>
   );

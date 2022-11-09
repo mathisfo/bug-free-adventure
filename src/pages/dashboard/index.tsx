@@ -25,19 +25,6 @@ const Dashboard = () => {
 
   return (
     <div>
-      <MenuBar />
-      <div className="back-layer grid h-full w-full grid-cols-5 pt-4">
-        <style global jsx>{`
-          html,
-          body,
-          body > div:first-child,
-          div#__next,
-          div#__next > div {
-            height: 100%;
-          }
-        `}</style>
-        <Sidebar target="/dashboard"></Sidebar>
-
         <div className="background-color col-span-4 mr-4 h-full rounded-r-lg p-16 ">
           <div className="text-color mb-4 text-xl font-semibold">
             My courses
@@ -62,7 +49,6 @@ const Dashboard = () => {
           </div>
           <Assignments />
         </div>
-      </div>
     </div>
   );
 };
