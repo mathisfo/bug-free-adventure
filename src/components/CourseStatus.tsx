@@ -80,7 +80,7 @@ const CourseStatus = () => {
   }
 
   return (
-    <div className="background-color relative w-full  overflow-x-auto rounded-lg">
+    <div className="background-color w-full h-full overflow-x-auto  rounded-lg ">
       <table className="text-color w-full table-fixed text-left text-sm">
         <thead className="dark:course-card-dark bg-[#F5F5F5] uppercase dark:text-gray-400">
           <tr>
