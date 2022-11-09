@@ -18,7 +18,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
   return (
     <ThemeProvider attribute="class" enableSystem={false}>
       <SessionProvider session={session}>
-      <Sidebar>
+        <Sidebar>
         <Component {...pageProps} />
         </Sidebar>
       </SessionProvider>
