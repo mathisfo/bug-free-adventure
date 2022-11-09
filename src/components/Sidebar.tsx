@@ -79,7 +79,7 @@ const Sidebar = ({ target }: { target: string }) => {
 
   return (
     <div className="sidebar-background-color relative ml-4 h-full rounded-l-lg border-r-2 py-16">
-      <Greeting />    
+      <Greeting />
       <ul className="mt-16 space-y-2">
         <li onClick={(e) => onClick("/dashboard", e)}>
           <a
