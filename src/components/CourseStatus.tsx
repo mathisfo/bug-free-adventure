@@ -21,6 +21,8 @@ const CourseStatus = () => {
         <div className="h-8 loading rounded"></div>
           <div className="h-8 loading rounded"></div>
           <div className="h-8 loading rounded"></div>
+          <div className="h-8 loading rounded"></div>
+          <div className="h-8 loading rounded"></div>
         </div>
       </div>
   </div>;

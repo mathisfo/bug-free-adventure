@@ -151,12 +151,14 @@ const Sidebar = ({ children }: { children: React.ReactElement }) => {
                   <UserCircleIcon className="text-color h-8 w-8"></UserCircleIcon>
                 </div>
                 {isLoading || !isSuccess ? (
-                  <div className="ml-3">
-                    <div
-                      className="spinner-border inline-block h-6 w-6 animate-spin rounded-full border-4 text-gray-300"
-                      role="status"
-                    ></div>
-                  </div>
+                  <div className="rounded-md w-full mx-auto">
+                  <div className="animate-pulse flex space-x-4">
+                    <div className="flex-1 py-1">
+                      <div className="h-6 loading rounded"></div>
+          
+                      </div>
+                    </div>
+                </div>
                 ) : (
                   <div className="text-color">
                     {learnerAnalytics.learner.id}
