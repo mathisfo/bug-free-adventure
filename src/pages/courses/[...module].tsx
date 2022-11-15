@@ -37,10 +37,10 @@ const ModuleStatistics = () => {
               .map((challenge) => {
                 return (
                   <tr
-                    key={challenge.activityName}
+                    key={challenge.activityId}
                     className="text-md background-color cursor-pointer border-b hover:bg-gray-50 dark:border-gray-700 hover:dark:bg-[#3F485F] "
                   >
-                    <th className="py-4 px-6">{challenge.activityName}</th>
+                    <th className="py-4 px-6">{challenge.activityId}</th>
                     <td className="py-4 px-6">{challenge.attempts}</td>
                     <td className="flex flex-row py-4 px-6">
                       <div>{challenge.successRate}</div>

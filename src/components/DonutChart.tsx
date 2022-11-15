@@ -25,10 +25,10 @@ const DonutChart = () => {
   }
 
   const overallProgress = () => {
-    return learnerAnalytics.moduleanalytics
+    return learnerAnalytics.moduleAnalytics
       .map((e) => e.overallProgress)
       .reduce((acc, val) => {
-        return acc + (val / learnerAnalytics.moduleanalytics.length) * 100;
+        return acc + (val / learnerAnalytics.moduleAnalytics.length) * 100;
       }, 0);
   };
 

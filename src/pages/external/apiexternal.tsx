@@ -22,18 +22,18 @@ const ExternalApi = () => {
       <h1>Hey, {learnerAnalytics.learner.id}</h1>
       <h2>Your topics: </h2>
 
-      {learnerAnalytics.moduleanalytics.map((topic: ModuleAnalytics) => (
-        <div key={topic.name}>
-          <h3>{topic.name}</h3>
-          <p>Example Progress: {topic.progress.examples}</p>
+      {learnerAnalytics.moduleAnalytics.map((module: ModuleAnalytics) => (
+        <div key={module.name}>
+          <h3>{module.name}</h3>
+          <p>Example Progress: {module.progress.examples}</p>
         </div>
       ))}
 
       <h2>Activites:</h2>
       {learnerAnalytics.activityAnalytics.challenges.map(
         (challenge: Activity) => (
-          <div key={challenge.activityName}>
-            <h3>{challenge.activityName}</h3>
+          <div key={challenge.activityId}>
+            <h3>{challenge.activityId}</h3>
             <p>{challenge.relatedTopic}</p>
           </div>
         )
