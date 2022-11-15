@@ -1,7 +1,7 @@
 import { trpc } from '../utils/trpc'
 
-export const useActivityResource = (moduleName: string) => {
-    const activityresourcequery = trpc.useQuery(["course.getActivityResourcesOnModuleName", {moduleName: moduleName} ])
+export const useActivityResource = (moduleId: number) => {
+    const activityresourcequery = trpc.useQuery(["course.getActivityResourcesOnModuleId", {moduleId: moduleId} ])
 
     return activityresourcequery
 }

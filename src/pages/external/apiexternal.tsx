@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import {
   Activity,
   TopicAnalytics,
@@ -5,6 +6,7 @@ import {
 import { trpc } from "../../utils/trpc";
 
 const ExternalApi = () => {
+  const router = useRouter();
   const {
     data: learnerAnalytics,
     isSuccess,
@@ -14,7 +16,8 @@ const ExternalApi = () => {
   if (!isSuccess || isLoading) {
     return <p>Loading..</p>;
   }
-  
+
+
 
   return (
     <>

@@ -1,5 +1,7 @@
+import { TRPCError } from "@trpc/server";
 import { Input } from "postcss";
 import { z } from "zod";
+import { trpc } from "../../../utils/trpc";
 import { createRouter } from "../context";
 
 export const courseRouter = createRouter()
@@ -13,23 +15,29 @@ export const courseRouter = createRouter()
       courseNameInput: z.string(),
     }),
     async resolve({ ctx, input }) {
-      return await ctx.prisma.module.findMany({
+      const modules = ctx.prisma.module.findMany({
         where: {
           relation: {
             courseName: input.courseNameInput,
           },
         },
       });
+
+      if (!modules) {
+        throw new TRPCError({ message: "No modules found", code: "NOT_FOUND" });
+      }
+
+      return modules;
     },
   })
-  .query("getActivityResourcesOnModuleName", {
+  .query("getActivityResourcesOnModuleId", {
     input: z.object({
-      moduleName: z.string(),
+      moduleId: z.number(),
     }),
     async resolve({ ctx, input }) {
       return await ctx.prisma.activityResource.findMany({
         where: {
-          name: input.moduleName,
+          moduleId: input.moduleId,
         },
       });
     },

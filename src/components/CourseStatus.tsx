@@ -1,5 +1,8 @@
 import { trpc } from "../utils/trpc";
 
+import { Disclosure } from "@headlessui/react";
+import Link from "next/link";
+
 const CourseStatus = () => {
   const doneIcon = (
     <div className="flex flex-row items-center gap-1">
@@ -29,7 +32,7 @@ const CourseStatus = () => {
         viewBox="0 0 24 24"
         strokeWidth={1.5}
         stroke="currentColor"
-        className="h-5 w-5 text-rose-400 dark:test-rose-500"
+        className="dark:test-rose-500 h-5 w-5 text-rose-400"
       >
         <path
           strokeLinecap="round"
@@ -68,15 +71,17 @@ const CourseStatus = () => {
   } = trpc.useQuery(["learneractivity.getLearnerActivity"]);
 
   if (!isSuccess || isLoading) {
-    return <div className="rounded-md p-4 w-full mx-auto">
-    <div className="animate-pulse flex space-x-4">
-      <div className="flex-1 space-y-6 py-1">
-        <div className="h-8 loading rounded"></div>
-          <div className="h-8 loading rounded"></div>
-          <div className="h-8 loading rounded"></div>
+    return (
+      <div className="mx-auto w-full rounded-md p-4">
+        <div className="flex animate-pulse space-x-4">
+          <div className="flex-1 space-y-6 py-1">
+            <div className="loading h-8 rounded"></div>
+            <div className="loading h-8 rounded"></div>
+            <div className="loading h-8 rounded"></div>
+          </div>
         </div>
       </div>
-  </div>;
+    );
   }
 
   return (
@@ -90,17 +95,19 @@ const CourseStatus = () => {
           </tr>
         </thead>
         <tbody>
-          {learnerAnalytics.topicAnalytics.map((topic) => {
+          {learnerAnalytics.topicAnalytics.map((module) => {
             return (
               <tr
-                key={topic.name}
+                key={module.name}
                 className="text-md background-color cursor-pointer border-b hover:bg-gray-50 dark:border-gray-700 hover:dark:bg-[#3F485F] "
               >
-                <th className="py-4 px-6">{topic.name}</th>
+                <th className="py-4 px-6">
+                  <Link href={`Java/${module.name}`}>{module.name}</Link>
+                </th>
                 <td className="py-4 px-6">
-                  {topic.overallProgress == 100
+                  {module.overallProgress == 100
                     ? doneIcon
-                    : topic.overallProgress > 0
+                    : module.overallProgress > 0
                     ? inProgressIcon
                     : notStartedIcon}
                 </td>
@@ -108,10 +115,12 @@ const CourseStatus = () => {
                   <div className="fill-color-light mx-4 h-2 w-2/3 rounded">
                     <div
                       className={`h-2 rounded bg-blue-400 dark:bg-[#f97316]`}
-                      style={{ width: topic.overallProgress *100+ "%" }}
+                      style={{ width: module.overallProgress * 100 + "%" }}
                     ></div>
                   </div>
-                  <div className="text-xs">{topic.overallProgress *100} %</div>
+                  <div className="text-xs">
+                    {module.overallProgress * 100} %
+                  </div>
                 </td>
               </tr>
             );
