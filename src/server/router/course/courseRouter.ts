@@ -41,4 +41,16 @@ export const courseRouter = createRouter()
         },
       });
     },
+  })
+  .query("getActivityResourceNamesAndActivityId", {
+    async resolve({ ctx }) {
+      return await ctx.prisma.activityResource.findMany({
+        //TODO where course = courseInput
+
+        select: {
+          name: true,
+          activityId: true,
+        },
+      });
+    },
   });

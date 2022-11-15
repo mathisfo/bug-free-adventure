@@ -14,11 +14,18 @@ const externalAPIURL =
 
 export const learnerActivityRouter = createRouter()
   .query("getLearnerActivity", {
-    async resolve() {
+    async resolve({ctx}) {
       const unfilteredAPI = await fetch(externalAPIURL, options)
         .then((response) => response.text())
         .then((text) => toJson(text))
         .then((j) => JSON.parse(j));
+
+      const activityResources = ctx.prisma.activityResource.findMany({
+        select: {
+          id: true,
+          
+        }
+      })
 
       const api = reMapLearnerActivityUtil(unfilteredAPI);
 

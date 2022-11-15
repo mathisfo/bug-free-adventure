@@ -10,13 +10,19 @@ const ModuleStatistics = () => {
     isSuccess,
     isLoading,
   } = trpc.useQuery(["learneractivity.getLearnerActivity"]);
+
+  const {
+    data: nameAndIds,
+    isSuccess: nameAndIdsSuccess,
+    isLoading: nameAndIdsLoading,
+  } = trpc.useQuery(["course.getActivityResourceNamesAndActivityId"]);
   const router = useRouter();
 
   const { module } = router.query;
 
   const path = module?.toString().split(",")[1];
 
-  if (!isSuccess) {
+  if (!isSuccess || !nameAndIdsSuccess) {
     return <div>Loading...</div>;
   }
   return (
@@ -35,12 +41,15 @@ const ModuleStatistics = () => {
             {learnerAnalytics.activityAnalytics.challenges
               .filter((module) => path === module.relatedTopic)
               .map((challenge) => {
+                const name = nameAndIds.find(
+                  (e) => e.activityId === challenge.activityId
+                );
                 return (
                   <tr
                     key={challenge.activityId}
                     className="text-md background-color cursor-pointer border-b hover:bg-gray-50 dark:border-gray-700 hover:dark:bg-[#3F485F] "
                   >
-                    <th className="py-4 px-6">{challenge.activityId}</th>
+                    <th className="py-4 px-6">{name?.name}</th>
                     <td className="py-4 px-6">{challenge.attempts}</td>
                     <td className="flex flex-row py-4 px-6">
                       <div>{challenge.successRate}</div>
