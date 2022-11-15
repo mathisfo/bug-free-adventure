@@ -1,6 +1,7 @@
 import ContinueCard from "../../components/ContinueCard";
 import DonutChart from "../../components/DonutChart";
 import CourseStatus from "../../components/CourseStatus";
+import { Accordion } from "flowbite-react";
 
 const Courses = () => {
 
@@ -45,6 +46,7 @@ const Courses = () => {
             </div>
           </div>
           <CourseStatus />
+         
       <div className="h-16 background-color">
 
       </div>
