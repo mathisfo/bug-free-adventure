@@ -95,7 +95,7 @@ const CourseStatus = () => {
           </tr>
         </thead>
         <tbody>
-          {learnerAnalytics.topicAnalytics.map((module) => {
+          {learnerAnalytics.moduleanalytics.map((module) => {
             return (
               <tr
                 key={module.name}

@@ -41,12 +41,12 @@ export const learnerActivitySchema = z.object({
     name: z.string(),
     lastActivityId: z.string(),
   }),
-  topicAnalytics: z.array(topicAnalyticsSchema),
+  moduleanalytics: z.array(topicAnalyticsSchema),
   activityAnalytics: activityAnalyticsSchema,
 });
 
 export type ActivityAnalytics = z.infer<typeof activityAnalyticsSchema>;
 export type Activity = z.infer<typeof activitySchema>;
 export type TopicProgress = z.infer<typeof topicProgressSchema>;
-export type TopicAnalytics = z.infer<typeof topicAnalyticsSchema>;
+export type ModuleAnalytics = z.infer<typeof topicAnalyticsSchema>;
 export type LearnerAnalyticsAPIResponse = z.infer<typeof learnerActivitySchema>;

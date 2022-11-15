@@ -11,7 +11,7 @@ export function reMapLearnerActivityUtil(api: any) {
       name: "",
       lastActivityId: "",
     },
-    topicAnalytics: [],
+    moduleanalytics: [],
     activityAnalytics: {
       examples: [],
       challenges: [],
@@ -59,7 +59,7 @@ export function reMapLearnerActivityUtil(api: any) {
 
     topicObj.overallProgress = topic.overall.p;
 
-    remapped.topicAnalytics.push(topicObj);
+    remapped.moduleanalytics.push(topicObj);
 
     for (const type in api.learner.state.activities[key].Examples) {
       const activity = {

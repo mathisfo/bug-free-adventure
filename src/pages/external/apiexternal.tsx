@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import {
   Activity,
-  TopicAnalytics,
+  ModuleAnalytics,
 } from "../../server/schema/LearnerActivitySchema";
 import { trpc } from "../../utils/trpc";
 
@@ -17,14 +17,12 @@ const ExternalApi = () => {
     return <p>Loading..</p>;
   }
 
-
-
   return (
     <>
       <h1>Hey, {learnerAnalytics.learner.id}</h1>
       <h2>Your topics: </h2>
 
-      {learnerAnalytics.topicAnalytics.map((topic: TopicAnalytics) => (
+      {learnerAnalytics.moduleanalytics.map((topic: ModuleAnalytics) => (
         <div key={topic.name}>
           <h3>{topic.name}</h3>
           <p>Example Progress: {topic.progress.examples}</p>

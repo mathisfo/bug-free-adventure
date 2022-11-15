@@ -4,7 +4,7 @@ export type LearnerActivityBFFApi = {
     name: string;
     lastActivityId: string;
   };
-  topicAnalytics: Array<Topic>;
+  moduleanalytics: Array<Topic>;
   activityAnalytics: {
     examples: Array<Activity>;
     challenges: Array<Activity>;
