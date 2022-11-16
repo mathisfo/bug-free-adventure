@@ -19,7 +19,7 @@ export const topicAnalyticsSchema = z.object({
 
 export const activitySchema = z.object({
   relatedTopic: z.string(),
-  activityName: z.string(),
+  activityId: z.string(),
   visited: z.boolean(),
   attempts: z.number(),
   successRate: z.number(),
@@ -41,12 +41,12 @@ export const learnerActivitySchema = z.object({
     name: z.string(),
     lastActivityId: z.string(),
   }),
-  topicAnalytics: z.array(topicAnalyticsSchema),
+  moduleAnalytics: z.array(topicAnalyticsSchema),
   activityAnalytics: activityAnalyticsSchema,
 });
 
 export type ActivityAnalytics = z.infer<typeof activityAnalyticsSchema>;
 export type Activity = z.infer<typeof activitySchema>;
 export type TopicProgress = z.infer<typeof topicProgressSchema>;
-export type TopicAnalytics = z.infer<typeof topicAnalyticsSchema>;
+export type ModuleAnalytics = z.infer<typeof topicAnalyticsSchema>;
 export type LearnerAnalyticsAPIResponse = z.infer<typeof learnerActivitySchema>;
