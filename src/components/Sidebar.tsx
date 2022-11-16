@@ -61,7 +61,7 @@ const Sidebar = ({ children }: { children: React.ReactElement }) => {
   return (
     <div className="back-layer grid grid-cols-5 px-2 pt-2 ">
       <div className="grid-col-1 z-index-2 grid h-screen">
-        <div className="background-color relative rounded-l-lg border-r-4 py-8 ">
+        <div className="background-color relative rounded-l-lg border-r-4 dark:border-gray-500 py-8 ">
           <div className="flex flex-shrink-0 justify-center px-2">
             <Greeting />
           </div>
@@ -144,7 +144,7 @@ const Sidebar = ({ children }: { children: React.ReactElement }) => {
               )}
             </nav>
           </div>
-          <div className="absolute bottom-4 flex w-full flex-shrink-0 border-t border-gray-200 p-4">
+          <div className="absolute bottom-4 flex w-full flex-shrink-0 border-t border-gray-200 dark:border-gray-500 p-4">
             <a href="#" className="group block w-full flex-shrink-0">
               <div className="flex items-center space-x-2">
                 <div>
@@ -173,7 +173,7 @@ const Sidebar = ({ children }: { children: React.ReactElement }) => {
         </div>
       </div>
       <div className="grid-col-2 background-color relative col-span-4 grid rounded-r-lg overflow-auto">
-        <div className="absolute right-8 top-8">
+        <div className="absolute right-0 top-4">
           <div className="mr-8 ">
             <ToggleTheme />
           </div>

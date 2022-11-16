@@ -2,6 +2,7 @@ import ContinueCard from "../../components/ContinueCard";
 import DonutChart from "../../components/DonutChart";
 import CourseStatus from "../../components/CourseStatus";
 import { Accordion } from "flowbite-react";
+import TopMenu from "../../components/TopMenu";
 
 const Courses = () => {
 
@@ -31,8 +32,9 @@ const Courses = () => {
 
   return (
     <div>
+      <TopMenu />
         <div className="background-color col-span-4 mr-4 h-screen rounded-r-lg p-14">
-          <div className="text-color mb-8 text-3xl font-semibold">Java</div>
+          
           <div className="mb-24 flex flex-row">
             <div className="w-3/5 ">
               <ContinueCard
