@@ -13,8 +13,8 @@ const DonutChart = () => {
 
   if (!isSuccess || isLoading) {
     return <div className="flex justify-center items-center">
-    <div className="spinner-border animate-spin inline-block w-44 h-44 border-4 loading-spinner rounded-full" role="status">
-      <span className="visually-hidden">Loading...</span>
+    <div className="spinner-border animate-spin inline-block w-44 h-44 border-8 loading-spinner rounded-full" role="status">
+      
     </div>
   </div>;
   }
