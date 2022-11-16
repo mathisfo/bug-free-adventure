@@ -5,7 +5,7 @@ const PrismaExternal = () => {
     data: course,
     error,
     isLoading,
-  } = trpc.useQuery(["course.getCourse"]);
+  } = trpc.useQuery(["course.getCourses"]);
   const {
     data: modules,
     error: moduleError,
@@ -21,7 +21,7 @@ const PrismaExternal = () => {
 
   return (
     <>
-      <div>{course?.courseName}</div>
+      <div>{course?.map(course => course.courseName)}</div>
       <div>{modules?.map((module) => module.moduleName)}</div>
     </>
   );
