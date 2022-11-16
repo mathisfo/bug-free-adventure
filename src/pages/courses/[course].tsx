@@ -2,39 +2,10 @@ import ContinueCard from "../../components/ContinueCard";
 import DonutChart from "../../components/DonutChart";
 import CourseStatus from "../../components/CourseStatus";
 import { useRouter } from "next/router";
-import { trpc } from "../../utils/trpc";
-import { GetStaticPaths } from "next";
 
 const Courses = () => {
   const router = useRouter();
   const { course } = router.query;
-  const { module } = router.query;
-
-  console.log("foo", module);
-
-  const exercises = [
-    {
-      course: "Java",
-      category: "Strings",
-      name: "Inheritance 1",
-      recommended: "false",
-      ongoing: true,
-    },
-    {
-      course: "Java",
-      category: "If-Else",
-      name: "Sum square difference",
-      recommended: "true",
-      ongoing: false,
-    },
-    {
-      course: "Java",
-      category: "Boolean Expressions",
-      name: "Calculating the Perimeter of a Rectangle",
-      recommended: "false",
-      ongoing: false,
-    },
-  ];
 
   return (
     <div>
