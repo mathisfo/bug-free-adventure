@@ -12,11 +12,14 @@ const DonutChart = () => {
   } = trpc.useQuery(["learneractivity.getLearnerActivity"]);
 
   if (!isSuccess || isLoading) {
-    return <div className="flex justify-center items-center">
-    <div className="spinner-border animate-spin inline-block w-44 h-44 border-8 loading-spinner rounded-full" role="status">
-      
-    </div>
-  </div>;
+    return (
+      <div className="flex items-center justify-center">
+        <div
+          className="spinner-border loading-spinner inline-block h-44 w-44 animate-spin rounded-full border-8"
+          role="status"
+        ></div>
+      </div>
+    );
   }
 
   const overallProgress = () => {

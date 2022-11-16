@@ -21,7 +21,7 @@ const PrismaExternal = () => {
 
   return (
     <>
-      <div>{course?.map(course => course.courseName)}</div>
+      <div>{course?.map((course) => course.courseName)}</div>
       <div>{modules?.map((module) => module.moduleName)}</div>
     </>
   );
