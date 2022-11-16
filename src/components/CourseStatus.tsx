@@ -12,7 +12,7 @@ const CourseStatus = () => {
     isSuccess,
     isLoading,
   } = trpc.useQuery(["learneractivity.getLearnerActivity"]);
-  const [clickedIndex, setClickedIndex] = useState({});
+  const [clickedIndex, setClickedIndex] = useState<any>({});
 
   if (!isSuccess || isLoading) {
     return <div className="rounded-md p-4 w-full mx-auto">
@@ -28,8 +28,8 @@ const CourseStatus = () => {
   </div>;
   }
 
-  const handleClick = (index: any) => {
-    setClickedIndex(state => ({
+  const handleClick = (index: number) => {
+    setClickedIndex((state: any[]) => ({
       ...state, 
     [index]: !state[index]
     }));
