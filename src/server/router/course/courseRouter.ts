@@ -1,7 +1,5 @@
 import { TRPCError } from "@trpc/server";
-import { Input } from "postcss";
 import { z } from "zod";
-import { trpc } from "../../../utils/trpc";
 import { createRouter } from "../context";
 
 export const courseRouter = createRouter()
