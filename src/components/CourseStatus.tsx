@@ -79,7 +79,7 @@ const CourseStatus = () => {
               </tr>
               {clickedIndex[index] &&
               <>
-              <tr className="text-md dark:course-card-dark bg-[#F5F5F5] cursor-pointer border-b hover:bg-gray-50 dark:border-gray-700 hover:dark:bg-[#3F485F] ">
+              <tr className="text-md dark:bg-[#1c1f37] bg-[#F5F5F5] cursor-pointer border-b hover:bg-gray-50 dark:border-gray-700 hover:dark:bg-[#3F485F] ">
                 <th className="py-4 px-12">Examples</th>
                 <td className="py-4 px-12"><div className="text-color flex flex-row font-bold">
         1/ 
@@ -96,7 +96,7 @@ const CourseStatus = () => {
                 </td>
                 
               </tr>
-              <tr className="text-md dark:course-card-dark bg-[#F5F5F5] cursor-pointer border-b hover:bg-gray-50 dark:border-gray-700 hover:dark:bg-[#3F485F] ">
+              <tr className="text-md dark:bg-[#1c1f37] bg-[#F5F5F5] cursor-pointer border-b hover:bg-gray-50 dark:border-gray-700 hover:dark:bg-[#3F485F] ">
               <th className="py-4 px-12">Coding</th>
               <td className="py-4 px-12"><div className="text-color flex flex-row font-bold">
         0/ 
@@ -113,7 +113,7 @@ const CourseStatus = () => {
               </td>
               
             </tr>
-            <tr className="text-md dark:course-card-dark bg-[#F5F5F5] cursor-pointer border-b hover:bg-gray-50 dark:border-gray-700 hover:dark:bg-[#3F485F] ">
+            <tr className="text-md dark:bg-[#1c1f37] bg-[#F5F5F5] cursor-pointer border-b hover:bg-gray-50 dark:border-gray-700 hover:dark:bg-[#3F485F] ">
             <th className="py-4 px-12">Challenges</th>
             <td className="py-4 px-12"><div className="text-color flex flex-row font-bold">
         0/ 
