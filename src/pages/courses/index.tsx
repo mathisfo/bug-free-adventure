@@ -49,7 +49,7 @@ const Courses = () => {
           </div>
           <CourseStatus />
          
-      <div className="h-16 background-color">
+      <div className="h-32 background-color">
 
       </div>
         </div>
