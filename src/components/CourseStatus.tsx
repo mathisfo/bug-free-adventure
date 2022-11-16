@@ -8,7 +8,7 @@ import {
 import { useState } from "react";
 import { trpc } from "../utils/trpc";
 import Link from "next/link";
-import { type } from '@prisma/client';
+import { type } from "@prisma/client";
 
 const CourseStatus = () => {
   const {
@@ -67,9 +67,7 @@ const CourseStatus = () => {
                     ) : (
                       <ChevronRightIcon className="text-color mr-2 h-4 w-4"></ChevronRightIcon>
                     )}
-                    <Link href={`Java/${module.name}&?{type}`}>
-                      {module.name}
-                    </Link>
+                    <Link href={`Java/${module.name}`}>{module.name}</Link>
                   </th>
 
                   <td className="py-4 px-6">
@@ -105,7 +103,13 @@ const CourseStatus = () => {
                 {clickedIndex[index] && (
                   <>
                     <tr className="text-md cursor-pointer border-b bg-[#F5F5F5] hover:bg-gray-50 dark:border-gray-700 dark:bg-[#1c1f37] hover:dark:bg-[#3F485F] ">
-                      <th className="py-4 px-12"><Link href={`Java/${module.name}?&type=${type.EXAMPLE}`}>Examples</Link></th>
+                      <th className="py-4 px-12">
+                        <Link
+                          href={`Java/${module.name}?&type=${type.EXAMPLE}`}
+                        >
+                          Examples
+                        </Link>
+                      </th>
                       <td className="py-4 px-12">
                         <div className="text-color flex flex-row font-bold">
                           1/
@@ -127,7 +131,11 @@ const CourseStatus = () => {
                       </td>
                     </tr>
                     <tr className="text-md cursor-pointer border-b bg-[#F5F5F5] hover:bg-gray-50 dark:border-gray-700 dark:bg-[#1c1f37] hover:dark:bg-[#3F485F] ">
-                      <th className="py-4 px-12"><Link href={`Java/${module.name}?&type=${type.CODING}`}>Coding</Link></th>
+                      <th className="py-4 px-12">
+                        <Link href={`Java/${module.name}?&type=${type.CODING}`}>
+                          Coding
+                        </Link>
+                      </th>
                       <td className="py-4 px-12">
                         <div className="text-color flex flex-row font-bold">
                           0/
@@ -150,7 +158,9 @@ const CourseStatus = () => {
                     </tr>
                     <tr className="text-md cursor-pointer border-b bg-[#F5F5F5] hover:bg-gray-50 dark:border-gray-700 dark:bg-[#1c1f37] hover:dark:bg-[#3F485F] ">
                       <th className="py-4 px-12">
-                        <Link href={`Java/${module.name}?&type=${type.CHALLENGE}`}>
+                        <Link
+                          href={`Java/${module.name}?&type=${type.CHALLENGE}`}
+                        >
                           Challenges
                         </Link>
                       </th>
