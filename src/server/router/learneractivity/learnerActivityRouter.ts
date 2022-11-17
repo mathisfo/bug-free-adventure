@@ -1,8 +1,12 @@
 import { z } from "zod";
 import { createRouter } from "../context";
 import { toJson } from "really-relaxed-json";
-import { learnerActivitySchema } from "../../schema/LearnerActivitySchema";
+import {
+  learnerActivitySchema,
+  LearnerAnalyticsAPIResponse,
+} from "../../schema/LearnerActivitySchema";
 import { reMapLearnerActivityUtil } from "../../bff/learnerActivityUtil";
+import { prisma } from "@prisma/client";
 
 const options = {
   method: "GET",
@@ -21,13 +25,40 @@ export const learnerActivityRouter = createRouter().query(
         .then((text) => toJson(text))
         .then((j) => JSON.parse(j));
 
-      const activityResources = ctx.prisma.activityResource.findMany({
+      const activityResources = await ctx.prisma.activityResource.findMany({
         select: {
-          id: true,
+          activityId: true,
+          name: true,
         },
       });
 
-      const api = reMapLearnerActivityUtil(unfilteredAPI);
+      const api = reMapLearnerActivityUtil(
+        unfilteredAPI,
+        activityResources
+      ) as LearnerAnalyticsAPIResponse;
+
+      console.log("API", api);
+
+      for (const activity of api.activityAnalytics.challenges) {
+        const name = activityResources.find((ac) => {
+          ac.activityId === activity.activityId;
+        })?.name;
+        activity.activityName === name;
+      }
+
+      for (const activity of api.activityAnalytics.coding) {
+        const name = activityResources.find((ac) => {
+          ac.activityId === activity.activityId;
+        })?.name;
+        activity.activityName === name;
+      }
+
+      for (const activity of api.activityAnalytics.examples) {
+        const name = activityResources.find((ac) => {
+          ac.activityId === activity.activityId;
+        })?.name;
+        activity.activityName === name;
+      }
 
       return learnerActivitySchema.parse(api);
     },
