@@ -1,7 +1,4 @@
-
-import {
-  ClipboardDocumentCheckIcon
-} from "@heroicons/react/24/outline";
+import { ClipboardDocumentCheckIcon } from "@heroicons/react/24/outline";
 
 const Assignments = () => {
   const assignments = [
@@ -38,7 +35,9 @@ const Assignments = () => {
           <div key={assignment.title} className="col-start-1 grid">
             <div className="mb-4 flex flex-row space-x-6">
               <div>
-                <div className="icon w-12 rounded-3xl p-2 text-white"><ClipboardDocumentCheckIcon /></div>
+                <div className="icon w-12 rounded-3xl p-2 text-white">
+                  <ClipboardDocumentCheckIcon />
+                </div>
               </div>
               <div>
                 <div className="text-lg ">{assignment.title}</div>

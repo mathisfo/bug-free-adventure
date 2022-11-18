@@ -1,5 +1,5 @@
 import { type as typeEnum } from "@prisma/client";
-import Link from 'next/link';
+import Link from "next/link";
 import { useRouter } from "next/router";
 import Timeline from "../../components/Timeline";
 import { Activity } from "../../server/schema/LearnerActivitySchema";
@@ -46,8 +46,8 @@ const ModuleStatistics = () => {
 
   if (!type) {
     return (
-      <div className='m-4'>
-        <h1 className='m-2 text-4xl'>{module![1]}</h1>
+      <div className="m-4">
+        <h1 className="m-2 text-4xl">{module![1]}</h1>
         <Timeline
           recommendedActivities={[
             ...activities.challenges,
@@ -99,7 +99,15 @@ const ModuleStatistics = () => {
                         key={activity.activityId}
                         className="text-md background-color cursor-pointer border-b hover:bg-gray-50 dark:border-gray-700 hover:dark:bg-[#3F485F] "
                       >
-                        <th className="py-4 px-6"><a target="_blank" href={activity.url} rel="noreferrer">{activity.activityName}</a></th>
+                        <th className="py-4 px-6">
+                          <a
+                            target="_blank"
+                            href={activity.url}
+                            rel="noreferrer"
+                          >
+                            {activity.activityName}
+                          </a>
+                        </th>
                         <td className="py-4 px-6">{activity.attempts}</td>
                         <td className="flex flex-row py-4 px-6">
                           <div>{activity.successRate}</div>

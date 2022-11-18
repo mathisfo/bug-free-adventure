@@ -5,7 +5,6 @@ import {
 import { trpc } from "../../utils/trpc";
 
 const ExternalApi = () => {
-
   const {
     data: learnerAnalytics,
     isSuccess,

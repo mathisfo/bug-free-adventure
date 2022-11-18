@@ -1,7 +1,4 @@
-
-import {
-  PlayIcon
-} from "@heroicons/react/24/solid";
+import { PlayIcon } from "@heroicons/react/24/solid";
 
 const ContinueCard = ({
   currentExercise,
@@ -10,8 +7,6 @@ const ContinueCard = ({
   currentExercise: string;
   recommendedExercise: string;
 }) => {
-  
-
   return (
     <div className="space-y-4">
       <div className="course-card grid w-full grid-cols-3 grid-rows-2 rounded-lg px-2">
@@ -35,7 +30,7 @@ const ContinueCard = ({
           </div>
         </div>
         <div className="col-start-3 row-span-2 row-start-1 m-2  my-auto flex h-16 w-16 place-self-end rounded-lg bg-[#FED1D3] dark:bg-[#7d8393]/75">
-        <PlayIcon className="m-auto w-8 cursor-pointer text-gray-700 hover:scale-125 dark:text-[#f97316]"></PlayIcon>
+          <PlayIcon className="m-auto w-8 cursor-pointer text-gray-700 hover:scale-125 dark:text-[#f97316]"></PlayIcon>
         </div>
       </div>
     </div>
