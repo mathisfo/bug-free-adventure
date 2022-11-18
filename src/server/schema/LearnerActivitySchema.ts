@@ -1,3 +1,4 @@
+import { type } from "@prisma/client";
 import { z } from "zod";
 
 export const topicProgressSchema = z.object({
@@ -21,13 +22,14 @@ export const activitySchema = z.object({
   relatedTopic: z.string(),
   activityName: z.string(),
   activityId: z.string(),
+  url: z.string(),
   visited: z.boolean(),
   attempts: z.number(),
   successRate: z.number(),
   t: z.number(),
   aSeq: z.string(),
   sequencing: z.number(),
-  type: z.string(),
+  type: z.enum([type.EXAMPLE, type.CODING, type.CHALLENGE]),
 });
 
 export const activityAnalyticsSchema = z.object({
