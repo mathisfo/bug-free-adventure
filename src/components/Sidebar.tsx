@@ -1,14 +1,11 @@
-import { useRouter } from "next/router";
-import Greeting from "./Greeting";
-import {
-  ChartBarIcon,
-  FolderIcon,
-  Cog6ToothIcon,
-  UserCircleIcon,
-} from "@heroicons/react/24/outline";
-import { trpc } from "../utils/trpc";
 import { Disclosure } from "@headlessui/react";
+import {
+  ChartBarIcon, Cog6ToothIcon, FolderIcon, UserCircleIcon
+} from "@heroicons/react/24/outline";
+import { useRouter } from "next/router";
 import { HiOutlineLogout } from "react-icons/hi";
+import { trpc } from "../utils/trpc";
+import Greeting from "./Greeting";
 import ToggleTheme from "./ToggleTheme";
 
 function classNames(...classes: string[]) {
@@ -17,11 +14,6 @@ function classNames(...classes: string[]) {
 
 const Sidebar = ({ children }: { children: React.ReactElement }) => {
   const router = useRouter();
-
-  const items = [
-    { title: "Java", target: "/courses" },
-    { title: "Python", target: "/courses" },
-  ];
 
   const navigation = [
     {

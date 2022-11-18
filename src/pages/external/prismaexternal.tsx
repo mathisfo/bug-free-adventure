@@ -1,16 +1,8 @@
 import { trpc } from "../../utils/trpc";
 
 const PrismaExternal = () => {
-  const {
-    data: course,
-    error,
-    isLoading,
-  } = trpc.useQuery(["course.getCourses"]);
-  const {
-    data: modules,
-    error: moduleError,
-    isLoading: moduleIsLoading,
-  } = trpc.useQuery([
+  const { data: course, isLoading } = trpc.useQuery(["course.getCourses"]);
+  const { data: modules, isLoading: moduleIsLoading } = trpc.useQuery([
     "course.getModuleOnCourseName",
     { courseNameInput: "Java" },
   ]);

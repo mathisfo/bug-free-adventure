@@ -1,6 +1,5 @@
-import { createRouter } from "./context";
 import { z } from "zod";
-import { useQuery } from "react-query";
+import { createRouter } from "./context";
 
 export const exampleRouter = createRouter()
   .query("hello", {

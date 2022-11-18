@@ -1,10 +1,7 @@
-import { useRouter } from "next/router";
 import {
-   HomeIcon
-  } from "@heroicons/react/24/outline";
-import {
-    ChartBarIcon
+  ChartBarIcon
 } from "@heroicons/react/24/solid";
+import { useRouter } from "next/router";
 
 const TopMenu = () => {
     const router = useRouter();
@@ -49,7 +46,7 @@ const TopMenu = () => {
             </a>
           </div>
           {navigation.map((item) => 
-          <div className={classNames(
+          <div key={item.name} className={classNames(
             item.current ? currentItemStyling : menuItemStyling, "hover:bg-indigo-100 dark:hover:bg-[#503597] px-4 py-2 rounded-lg")}>
           <a href={item.href}>
             {item.name}

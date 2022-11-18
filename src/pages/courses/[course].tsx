@@ -1,7 +1,7 @@
-import ContinueCard from "../../components/ContinueCard";
-import DonutChart from "../../components/DonutChart";
-import CourseStatus from "../../components/CourseStatus";
 import { useRouter } from "next/router";
+import ContinueCard from "../../components/ContinueCard";
+import CourseStatus from "../../components/CourseStatus";
+import DonutChart from "../../components/DonutChart";
 import TopMenu from "../../components/TopMenu";
 
 const Courses = () => {
