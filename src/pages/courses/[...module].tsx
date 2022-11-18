@@ -1,15 +1,10 @@
-import { GetStaticPaths, GetStaticPropsContext } from "next";
-import { useRouter } from "next/router";
-import { appRouter } from "../../server/router";
-import { trpc } from "../../utils/trpc";
-import superjson from "superjson";
 import { type as typeEnum } from "@prisma/client";
-import {
-  Activity,
-  ActivityAnalytics,
-  LearnerAnalyticsAPIResponse,
-} from "../../server/schema/LearnerActivitySchema";
+import { useRouter } from "next/router";
 import Timeline from "../../components/Timeline";
+import {
+  Activity
+} from "../../server/schema/LearnerActivitySchema";
+import { trpc } from "../../utils/trpc";
 
 const ModuleStatistics = () => {
   const {
@@ -17,28 +12,15 @@ const ModuleStatistics = () => {
     isSuccess,
     isLoading,
     isIdle,
-    isError,
-    error,
   } = trpc.useQuery(["learneractivity.getLearnerActivity"]);
 
-  const {
-    data: nameAndIds,
-    isSuccess: nameAndIdsSuccess,
-    isLoading: nameAndIdsLoading,
-  } = trpc.useQuery(["course.getActivityResourceNamesAndActivityId"]);
   const router = useRouter();
 
   const { module } = router.query;
   const { type } = router.query;
 
-  console.log("module", module);
-  console.log("type", type);
-
-  if (isLoading || nameAndIdsLoading || !nameAndIdsSuccess || isIdle) {
+  if (isLoading || isIdle || !isSuccess ) {
     return <div>Loading...</div>;
-  }
-  if (isError) {
-    return <span>Error: {error.message}</span>;
   }
 
   const activities = learnerAnalytics.activityAnalytics;
@@ -64,7 +46,7 @@ const ModuleStatistics = () => {
   };
 
   return (
-    <>     
+    <>
       <div> {module ? module[1] : "404"}</div>
       <div>{type + "S"}</div>
       <Timeline
@@ -90,7 +72,6 @@ const ModuleStatistics = () => {
               ? typeofActivity()
                   .filter((activity) => activity.relatedTopic == module[1])
                   .map((activity) => {
-                    console.log("NAME ", activity.activityName)
                     return (
                       <tr
                         key={activity.activityId}

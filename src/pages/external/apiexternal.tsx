@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import {
   Activity,
   ModuleAnalytics,
@@ -7,11 +6,6 @@ import { trpc } from "../../utils/trpc";
 
 const ExternalApi = () => {
 
-  const map = new Map<string, Activity>
-
-
-
-  const router = useRouter();
   const {
     data: learnerAnalytics,
     isSuccess,
