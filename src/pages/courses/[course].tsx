@@ -21,7 +21,7 @@ const Courses = () => {
           </div>
 
           <div className="w-2/5 items-center px-20">
-            <DonutChart />
+            <DonutChart size="176px" bg="#d1d5db" fillColor="#60a5fa"/>
           </div>
         </div>
         <CourseStatus />
