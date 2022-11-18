@@ -65,6 +65,7 @@ const ModuleStatistics = () => {
               <th className="py-3 px-6">Success</th>
               <th className="py-3 px-6">Module</th>
               <th className="py-3 px-6">Type</th>
+              <th className="py-3 px-6">Sequencing</th>
             </tr>
           </thead>
           <tbody>
