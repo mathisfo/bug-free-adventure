@@ -1,6 +1,9 @@
 import { Disclosure } from "@headlessui/react";
 import {
-  ChartBarIcon, Cog6ToothIcon, FolderIcon, UserCircleIcon
+  ChartBarIcon,
+  Cog6ToothIcon,
+  FolderIcon,
+  UserCircleIcon,
 } from "@heroicons/react/24/outline";
 import { useRouter } from "next/router";
 import { HiOutlineLogout } from "react-icons/hi";
@@ -27,8 +30,8 @@ const Sidebar = ({ children }: { children: React.ReactElement }) => {
       icon: FolderIcon,
       current: router.asPath === "/courses",
       children: [
-        { name: "Java", href: "/courses" },
-        { name: "Python", href: "/courses" },
+        { name: "Java", href: "/courses/Java" },
+        { name: "Python", href: "/courses/Python" },
       ],
     },
     {
@@ -53,7 +56,7 @@ const Sidebar = ({ children }: { children: React.ReactElement }) => {
   return (
     <div className="back-layer grid grid-cols-5 px-2 pt-2 ">
       <div className="grid-col-1 z-index-2 grid h-screen">
-        <div className="background-color relative rounded-l-lg border-r-4 dark:border-gray-500 py-8 ">
+        <div className="background-color relative rounded-l-lg border-r-4 py-8 dark:border-gray-500 ">
           <div className="flex flex-shrink-0 justify-center px-2">
             <Greeting />
           </div>
@@ -136,21 +139,20 @@ const Sidebar = ({ children }: { children: React.ReactElement }) => {
               )}
             </nav>
           </div>
-          <div className="absolute bottom-4 flex w-full flex-shrink-0 border-t border-gray-200 dark:border-gray-500 p-4">
+          <div className="absolute bottom-4 flex w-full flex-shrink-0 border-t border-gray-200 p-4 dark:border-gray-500">
             <a href="#" className="group block w-full flex-shrink-0">
               <div className="flex items-center space-x-2">
                 <div>
                   <UserCircleIcon className="text-color h-8 w-8"></UserCircleIcon>
                 </div>
                 {isLoading || !isSuccess ? (
-                  <div className="rounded-md w-full mx-auto">
-                  <div className="animate-pulse flex space-x-4">
-                    <div className="flex-1 py-1">
-                      <div className="h-6 loading rounded"></div>
-          
+                  <div className="mx-auto w-full rounded-md">
+                    <div className="flex animate-pulse space-x-4">
+                      <div className="flex-1 py-1">
+                        <div className="loading h-6 rounded"></div>
                       </div>
                     </div>
-                </div>
+                  </div>
                 ) : (
                   <div className="text-color">
                     {learnerAnalytics.learner.id}
@@ -164,13 +166,13 @@ const Sidebar = ({ children }: { children: React.ReactElement }) => {
           </div>
         </div>
       </div>
-      <div className="grid-col-2 background-color relative col-span-4 grid rounded-r-lg overflow-auto">
+      <div className="grid-col-2 background-color relative col-span-4 grid overflow-auto rounded-r-lg">
         <div className="absolute right-0 top-4">
           <div className="mr-8 ">
             <ToggleTheme />
           </div>
         </div>
-        <div className="py-4 w-full ">{children}</div>
+        <div className="w-full py-4 ">{children}</div>
       </div>
     </div>
   );

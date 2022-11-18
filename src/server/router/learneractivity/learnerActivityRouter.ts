@@ -2,7 +2,7 @@ import { toJson } from "really-relaxed-json";
 import { reMapLearnerActivityUtil } from "../../bff/learnerActivityUtil";
 import {
   learnerActivitySchema,
-  LearnerAnalyticsAPIResponse
+  LearnerAnalyticsAPIResponse,
 } from "../../schema/LearnerActivitySchema";
 import { createRouter } from "../context";
 
@@ -27,6 +27,7 @@ export const learnerActivityRouter = createRouter().query(
         select: {
           activityId: true,
           name: true,
+          url: true,
         },
       });
 
@@ -34,18 +35,6 @@ export const learnerActivityRouter = createRouter().query(
         unfilteredAPI,
         activityResources
       ) as LearnerAnalyticsAPIResponse;
-
-      const array = api.activityAnalytics.challenges.concat(
-        api.activityAnalytics.coding,
-        api.activityAnalytics.examples
-      );
-
-      for (const activity of array) {
-        const name = activityResources.find((ac) => {
-          ac.activityId === activity.activityId;
-        })?.name;
-        activity.activityName === name;
-      }
 
       return learnerActivitySchema.parse(api);
     },
