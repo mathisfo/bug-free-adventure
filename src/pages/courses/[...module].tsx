@@ -1,9 +1,8 @@
 import { type as typeEnum } from "@prisma/client";
+import Link from 'next/link';
 import { useRouter } from "next/router";
 import Timeline from "../../components/Timeline";
-import {
-  Activity
-} from "../../server/schema/LearnerActivitySchema";
+import { Activity } from "../../server/schema/LearnerActivitySchema";
 import { trpc } from "../../utils/trpc";
 
 const ModuleStatistics = () => {
@@ -19,7 +18,7 @@ const ModuleStatistics = () => {
   const { module } = router.query;
   const { type } = router.query;
 
-  if (isLoading || isIdle || !isSuccess ) {
+  if (isLoading || isIdle || !isSuccess) {
     return <div>Loading...</div>;
   }
 
@@ -44,6 +43,28 @@ const ModuleStatistics = () => {
       }
     }
   };
+
+  if (!type) {
+    return (
+      <div className='m-4'>
+        <h1 className='m-2 text-4xl'>{module![1]}</h1>
+        <Timeline
+          recommendedActivities={[
+            ...activities.challenges,
+            ...activities.coding,
+            ...activities.examples,
+          ].filter((e) => e.sequencing > 0 && e.relatedTopic === module![1])}
+        />
+        <div className="grid grid-cols-3 gap-4">
+          <div>Card 1</div>
+          <div>Card 2</div>
+          <div>Card 3</div>
+          <div>Card 4</div>
+          <div>Card 5</div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -78,7 +99,7 @@ const ModuleStatistics = () => {
                         key={activity.activityId}
                         className="text-md background-color cursor-pointer border-b hover:bg-gray-50 dark:border-gray-700 hover:dark:bg-[#3F485F] "
                       >
-                        <th className="py-4 px-6">{activity.activityName}</th>
+                        <th className="py-4 px-6"><a target="_blank" href={activity.url} rel="noreferrer">{activity.activityName}</a></th>
                         <td className="py-4 px-6">{activity.attempts}</td>
                         <td className="flex flex-row py-4 px-6">
                           <div>{activity.successRate}</div>

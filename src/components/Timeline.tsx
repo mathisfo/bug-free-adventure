@@ -16,7 +16,7 @@ const TimelineWrapper = (props: { recommendedActivities: Activity[] }) => {
           <Timeline.Point icon={HiCalendar} />
           <Timeline.Content>
             <Timeline.Time>{activity.type}</Timeline.Time>
-            <Timeline.Title>{activity.activityId}</Timeline.Title>
+            <Timeline.Title>{activity.activityName}</Timeline.Title>
           </Timeline.Content>
         </Timeline.Item>
       ))}

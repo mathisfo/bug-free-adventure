@@ -6,7 +6,7 @@ import {
 
 export function reMapLearnerActivityUtil(
   api: any,
-  names: { name: string; activityId: string }[]
+  names: { name: string; activityId: string; url: string }[]
 ) {
   const remapped: LearnerActivityBFFApi = {
     learner: {
@@ -69,20 +69,20 @@ export function reMapLearnerActivityUtil(
         relatedTopic: "",
         activityId: "",
         activityName: "heihei",
+        url: "",
         visited: false,
         attempts: 0,
         successRate: 0,
         t: 0,
         aSeq: "",
-        sequencing: 0.1,
-        type: "",
+        sequencing: 0,
+        type: "EXAMPLE",
       };
       activity.relatedTopic = key;
-      activity.type = "example";
       activity.activityId = type;
       activity.activityName =
         names.find((e) => e.activityId === type)?.name ?? "Unnamed Activity";
-
+      activity.url = names.find((e) => e.activityId === type)?.url ?? "NO URL";
       if (api.learner.state.activities[key].Examples[type].values.p == 1) {
         activity.visited = true;
       }
@@ -104,6 +104,7 @@ export function reMapLearnerActivityUtil(
         relatedTopic: "",
         activityId: "",
         activityName: "heihei",
+        url: "",
         visited: false,
         attempts: 0,
         successRate: 0,
@@ -114,10 +115,11 @@ export function reMapLearnerActivityUtil(
       };
 
       activity.relatedTopic = key;
-      activity.type = "challenge";
+      activity.type = "CHALLENGE";
       activity.activityId = type;
       activity.activityName =
         names.find((e) => e.activityId === type)?.name ?? "Unamed Activity";
+      activity.url = names.find((e) => e.activityId === type)?.url ?? "NO URL";
 
       if (api.learner.state.activities[key].Challenges[type].values.p == 1) {
         activity.visited = true;
@@ -140,6 +142,7 @@ export function reMapLearnerActivityUtil(
         relatedTopic: "",
         activityId: "",
         activityName: "hei",
+        url: "",
         visited: false,
         attempts: 0,
         successRate: 0,
@@ -149,10 +152,11 @@ export function reMapLearnerActivityUtil(
         type: "",
       };
       activity.relatedTopic = key;
-      activity.type = "coding";
+      activity.type = "CODING";
       activity.activityId = type;
       activity.activityName =
         names.find((e) => e.activityId === type)?.name ?? "Unamed Activity";
+      activity.url = names.find((e) => e.activityId === type)?.url ?? "NO URL";
       if (api.learner.state.activities[key].Coding[type].values.p == 1) {
         activity.visited = true;
       }
