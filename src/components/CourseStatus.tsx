@@ -1,14 +1,12 @@
 import {
-  CheckCircleIcon,
-  EllipsisHorizontalCircleIcon,
-  XCircleIcon,
-  ChevronDownIcon,
-  ChevronRightIcon,
+  CheckCircleIcon, ChevronDownIcon,
+  ChevronRightIcon, EllipsisHorizontalCircleIcon,
+  XCircleIcon
 } from "@heroicons/react/24/outline";
+import { type } from "@prisma/client";
+import Link from "next/link";
 import { useState } from "react";
 import { trpc } from "../utils/trpc";
-import Link from "next/link";
-import { type } from "@prisma/client";
 
 const CourseStatus = () => {
   const {

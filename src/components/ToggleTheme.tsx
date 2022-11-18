@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
-import { useTheme } from "next-themes";
 import {
   MoonIcon, SunIcon
 } from "@heroicons/react/24/outline";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
 const ToggleTheme = () => {
   const [mounted, setMounted] = useState(false);
@@ -21,7 +21,7 @@ const ToggleTheme = () => {
   return (
     <div
       className="cursor-pointer"
-      onClick={(e) => setTheme(theme == "light" ? "dark" : "light")}
+      onClick={() => setTheme(theme == "light" ? "dark" : "light")}
     >
       {theme === "light" ? <MoonIcon className="text-color h-8 w-8 hover:scale-105 ease-in-out"></MoonIcon> : <SunIcon className="text-color h-8 w-8 hover:scale-105 ease-in-out"></SunIcon>}
     </div>
