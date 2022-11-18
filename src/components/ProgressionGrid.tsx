@@ -23,14 +23,17 @@ const ProgressionGrid = () => {
 
 
   return (
-    <div className="mt-12 w-1/3 space-y-1 ">
-      <div
-        className={`row-start-1 grid grid-cols-4 place-content-start items-center gap-6 `}
-      >
-        <p className="text-color col-start-1 justify-self-end text-sm font-semibold uppercase">
+    <div className="mt-12 space-y-1 grid grid-cols-2">
+        <div className="row-start-1 flex flex-row items-center space-x-2 pb-4 justify-self-end">
+            <div className="w-4 h-4 items-center rounded-md bg-green-200"></div><p className="text-sm">Finished</p>
+            <div className="w-4 h-4 items-center rounded-md bg-blue-200"></div><p className="text-sm">Started</p>
+            <div className="w-4 h-4 items-center rounded-md bg-gray-200"></div><p className="text-sm">To do</p>
+      </div>
+      <div className="row-start-2 flex items-center gap-6">
+        <p className="w-24 col-start-1 text-end text-sm font-semibold uppercase text-color">
           Examples
         </p>
-        <div className="col-span-3 col-start-2 flex flex-row space-x-1">
+        <div className="col-start-2 flex flex-row space-x-1">
           {modules.activityAnalytics.examples.filter(e => e.relatedTopic == "Strings").map((item) => (
             <>
               <div
@@ -57,11 +60,11 @@ const ProgressionGrid = () => {
           ))}
         </div>
       </div>
-      <div className="row-start-1 flex grid grid-cols-4 place-content-start items-center gap-6">
-        <p className="text-color col-start-1 justify-self-end text-sm font-semibold uppercase">
+      <div className="row-start-3 flex  items-center gap-6">
+        <p className="w-24 col-start-1 text-end text-sm font-semibold uppercase text-color">
           Coding
         </p>
-        <div className="col-span-3 col-start-2 flex flex-row space-x-1">
+        <div className=" col-start-2 flex flex-row space-x-1">
           {modules.activityAnalytics.coding.filter(e => e.relatedTopic == "Strings").map((item) => (
             <>
               <div
@@ -88,11 +91,11 @@ const ProgressionGrid = () => {
           ))}
         </div>
       </div>
-      <div className="row-start-1 flex grid grid-cols-4 place-content-start items-center gap-6">
-        <p className="text-color col-start-1 justify-self-end text-sm font-semibold uppercase">
+      <div className="row-start-4  flex items-center gap-6">
+        <p className="w-24 col-start-1 text-end text-sm font-semibold uppercase text-color">
           Challenges
         </p>
-        <div className="col-span-3 col-start-2 flex flex-row space-x-1">
+        <div className="col-start-2 flex flex-row space-x-1">
           {modules.activityAnalytics.challenges.filter(e => e.relatedTopic == "Strings").map((item) => (
             <>
               <div
