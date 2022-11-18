@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import {
   Activity,
   ModuleAnalytics,
@@ -6,7 +5,7 @@ import {
 import { trpc } from "../../utils/trpc";
 
 const ExternalApi = () => {
-  const router = useRouter();
+
   const {
     data: learnerAnalytics,
     isSuccess,
@@ -33,7 +32,7 @@ const ExternalApi = () => {
       {learnerAnalytics.activityAnalytics.challenges.map(
         (challenge: Activity) => (
           <div key={challenge.activityId}>
-            <h3>{challenge.activityId}</h3>
+            <h3>{challenge.activityName}</h3>
             <p>{challenge.relatedTopic}</p>
           </div>
         )

@@ -4,7 +4,10 @@ import {
   Sequencing,
 } from "./types/LearnerActivityBFFApi";
 
-export function reMapLearnerActivityUtil(api: any) {
+export function reMapLearnerActivityUtil(
+  api: any,
+  names: { name: string; activityId: string }[]
+) {
   const remapped: LearnerActivityBFFApi = {
     learner: {
       id: "",
@@ -65,6 +68,7 @@ export function reMapLearnerActivityUtil(api: any) {
       const activity = {
         relatedTopic: "",
         activityId: "",
+        activityName: "heihei",
         visited: false,
         attempts: 0,
         successRate: 0,
@@ -76,6 +80,8 @@ export function reMapLearnerActivityUtil(api: any) {
       activity.relatedTopic = key;
       activity.type = "example";
       activity.activityId = type;
+      activity.activityName =
+        names.find((e) => e.activityId === type)?.name ?? "Unnamed Activity";
 
       if (api.learner.state.activities[key].Examples[type].values.p == 1) {
         activity.visited = true;
@@ -97,6 +103,7 @@ export function reMapLearnerActivityUtil(api: any) {
       const activity = {
         relatedTopic: "",
         activityId: "",
+        activityName: "heihei",
         visited: false,
         attempts: 0,
         successRate: 0,
@@ -109,6 +116,8 @@ export function reMapLearnerActivityUtil(api: any) {
       activity.relatedTopic = key;
       activity.type = "challenge";
       activity.activityId = type;
+      activity.activityName =
+        names.find((e) => e.activityId === type)?.name ?? "Unamed Activity";
 
       if (api.learner.state.activities[key].Challenges[type].values.p == 1) {
         activity.visited = true;
@@ -130,6 +139,7 @@ export function reMapLearnerActivityUtil(api: any) {
       const activity = {
         relatedTopic: "",
         activityId: "",
+        activityName: "hei",
         visited: false,
         attempts: 0,
         successRate: 0,
@@ -141,6 +151,8 @@ export function reMapLearnerActivityUtil(api: any) {
       activity.relatedTopic = key;
       activity.type = "coding";
       activity.activityId = type;
+      activity.activityName =
+        names.find((e) => e.activityId === type)?.name ?? "Unamed Activity";
       if (api.learner.state.activities[key].Coding[type].values.p == 1) {
         activity.visited = true;
       }

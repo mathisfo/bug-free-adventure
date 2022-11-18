@@ -19,6 +19,7 @@ export const topicAnalyticsSchema = z.object({
 
 export const activitySchema = z.object({
   relatedTopic: z.string(),
+  activityName: z.string(),
   activityId: z.string(),
   visited: z.boolean(),
   attempts: z.number(),
@@ -47,6 +48,7 @@ export const learnerActivitySchema = z.object({
 
 export type ActivityAnalytics = z.infer<typeof activityAnalyticsSchema>;
 export type Activity = z.infer<typeof activitySchema>;
+
 export type TopicProgress = z.infer<typeof topicProgressSchema>;
 export type ModuleAnalytics = z.infer<typeof topicAnalyticsSchema>;
 export type LearnerAnalyticsAPIResponse = z.infer<typeof learnerActivitySchema>;

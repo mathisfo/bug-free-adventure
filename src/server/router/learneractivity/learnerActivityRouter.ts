@@ -1,8 +1,10 @@
-import { z } from "zod";
-import { createRouter } from "../context";
 import { toJson } from "really-relaxed-json";
-import { learnerActivitySchema } from "../../schema/LearnerActivitySchema";
 import { reMapLearnerActivityUtil } from "../../bff/learnerActivityUtil";
+import {
+  learnerActivitySchema,
+  LearnerAnalyticsAPIResponse
+} from "../../schema/LearnerActivitySchema";
+import { createRouter } from "../context";
 
 const options = {
   method: "GET",
@@ -21,13 +23,29 @@ export const learnerActivityRouter = createRouter().query(
         .then((text) => toJson(text))
         .then((j) => JSON.parse(j));
 
-      const activityResources = ctx.prisma.activityResource.findMany({
+      const activityResources = await ctx.prisma.activityResource.findMany({
         select: {
-          id: true,
+          activityId: true,
+          name: true,
         },
       });
 
-      const api = reMapLearnerActivityUtil(unfilteredAPI);
+      const api = reMapLearnerActivityUtil(
+        unfilteredAPI,
+        activityResources
+      ) as LearnerAnalyticsAPIResponse;
+
+      const array = api.activityAnalytics.challenges.concat(
+        api.activityAnalytics.coding,
+        api.activityAnalytics.examples
+      );
+
+      for (const activity of array) {
+        const name = activityResources.find((ac) => {
+          ac.activityId === activity.activityId;
+        })?.name;
+        activity.activityName === name;
+      }
 
       return learnerActivitySchema.parse(api);
     },
