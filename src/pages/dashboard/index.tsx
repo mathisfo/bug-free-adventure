@@ -1,8 +1,9 @@
 
 import CourseCard from "../../components/CourseCard";
 import Assignments from "../../components/Assignments";
+import { NextPage } from 'next/types';
 
-const Dashboard = () => {
+const Dashboard: NextPage = () => {
   const courses = [
     {
       course: "Java",

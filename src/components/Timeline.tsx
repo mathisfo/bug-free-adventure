@@ -1,8 +1,6 @@
-import { type } from "@prisma/client";
 import { Timeline } from "flowbite-react";
 import { HiCalendar } from "react-icons/hi";
 import { Activity } from "../server/schema/LearnerActivitySchema";
-import { trpc } from "../utils/trpc";
 
 const TimelineWrapper = (props: { recommendedActivities: Activity[] }) => {
   const { recommendedActivities } = props;
@@ -18,7 +16,7 @@ const TimelineWrapper = (props: { recommendedActivities: Activity[] }) => {
           <Timeline.Point icon={HiCalendar} />
           <Timeline.Content>
             <Timeline.Time>{activity.type}</Timeline.Time>
-            <Timeline.Title>{activity.activityId}</Timeline.Title>
+            <Timeline.Title>{activity.activityName}</Timeline.Title>
           </Timeline.Content>
         </Timeline.Item>
       ))}
