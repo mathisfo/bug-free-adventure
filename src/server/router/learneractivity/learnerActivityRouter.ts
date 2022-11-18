@@ -1,8 +1,10 @@
-import { z } from "zod";
-import { createRouter } from "../context";
 import { toJson } from "really-relaxed-json";
-import { learnerActivitySchema } from "../../schema/LearnerActivitySchema";
 import { reMapLearnerActivityUtil } from "../../bff/learnerActivityUtil";
+import {
+  learnerActivitySchema,
+  LearnerAnalyticsAPIResponse
+} from "../../schema/LearnerActivitySchema";
+import { createRouter } from "../context";
 
 const options = {
   method: "GET",
@@ -12,16 +14,40 @@ const options = {
 const externalAPIURL =
   "http://adapt2.sis.pitt.edu/aggregate2/GetContentLevels?usr=norway22169&grp=NorwayFall2022B&mod=user&sid=TEST&cid=352&lastActivityId=while_loops.j_digits&res=-1";
 
-export const learnerActivityRouter = createRouter()
-  .query("getLearnerActivity", {
-    async resolve() {
+export const learnerActivityRouter = createRouter().query(
+  "getLearnerActivity",
+  {
+    async resolve({ ctx }) {
       const unfilteredAPI = await fetch(externalAPIURL, options)
         .then((response) => response.text())
         .then((text) => toJson(text))
         .then((j) => JSON.parse(j));
 
-      const api = reMapLearnerActivityUtil(unfilteredAPI);
+      const activityResources = await ctx.prisma.activityResource.findMany({
+        select: {
+          activityId: true,
+          name: true,
+        },
+      });
+
+      const api = reMapLearnerActivityUtil(
+        unfilteredAPI,
+        activityResources
+      ) as LearnerAnalyticsAPIResponse;
+
+      const array = api.activityAnalytics.challenges.concat(
+        api.activityAnalytics.coding,
+        api.activityAnalytics.examples
+      );
+
+      for (const activity of array) {
+        const name = activityResources.find((ac) => {
+          ac.activityId === activity.activityId;
+        })?.name;
+        activity.activityName === name;
+      }
 
       return learnerActivitySchema.parse(api);
     },
-  });
+  }
+);

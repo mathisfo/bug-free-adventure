@@ -12,15 +12,22 @@ const DonutChart = () => {
   } = trpc.useQuery(["learneractivity.getLearnerActivity"]);
 
   if (!isSuccess || isLoading) {
-    return <div className="flex justify-center items-center">
-    <div className="spinner-border animate-spin inline-block w-44 h-44 border-8 loading-spinner rounded-full" role="status">
-      
-    </div>
-  </div>;
+    return (
+      <div className="flex items-center justify-center">
+        <div
+          className="spinner-border loading-spinner inline-block h-44 w-44 animate-spin rounded-full border-8"
+          role="status"
+        ></div>
+      </div>
+    );
   }
 
   const overallProgress = () => {
-    return learnerAnalytics.topicAnalytics.map((e) => e.overallProgress).reduce((acc, val) => { return acc + val / learnerAnalytics.topicAnalytics.length *100;},0 );
+    return learnerAnalytics.moduleAnalytics
+      .map((e) => e.overallProgress)
+      .reduce((acc, val) => {
+        return acc + (val / learnerAnalytics.moduleAnalytics.length) * 100;
+      }, 0);
   };
 
   const data: any = [
@@ -32,8 +39,6 @@ const DonutChart = () => {
     },
   ];
 
-  
-
   return (
     <>
       <PieChart
@@ -43,7 +48,7 @@ const DonutChart = () => {
         startAngle={270}
         style={{ height: "176px" }}
         rounded
-        lineWidth= {25}
+        lineWidth={25}
         label={({ dataEntry }) => dataEntry.value + "%"}
         labelStyle={(index) => ({
           fill: data[index].color,
@@ -52,7 +57,6 @@ const DonutChart = () => {
         })}
         labelPosition={0}
         animate
-
       />
     </>
   );

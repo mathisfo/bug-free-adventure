@@ -4,7 +4,7 @@ export type LearnerActivityBFFApi = {
     name: string;
     lastActivityId: string;
   };
-  topicAnalytics: Array<Topic>;
+  moduleAnalytics: Array<Topic>;
   activityAnalytics: {
     examples: Array<Activity>;
     challenges: Array<Activity>;
@@ -33,7 +33,7 @@ export type Sequencing = {
 
 export type Activity = {
   relatedTopic: string;
-  activityName: string;
+  activityId: string;
   visited: boolean;
   attempts: number;
   successRate: number;
