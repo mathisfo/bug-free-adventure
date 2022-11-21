@@ -57,9 +57,9 @@ const ModuleStatistics = () => {
           ].filter((e) => e.sequencing > 0 && e.relatedTopic === module![1])}
         />
         <div className="p-14 space-y-4 col-start-2">
-          <ActivityCard type="Example" bg="bg-gradient-to-r from-[#3c3b95] via-[#44439f] to-[#3c3b95]" boxColor="bg-[#4c4aa2]" fillColor="#789bf8"/>
-          <ActivityCard type="Coding" bg="bg-gradient-to-r from-[#5f80f4] via-[#6c8af3] to-[#5f80f4]" boxColor="bg-[#7795f6]" fillColor="#4c4aa2"/>
-          <ActivityCard type="Challenge" bg="bg-gradient-to-r from-[#9293cf] via-[#9a9bd0] to-[#9293cf]" boxColor="bg-[#A3a6d8]" fillColor="#4c4aa2"/>
+          <ActivityCard type="Example" bg="bg-gradient-to-r from-[#3c3b95] via-[#44439f] to-[#3c3b95] " boxColor="bg-[#4c4aa2]" fillColor="#ED3695" fillColorDark="#E54799"/>
+          <ActivityCard type="Coding" bg="bg-gradient-to-r from-[#5f80f4] via-[#6c8af3] to-[#5f80f4]" boxColor="bg-[#7795f6]" fillColor="#ED3695" fillColorDark="#6BFF93"/>
+          <ActivityCard type="Challenge" bg="bg-gradient-to-r from-[#9293cf] via-[#9a9bd0] to-[#9293cf]" boxColor="bg-[#A3a6d8]" fillColor="#ED3695" fillColorDark="#7759EB"/>
         </div>
       </div>
     );

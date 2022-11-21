@@ -2,7 +2,7 @@ import { useTheme } from "next-themes";
 import { PieChart } from "react-minimal-pie-chart";
 import { trpc } from "../utils/trpc";
 
-const DonutChart = ({size, bg, fillColor}: {size: string, bg: string, fillColor: string}) => {
+const DonutChart = ({size, bg, fillColor, fillColorDark}: {size: string, bg: string, fillColor: string, fillColorDark: string}) => {
   const { theme } = useTheme();
   const {
     data: learnerAnalytics,
@@ -34,7 +34,7 @@ const DonutChart = ({size, bg, fillColor}: {size: string, bg: string, fillColor:
       title: "To go",
       value: `${Math.round(overallProgress())}`,
 
-      color: `${theme == "dark" ? "#f97316" : fillColor}`,
+      color: `${theme == "dark" ? fillColorDark : fillColor}`,
     },
   ];
 
