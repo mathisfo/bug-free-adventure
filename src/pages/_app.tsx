@@ -10,6 +10,7 @@ import type { Session } from "next-auth";
 import "../styles/globals.css";
 import { ThemeProvider } from "next-themes";
 import Sidebar from "../components/Sidebar";
+import SignIn from "../components/auth/SignIn";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -31,6 +32,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
             <Component {...pageProps} />
           </Sidebar>
         </div>
+        )
       </SessionProvider>
     </ThemeProvider>
   );

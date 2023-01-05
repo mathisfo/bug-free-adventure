@@ -10,6 +10,7 @@ import { HiOutlineLogout } from "react-icons/hi";
 import { trpc } from "../utils/trpc";
 import Greeting from "./Greeting";
 import ToggleTheme from "./ToggleTheme";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -159,7 +160,10 @@ const Sidebar = ({ children }: { children: React.ReactElement }) => {
                   </div>
                 )}
                 <div>
-                  <HiOutlineLogout className="text-color ml-14 h-6 w-6"></HiOutlineLogout>
+                  <HiOutlineLogout
+                    className="text-color ml-14 h-6 w-6"
+                    onClick={() => signOut()}
+                  ></HiOutlineLogout>
                 </div>
               </div>
             </a>
