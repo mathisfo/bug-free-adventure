@@ -1,7 +1,7 @@
 import {
   LearnerActivityBFFApi,
   Progress,
-  Sequencing,
+  Sequencing
 } from "./types/LearnerActivityBFFApi";
 
 export function reMapLearnerActivityUtil(
