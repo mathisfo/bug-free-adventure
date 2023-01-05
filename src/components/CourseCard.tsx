@@ -1,7 +1,4 @@
-
-import {
-  CommandLineIcon
-} from "@heroicons/react/24/outline";
+import { CommandLineIcon } from "@heroicons/react/24/outline";
 import { useRouter } from "next/router";
 
 const CourseCard = ({
@@ -19,7 +16,7 @@ const CourseCard = ({
   color: string;
   iconColor: string;
 }) => {
-    const router = useRouter();
+  const router = useRouter();
 
   const onClick = async (target: string, e: React.MouseEvent) => {
     e.preventDefault();
@@ -27,7 +24,10 @@ const CourseCard = ({
   };
 
   return (
-    <div onClick={(e) => onClick("/courses", e)} className={`${color} mr-4 w-1/3 rounded-lg p-2 cursor-pointer hover:scale-105 transition duration-300 ease-in-out`}>
+    <div
+      onClick={(e) => onClick("/courses", e)}
+      className={`${color} mr-4 w-1/3 cursor-pointer rounded-lg p-2 transition duration-300 ease-in-out hover:scale-105`}
+    >
       <div className="my-4 ml-4 flex flex-row items-center">
         <div
           className={` w-12 rounded-3xl p-2 ${iconColor} items-end dark:bg-[#6f69ee] `}

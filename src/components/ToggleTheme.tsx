@@ -1,13 +1,10 @@
-import {
-  MoonIcon, SunIcon
-} from "@heroicons/react/24/outline";
+import { MoonIcon, SunIcon } from "@heroicons/react/24/outline";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 
 const ToggleTheme = () => {
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
-
 
   // useEffect only runs on the client, so now we can safely show the UI
   useEffect(() => {
@@ -23,7 +20,11 @@ const ToggleTheme = () => {
       className="cursor-pointer"
       onClick={() => setTheme(theme == "light" ? "dark" : "light")}
     >
-      {theme === "light" ? <MoonIcon className="text-color h-8 w-8 hover:scale-105 ease-in-out"></MoonIcon> : <SunIcon className="text-color h-8 w-8 hover:scale-105 ease-in-out"></SunIcon>}
+      {theme === "light" ? (
+        <MoonIcon className="text-color h-8 w-8 ease-in-out hover:scale-105"></MoonIcon>
+      ) : (
+        <SunIcon className="text-color h-8 w-8 ease-in-out hover:scale-105"></SunIcon>
+      )}
     </div>
   );
 };

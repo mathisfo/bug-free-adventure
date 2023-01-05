@@ -1,7 +1,9 @@
 import {
-  CheckCircleIcon, ChevronDownIcon,
-  ChevronRightIcon, EllipsisHorizontalCircleIcon,
-  XCircleIcon
+  CheckCircleIcon,
+  ChevronDownIcon,
+  ChevronRightIcon,
+  EllipsisHorizontalCircleIcon,
+  XCircleIcon,
 } from "@heroicons/react/24/outline";
 import { type } from "@prisma/client";
 import Link from "next/link";
@@ -100,88 +102,45 @@ const CourseStatus = () => {
                 </tr>
                 {clickedIndex[index] && (
                   <>
-                    <tr className="text-md cursor-pointer border-b bg-[#F5F5F5] hover:bg-gray-50 dark:border-gray-700 dark:bg-[#1c1f37] hover:dark:bg-[#3F485F] ">
-                      <th className="py-4 px-12">
-                        <Link
-                          href={`Java/${module.name}?&type=${type.EXAMPLE}`}
+                    {Object.keys(learnerAnalytics.activityAnalytics).map(
+                      (activityType, index) => (
+                        <tr
+                          key={index}
+                          className="text-md cursor-pointer border-b bg-[#F5F5F5] hover:bg-gray-50 dark:border-gray-700 dark:bg-[#1c1f37] hover:dark:bg-[#3F485F] "
                         >
-                          Examples
-                        </Link>
-                      </th>
-                      <td className="py-4 px-12">
-                        <div className="text-color flex flex-row font-bold">
-                          1/
-                          <div className=" font-normal">12 tasks</div>
-                        </div>
-                      </td>
-                      <td className="flex flex-row py-4 px-6 ">
-                        <div className="fill-color-light mx-4 h-2 w-2/3 rounded">
-                          <div
-                            className={`h-2 rounded bg-rose-400 dark:bg-[#f97316]`}
-                            style={{
-                              width: module.overallProgress * 100 + "%",
-                            }}
-                          ></div>
-                        </div>
-                        <div className="text-xs">
-                          {module.overallProgress * 100} %
-                        </div>
-                      </td>
-                    </tr>
-                    <tr className="text-md cursor-pointer border-b bg-[#F5F5F5] hover:bg-gray-50 dark:border-gray-700 dark:bg-[#1c1f37] hover:dark:bg-[#3F485F] ">
-                      <th className="py-4 px-12">
-                        <Link href={`Java/${module.name}?&type=${type.CODING}`}>
-                          Coding
-                        </Link>
-                      </th>
-                      <td className="py-4 px-12">
-                        <div className="text-color flex flex-row font-bold">
-                          0/
-                          <div className=" font-normal">12 tasks</div>
-                        </div>
-                      </td>
-                      <td className="flex flex-row py-4 px-6">
-                        <div className="fill-color-light mx-4 h-2 w-2/3 rounded">
-                          <div
-                            className={`h-2 rounded bg-rose-400 dark:bg-[#f97316]`}
-                            style={{
-                              width: module.overallProgress * 100 + "%",
-                            }}
-                          ></div>
-                        </div>
-                        <div className="text-xs">
-                          {module.overallProgress * 100} %
-                        </div>
-                      </td>
-                    </tr>
-                    <tr className="text-md cursor-pointer border-b bg-[#F5F5F5] hover:bg-gray-50 dark:border-gray-700 dark:bg-[#1c1f37] hover:dark:bg-[#3F485F] ">
-                      <th className="py-4 px-12">
-                        <Link
-                          href={`Java/${module.name}?&type=${type.CHALLENGE}`}
-                        >
-                          Challenges
-                        </Link>
-                      </th>
-                      <td className="py-4 px-12">
-                        <div className="text-color flex flex-row font-bold">
-                          0/
-                          <div className=" font-normal">12 tasks</div>
-                        </div>
-                      </td>
-                      <td className="flex flex-row py-4 px-6">
-                        <div className="fill-color-light mx-4 h-2 w-2/3 rounded">
-                          <div
-                            className={`h-2 rounded bg-rose-400 dark:bg-[#f97316]`}
-                            style={{
-                              width: module.overallProgress * 100 + "%",
-                            }}
-                          ></div>
-                        </div>
-                        <div className="text-xs">
-                          {module.overallProgress * 100} %
-                        </div>
-                      </td>
-                    </tr>
+                          <th className="py-4 px-12">
+                            <Link
+                              href={{
+                                pathname: `Java/${module.name}`,
+                                query: { type: type.EXAMPLE },
+                              }}
+                            >
+                              {activityType.charAt(0).toUpperCase() +
+                                activityType.slice(1)}
+                            </Link>
+                          </th>
+                          <td className="py-4 px-12">
+                            <div className="text-color flex flex-row font-bold">
+                              1/
+                              <div className=" font-normal">12 tasks</div>
+                            </div>
+                          </td>
+                          <td className="flex flex-row py-4 px-6 ">
+                            <div className="fill-color-light mx-4 h-2 w-2/3 rounded">
+                              <div
+                                className={`h-2 rounded bg-rose-400 dark:bg-[#f97316]`}
+                                style={{
+                                  width: module.overallProgress * 100 + "%",
+                                }}
+                              ></div>
+                            </div>
+                            <div className="text-xs">
+                              {module.overallProgress * 100} %
+                            </div>
+                          </td>
+                        </tr>
+                      )
+                    )}
                   </>
                 )}
               </>
