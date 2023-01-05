@@ -49,6 +49,8 @@ const ModuleStatistics = () => {
     return (
       <div className="m-4 grid grid-cols-2">
         {/* <h1 className='m-2 text-4xl'>{module![1]}</h1> */}
+        <div className="col-start-1 space-y-8 p-14 space-x-4">
+        <div className="text-color mb-4 text-xl font-semibold">Recommended next steps</div>
         <Timeline
           recommendedActivities={[
             ...activities.challenges,
@@ -56,6 +58,7 @@ const ModuleStatistics = () => {
             ...activities.examples,
           ].filter((e) => e.sequencing > 0 && e.relatedTopic === module![1])}
         />
+        </div>
         <div className="col-start-2 space-y-4 p-14">
           <ActivityCard
             type="Example"
