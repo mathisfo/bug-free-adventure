@@ -2,6 +2,7 @@ import { type as typeEnum } from "@prisma/client";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import ActivityCard from "../../components/ActivityCard";
+import ProgressionGrid from "../../components/ProgressionGrid";
 import Timeline from "../../components/Timeline";
 import { Activity } from "../../server/schema/LearnerActivitySchema";
 import { trpc } from "../../utils/trpc";
@@ -47,7 +48,7 @@ const ModuleStatistics = () => {
 
   if (!type) {
     return (
-      <div className="m-4 grid grid-cols-2">
+      <div className="m-4 grid grid-cols-2 grid-rows-2 h-screen">
         {/* <h1 className='m-2 text-4xl'>{module![1]}</h1> */}
         <div className="col-start-1 space-y-8 p-14 space-x-4">
         <div className="text-color mb-4 text-xl font-semibold">Recommended next steps</div>
@@ -59,6 +60,8 @@ const ModuleStatistics = () => {
           ].filter((e) => e.sequencing > 0 && e.relatedTopic === module![1])}
         />
         </div>
+
+        <div className="row-start-2 p-12 col-start-1 col-span-2"><ProgressionGrid /></div>
         <div className="col-start-2 space-y-4 p-14">
           <ActivityCard
             type="Example"

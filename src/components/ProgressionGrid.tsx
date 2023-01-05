@@ -23,7 +23,7 @@ const ProgressionGrid = () => {
 
   return (
     <div className="mt-12 grid grid-cols-2 space-y-1">
-      <div className="row-start-1 flex flex-row items-center space-x-2 justify-self-end pb-4">
+      <div className="row-start-1 flex flex-row items-center space-x-2 justify-self-end pb-4 pr-4">
         <div className="h-4 w-4 items-center rounded-md bg-green-400 dark:bg-green-500"></div>
         <p className="text-sm">Finished</p>
         <div className="h-4 w-4 items-center rounded-md bg-green-200 dark:bg-green-300"></div>
