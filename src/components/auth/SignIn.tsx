@@ -5,7 +5,14 @@ const SignIn = () => {
   return (
     <div>
       <Button onClick={() => signIn("discord")}>Sign in with Discord</Button>
-      <Button onClick={() => signIn("email", { email: "jtronstad@gmail.com" })}>
+      <Button
+        onClick={() =>
+          signIn("email", {
+            email: "mathias.s.fossum@gmail.com",
+            callbackUrl: "/dashboard",
+          })
+        }
+      >
         Sign in With Mail
       </Button>
     </div>

@@ -14,6 +14,8 @@ export const serverSchema = z.object({
   DISCORD_CLIENT_SECRET: z.string(),
   EMAIL_HOST: z.string(),
   EMAIL_PORT: z.string(),
+  EMAIL_USERNAME: z.string(),
+  EMAIL_PASSWORD: z.string(),
   EMAIL_FROM: z.string(),
 });
 

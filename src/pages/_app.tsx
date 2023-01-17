@@ -2,7 +2,7 @@
 import { httpBatchLink } from "@trpc/client/links/httpBatchLink";
 import { loggerLink } from "@trpc/client/links/loggerLink";
 import { withTRPC } from "@trpc/next";
-import { SessionProvider } from "next-auth/react";
+import { SessionProvider, useSession } from "next-auth/react";
 import superjson from "superjson";
 import type { AppType } from "next/app";
 import type { AppRouter } from "../server/router";
@@ -19,23 +19,20 @@ const MyApp: AppType<{ session: Session | null }> = ({
   return (
     <ThemeProvider attribute="class" enableSystem={false}>
       <SessionProvider session={session}>
-        {session ? (
-          <div className="fixed w-full">
-            <style global jsx>{`
-              html,
-              body {
-                height: 100%;
-                overflow: hidden;
-                position: fixed;
-              }
-            `}</style>
-            <Sidebar>
-              <Component {...pageProps} />
-            </Sidebar>
-          </div>
-        ) : (
-          <SignIn />
-        )}
+        <div className="fixed w-full">
+          <style global jsx>{`
+            html,
+            body {
+              height: 100%;
+              overflow: hidden;
+              position: fixed;
+            }
+          `}</style>
+          <Sidebar>
+            <Component {...pageProps} />
+          </Sidebar>
+        </div>
+        )
       </SessionProvider>
     </ThemeProvider>
   );
