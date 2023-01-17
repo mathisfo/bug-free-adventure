@@ -5,7 +5,12 @@ const SignIn = () => {
   return (
     <Button
       className="bg-sky-500 from-[#6e69ed] to-[#ab5cfb] dark:bg-gradient-to-tr"
-      onClick={() => signIn("email", { email: "jtronstad@gmail.com" })}
+      onClick={() =>
+        signIn("email", {
+          email: "jtronstad@gmail.com",
+          callback: "/dashboard",
+        })
+      }
     >
       Sign in
     </Button>

@@ -28,6 +28,10 @@ export const authOptions: NextAuthOptions = {
       server: {
         host: env.EMAIL_HOST,
         port: env.EMAIL_PORT,
+        auth: {
+          user: env.EMAIL_USERNAME,
+          pass: env.EMAIL_PASSWORD,
+        },
       },
       from: env.EMAIL_FROM,
     }),
