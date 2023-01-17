@@ -27,34 +27,29 @@ const Dashboard: NextPage = () => {
 
   return (
     <div>
-      {session ? (
-        <div className="background-color col-span-4 mr-4 h-full rounded-r-lg p-16 ">
-          <div className="text-color mb-4 text-xl font-semibold">
-            My courses
-          </div>
-          <div className="flex flex-row">
-            {courses.map((course) => {
-              return (
-                <CourseCard
-                  key={course.course}
-                  course={course.course}
-                  progress={course.progress}
-                  completedTasks={course.completedTasks}
-                  allTasks={course.allTasks}
-                  color={course.bg}
-                  iconColor={course.iconColor}
-                ></CourseCard>
-              );
-            })}
-          </div>
-          <div className="text-color mt-8 mb-4 text-lg font-semibold">
-            My assignments
-          </div>
-          <Assignments />
+      <div className="background-color col-span-4 mr-4 h-full rounded-r-lg p-16 ">
+        <div className="text-color mb-4 text-xl font-semibold">My courses</div>
+        <div className="flex flex-row">
+          {courses.map((course) => {
+            return (
+              <CourseCard
+                key={course.course}
+                course={course.course}
+                progress={course.progress}
+                completedTasks={course.completedTasks}
+                allTasks={course.allTasks}
+                color={course.bg}
+                iconColor={course.iconColor}
+              ></CourseCard>
+            );
+          })}
         </div>
-      ) : (
-        <SignIn />
-      )}
+        <div className="text-color mt-8 mb-4 text-lg font-semibold">
+          My assignments
+        </div>
+        <Assignments />
+      </div>
+      )
     </div>
   );
 };
