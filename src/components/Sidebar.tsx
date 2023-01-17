@@ -44,12 +44,6 @@ const Sidebar = ({ children }: { children: React.ReactElement }) => {
     },
   ];
 
-  const {
-    data: learnerAnalytics,
-    isSuccess,
-    isLoading,
-  } = trpc.useQuery(["learneractivity.getLearnerActivity"]);
-
   const { data: session } = useSession();
 
   const menuItemStyling =
@@ -160,19 +154,7 @@ const Sidebar = ({ children }: { children: React.ReactElement }) => {
                     <div>
                       <UserCircleIcon className="text-color h-8 w-8"></UserCircleIcon>
                     </div>
-                    {isLoading || !isSuccess ? (
-                      <div className="mx-auto w-full rounded-md">
-                        <div className="flex animate-pulse space-x-4">
-                          <div className="flex-1 py-1">
-                            <div className="loading h-6 rounded"></div>
-                          </div>
-                        </div>
-                      </div>
-                    ) : (
-                      <div className="text-color">
-                        {learnerAnalytics.learner.id}
-                      </div>
-                    )}
+                    <div className="text-color">{session.user?.name}</div>
                     <div>
                       <HiOutlineLogout
                         className="text-color ml-14 h-6 w-6"
