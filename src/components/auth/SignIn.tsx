@@ -3,12 +3,12 @@ import { signIn } from "next-auth/react";
 
 const SignIn = () => {
   return (
-    <div>
-      <Button onClick={() => signIn("discord")}>Sign in with Discord</Button>
-      <Button onClick={() => signIn("email", { email: "jtronstad@gmail.com" })}>
-        Sign in With Mail
-      </Button>
-    </div>
+    <Button
+      className="bg-sky-500 from-[#6e69ed] to-[#ab5cfb] dark:bg-gradient-to-tr"
+      onClick={() => signIn("email", { email: "jtronstad@gmail.com" })}
+    >
+      Sign in
+    </Button>
   );
 };
 
