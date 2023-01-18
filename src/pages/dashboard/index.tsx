@@ -1,8 +1,11 @@
 import CourseCard from "../../components/CourseCard";
 import Assignments from "../../components/Assignments";
 import { NextPage } from "next/types";
+import { useSession } from "next-auth/react";
+import SignIn from "../../components/auth/SignIn";
 
 const Dashboard: NextPage = () => {
+  const { data: session, status } = useSession();
   const courses = [
     {
       course: "Java",
@@ -46,6 +49,7 @@ const Dashboard: NextPage = () => {
         </div>
         <Assignments />
       </div>
+      )
     </div>
   );
 };

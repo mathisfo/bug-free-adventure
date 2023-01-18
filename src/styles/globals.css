@@ -15,6 +15,7 @@
   .text-color {
     @apply text-gray-700 dark:text-white;
   }
+
   .text-color-light {
     @apply text-gray-400 dark:opacity-75;
   }
@@ -25,7 +26,7 @@
     @apply dark:dark-back-layer bg-gradient-to-r from-indigo-300 to-cyan-500;
   }
   .dark-back-layer {
-    @apply bg-gradient-to-r from-[#454a6f] to-[#71759a];
+    @apply bg-gradient-to-tr from-[#141627] to-[#232745];
   }
   .assignment-background {
     @apply dark:course-card-dark bg-gradient-to-tr from-[#D4D5E5] via-[#DEDFEF] to-[#F4F8FC];
@@ -49,3 +50,5 @@
     @apply bg-[#d1d5db] opacity-25;
   }
 }
+
+/* @apply bg-gradient-to-r from-[#454a6f] to-[#71759a]; */
