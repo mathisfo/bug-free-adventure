@@ -1,8 +1,9 @@
-import { Timeline } from "flowbite-react";
-import { HiCalendar } from "react-icons/hi";
-import { CommandLineIcon, FlagIcon, DocumentTextIcon } from "@heroicons/react/24/solid";
+import {
+  CommandLineIcon,
+  DocumentTextIcon,
+  FlagIcon,
+} from "@heroicons/react/24/solid";
 import { Activity } from "../server/schema/LearnerActivitySchema";
-import Home from "../pages";
 
 const TimelineWrapper = (props: { recommendedActivities: Activity[] }) => {
   const { recommendedActivities } = props;
@@ -12,29 +13,39 @@ const TimelineWrapper = (props: { recommendedActivities: Activity[] }) => {
   }
 
   return (
-    <ol className="relative border-l border-gray-200 dark:border-gray-700"> 
-    {props.recommendedActivities.map((activity) => (                 
-    <li className="mb-10 ml-10" key={activity.activityId}> 
-    {activity.type == "EXAMPLE" ?           
-        <span className="absolute flex items-center justify-center w-8 h-8 bg-[#3c3b95] dark:bg-[#E54799] rounded-full -left-3 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
-            <DocumentTextIcon className="text-white w-5 h-5"></DocumentTextIcon></span> :
-            activity.type == "CODING" ? <span className="absolute flex items-center justify-center w-8 h-8 bg-[#5f80f4] dark:bg-[#6BFF93] rounded-full -left-3 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
-            <FlagIcon className="text-white w-5 h-5"></FlagIcon></span> : 
-            <span className="absolute flex items-center justify-center w-8 h-8 bg-[#9293cf] dark:bg-[#7759EB] rounded-full -left-3 ring-8 ring-white dark:ring-gray-900">
-            <CommandLineIcon className="text-white w-5 h-5"></CommandLineIcon></span> }
-      
-        <p className="mb-2  text-lg font-normal text-color">{activity.type}</p>
-        <p className=" flex items-center mb-1 text-xl font-bold text-color">{activity.activityName}</p>
-    </li>))}
-</ol>
-    
+    <ol className="relative border-l border-gray-200 dark:border-gray-700">
+      {props.recommendedActivities.map((activity) => (
+        <li className="mb-10 ml-10" key={activity.activityId}>
+          {activity.type == "EXAMPLE" ? (
+            <span className="absolute -left-3 flex h-8 w-8 items-center justify-center rounded-full bg-[#3c3b95] ring-8 ring-white dark:bg-[#E54799] dark:bg-blue-900 dark:ring-gray-900">
+              <DocumentTextIcon className="h-5 w-5 text-white"></DocumentTextIcon>
+            </span>
+          ) : activity.type == "CODING" ? (
+            <span className="absolute -left-3 flex h-8 w-8 items-center justify-center rounded-full bg-[#5f80f4] ring-8 ring-white dark:bg-[#6BFF93] dark:bg-blue-900 dark:ring-gray-900">
+              <FlagIcon className="h-5 w-5 text-white"></FlagIcon>
+            </span>
+          ) : (
+            <span className="absolute -left-3 flex h-8 w-8 items-center justify-center rounded-full bg-[#9293cf] ring-8 ring-white dark:bg-[#7759EB] dark:ring-gray-900">
+              <CommandLineIcon className="h-5 w-5 text-white"></CommandLineIcon>
+            </span>
+          )}
+
+          <p className="text-color  mb-2 text-lg font-normal">
+            {activity.type}
+          </p>
+          <p className=" text-color mb-1 flex items-center text-xl font-bold">
+            {activity.activityName}
+          </p>
+        </li>
+      ))}
+    </ol>
   );
 };
 
 export default TimelineWrapper;
 
-
-{/* <Timeline >
+{
+  /* <Timeline >
       {props.recommendedActivities.map((activity) => (
         <Timeline.Item key={activity.activityId}>
           <Timeline.Point icon={HiCalendar} />
@@ -50,4 +61,5 @@ export default TimelineWrapper;
     <FlagIcon className="text-white w-5 h-5"></FlagIcon> </span> :
     <span className="bg-[#9293cf] rounded-full -left-3 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
     <CommandLineIcon className="text-white w-5 h-5"></CommandLineIcon> </span>
-}   */}
+}   */
+}

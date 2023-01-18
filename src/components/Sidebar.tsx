@@ -5,13 +5,12 @@ import {
   FolderIcon,
   UserCircleIcon,
 } from "@heroicons/react/24/outline";
+import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { HiOutlineLogout } from "react-icons/hi";
-import { trpc } from "../utils/trpc";
+import SignIn from "./auth/SignIn";
 import Greeting from "./Greeting";
 import ToggleTheme from "./ToggleTheme";
-import { signOut, useSession } from "next-auth/react";
-import SignIn from "./auth/SignIn";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
