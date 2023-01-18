@@ -5,6 +5,7 @@ import {
   FolderIcon,
   UserCircleIcon,
 } from "@heroicons/react/24/outline";
+import { Spinner } from "flowbite-react";
 import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { HiOutlineLogout } from "react-icons/hi";
@@ -43,12 +44,16 @@ const Sidebar = ({ children }: { children: React.ReactElement }) => {
     },
   ];
 
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
 
   const menuItemStyling =
     "text-color hover:text-gray-900 dark:hover:bg-[#503597] dark:hover:text-white hover:bg-indigo-50";
   const currentItemStyling =
     "text-violet-800 dark:text-white bg-indigo-100 dark:bg-[#6f69ee] dark:hover:bg-[#847FF7] hover:text-gray-900 hover:bg-indigo-50";
+
+  if (status === "loading") {
+    return <Spinner />;
+  }
 
   return (
     <div>

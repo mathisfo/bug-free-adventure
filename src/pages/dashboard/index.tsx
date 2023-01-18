@@ -46,7 +46,6 @@ const Dashboard: NextPage = () => {
         </div>
         <Assignments />
       </div>
-      )
     </div>
   );
 };
