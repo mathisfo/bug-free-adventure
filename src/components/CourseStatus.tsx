@@ -9,10 +9,6 @@ import { type } from "@prisma/client";
 import Link from "next/link";
 import { useState } from "react";
 import { api } from "../utils/api";
-import { createProxySSGHelpers } from "@trpc/react-query/ssg";
-import { GetStaticPaths, GetStaticPropsContext } from "next";
-import { appRouter } from "../server/api/root";
-import superjson from "superjson";
 
 const CourseStatus = () => {
   const {
