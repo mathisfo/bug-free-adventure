@@ -5,22 +5,21 @@ import ActivityCard from "../../components/ActivityCard";
 import ProgressionGrid from "../../components/ProgressionGrid";
 import Timeline from "../../components/Timeline";
 import { Activity } from "../../server/schema/LearnerActivitySchema";
-import { trpc } from "../../utils/trpc";
+import { api } from "../../utils/api";
 
 const ModuleStatistics = () => {
   const {
     data: learnerAnalytics,
     isSuccess,
     isLoading,
-    isIdle,
-  } = trpc.useQuery(["learneractivity.getLearnerActivity"]);
+  } = api.learnerActivityRouter.getLearnerActivity.useQuery();
 
   const router = useRouter();
 
   const { module } = router.query;
   const { type } = router.query;
 
-  if (isLoading || isIdle || !isSuccess) {
+  if (isLoading || !isSuccess) {
     return <div>Loading...</div>;
   }
 
@@ -48,20 +47,24 @@ const ModuleStatistics = () => {
 
   if (!type) {
     return (
-      <div className="m-4 grid grid-cols-2 grid-rows-2 h-screen">
+      <div className="m-4 grid h-screen grid-cols-2 grid-rows-2">
         {/* <h1 className='m-2 text-4xl'>{module![1]}</h1> */}
-        <div className="col-start-1 space-y-8 p-14 space-x-4">
-        <div className="text-color mb-4 text-xl font-semibold">Recommended next steps</div>
-        <Timeline
-          recommendedActivities={[
-            ...activities.challenges,
-            ...activities.coding,
-            ...activities.examples,
-          ].filter((e) => e.sequencing > 0 && e.relatedTopic === module![1])}
-        />
+        <div className="col-start-1 space-y-8 space-x-4 p-14">
+          <div className="text-color mb-4 text-xl font-semibold">
+            Recommended next steps
+          </div>
+          <Timeline
+            recommendedActivities={[
+              ...activities.challenges,
+              ...activities.coding,
+              ...activities.examples,
+            ].filter((e) => e.sequencing > 0 && e.relatedTopic === module![1])}
+          />
         </div>
 
-        <div className="row-start-2 p-12 col-start-1 col-span-2"><ProgressionGrid /></div>
+        <div className="col-span-2 col-start-1 row-start-2 p-12">
+          <ProgressionGrid />
+        </div>
         <div className="col-start-2 space-y-4 p-14">
           <ActivityCard
             type="Example"
