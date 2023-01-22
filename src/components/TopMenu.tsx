@@ -1,7 +1,7 @@
-import { ChartBarIcon } from "@heroicons/react/24/solid";
+import { ChartBarIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import { useRouter } from "next/router";
 
-const TopMenu = () => {
+const TopMenu = ({ currentPage }: { currentPage: string }) => {
   const router = useRouter();
 
   const navigation = [
@@ -43,13 +43,23 @@ const TopMenu = () => {
             )}
           >
             <a
-              href="/courses"
+              href="/courses/Java"
               className="flex flex-row items-center uppercase "
             >
               <ChartBarIcon className="text-color mr-1 h-6 w-6 "></ChartBarIcon>
               Java
             </a>
           </div>
+          {currentPage ? (
+            <div className="flex flex-row">
+              <ChevronRightIcon className="text-color h-5 w-5"></ChevronRightIcon>
+              <p className="text-color pl-4 text-sm font-semibold uppercase">
+                {currentPage}
+              </p>
+            </div>
+          ) : (
+            <></>
+          )}
           {navigation.map((item) => (
             <div
               key={item.name}
