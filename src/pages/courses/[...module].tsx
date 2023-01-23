@@ -14,12 +14,18 @@ const ModuleStatistics = () => {
     isLoading,
   } = api.learnerActivityRouter.getLearnerActivity.useQuery();
 
+  const {
+    data: loggedInUser,
+    isSuccess: loggedInUserSuccess,
+    isLoading: userLoading,
+  } = api.userRouter.getLoggedInUser.useQuery();
+
   const router = useRouter();
 
   const { module } = router.query;
   const { type } = router.query;
 
-  if (isLoading || !isSuccess) {
+  if (isLoading || !isSuccess || !loggedInUserSuccess || userLoading) {
     return <div>Loading...</div>;
   }
 
@@ -130,7 +136,9 @@ const ModuleStatistics = () => {
                             target="_blank"
                             href={
                               activity.url +
-                              "&usr=norway22169&grp=NorwayFall2022B&sid=TEST&cid=352"
+                              "&usr=" +
+                              loggedInUser?.protusId +
+                              "&grp=NorwayFall2022B&sid=TEST&cid=352"
                             }
                             rel="noreferrer"
                           >
