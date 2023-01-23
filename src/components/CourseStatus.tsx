@@ -6,17 +6,12 @@ import {
   XCircleIcon,
 } from "@heroicons/react/24/outline";
 import { type } from "@prisma/client";
-import { Spinner } from "flowbite-react";
 import Link from "next/link";
 import { useState } from "react";
 import { api } from "../utils/api";
 
 const CourseStatus = () => {
   const [clickedIndex, setClickedIndex] = useState<any>({});
-
-  if (status === "loading") {
-    return <Spinner />;
-  }
 
   const {
     data: learnerAnalytics,

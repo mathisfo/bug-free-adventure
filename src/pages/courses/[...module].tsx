@@ -1,4 +1,5 @@
 import { type as typeEnum } from "@prisma/client";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import ActivityCard from "../../components/ActivityCard";
@@ -14,19 +15,19 @@ const ModuleStatistics = () => {
     isLoading,
   } = api.learnerActivityRouter.getLearnerActivity.useQuery();
 
-  const {
-    data: loggedInUser,
-    isSuccess: loggedInUserSuccess,
-    isLoading: userLoading,
-  } = api.userRouter.getLoggedInUser.useQuery();
+  const { data: session, status } = useSession();
 
   const router = useRouter();
 
   const { module } = router.query;
   const { type } = router.query;
 
-  if (isLoading || !isSuccess || !loggedInUserSuccess || userLoading) {
+  if (isLoading || !isSuccess || status === "loading") {
     return <div>Loading...</div>;
+  }
+
+  if (status === "unauthenticated" || !session?.user?.prisma) {
+    return <div>Unauthorized</div>;
   }
 
   const activities = learnerAnalytics.activityAnalytics;
@@ -137,7 +138,7 @@ const ModuleStatistics = () => {
                             href={
                               activity.url +
                               "&usr=" +
-                              loggedInUser?.protusId +
+                              session.user?.prisma?.protusId +
                               "&grp=NorwayFall2022B&sid=TEST&cid=352"
                             }
                             rel="noreferrer"
