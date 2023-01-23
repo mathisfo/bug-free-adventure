@@ -73,25 +73,28 @@ const ModuleStatistics = () => {
           </div>
           <div className="col-start-2 space-y-4 p-14">
             <ActivityCard
-              type="Example"
+              type="example"
               bg="bg-gradient-to-r from-[#3c3b95] via-[#44439f] to-[#3c3b95] "
               boxColor="bg-[#4c4aa2]"
               fillColor="#ED3695"
               fillColorDark="#E54799"
+              moduleName={module ? module[1] : "404"}
             />
             <ActivityCard
-              type="Coding"
+              type="coding"
               bg="bg-gradient-to-r from-[#5f80f4] via-[#6c8af3] to-[#5f80f4]"
               boxColor="bg-[#7795f6]"
               fillColor="#ED3695"
               fillColorDark="#6BFF93"
+              moduleName={module ? module[1] : "404"}
             />
             <ActivityCard
-              type="Challenge"
+              type="challenge"
               bg="bg-gradient-to-r from-[#9293cf] via-[#9a9bd0] to-[#9293cf]"
               boxColor="bg-[#A3a6d8]"
               fillColor="#ED3695"
               fillColorDark="#7759EB"
+              moduleName={module ? module[1] : "404"}
             />
           </div>
         </div>
@@ -101,8 +104,10 @@ const ModuleStatistics = () => {
 
   return (
     <>
-      <TopMenu currentPage={module ? module[1] : "404"} />
-      <div>{type + "S"}</div>
+      <TopMenu
+        currentPage={module ? module[1] : "404"}
+        currentType={type == "CODING" ? type : type + "S"}
+      />
       <div className="background-color absolute w-full overflow-x-auto  rounded-lg">
         <div className="m-12 grid grid-cols-4 gap-8">
           {module

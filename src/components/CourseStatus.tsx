@@ -112,7 +112,14 @@ const CourseStatus = () => {
                             <Link
                               href={{
                                 pathname: `Java/${module.name}`,
-                                query: { type: type.CHALLENGE },
+                                query: {
+                                  type:
+                                    activityType == "coding"
+                                      ? activityType.toUpperCase()
+                                      : activityType
+                                          .toUpperCase()
+                                          .slice(0, activityType.length - 1),
+                                },
                               }}
                             >
                               {activityType.charAt(0).toUpperCase() +

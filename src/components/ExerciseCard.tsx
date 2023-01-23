@@ -23,7 +23,7 @@ const ExerciseCard = ({
         successRate > 0 ? `bg-green-100` : `course-card`
       }`}
     >
-      <p className="text-color p-4 text-lg font-semibold">{name}</p>
+      <p className="text-color px-4 pt-4 text-lg font-semibold">{name}</p>
       <div className="grid justify-items-center">
         <div
           className={`flex h-28 w-28 flex-row items-stretch rounded-full p-4 ${
