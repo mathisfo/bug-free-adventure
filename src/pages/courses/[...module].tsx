@@ -26,7 +26,7 @@ const ModuleStatistics = () => {
     return <div>Loading...</div>;
   }
 
-  if (status === "unauthenticated" || !session?.user?.prisma) {
+  if (status === "unauthenticated" || !session?.user) {
     return <div>Unauthorized</div>;
   }
 
@@ -138,7 +138,7 @@ const ModuleStatistics = () => {
                             href={
                               activity.url +
                               "&usr=" +
-                              session.user?.prisma?.protusId +
+                              session.user?.protusId +
                               "&grp=NorwayFall2022B&sid=TEST&cid=352"
                             }
                             rel="noreferrer"

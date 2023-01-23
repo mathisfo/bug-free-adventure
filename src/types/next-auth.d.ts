@@ -8,7 +8,7 @@ declare module "next-auth" {
   interface Session {
     user?: {
       id: string;
-      prisma: User | null;
-    } & DefaultSession["user"];
+    } & DefaultSession["user"] &
+      User;
   }
 }
