@@ -1,13 +1,10 @@
-import { Input } from "postcss";
 import { toJson } from "really-relaxed-json";
-import { URLSearchParams } from "url";
-import { z } from "zod";
 import { reMapLearnerActivityUtil } from "../../bff/learnerActivityUtil";
 import {
   learnerActivitySchema,
   LearnerAnalyticsAPIResponse,
 } from "../../schema/LearnerActivitySchema";
-import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
+import { createTRPCRouter, protectedProcedure } from "../trpc";
 
 export const learnerActivityRouter = createTRPCRouter({
   getLearnerActivity: protectedProcedure.query(async ({ ctx }) => {

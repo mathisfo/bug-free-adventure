@@ -1,13 +1,9 @@
-import { useRouter } from "next/router";
 import ContinueCard from "../../components/ContinueCard";
 import CourseStatus from "../../components/CourseStatus";
 import DonutChart from "../../components/DonutChart";
 import TopMenu from "../../components/TopMenu";
 
 const Courses = () => {
-  const router = useRouter();
-  const { course } = router.query;
-
   return (
     <div>
       <TopMenu />
@@ -21,7 +17,12 @@ const Courses = () => {
           </div>
 
           <div className="w-2/5 items-center px-20">
-            <DonutChart size="176px" bg="#d1d5db" fillColor="#60a5fa" fillColorDark="#f97316"/>
+            <DonutChart
+              size="176px"
+              bg="#d1d5db"
+              fillColor="#60a5fa"
+              fillColorDark="#f97316"
+            />
           </div>
         </div>
         <CourseStatus />

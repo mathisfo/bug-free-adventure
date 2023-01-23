@@ -1,4 +1,3 @@
-import { useSession } from "next-auth/react";
 import { useState } from "react";
 import { Activity } from "../server/schema/LearnerActivitySchema";
 import { api } from "../utils/api";
