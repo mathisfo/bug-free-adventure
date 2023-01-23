@@ -4,17 +4,17 @@ import { z } from "zod";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 
 export const userRouter = createTRPCRouter({
-  loginUser: protectedProcedure
+  getUserInfo: protectedProcedure
     .input(
       z.object({
-        email: z.string().email(),
+        id: z.string().email(),
       })
     )
     .query(async ({ ctx, input }) => {
       return await ctx.prisma.user
         .findUniqueOrThrow({
           where: {
-            email: input?.email,
+            id: input?.id,
           },
         })
         .catch((err) => {

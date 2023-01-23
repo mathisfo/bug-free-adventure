@@ -128,7 +128,10 @@ const ModuleStatistics = () => {
                         <th className="py-4 px-6">
                           <a
                             target="_blank"
-                            href={activity.url}
+                            href={
+                              activity.url +
+                              "&usr=norway22169&grp=NorwayFall2022B&sid=TEST&cid=352"
+                            }
                             rel="noreferrer"
                           >
                             {activity.activityName}
