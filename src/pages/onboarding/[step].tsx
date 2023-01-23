@@ -3,6 +3,7 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { HiHome } from "react-icons/hi";
+import Step0 from "../../components/onboarding/Step0";
 import Step1 from "../../components/onboarding/Step1";
 import Step2 from "../../components/onboarding/Step2";
 import Step3 from "../../components/onboarding/Step3";
@@ -36,6 +37,7 @@ const Steps: NextPage = () => {
         <Breadcrumb.Item href="3">Components</Breadcrumb.Item>
       </Breadcrumb>
 
+      {currentStep === "0" && <Step0 />}
       {currentStep === "1" && <Step1 />}
       {currentStep === "2" && (
         <div>
