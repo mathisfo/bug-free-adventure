@@ -1,4 +1,5 @@
 import { type as typeEnum } from "@prisma/client";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import ActivityCard from "../../components/ActivityCard";
@@ -7,23 +8,28 @@ import ProgressionGrid from "../../components/ProgressionGrid";
 import Timeline from "../../components/Timeline";
 import TopMenu from "../../components/TopMenu";
 import { Activity } from "../../server/schema/LearnerActivitySchema";
-import { trpc } from "../../utils/trpc";
+import { api } from "../../utils/api";
 
 const ModuleStatistics = () => {
   const {
     data: learnerAnalytics,
     isSuccess,
     isLoading,
-    isIdle,
-  } = trpc.useQuery(["learneractivity.getLearnerActivity"]);
+  } = api.learnerActivityRouter.getLearnerActivity.useQuery();
+
+  const { data: session, status } = useSession();
 
   const router = useRouter();
 
   const { module } = router.query;
   const { type } = router.query;
 
-  if (isLoading || isIdle || !isSuccess) {
+  if (isLoading || !isSuccess || status === "loading") {
     return <div>Loading...</div>;
+  }
+
+  if (status === "unauthenticated" || !session?.user) {
+    return <div>Unauthorized</div>;
   }
 
   const activities = learnerAnalytics.activityAnalytics;
@@ -151,7 +157,12 @@ const ModuleStatistics = () => {
                         <th className="py-4 px-6">
                           <a
                             target="_blank"
-                            href={activity.url}
+                            href={
+                              activity.url +
+                              "&usr=" +
+                              session.user?.protusId +
+                              "&grp=NorwayFall2022B&sid=TEST&cid=352"
+                            }
                             rel="noreferrer"
                           >
                             {activity.activityName}

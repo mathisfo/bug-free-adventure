@@ -1,10 +1,10 @@
-import { trpc } from "../utils/trpc";
+import { api } from "../utils/api";
 
 export const useActivityResource = (moduleId: number) => {
-  const activityresourcequery = trpc.useQuery([
-    "course.getActivityResourcesOnModuleId",
-    { moduleId: moduleId },
-  ]);
+  const activityresourcequery =
+    api.courseRouter.getActivityResourcesOnModuleId.useQuery({
+      moduleId: moduleId,
+    });
 
   return activityresourcequery;
 };

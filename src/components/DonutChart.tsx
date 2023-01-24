@@ -1,14 +1,24 @@
 import { useTheme } from "next-themes";
 import { PieChart } from "react-minimal-pie-chart";
-import { trpc } from "../utils/trpc";
+import { api } from "../utils/api";
 
-const DonutChart = ({size, bg, fillColor, fillColorDark}: {size: string, bg: string, fillColor: string, fillColorDark: string}) => {
+const DonutChart = ({
+  size,
+  bg,
+  fillColor,
+  fillColorDark,
+}: {
+  size: string;
+  bg: string;
+  fillColor: string;
+  fillColorDark: string;
+}) => {
   const { theme } = useTheme();
   const {
     data: learnerAnalytics,
     isSuccess,
     isLoading,
-  } = trpc.useQuery(["learneractivity.getLearnerActivity"]);
+  } = api.learnerActivityRouter.getLearnerActivity.useQuery();
 
   if (!isSuccess || isLoading) {
     return (

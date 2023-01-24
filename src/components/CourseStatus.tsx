@@ -8,15 +8,16 @@ import {
 import { type } from "@prisma/client";
 import Link from "next/link";
 import { useState } from "react";
-import { trpc } from "../utils/trpc";
+import { api } from "../utils/api";
 
 const CourseStatus = () => {
+  const [clickedIndex, setClickedIndex] = useState<any>({});
+
   const {
     data: learnerAnalytics,
     isSuccess,
     isLoading,
-  } = trpc.useQuery(["learneractivity.getLearnerActivity"]);
-  const [clickedIndex, setClickedIndex] = useState<any>({});
+  } = api.learnerActivityRouter.getLearnerActivity.useQuery();
 
   if (!isSuccess || isLoading) {
     return (

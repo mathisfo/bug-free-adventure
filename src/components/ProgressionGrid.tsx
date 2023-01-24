@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Activity } from "../server/schema/LearnerActivitySchema";
-import { trpc } from "../utils/trpc";
+import { api } from "../utils/api";
 
 const ProgressionGrid = () => {
   const [isShowing, setIsShowing] = useState<Activity | null>();
@@ -12,9 +12,9 @@ const ProgressionGrid = () => {
 
   const {
     data: modules,
-    isLoading,
     isSuccess,
-  } = trpc.useQuery(["learneractivity.getLearnerActivity"]);
+    isLoading,
+  } = api.learnerActivityRouter.getLearnerActivity.useQuery();
 
   if (isLoading || !isSuccess) return <div>Loading..</div>;
 
