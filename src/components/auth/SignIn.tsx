@@ -26,6 +26,12 @@ const SignIn = () => {
           <div className="mt-8 grid justify-items-center">
             <Button
               className="bg-sky-500 from-[#6e69ed] to-[#ab5cfb] dark:bg-gradient-to-tr"
+              onClick={() => signIn()}
+            >
+              Sign in Providers
+            </Button>
+            <Button
+              className="bg-sky-500 from-[#6e69ed] to-[#ab5cfb] dark:bg-gradient-to-tr"
               onClick={() =>
                 signIn("email", {
                   email: email,
@@ -33,7 +39,7 @@ const SignIn = () => {
                 })
               }
             >
-              Sign in
+              Sign in with email
             </Button>
           </div>
         </div>
