@@ -157,9 +157,13 @@ const ModuleStatistics = () => {
                   return (
                     <a
                       target="_blank"
-                      href={activity.url}
+                      href={
+                        activity.url +
+                        "&usr=" +
+                        session.user?.protusId +
+                        "&grp=NorwayFall2022B&sid=TEST&cid=352"
+                      }
                       rel="noreferrer"
-                      key={activity.activityId}
                     >
                       <ExerciseCard
                         name={activity.activityName}
