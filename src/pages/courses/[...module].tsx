@@ -155,7 +155,12 @@ const ModuleStatistics = () => {
 
                 .map((activity) => {
                   return (
-                    <a target="_blank" href={activity.url} rel="noreferrer">
+                    <a
+                      target="_blank"
+                      href={activity.url}
+                      rel="noreferrer"
+                      key={activity.activityId}
+                    >
                       <ExerciseCard
                         name={activity.activityName}
                         type={activity.type}

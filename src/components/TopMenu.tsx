@@ -1,13 +1,12 @@
 import { ChartBarIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
+import Link from "next/link";
 import { useRouter } from "next/router";
 
-const TopMenu = ({
-  currentPage,
-  currentType,
-}: {
-  currentPage: string;
-  currentType: string;
-}) => {
+interface TopMenuProps {
+  currentPage?: string;
+  currentType?: string;
+}
+const TopMenu = (props: TopMenuProps) => {
   const chevron = (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -47,29 +46,28 @@ const TopMenu = ({
               "ml-8 flex justify-start rounded-lg p-2 hover:bg-indigo-100 dark:hover:bg-[#503597]"
             )}
           >
-            <a
-              href="/courses/Java"
-              className="flex flex-row items-center uppercase "
-            >
-              <ChartBarIcon className="text-color mr-1 h-6 w-6 "></ChartBarIcon>
-              Java
-            </a>
+            <Link href="/courses/Java">
+              <div className="flex flex-row items-center uppercase ">
+                <ChartBarIcon className="text-color mr-1 h-6 w-6 "></ChartBarIcon>
+                Java
+              </div>
+            </Link>
           </div>
-          {currentPage ? (
+          {props.currentPage ? (
             <div className="flex flex-row">
               {chevron}
               <p className="text-color pl-4 text-sm font-semibold uppercase">
-                {currentPage}
+                {props.currentPage}
               </p>
             </div>
           ) : (
             <></>
           )}
-          {currentType ? (
+          {props.currentType ? (
             <div className="flex flex-row">
               {chevron}
               <p className="text-color pl-4 text-sm font-semibold uppercase">
-                {currentType}
+                {props.currentType}
               </p>
             </div>
           ) : (

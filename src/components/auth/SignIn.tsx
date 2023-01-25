@@ -70,7 +70,7 @@ const SignIn = () => {
               </Button>
               <div className="flex flex-row">
                 <p className="text-color pt-5  text-sm">
-                  Don't have an account yet?
+                  Don&apos;t have an account yet?
                 </p>
                 <p
                   className="text-color px-1 pt-5 text-sm font-semibold underline hover:cursor-pointer"
@@ -84,7 +84,9 @@ const SignIn = () => {
         ) : forgotPassword ? (
           <div className="px-16 pt-12">
             <p className="text-color text-2xl font-semibold">Reset password</p>
-            <p className="text-color">It's okay! We all forget sometimes 💙</p>
+            <p className="text-color">
+              It&apos;s okay! We all forget sometimes 💙
+            </p>
             <p className="text-color pt-8 font-semibold">Email</p>
             <input
               type="email"
@@ -112,8 +114,8 @@ const SignIn = () => {
           <div className="px-16 pt-12">
             <p className="text-color text-2xl font-semibold">Welcome!</p>
             <p className="text-color">
-              We just need your university email and we'll send you a magic link
-              ✨
+              We just need your university email and we&apos;ll send you a magic
+              link ✨
             </p>
             <p className="text-color pt-8 font-semibold">Email</p>
             <input

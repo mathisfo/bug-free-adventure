@@ -2,21 +2,16 @@ import { useTheme } from "next-themes";
 import Link from "next/link";
 import DonutChart from "./DonutChart";
 
-const ActivityCard = ({
-  type,
-  bg,
-  boxColor,
-  fillColor,
-  fillColorDark,
-  moduleName,
-}: {
+interface ActivityCardProps {
   type: string;
   bg: string;
   boxColor: string;
   fillColor: string;
   fillColorDark: string;
-  moduleName: string;
-}) => {
+  moduleName?: string;
+}
+
+const ActivityCard = (props: ActivityCardProps) => {
   const { theme } = useTheme();
 
   const chevron = (
@@ -42,34 +37,34 @@ const ActivityCard = ({
   return (
     <div
       className={`${
-        theme == "dark" ? "bg-[#1c1f37]" : bg
+        theme == "dark" ? "bg-[#1c1f37]" : props.bg
       }  grid  w-4/5 grid-cols-5 rounded-lg text-white`}
     >
       <div className="col-span-3 col-start-1 flex flex-row items-baseline space-x-2 p-4 font-semibold">
         <p className="text-6xl">5</p>
-        <p className="text-2xl lowercase">{type + "s"}</p>
+        <p className="text-2xl lowercase">{props.type + "s"}</p>
       </div>
       <div
         className={`${
-          theme == "dark" ? "bg-[#2F3358]" : boxColor
+          theme == "dark" ? "bg-[#2F3358]" : props.boxColor
         } col-span-2 col-start-4 row-span-2 h-full rounded-lg p-4`}
       >
         <DonutChart
           size="110px"
           bg="white"
-          fillColor={fillColor}
-          fillColorDark={fillColorDark}
+          fillColor={props.fillColor}
+          fillColorDark={props.fillColorDark}
         />
       </div>
       <div className="col-span-3 col-start-1 flex flex-row items-center space-x-1 p-4 text-sm">
         <Link
           href={{
-            pathname: `Java/${moduleName}/${type}`,
-            query: { type: type.toUpperCase() },
+            pathname: `Java/${props.moduleName}/${props.type}`,
+            query: { type: props.type.toUpperCase() },
           }}
         >
           <div className="flex flex-row hover:cursor-pointer">
-            <p>{"Show all " + type + "s"}</p>
+            <p>{"Show all " + props.type + "s"}</p>
             <p className="self-center">{chevron}</p>
           </div>
         </Link>
