@@ -1,4 +1,5 @@
 import { ChartBarIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
+import { Dropdown } from "flowbite-react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
@@ -6,6 +7,11 @@ interface TopMenuProps {
   currentPage?: string;
   currentType?: string;
 }
+
+function classNames(...classes: string[]) {
+  return classes.filter(Boolean).join(" ");
+}
+
 const TopMenu = (props: TopMenuProps) => {
   const chevron = (
     <svg
@@ -25,6 +31,9 @@ const TopMenu = (props: TopMenuProps) => {
   );
 
   const router = useRouter();
+  const { type } = router.query;
+
+  const types = ["example", "challenge", "coding"];
 
   const currentItemStyling =
     "text-color uppercase text-sm font-semibold bg-indigo-100 dark:bg-[#6f69ee] dark:hover:bg-[#847FF7]";
@@ -66,11 +75,36 @@ const TopMenu = (props: TopMenuProps) => {
             <></>
           )}
           {props.currentType ? (
-            <div className="flex flex-row">
+            <div className="text-color flex flex-row items-center text-sm font-semibold uppercase">
               {chevron}
-              <p className="text-color pl-4 text-sm font-semibold uppercase">
-                {props.currentType}
-              </p>
+              <div className="pl-4">
+                <Dropdown label={props.currentType} inline={true}>
+                  {types.map((item) => (
+                    <a
+                      href={
+                        "/courses/Java/" +
+                        props.currentPage +
+                        "/" +
+                        item +
+                        "?type=" +
+                        item.toUpperCase()
+                      }
+                      rel="noreferrer"
+                    >
+                      <Dropdown.Item
+                        className={classNames(
+                          props.currentType == item.toUpperCase() + "S" ||
+                            props.currentType == item.toUpperCase()
+                            ? currentItemStyling
+                            : menuItemStyling
+                        )}
+                      >
+                        {item.toUpperCase() == "CODING" ? item : item + "S"}
+                      </Dropdown.Item>
+                    </a>
+                  ))}
+                </Dropdown>
+              </div>
             </div>
           ) : (
             <></>
