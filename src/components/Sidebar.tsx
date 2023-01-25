@@ -158,7 +158,7 @@ const Sidebar = ({ children }: { children: React.ReactElement }) => {
                     <div>
                       <UserCircleIcon className="text-color h-8 w-8"></UserCircleIcon>
                     </div>
-                    <div className="text-color">{session.user?.name}</div>
+                    <div className="text-color"></div>
                     <div>
                       <HiOutlineLogout
                         className="text-color ml-14 h-6 w-6"
