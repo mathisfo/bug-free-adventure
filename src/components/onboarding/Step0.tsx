@@ -1,14 +1,10 @@
-import { Button } from "flowbite-react";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { userRouter } from "../../server/api/routers/userRouter";
 import { api } from "../../utils/api";
 
 const Step0 = () => {
   const mutation = api.userRouter.setNameForUser.useMutation();
   const [name, setName] = useState<string>("");
-
-  const ctx = api.useContext();
   const router = useRouter();
 
   const handleForm = () => {

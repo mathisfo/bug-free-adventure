@@ -1,17 +1,12 @@
-import { ArrowPathIcon } from "@heroicons/react/24/outline";
 import { type as typeEnum } from "@prisma/client";
 import { useSession } from "next-auth/react";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import ActivityCard from "../../components/ActivityCard";
 import ExerciseCard from "../../components/ExerciseCard";
 import ProgressionGrid from "../../components/ProgressionGrid";
 import Timeline from "../../components/Timeline";
 import TopMenu from "../../components/TopMenu";
-import {
-  Activity,
-  activityAnalyticsSchema,
-} from "../../server/schema/LearnerActivitySchema";
+import { Activity } from "../../server/schema/LearnerActivitySchema";
 import { api } from "../../utils/api";
 
 const ModuleStatistics = () => {
@@ -156,6 +151,7 @@ const ModuleStatistics = () => {
                 .map((activity) => {
                   return (
                     <a
+                      key={activity.activityName}
                       target="_blank"
                       href={
                         activity.url +

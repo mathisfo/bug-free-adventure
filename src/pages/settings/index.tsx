@@ -1,5 +1,3 @@
-import ExerciseCard from "../../components/ExerciseCard";
-
 const Settings = () => {
   return (
     <div>

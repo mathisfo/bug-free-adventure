@@ -5,7 +5,6 @@ import {
   EllipsisHorizontalCircleIcon,
   XCircleIcon,
 } from "@heroicons/react/24/outline";
-import { type } from "@prisma/client";
 import Link from "next/link";
 import { useState } from "react";
 import { api } from "../utils/api";
