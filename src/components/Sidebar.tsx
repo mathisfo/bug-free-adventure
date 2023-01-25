@@ -12,6 +12,7 @@ import { HiOutlineLogout } from "react-icons/hi";
 import SignIn from "./auth/SignIn";
 import Greeting from "./Greeting";
 import Onboarding from "./onboarding/Onboarding";
+import UIOnboarding from "./onboarding/UIOnboarding";
 import ToggleTheme from "./ToggleTheme";
 
 function classNames(...classes: string[]) {
@@ -60,8 +61,8 @@ const Sidebar = ({ children }: { children: React.ReactElement }) => {
     <div>
       {session ? (
         <div>
-          {!session.user?.onBoarded ? (
-            <Onboarding />
+          {session.user?.onBoarded ? (
+            <UIOnboarding />
           ) : (
             <div className="back-layer grid grid-cols-5 px-2 pt-2 ">
               <div className="grid-col-1 z-index-2 grid h-screen">

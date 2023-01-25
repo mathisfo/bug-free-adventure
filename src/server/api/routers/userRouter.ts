@@ -53,4 +53,12 @@ export const userRouter = createTRPCRouter({
         data: { name: input.name },
       });
     }),
+  finishOnboarding: protectedProcedure.mutation(async ({ ctx }) => {
+    return await ctx.prisma.user.update({
+      where: {
+        id: ctx.session.user.id,
+      },
+      data: { onBoarded: true },
+    });
+  }),
 });
