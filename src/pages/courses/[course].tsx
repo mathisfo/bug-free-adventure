@@ -1,7 +1,7 @@
 import ContinueCard from "../../components/ContinueCard";
 import CourseStatus from "../../components/CourseStatus";
 import DonutChart from "../../components/DonutChart";
-import TopMenu from "../../components/TopMenu";
+import TopMenu from "../../components/Breadcrumbs";
 
 const Courses = () => {
   return (

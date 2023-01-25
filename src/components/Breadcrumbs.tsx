@@ -56,9 +56,11 @@ const TopMenu = (props: TopMenuProps) => {
           {props.currentPage ? (
             <div className="flex flex-row">
               {chevron}
-              <p className="text-color pl-4 text-sm font-semibold uppercase">
-                {props.currentPage}
-              </p>
+              <a href={"/courses/Java/" + props.currentPage} rel="noreferrer">
+                <p className="text-color pl-4 text-sm font-semibold uppercase">
+                  {props.currentPage}
+                </p>
+              </a>
             </div>
           ) : (
             <></>

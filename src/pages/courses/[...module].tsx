@@ -7,7 +7,7 @@ import ActivityCard from "../../components/ActivityCard";
 import ExerciseCard from "../../components/ExerciseCard";
 import ProgressionGrid from "../../components/ProgressionGrid";
 import Timeline from "../../components/Timeline";
-import TopMenu from "../../components/TopMenu";
+import TopMenu from "../../components/Breadcrumbs";
 import {
   Activity,
   activityAnalyticsSchema,
