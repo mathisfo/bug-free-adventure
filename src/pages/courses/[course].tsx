@@ -6,7 +6,7 @@ import TopMenu from "../../components/TopMenu";
 const Courses = () => {
   return (
     <div>
-      <TopMenu />
+      <TopMenu currentPage={""} currentType={""} />
       <div className="background-color col-span-4 mr-4 h-screen rounded-r-lg p-14">
         <div className="mb-24 flex flex-row">
           <div className="w-3/5 ">

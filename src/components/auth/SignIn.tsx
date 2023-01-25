@@ -7,6 +7,14 @@ const SignIn = () => {
   const [email, setEmail] = useState("");
   const [forgotPassword, setForgotPassword] = useState(false);
   const [signUp, setSignUp] = useState(false);
+
+  function resetPassword(
+    arg0: string,
+    arg1: { email: string; callbackUrl: string }
+  ): void {
+    throw new Error("Function not implemented.");
+  }
+
   return (
     <div className="back-layer dark:dark-back-layer fixed h-full w-full ">
       <div className="mx-auto my-24 h-3/4 w-1/2 rounded-lg bg-white dark:bg-[#292e50]">

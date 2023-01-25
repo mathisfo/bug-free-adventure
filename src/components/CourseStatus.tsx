@@ -97,7 +97,7 @@ const CourseStatus = () => {
                       ></div>
                     </div>
                     <div className="text-xs">
-                      {module.overallProgress * 100} %
+                      {Math.ceil(module.overallProgress * 100)} %
                     </div>
                   </td>
                 </tr>
@@ -143,7 +143,7 @@ const CourseStatus = () => {
                               ></div>
                             </div>
                             <div className="text-xs">
-                              {module.overallProgress * 100} %
+                              {Math.ceil(module.overallProgress * 100)} %
                             </div>
                           </td>
                         </tr>

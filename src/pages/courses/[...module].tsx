@@ -1,3 +1,4 @@
+import { ArrowPathIcon } from "@heroicons/react/24/outline";
 import { type as typeEnum } from "@prisma/client";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
@@ -7,7 +8,10 @@ import ExerciseCard from "../../components/ExerciseCard";
 import ProgressionGrid from "../../components/ProgressionGrid";
 import Timeline from "../../components/Timeline";
 import TopMenu from "../../components/TopMenu";
-import { Activity } from "../../server/schema/LearnerActivitySchema";
+import {
+  Activity,
+  activityAnalyticsSchema,
+} from "../../server/schema/LearnerActivitySchema";
 import { api } from "../../utils/api";
 
 const ModuleStatistics = () => {
@@ -37,15 +41,36 @@ const ModuleStatistics = () => {
   const typeofActivity = (): Activity[] => {
     switch (type) {
       case typeEnum.CHALLENGE: {
-        return learnerAnalytics.activityAnalytics.challenges;
+        return learnerAnalytics.activityAnalytics.challenges.sort(
+          (firstActivity, secondActivity) =>
+            firstActivity.successRate > secondActivity.successRate
+              ? 1
+              : firstActivity.successRate === secondActivity.successRate
+              ? firstActivity.attempts < secondActivity.attempts
+                ? 1
+                : -1
+              : -1
+        );
       }
 
       case typeEnum.EXAMPLE: {
-        return learnerAnalytics.activityAnalytics.examples;
+        return learnerAnalytics.activityAnalytics.examples.sort(
+          (firstActivity, secondActivity) =>
+            firstActivity.attempts - secondActivity.attempts
+        );
       }
 
       case typeEnum.CODING: {
-        return learnerAnalytics.activityAnalytics.coding;
+        return learnerAnalytics.activityAnalytics.coding.sort(
+          (firstActivity, secondActivity) =>
+            firstActivity.successRate > secondActivity.successRate
+              ? 1
+              : firstActivity.successRate === secondActivity.successRate
+              ? firstActivity.attempts < secondActivity.attempts
+                ? 1
+                : -1
+              : -1
+        );
       }
 
       default: {
@@ -114,11 +139,20 @@ const ModuleStatistics = () => {
         currentPage={module ? module[1] : "404"}
         currentType={type == "CODING" ? type : type + "S"}
       />
-      <div className="background-color absolute w-full overflow-x-auto  rounded-lg">
-        <div className="m-12 grid grid-cols-4 gap-8">
+      <div className=" background-color absolute grid w-full overflow-x-auto  rounded-lg">
+        <div className="flex flex-row items-center space-x-2 justify-self-end pb-4 pr-12 pt-6">
+          <div className="h-4 w-4 items-center rounded-md bg-emerald-300 dark:bg-emerald-900"></div>
+          <p className="text-sm">Finished</p>
+          <div className="h-4 w-4 items-center rounded-md bg-yellow-200 dark:bg-orange-600"></div>
+          <p className="text-sm">Started</p>
+          <div className="h-4 w-4 items-center rounded-md bg-blue-100 dark:bg-[#2F3358]"></div>
+          <p className="text-sm">To do</p>
+        </div>
+        <div className="mx-12 mt-4 grid grid-cols-4 gap-8">
           {module
             ? typeofActivity()
                 .filter((activity) => activity.relatedTopic == module[1])
+
                 .map((activity) => {
                   return (
                     <a target="_blank" href={activity.url} rel="noreferrer">
