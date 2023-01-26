@@ -12,7 +12,6 @@ import { HiOutlineLogout } from "react-icons/hi";
 import SignIn from "./auth/SignIn";
 import Greeting from "./Greeting";
 import ToggleTheme from "./ToggleTheme";
-
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
@@ -158,7 +157,7 @@ const Sidebar = ({ children }: { children: React.ReactElement }) => {
                     <div>
                       <UserCircleIcon className="text-color h-8 w-8"></UserCircleIcon>
                     </div>
-                    <div className="text-color"></div>
+                    <div className="text-color">{session?.user?.name}</div>
                     <div>
                       <HiOutlineLogout
                         className="text-color ml-14 h-6 w-6"
