@@ -2,8 +2,24 @@ import ContinueCard from "../../components/ContinueCard";
 import CourseStatus from "../../components/CourseStatus";
 import DonutChart from "../../components/DonutChart";
 import TopMenu from "../../components/Breadcrumbs";
+import { api } from "../../utils/api";
+import { useSession } from "next-auth/react";
 
 const Courses = () => {
+  const { data: session, status } = useSession();
+
+  const {
+    data: learnerAnalytics,
+    isSuccess,
+    isLoading,
+  } = api.learnerActivityRouter.getLearnerActivity.useQuery();
+
+  if (isLoading || !isSuccess) {
+    return <div>Loading...</div>;
+  }
+
+  const activities = learnerAnalytics.activityAnalytics;
+
   return (
     <div>
       <TopMenu currentPage={""} currentType={""} />
@@ -11,8 +27,11 @@ const Courses = () => {
         <div className="mb-24 flex flex-row">
           <div className="w-3/5 ">
             <ContinueCard
-              currentExercise="Inheritance 1"
-              recommendedExercise="Sum square difference"
+              recommendedActivities={[
+                ...activities.challenges,
+                ...activities.coding,
+                ...activities.examples,
+              ].filter((e) => e.sequencing > 0)}
             />
           </div>
 

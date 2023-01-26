@@ -7,12 +7,12 @@ import ActivityCard from "../../components/ActivityCard";
 import ExerciseCard from "../../components/ExerciseCard";
 import ProgressionGrid from "../../components/ProgressionGrid";
 import Timeline from "../../components/Timeline";
-import TopMenu from "../../components/Breadcrumbs";
 import {
   Activity,
   activityAnalyticsSchema,
 } from "../../server/schema/LearnerActivitySchema";
 import { api } from "../../utils/api";
+import Breadcrumbs from "../../components/Breadcrumbs";
 
 const ModuleStatistics = () => {
   const {
@@ -82,7 +82,7 @@ const ModuleStatistics = () => {
   if (!type) {
     return (
       <div>
-        <TopMenu currentPage={module ? module[1] : "404"} />
+        <Breadcrumbs currentPage={module ? module[1] : "404"} />
         <div className="m-4 grid h-screen grid-cols-2 grid-rows-2">
           <div className="col-start-1 space-y-8 space-x-4 p-14">
             <div className="text-color mb-4 text-xl font-semibold">
@@ -135,11 +135,11 @@ const ModuleStatistics = () => {
 
   return (
     <>
-      <TopMenu
+      <Breadcrumbs
         currentPage={module ? module[1] : "404"}
         currentType={type == "CODING" ? type : type + "S"}
       />
-      <div className=" background-color absolute grid w-full overflow-x-auto  rounded-lg">
+      <div className=" background-color absolute mt-12 grid w-full  overflow-x-auto rounded-lg">
         <div className="flex flex-row items-center space-x-2 justify-self-end pb-4 pr-12 pt-6">
           <div className="h-4 w-4 items-center rounded-md bg-emerald-300 dark:bg-emerald-900"></div>
           <p className="text-sm">Finished</p>
