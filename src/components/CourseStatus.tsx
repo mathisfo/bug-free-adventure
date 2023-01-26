@@ -231,22 +231,30 @@ const CourseStatus = () => {
                                         activityType.toUpperCase()
                                   )
                                   .filter(
-                                    (e: Activity) =>
-                                      e.relatedTopic === module.name
+                                    (act: Activity) =>
+                                      act.relatedTopic === module.name
                                   )
-                                  .filter((e) =>
-                                    e.type == "EXAMPLE"
-                                      ? e.attempts > 0
-                                      : e.successRate > 0
+                                  .filter((act) =>
+                                    act.type == "EXAMPLE"
+                                      ? act.attempts > 0
+                                      : act.successRate > 0
                                   ).length /
                                   [
                                     ...activites.challenges,
                                     ...activites.coding,
                                     ...activites.examples,
-                                  ].filter(
-                                    (e: Activity) =>
-                                      e.relatedTopic === module.name
-                                  ).length) *
+                                  ]
+                                    .filter((act) =>
+                                      act.type === "CODING"
+                                        ? act.type ===
+                                          activityType.toUpperCase()
+                                        : act.type + "S" ===
+                                          activityType.toUpperCase()
+                                    )
+                                    .filter(
+                                      (e: Activity) =>
+                                        e.relatedTopic === module.name
+                                    ).length) *
                                   100
                               )}{" "}
                               %
