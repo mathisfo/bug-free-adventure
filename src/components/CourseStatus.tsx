@@ -7,7 +7,13 @@ import {
 } from "@heroicons/react/24/outline";
 import { type } from "@prisma/client";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useState } from "react";
+import {
+  activityAnalyticsSchema,
+  activitySchema,
+  learnerActivitySchema,
+} from "../server/schema/LearnerActivitySchema";
 import { api } from "../utils/api";
 
 const CourseStatus = () => {
@@ -129,8 +135,32 @@ const CourseStatus = () => {
                           </th>
                           <td className="py-4 px-12">
                             <div className="text-color flex flex-row font-bold">
-                              1/
-                              <div className=" font-normal">12 tasks</div>
+                              {
+                                Object.entries(
+                                  learnerAnalytics.activityAnalytics
+                                )
+                                  [index][1].filter(
+                                    (e: Activity) =>
+                                      e.relatedTopic === module.name
+                                  )
+                                  .filter((e) =>
+                                    e.type == "EXAMPLE"
+                                      ? e.attempts > 0
+                                      : e.successRate > 0
+                                  ).length
+                              }
+                              /
+                              <div className="font-normal">
+                                {
+                                  Object.entries(
+                                    learnerAnalytics.activityAnalytics
+                                  )[index][1].filter(
+                                    (e: Activity) =>
+                                      e.relatedTopic === module.name
+                                  ).length
+                                }{" "}
+                                tasks done{" "}
+                              </div>
                             </div>
                           </td>
                           <td className="flex flex-row py-4 px-6 ">
@@ -138,12 +168,53 @@ const CourseStatus = () => {
                               <div
                                 className={`h-2 rounded bg-rose-400 dark:bg-[#f97316]`}
                                 style={{
-                                  width: module.overallProgress * 100 + "%",
+                                  width:
+                                    (Object.entries(
+                                      learnerAnalytics.activityAnalytics
+                                    )
+                                      [index][1].filter(
+                                        (e: Activity) =>
+                                          e.relatedTopic === module.name
+                                      )
+                                      .filter((e) =>
+                                        e.type == "EXAMPLE"
+                                          ? e.attempts > 0
+                                          : e.successRate > 0
+                                      ).length /
+                                      Object.entries(
+                                        learnerAnalytics.activityAnalytics
+                                      )[index][1].filter(
+                                        (e: Activity) =>
+                                          e.relatedTopic === module.name
+                                      ).length) *
+                                      100 +
+                                    "%",
                                 }}
                               ></div>
                             </div>
                             <div className="text-xs">
-                              {Math.ceil(module.overallProgress * 100)} %
+                              {Math.ceil(
+                                (Object.entries(
+                                  learnerAnalytics.activityAnalytics
+                                )
+                                  [index][1].filter(
+                                    (e: Activity) =>
+                                      e.relatedTopic === module.name
+                                  )
+                                  .filter((e) =>
+                                    e.type == "EXAMPLE"
+                                      ? e.attempts > 0
+                                      : e.successRate > 0
+                                  ).length /
+                                  Object.entries(
+                                    learnerAnalytics.activityAnalytics
+                                  )[index][1].filter(
+                                    (e: Activity) =>
+                                      e.relatedTopic === module.name
+                                  ).length) *
+                                  100
+                              )}{" "}
+                              %
                             </div>
                           </td>
                         </tr>
