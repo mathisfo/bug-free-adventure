@@ -5,15 +5,9 @@ import {
   EllipsisHorizontalCircleIcon,
   XCircleIcon,
 } from "@heroicons/react/24/outline";
-import { type } from "@prisma/client";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { useState } from "react";
-import {
-  activityAnalyticsSchema,
-  activitySchema,
-  learnerActivitySchema,
-} from "../server/schema/LearnerActivitySchema";
+import { Activity } from "../server/schema/LearnerActivitySchema";
 import { api } from "../utils/api";
 
 const CourseStatus = () => {
@@ -40,6 +34,8 @@ const CourseStatus = () => {
       </div>
     );
   }
+
+  const activites = learnerAnalytics.activityAnalytics;
 
   const handleClick = (index: number) => {
     setClickedIndex((state: any[]) => ({
@@ -136,28 +132,46 @@ const CourseStatus = () => {
                           <td className="py-4 px-12">
                             <div className="text-color flex flex-row font-bold">
                               {
-                                Object.entries(
-                                  learnerAnalytics.activityAnalytics
-                                )
-                                  [index][1].filter(
-                                    (e: Activity) =>
-                                      e.relatedTopic === module.name
+                                [
+                                  ...activites.challenges,
+                                  ...activites.coding,
+                                  ...activites.examples,
+                                ]
+                                  .filter((act) =>
+                                    act.type === "CODING"
+                                      ? act.type === activityType.toUpperCase()
+                                      : act.type + "S" ===
+                                        activityType.toUpperCase()
                                   )
-                                  .filter((e) =>
-                                    e.type == "EXAMPLE"
-                                      ? e.attempts > 0
-                                      : e.successRate > 0
+                                  .filter(
+                                    (act: Activity) =>
+                                      act.relatedTopic === module.name
+                                  )
+                                  .filter((act) =>
+                                    act.type == "EXAMPLE"
+                                      ? act.attempts > 0
+                                      : act.successRate > 0
                                   ).length
                               }
                               /
                               <div className="font-normal">
                                 {
-                                  Object.entries(
-                                    learnerAnalytics.activityAnalytics
-                                  )[index][1].filter(
-                                    (e: Activity) =>
-                                      e.relatedTopic === module.name
-                                  ).length
+                                  [
+                                    ...activites.challenges,
+                                    ...activites.coding,
+                                    ...activites.examples,
+                                  ]
+                                    .filter((act) =>
+                                      act.type === "CODING"
+                                        ? act.type ===
+                                          activityType.toUpperCase()
+                                        : act.type + "S" ===
+                                          activityType.toUpperCase()
+                                    )
+                                    .filter(
+                                      (e: Activity) =>
+                                        e.relatedTopic === module.name
+                                    ).length
                                 }{" "}
                                 tasks done{" "}
                               </div>
@@ -169,10 +183,19 @@ const CourseStatus = () => {
                                 className={`h-2 rounded bg-rose-400 dark:bg-[#f97316]`}
                                 style={{
                                   width:
-                                    (Object.entries(
-                                      learnerAnalytics.activityAnalytics
-                                    )
-                                      [index][1].filter(
+                                    ([
+                                      ...activites.challenges,
+                                      ...activites.coding,
+                                      ...activites.examples,
+                                    ]
+                                      .filter((act) =>
+                                        act.type === "CODING"
+                                          ? act.type ===
+                                            activityType.toUpperCase()
+                                          : act.type + "S" ===
+                                            activityType.toUpperCase()
+                                      )
+                                      .filter(
                                         (e: Activity) =>
                                           e.relatedTopic === module.name
                                       )
@@ -181,9 +204,11 @@ const CourseStatus = () => {
                                           ? e.attempts > 0
                                           : e.successRate > 0
                                       ).length /
-                                      Object.entries(
-                                        learnerAnalytics.activityAnalytics
-                                      )[index][1].filter(
+                                      [
+                                        ...activites.challenges,
+                                        ...activites.coding,
+                                        ...activites.examples,
+                                      ].filter(
                                         (e: Activity) =>
                                           e.relatedTopic === module.name
                                       ).length) *
@@ -194,10 +219,18 @@ const CourseStatus = () => {
                             </div>
                             <div className="text-xs">
                               {Math.ceil(
-                                (Object.entries(
-                                  learnerAnalytics.activityAnalytics
-                                )
-                                  [index][1].filter(
+                                ([
+                                  ...activites.challenges,
+                                  ...activites.coding,
+                                  ...activites.examples,
+                                ]
+                                  .filter((act) =>
+                                    act.type === "CODING"
+                                      ? act.type === activityType.toUpperCase()
+                                      : act.type + "S" ===
+                                        activityType.toUpperCase()
+                                  )
+                                  .filter(
                                     (e: Activity) =>
                                       e.relatedTopic === module.name
                                   )
@@ -206,9 +239,11 @@ const CourseStatus = () => {
                                       ? e.attempts > 0
                                       : e.successRate > 0
                                   ).length /
-                                  Object.entries(
-                                    learnerAnalytics.activityAnalytics
-                                  )[index][1].filter(
+                                  [
+                                    ...activites.challenges,
+                                    ...activites.coding,
+                                    ...activites.examples,
+                                  ].filter(
                                     (e: Activity) =>
                                       e.relatedTopic === module.name
                                   ).length) *
