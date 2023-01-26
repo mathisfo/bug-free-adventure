@@ -94,7 +94,7 @@ const CourseStatus = () => {
                   <td className="flex flex-row py-4 px-6">
                     <div className="fill-color-light mx-4 h-2 w-2/3 rounded">
                       <div
-                        className={`h-2 rounded bg-blue-400 dark:bg-[#f97316]`}
+                        className={`h-2 rounded bg-blue-400 dark:bg-[#11E64A]`}
                         style={{ width: module.overallProgress * 100 + "%" }}
                       ></div>
                     </div>
@@ -180,7 +180,7 @@ const CourseStatus = () => {
                           <td className="flex flex-row py-4 px-6 ">
                             <div className="fill-color-light mx-4 h-2 w-2/3 rounded">
                               <div
-                                className={`h-2 rounded bg-rose-400 dark:bg-[#f97316]`}
+                                className={`h-2 rounded bg-rose-400 dark:bg-[#6BFF93]`}
                                 style={{
                                   width:
                                     ([

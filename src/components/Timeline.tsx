@@ -3,39 +3,57 @@ import {
   DocumentTextIcon,
   FlagIcon,
 } from "@heroicons/react/24/solid";
+import { useSession } from "next-auth/react";
 import { Activity } from "../server/schema/LearnerActivitySchema";
 
 const TimelineWrapper = (props: { recommendedActivities: Activity[] }) => {
+  const { data: session, status } = useSession();
+
   const { recommendedActivities } = props;
 
   if (recommendedActivities.length === 0) {
     return <div>No recommendations have been generated yet</div>;
   }
 
+  if (status === "unauthenticated" || !session?.user) {
+    return <div>Unauthorized</div>;
+  }
+
   return (
     <ol className="relative border-l border-gray-200 dark:border-gray-700">
       {props.recommendedActivities.map((activity) => (
         <li className="mb-10 ml-10" key={activity.activityId}>
-          {activity.type == "EXAMPLE" ? (
-            <span className="absolute -left-3 flex h-8 w-8 items-center justify-center rounded-full bg-[#3c3b95] ring-8 ring-white dark:bg-[#E54799] dark:bg-blue-900 dark:ring-gray-900">
-              <DocumentTextIcon className="h-5 w-5 text-white"></DocumentTextIcon>
-            </span>
-          ) : activity.type == "CODING" ? (
-            <span className="absolute -left-3 flex h-8 w-8 items-center justify-center rounded-full bg-[#5f80f4] ring-8 ring-white dark:bg-[#6BFF93] dark:bg-blue-900 dark:ring-gray-900">
-              <FlagIcon className="h-5 w-5 text-white"></FlagIcon>
-            </span>
-          ) : (
-            <span className="absolute -left-3 flex h-8 w-8 items-center justify-center rounded-full bg-[#9293cf] ring-8 ring-white dark:bg-[#7759EB] dark:ring-gray-900">
-              <CommandLineIcon className="h-5 w-5 text-white"></CommandLineIcon>
-            </span>
-          )}
+          <a
+            target="_blank"
+            href={
+              activity.url +
+              "&usr=" +
+              session.user?.protusId +
+              "&grp=NorwayFall2022B&sid=TEST&cid=352"
+            }
+            rel="noreferrer"
+          >
+            {activity.type == "EXAMPLE" ? (
+              <span className="absolute -left-3 flex h-8 w-8 items-center justify-center rounded-full bg-[#3c3b95] ring-8 ring-white dark:bg-[#E54799] dark:bg-blue-900 dark:ring-gray-900">
+                <DocumentTextIcon className="h-5 w-5 text-white"></DocumentTextIcon>
+              </span>
+            ) : activity.type == "CODING" ? (
+              <span className="absolute -left-3 flex h-8 w-8 items-center justify-center rounded-full bg-[#5f80f4] ring-8 ring-white dark:bg-[#6BFF93] dark:bg-blue-900 dark:ring-gray-900">
+                <FlagIcon className="h-5 w-5 text-white"></FlagIcon>
+              </span>
+            ) : (
+              <span className="absolute -left-3 flex h-8 w-8 items-center justify-center rounded-full bg-[#9293cf] ring-8 ring-white dark:bg-[#7759EB] dark:ring-gray-900">
+                <CommandLineIcon className="h-5 w-5 text-white"></CommandLineIcon>
+              </span>
+            )}
 
-          <p className="text-color  mb-2 text-lg font-normal">
-            {activity.type}
-          </p>
-          <p className=" text-color mb-1 flex items-center text-xl font-bold">
-            {activity.activityName}
-          </p>
+            <p className="text-color  mb-2 text-lg font-normal">
+              {activity.type}
+            </p>
+            <p className=" text-color mb-1 flex items-center text-xl font-bold">
+              {activity.activityName}
+            </p>
+          </a>
         </li>
       ))}
     </ol>

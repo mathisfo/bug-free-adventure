@@ -7,11 +7,13 @@ const DonutChart = ({
   bg,
   fillColor,
   fillColorDark,
+  progress,
 }: {
   size: string;
   bg: string;
   fillColor: string;
   fillColorDark: string;
+  progress: number;
 }) => {
   const { theme } = useTheme();
   const {
@@ -31,18 +33,18 @@ const DonutChart = ({
     );
   }
 
-  const overallProgress = () => {
+  /*   const overallProgress = () => {
     return learnerAnalytics.moduleAnalytics
       .map((e) => e.overallProgress)
       .reduce((acc, val) => {
         return acc + (val / learnerAnalytics.moduleAnalytics.length) * 100;
       }, 0);
-  };
+  }; */
 
   const data: any = [
     {
       title: "To go",
-      value: `${Math.round(overallProgress())}`,
+      value: `${Math.round(progress)}`,
 
       color: `${theme == "dark" ? fillColorDark : fillColor}`,
     },
