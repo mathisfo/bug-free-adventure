@@ -21,7 +21,7 @@ const Courses = () => {
               size="176px"
               bg="#d1d5db"
               fillColor="#60a5fa"
-              fillColorDark="#f97316"
+              fillColorDark="#11E64A"
             />
           </div>
         </div>
