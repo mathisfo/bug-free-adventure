@@ -208,10 +208,18 @@ const CourseStatus = () => {
                                         ...activites.challenges,
                                         ...activites.coding,
                                         ...activites.examples,
-                                      ].filter(
-                                        (e: Activity) =>
-                                          e.relatedTopic === module.name
-                                      ).length) *
+                                      ]
+                                        .filter((act) =>
+                                          act.type === "CODING"
+                                            ? act.type ===
+                                              activityType.toUpperCase()
+                                            : act.type + "S" ===
+                                              activityType.toUpperCase()
+                                        )
+                                        .filter(
+                                          (e: Activity) =>
+                                            e.relatedTopic === module.name
+                                        ).length) *
                                       100 +
                                     "%",
                                 }}
