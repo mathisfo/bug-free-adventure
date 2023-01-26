@@ -84,10 +84,10 @@ const ProgressionGrid = (props: ProgressionGridInterface) => {
       </div>
       <div className="row-start-3 flex  items-center gap-6">
         <p className="text-color col-start-1 w-24 text-end text-sm font-semibold uppercase">
-          Coding
+          Challenges
         </p>
         <div className=" col-start-2 flex flex-row space-x-1">
-          {modules.activityAnalytics.coding
+          {modules.activityAnalytics.challenges
             .filter((e) => e.relatedTopic == props.currentPage)
             .map((item) => (
               <a
@@ -126,10 +126,10 @@ const ProgressionGrid = (props: ProgressionGridInterface) => {
       </div>
       <div className="row-start-4  flex items-center gap-6">
         <p className="text-color col-start-1 w-24 text-end text-sm font-semibold uppercase">
-          Challenges
+          Coding
         </p>
         <div className="col-start-2 flex flex-row space-x-1">
-          {modules.activityAnalytics.challenges
+          {modules.activityAnalytics.coding
             .filter((e) => e.relatedTopic == props.currentPage)
             .map((item) => (
               <a

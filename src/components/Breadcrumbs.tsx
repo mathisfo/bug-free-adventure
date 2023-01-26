@@ -56,7 +56,7 @@ const TopMenu = (props: TopMenuProps) => {
             )}
           >
             <Link href="/courses/Java">
-              <div className="flex flex-row items-center uppercase ">
+              <div className="flex flex-row items-center uppercase hover:cursor-pointer">
                 <ChartBarIcon className="text-color mr-1 h-6 w-6 "></ChartBarIcon>
                 Java
               </div>

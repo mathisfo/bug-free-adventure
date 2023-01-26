@@ -1,5 +1,10 @@
 import { useTheme } from "next-themes";
 import Link from "next/link";
+import {
+  Activity,
+  activityAnalyticsSchema,
+} from "../server/schema/LearnerActivitySchema";
+import { api } from "../utils/api";
 import DonutChart from "./DonutChart";
 
 interface ActivityCardProps {
@@ -13,6 +18,34 @@ interface ActivityCardProps {
 
 const ActivityCard = (props: ActivityCardProps) => {
   const { theme } = useTheme();
+
+  const {
+    data: learnerAnalytics,
+    isSuccess,
+    isLoading,
+  } = api.learnerActivityRouter.getLearnerActivity.useQuery();
+
+  if (!isSuccess || isLoading) {
+    return (
+      <div className="mx-auto w-full rounded-md p-4">
+        <div className="flex animate-pulse space-x-4">
+          <div className="flex-1 space-y-6 py-1">
+            <div className="loading h-8 rounded"></div>
+            <div className="loading h-8 rounded"></div>
+            <div className="loading h-8 rounded"></div>
+            <div className="loading h-8 rounded"></div>
+            <div className="loading h-8 rounded"></div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  const listOfExercises = [
+    ...learnerAnalytics.activityAnalytics.challenges,
+    ...learnerAnalytics.activityAnalytics.examples,
+    ...learnerAnalytics.activityAnalytics.coding,
+  ];
 
   const chevron = (
     <svg
@@ -41,7 +74,14 @@ const ActivityCard = (props: ActivityCardProps) => {
       }  grid  w-4/5 grid-cols-5 rounded-lg text-white`}
     >
       <div className="col-span-3 col-start-1 flex flex-row items-baseline space-x-2 p-4 font-semibold">
-        <p className="text-6xl">5</p>
+        <p className="text-6xl">
+          {
+            listOfExercises.filter(
+              (e: Activity) =>
+                props.type === e.type && props.moduleName === e.relatedTopic
+            ).length
+          }
+        </p>
         <p className="text-2xl lowercase">{props.type + "s"}</p>
       </div>
       <div
@@ -54,6 +94,22 @@ const ActivityCard = (props: ActivityCardProps) => {
           bg="white"
           fillColor={props.fillColor}
           fillColorDark={props.fillColorDark}
+          progress={Math.ceil(
+            (listOfExercises.filter((e: Activity) =>
+              props.type === "EXAMPLE"
+                ? props.type === e.type &&
+                  props.moduleName === e.relatedTopic &&
+                  e.attempts > 0
+                : props.type === e.type &&
+                  props.moduleName === e.relatedTopic &&
+                  e.successRate > 0
+            ).length /
+              listOfExercises.filter(
+                (e: Activity) =>
+                  props.type === e.type && props.moduleName === e.relatedTopic
+              ).length) *
+              100
+          )}
         />
       </div>
       <div className="col-span-3 col-start-1 flex flex-row items-center space-x-1 p-4 text-sm">
@@ -64,7 +120,7 @@ const ActivityCard = (props: ActivityCardProps) => {
           }}
         >
           <div className="flex flex-row hover:cursor-pointer">
-            <p>{"Show all " + props.type + "s"}</p>
+            <p>{"Show all " + props.type.toLowerCase() + "s"}</p>
             <p className="self-center">{chevron}</p>
           </div>
         </Link>

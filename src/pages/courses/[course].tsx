@@ -20,6 +20,14 @@ const Courses = () => {
 
   const activities = learnerAnalytics.activityAnalytics;
 
+  const overallProgress = () => {
+    return learnerAnalytics.moduleAnalytics
+      .map((e) => e.overallProgress)
+      .reduce((acc, val) => {
+        return acc + (val / learnerAnalytics.moduleAnalytics.length) * 100;
+      }, 0);
+  };
+
   return (
     <div>
       <TopMenu currentPage={""} currentType={""} />
@@ -41,6 +49,7 @@ const Courses = () => {
               bg="#d1d5db"
               fillColor="#60a5fa"
               fillColorDark="#11E64A"
+              progress={overallProgress()}
             />
           </div>
         </div>

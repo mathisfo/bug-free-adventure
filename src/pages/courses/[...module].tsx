@@ -104,7 +104,7 @@ const ModuleStatistics = () => {
           </div>
           <div className="col-start-2 space-y-4 p-14">
             <ActivityCard
-              type="example"
+              type="EXAMPLE"
               bg="bg-gradient-to-r from-[#3c3b95] via-[#44439f] to-[#3c3b95] "
               boxColor="bg-[#4c4aa2]"
               fillColor="#ED3695"
@@ -112,19 +112,19 @@ const ModuleStatistics = () => {
               moduleName={module ? module[1] : "404"}
             />
             <ActivityCard
-              type="coding"
-              bg="bg-gradient-to-r from-[#5f80f4] via-[#6c8af3] to-[#5f80f4]"
-              boxColor="bg-[#7795f6]"
-              fillColor="#ED3695"
-              fillColorDark="#6BFF93"
-              moduleName={module ? module[1] : "404"}
-            />
-            <ActivityCard
-              type="challenge"
+              type="CHALLENGE"
               bg="bg-gradient-to-r from-[#9293cf] via-[#9a9bd0] to-[#9293cf]"
               boxColor="bg-[#A3a6d8]"
               fillColor="#ED3695"
               fillColorDark="#7759EB"
+              moduleName={module ? module[1] : "404"}
+            />
+            <ActivityCard
+              type="CODING"
+              bg="bg-gradient-to-r from-[#5f80f4] via-[#6c8af3] to-[#5f80f4]"
+              boxColor="bg-[#7795f6]"
+              fillColor="#ED3695"
+              fillColorDark="#6BFF93"
               moduleName={module ? module[1] : "404"}
             />
           </div>
@@ -139,7 +139,7 @@ const ModuleStatistics = () => {
         currentPage={module ? module[1] : "404"}
         currentType={type == "CODING" ? type : type + "S"}
       />
-      <div className=" background-color absolute mt-12 grid w-full  overflow-x-auto rounded-lg">
+      <div className=" background-color absolute mt-6 grid w-full  overflow-x-auto rounded-lg">
         <div className="flex flex-row items-center space-x-2 justify-self-end pb-4 pr-12 pt-6">
           <div className="h-4 w-4 items-center rounded-md bg-emerald-300 dark:bg-emerald-900"></div>
           <p className="text-sm">Finished</p>
@@ -225,7 +225,6 @@ const ModuleStatistics = () => {
           </tbody>
         </table>
       </div>
-      );
     </>
   );
 };
