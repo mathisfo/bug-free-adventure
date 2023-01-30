@@ -15,7 +15,6 @@
   .text-color {
     @apply text-gray-700 dark:text-white;
   }
-
   .text-color-light {
     @apply text-gray-400 dark:opacity-75;
   }

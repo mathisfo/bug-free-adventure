@@ -1,10 +1,11 @@
 import { type as typeEnum } from "@prisma/client";
 import { useSession } from "next-auth/react";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import ActivityCard from "../../components/ActivityCard";
+import ExerciseCard from "../../components/ExerciseCard";
 import ProgressionGrid from "../../components/ProgressionGrid";
 import Timeline from "../../components/Timeline";
+import TopMenu from "../../components/TopMenu";
 import { Activity } from "../../server/schema/LearnerActivitySchema";
 import { api } from "../../utils/api";
 
@@ -35,15 +36,36 @@ const ModuleStatistics = () => {
   const typeofActivity = (): Activity[] => {
     switch (type) {
       case typeEnum.CHALLENGE: {
-        return learnerAnalytics.activityAnalytics.challenges;
+        return learnerAnalytics.activityAnalytics.challenges.sort(
+          (firstActivity, secondActivity) =>
+            firstActivity.successRate > secondActivity.successRate
+              ? 1
+              : firstActivity.successRate === secondActivity.successRate
+              ? firstActivity.attempts < secondActivity.attempts
+                ? 1
+                : -1
+              : -1
+        );
       }
 
       case typeEnum.EXAMPLE: {
-        return learnerAnalytics.activityAnalytics.examples;
+        return learnerAnalytics.activityAnalytics.examples.sort(
+          (firstActivity, secondActivity) =>
+            firstActivity.attempts - secondActivity.attempts
+        );
       }
 
       case typeEnum.CODING: {
-        return learnerAnalytics.activityAnalytics.coding;
+        return learnerAnalytics.activityAnalytics.coding.sort(
+          (firstActivity, secondActivity) =>
+            firstActivity.successRate > secondActivity.successRate
+              ? 1
+              : firstActivity.successRate === secondActivity.successRate
+              ? firstActivity.attempts < secondActivity.attempts
+                ? 1
+                : -1
+              : -1
+        );
       }
 
       default: {
@@ -54,46 +76,53 @@ const ModuleStatistics = () => {
 
   if (!type) {
     return (
-      <div className="m-4 grid h-screen grid-cols-2 grid-rows-2">
-        {/* <h1 className='m-2 text-4xl'>{module![1]}</h1> */}
-        <div className="col-start-1 space-y-8 space-x-4 p-14">
-          <div className="text-color mb-4 text-xl font-semibold">
-            Recommended next steps
+      <div>
+        <TopMenu currentPage={module ? module[1] : "404"} />
+        <div className="m-4 grid h-screen grid-cols-2 grid-rows-2">
+          <div className="col-start-1 space-y-8 space-x-4 p-14">
+            <div className="text-color mb-4 text-xl font-semibold">
+              Recommended next steps
+            </div>
+            <Timeline
+              recommendedActivities={[
+                ...activities.challenges,
+                ...activities.coding,
+                ...activities.examples,
+              ].filter(
+                (e) => e.sequencing > 0 && e.relatedTopic === module![1]
+              )}
+            />
           </div>
-          <Timeline
-            recommendedActivities={[
-              ...activities.challenges,
-              ...activities.coding,
-              ...activities.examples,
-            ].filter((e) => e.sequencing > 0 && e.relatedTopic === module![1])}
-          />
-        </div>
 
-        <div className="col-span-2 col-start-1 row-start-2 p-12">
-          <ProgressionGrid />
-        </div>
-        <div className="col-start-2 space-y-4 p-14">
-          <ActivityCard
-            type="Example"
-            bg="bg-gradient-to-r from-[#3c3b95] via-[#44439f] to-[#3c3b95] "
-            boxColor="bg-[#4c4aa2]"
-            fillColor="#ED3695"
-            fillColorDark="#E54799"
-          />
-          <ActivityCard
-            type="Coding"
-            bg="bg-gradient-to-r from-[#5f80f4] via-[#6c8af3] to-[#5f80f4]"
-            boxColor="bg-[#7795f6]"
-            fillColor="#ED3695"
-            fillColorDark="#6BFF93"
-          />
-          <ActivityCard
-            type="Challenge"
-            bg="bg-gradient-to-r from-[#9293cf] via-[#9a9bd0] to-[#9293cf]"
-            boxColor="bg-[#A3a6d8]"
-            fillColor="#ED3695"
-            fillColorDark="#7759EB"
-          />
+          <div className="col-span-2 col-start-1 row-start-2 p-12">
+            <ProgressionGrid />
+          </div>
+          <div className="col-start-2 space-y-4 p-14">
+            <ActivityCard
+              type="example"
+              bg="bg-gradient-to-r from-[#3c3b95] via-[#44439f] to-[#3c3b95] "
+              boxColor="bg-[#4c4aa2]"
+              fillColor="#ED3695"
+              fillColorDark="#E54799"
+              moduleName={module ? module[1] : "404"}
+            />
+            <ActivityCard
+              type="coding"
+              bg="bg-gradient-to-r from-[#5f80f4] via-[#6c8af3] to-[#5f80f4]"
+              boxColor="bg-[#7795f6]"
+              fillColor="#ED3695"
+              fillColorDark="#6BFF93"
+              moduleName={module ? module[1] : "404"}
+            />
+            <ActivityCard
+              type="challenge"
+              bg="bg-gradient-to-r from-[#9293cf] via-[#9a9bd0] to-[#9293cf]"
+              boxColor="bg-[#A3a6d8]"
+              fillColor="#ED3695"
+              fillColorDark="#7759EB"
+              moduleName={module ? module[1] : "404"}
+            />
+          </div>
         </div>
       </div>
     );
@@ -101,16 +130,48 @@ const ModuleStatistics = () => {
 
   return (
     <>
-      <div> {module ? module[1] : "404"}</div>
-      <div>{type + "S"}</div>
-      <Timeline
-        recommendedActivities={[
-          ...activities.challenges,
-          ...activities.coding,
-          ...activities.examples,
-        ].filter((e) => e.sequencing > 0 && e.relatedTopic === module![1])}
+      <TopMenu
+        currentPage={module ? module[1] : "404"}
+        currentType={type == "CODING" ? type : type + "S"}
       />
-      <div className="background-color absolute w-full overflow-x-auto  rounded-lg">
+      <div className=" background-color absolute grid w-full overflow-x-auto  rounded-lg">
+        <div className="flex flex-row items-center space-x-2 justify-self-end pb-4 pr-12 pt-6">
+          <div className="h-4 w-4 items-center rounded-md bg-emerald-300 dark:bg-emerald-900"></div>
+          <p className="text-sm">Finished</p>
+          <div className="h-4 w-4 items-center rounded-md bg-yellow-200 dark:bg-orange-600"></div>
+          <p className="text-sm">Started</p>
+          <div className="h-4 w-4 items-center rounded-md bg-blue-100 dark:bg-[#2F3358]"></div>
+          <p className="text-sm">To do</p>
+        </div>
+        <div className="mx-12 mt-4 grid grid-cols-4 gap-8">
+          {module
+            ? typeofActivity()
+                .filter((activity) => activity.relatedTopic == module[1])
+
+                .map((activity) => {
+                  return (
+                    <a
+                      key={activity.activityName}
+                      target="_blank"
+                      href={
+                        activity.url +
+                        "&usr=" +
+                        session.user?.protusId +
+                        "&grp=NorwayFall2022B&sid=TEST&cid=352"
+                      }
+                      rel="noreferrer"
+                    >
+                      <ExerciseCard
+                        name={activity.activityName}
+                        type={activity.type}
+                        successRate={activity.successRate}
+                        attempts={activity.attempts}
+                      />
+                    </a>
+                  );
+                })
+            : "404"}
+        </div>
         <table className="text-color w-full table-fixed text-left text-sm">
           <thead className="dark:course-card-dark bg-[#F5F5F5] uppercase dark:text-gray-400">
             <tr>

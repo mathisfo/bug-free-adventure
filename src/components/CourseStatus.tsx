@@ -5,7 +5,6 @@ import {
   EllipsisHorizontalCircleIcon,
   XCircleIcon,
 } from "@heroicons/react/24/outline";
-import { type } from "@prisma/client";
 import Link from "next/link";
 import { useState } from "react";
 import { api } from "../utils/api";
@@ -97,7 +96,7 @@ const CourseStatus = () => {
                       ></div>
                     </div>
                     <div className="text-xs">
-                      {module.overallProgress * 100} %
+                      {Math.ceil(module.overallProgress * 100)} %
                     </div>
                   </td>
                 </tr>
@@ -113,7 +112,14 @@ const CourseStatus = () => {
                             <Link
                               href={{
                                 pathname: `Java/${module.name}`,
-                                query: { type: type.EXAMPLE },
+                                query: {
+                                  type:
+                                    activityType == "coding"
+                                      ? activityType.toUpperCase()
+                                      : activityType
+                                          .toUpperCase()
+                                          .slice(0, activityType.length - 1),
+                                },
                               }}
                             >
                               {activityType.charAt(0).toUpperCase() +
@@ -136,7 +142,7 @@ const CourseStatus = () => {
                               ></div>
                             </div>
                             <div className="text-xs">
-                              {module.overallProgress * 100} %
+                              {Math.ceil(module.overallProgress * 100)} %
                             </div>
                           </td>
                         </tr>
