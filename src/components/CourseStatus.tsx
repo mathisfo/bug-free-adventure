@@ -7,6 +7,7 @@ import {
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { useState } from "react";
+import { Activity } from "../server/schema/LearnerActivitySchema";
 import { api } from "../utils/api";
 
 const CourseStatus = () => {
@@ -33,6 +34,8 @@ const CourseStatus = () => {
       </div>
     );
   }
+
+  const activites = learnerAnalytics.activityAnalytics;
 
   const handleClick = (index: number) => {
     setClickedIndex((state: any[]) => ({
@@ -91,7 +94,7 @@ const CourseStatus = () => {
                   <td className="flex flex-row py-4 px-6">
                     <div className="fill-color-light mx-4 h-2 w-2/3 rounded">
                       <div
-                        className={`h-2 rounded bg-blue-400 dark:bg-[#f97316]`}
+                        className={`h-2 rounded bg-blue-400 dark:bg-[#11E64A]`}
                         style={{ width: module.overallProgress * 100 + "%" }}
                       ></div>
                     </div>
@@ -128,21 +131,141 @@ const CourseStatus = () => {
                           </th>
                           <td className="py-4 px-12">
                             <div className="text-color flex flex-row font-bold">
-                              1/
-                              <div className=" font-normal">12 tasks</div>
+                              {
+                                [
+                                  ...activites.challenges,
+                                  ...activites.coding,
+                                  ...activites.examples,
+                                ]
+                                  .filter((act) =>
+                                    act.type === "CODING"
+                                      ? act.type === activityType.toUpperCase()
+                                      : act.type + "S" ===
+                                        activityType.toUpperCase()
+                                  )
+                                  .filter(
+                                    (act: Activity) =>
+                                      act.relatedTopic === module.name
+                                  )
+                                  .filter((act) =>
+                                    act.type == "EXAMPLE"
+                                      ? act.attempts > 0
+                                      : act.successRate > 0
+                                  ).length
+                              }
+                              /
+                              <div className="font-normal">
+                                {
+                                  [
+                                    ...activites.challenges,
+                                    ...activites.coding,
+                                    ...activites.examples,
+                                  ]
+                                    .filter((act) =>
+                                      act.type === "CODING"
+                                        ? act.type ===
+                                          activityType.toUpperCase()
+                                        : act.type + "S" ===
+                                          activityType.toUpperCase()
+                                    )
+                                    .filter(
+                                      (e: Activity) =>
+                                        e.relatedTopic === module.name
+                                    ).length
+                                }{" "}
+                                tasks done{" "}
+                              </div>
                             </div>
                           </td>
                           <td className="flex flex-row py-4 px-6 ">
                             <div className="fill-color-light mx-4 h-2 w-2/3 rounded">
                               <div
-                                className={`h-2 rounded bg-rose-400 dark:bg-[#f97316]`}
+                                className={`h-2 rounded bg-rose-400 dark:bg-[#6BFF93]`}
                                 style={{
-                                  width: module.overallProgress * 100 + "%",
+                                  width:
+                                    ([
+                                      ...activites.challenges,
+                                      ...activites.coding,
+                                      ...activites.examples,
+                                    ]
+                                      .filter((act) =>
+                                        act.type === "CODING"
+                                          ? act.type ===
+                                            activityType.toUpperCase()
+                                          : act.type + "S" ===
+                                            activityType.toUpperCase()
+                                      )
+                                      .filter(
+                                        (e: Activity) =>
+                                          e.relatedTopic === module.name
+                                      )
+                                      .filter((e) =>
+                                        e.type == "EXAMPLE"
+                                          ? e.attempts > 0
+                                          : e.successRate > 0
+                                      ).length /
+                                      [
+                                        ...activites.challenges,
+                                        ...activites.coding,
+                                        ...activites.examples,
+                                      ]
+                                        .filter((act) =>
+                                          act.type === "CODING"
+                                            ? act.type ===
+                                              activityType.toUpperCase()
+                                            : act.type + "S" ===
+                                              activityType.toUpperCase()
+                                        )
+                                        .filter(
+                                          (e: Activity) =>
+                                            e.relatedTopic === module.name
+                                        ).length) *
+                                      100 +
+                                    "%",
                                 }}
                               ></div>
                             </div>
                             <div className="text-xs">
-                              {Math.ceil(module.overallProgress * 100)} %
+                              {Math.ceil(
+                                ([
+                                  ...activites.challenges,
+                                  ...activites.coding,
+                                  ...activites.examples,
+                                ]
+                                  .filter((act) =>
+                                    act.type === "CODING"
+                                      ? act.type === activityType.toUpperCase()
+                                      : act.type + "S" ===
+                                        activityType.toUpperCase()
+                                  )
+                                  .filter(
+                                    (act: Activity) =>
+                                      act.relatedTopic === module.name
+                                  )
+                                  .filter((act) =>
+                                    act.type == "EXAMPLE"
+                                      ? act.attempts > 0
+                                      : act.successRate > 0
+                                  ).length /
+                                  [
+                                    ...activites.challenges,
+                                    ...activites.coding,
+                                    ...activites.examples,
+                                  ]
+                                    .filter((act) =>
+                                      act.type === "CODING"
+                                        ? act.type ===
+                                          activityType.toUpperCase()
+                                        : act.type + "S" ===
+                                          activityType.toUpperCase()
+                                    )
+                                    .filter(
+                                      (e: Activity) =>
+                                        e.relatedTopic === module.name
+                                    ).length) *
+                                  100
+                              )}{" "}
+                              %
                             </div>
                           </td>
                         </tr>

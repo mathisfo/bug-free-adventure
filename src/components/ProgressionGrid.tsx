@@ -1,8 +1,13 @@
+import { useSession } from "next-auth/react";
 import { useState } from "react";
 import { Activity } from "../server/schema/LearnerActivitySchema";
 import { api } from "../utils/api";
 
-const ProgressionGrid = () => {
+interface ProgressionGridInterface {
+  currentPage?: string;
+}
+const ProgressionGrid = (props: ProgressionGridInterface) => {
+  const { data: session, status } = useSession();
   const [isShowing, setIsShowing] = useState<Activity | null>();
   console.log("SHOW", isShowing);
 
@@ -17,6 +22,10 @@ const ProgressionGrid = () => {
   } = api.learnerActivityRouter.getLearnerActivity.useQuery();
 
   if (isLoading || !isSuccess) return <div>Loading..</div>;
+
+  if (status === "unauthenticated" || !session?.user) {
+    return <div>Unauthorized</div>;
+  }
 
   const boxStyling =
     "w-10 h-10 items-center rounded-md cursor-pointer hover:scale-105 transition duration-300 ease-in-out";
@@ -37,15 +46,25 @@ const ProgressionGrid = () => {
         </p>
         <div className="col-start-2 flex flex-row space-x-1">
           {modules.activityAnalytics.examples
-            .filter((e) => e.relatedTopic == "Strings")
+            .filter((e) => e.relatedTopic == props.currentPage)
             .map((item) => (
-              <>
+              <a
+                target="_blank"
+                href={
+                  item.url +
+                  "&usr=" +
+                  session.user?.protusId +
+                  "&grp=NorwayFall2022B&sid=TEST&cid=352"
+                }
+                rel="noreferrer"
+                key={item.activityId}
+              >
                 <div
                   key={item.activityName}
                   onMouseEnter={() => handleHover(item)}
                   onMouseLeave={() => setIsShowing(null)}
                   className={`${boxStyling} ${
-                    item.successRate === 1
+                    item.attempts > 0
                       ? "bg-green-400 dark:bg-green-500"
                       : item.successRate === 0 && item.visited
                       ? "bg-green-200 dark:bg-green-300"
@@ -60,27 +79,37 @@ const ProgressionGrid = () => {
                     </div>
                   )}
                 </div>
-              </>
+              </a>
             ))}
         </div>
       </div>
       <div className="row-start-3 flex  items-center gap-6">
         <p className="text-color col-start-1 w-24 text-end text-sm font-semibold uppercase">
-          Coding
+          Challenges
         </p>
         <div className=" col-start-2 flex flex-row space-x-1">
-          {modules.activityAnalytics.coding
-            .filter((e) => e.relatedTopic == "Strings")
+          {modules.activityAnalytics.challenges
+            .filter((e) => e.relatedTopic == props.currentPage)
             .map((item) => (
-              <>
+              <a
+                target="_blank"
+                href={
+                  item.url +
+                  "&usr=" +
+                  session.user?.protusId +
+                  "&grp=NorwayFall2022B&sid=TEST&cid=352"
+                }
+                rel="noreferrer"
+                key={item.activityId}
+              >
                 <div
                   key={item.activityName}
                   onMouseEnter={() => handleHover(item)}
                   onMouseLeave={() => setIsShowing(null)}
                   className={`${boxStyling} ${
-                    item.successRate === 1
+                    item.successRate > 0
                       ? "bg-green-400 dark:bg-green-500"
-                      : item.successRate === 0 && item.visited
+                      : item.successRate === 0 && item.attempts > 0
                       ? "bg-green-200 dark:bg-green-300"
                       : "bg-gray-200 dark:bg-[#3F485F]"
                   } `}
@@ -93,27 +122,37 @@ const ProgressionGrid = () => {
                     </div>
                   )}
                 </div>
-              </>
+              </a>
             ))}
         </div>
       </div>
       <div className="row-start-4  flex items-center gap-6">
         <p className="text-color col-start-1 w-24 text-end text-sm font-semibold uppercase">
-          Challenges
+          Coding
         </p>
         <div className="col-start-2 flex flex-row space-x-1">
-          {modules.activityAnalytics.challenges
-            .filter((e) => e.relatedTopic == "Strings")
+          {modules.activityAnalytics.coding
+            .filter((e) => e.relatedTopic == props.currentPage)
             .map((item) => (
-              <>
+              <a
+                target="_blank"
+                href={
+                  item.url +
+                  "&usr=" +
+                  session.user?.protusId +
+                  "&grp=NorwayFall2022B&sid=TEST&cid=352"
+                }
+                rel="noreferrer"
+                key={item.activityId}
+              >
                 <div
                   key={item.activityName}
                   onMouseEnter={() => handleHover(item)}
                   onMouseLeave={() => setIsShowing(null)}
                   className={`${boxStyling} ${
-                    item.successRate === 1
+                    item.successRate > 0
                       ? "bg-green-400 dark:bg-green-500"
-                      : item.successRate === 0 && item.visited
+                      : item.successRate === 0 && item.attempts > 0
                       ? "bg-green-200 dark:bg-green-300"
                       : "bg-gray-200 dark:bg-[#3F485F]"
                   } `}
@@ -126,7 +165,7 @@ const ProgressionGrid = () => {
                     </div>
                   )}
                 </div>
-              </>
+              </a>
             ))}
         </div>
       </div>

@@ -14,7 +14,6 @@ import Greeting from "./Greeting";
 import Onboarding from "./onboarding/Onboarding";
 import UIOnboarding from "./onboarding/UIOnboarding";
 import ToggleTheme from "./ToggleTheme";
-
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
