@@ -39,14 +39,16 @@ model Session {
 
 model User {
   id            String    @id @default(cuid())
-  protusId      String?   @unique
-  onBoarded     Boolean   @default(false)
   name          String?
   email         String?   @unique
   emailVerified DateTime?
   image         String?
   createdAt     DateTime?
+  protusId      String?   @unique
   updatedAt     DateTime?
+  onBoarded     Boolean   @default(false)
+  USNEmail      String?
+  leaderboard   Boolean?
   accounts      Account[]
   sessions      Session[]
 }
@@ -80,8 +82,8 @@ model Module {
   order            Int
   id               Int                @id @default(autoincrement())
   courseId         Int
-  relation         Course             @relation(fields: [courseId], references: [id], onDelete: Cascade)
   ActivityResource ActivityResource[]
+  relation         Course             @relation(fields: [courseId], references: [id], onDelete: Cascade)
 }
 
 enum type {

@@ -1,6 +1,6 @@
 import { Label, Radio } from "flowbite-react";
 
-const Step1 = () => {
+const SelectComponents = () => {
   return (
     <fieldset className="flex flex-col gap-4" id="radio">
       <legend>Select your prefered theme</legend>
@@ -16,4 +16,4 @@ const Step1 = () => {
   );
 };
 
-export default Step1;
+export default SelectComponents;
