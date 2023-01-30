@@ -57,6 +57,7 @@ const ProgressionGrid = (props: ProgressionGridInterface) => {
                   "&grp=NorwayFall2022B&sid=TEST&cid=352"
                 }
                 rel="noreferrer"
+                key={item.activityId}
               >
                 <div
                   key={item.activityName}
@@ -99,6 +100,7 @@ const ProgressionGrid = (props: ProgressionGridInterface) => {
                   "&grp=NorwayFall2022B&sid=TEST&cid=352"
                 }
                 rel="noreferrer"
+                key={item.activityId}
               >
                 <div
                   key={item.activityName}
@@ -141,6 +143,7 @@ const ProgressionGrid = (props: ProgressionGridInterface) => {
                   "&grp=NorwayFall2022B&sid=TEST&cid=352"
                 }
                 rel="noreferrer"
+                key={item.activityId}
               >
                 <div
                   key={item.activityName}

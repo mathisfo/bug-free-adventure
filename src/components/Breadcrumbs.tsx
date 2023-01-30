@@ -90,6 +90,7 @@ const TopMenu = (props: TopMenuProps) => {
                         item.toUpperCase()
                       }
                       rel="noreferrer"
+                      key={item}
                     >
                       <Dropdown.Item
                         className={classNames(
