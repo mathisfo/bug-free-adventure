@@ -1,6 +1,7 @@
 import { Prisma } from "@prisma/client";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
+import { onboardingSchema } from "../../schema/UserSchema";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 
 export const userRouter = createTRPCRouter({
@@ -51,6 +52,31 @@ export const userRouter = createTRPCRouter({
           id: ctx.session.user.id,
         },
         data: { name: input.name },
+      });
+    }),
+  finishOnboarding: protectedProcedure.mutation(async ({ ctx }) => {
+    return await ctx.prisma.user.update({
+      where: {
+        id: ctx.session.user.id,
+      },
+      data: { onBoarded: true },
+    });
+  }),
+
+  submitOnboarding: protectedProcedure
+    .input(onboardingSchema)
+    .mutation(async ({ ctx, input }) => {
+      return await ctx.prisma.user.update({
+        where: {
+          id: ctx.session.user.id,
+        },
+        data: {
+          name: input.name,
+          USNEmail: input.USNEmail,
+          protusId: "norway" + input.protusId,
+          leaderboard: input.leaderboard,
+          onBoarded: true,
+        },
       });
     }),
 });

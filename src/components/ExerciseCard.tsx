@@ -1,10 +1,9 @@
 import {
+  CheckCircleIcon,
   CommandLineIcon,
   DocumentTextIcon,
   FlagIcon,
-  CheckCircleIcon,
 } from "@heroicons/react/24/solid";
-import { Activity } from "../server/schema/LearnerActivitySchema";
 
 const ExerciseCard = ({
   name,

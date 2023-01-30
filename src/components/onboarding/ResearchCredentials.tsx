@@ -1,4 +1,4 @@
-const Step2 = () => {
+const ResearchCredentials = () => {
   return (
     <div>
       <h2>Select your components</h2>
@@ -6,4 +6,4 @@ const Step2 = () => {
   );
 };
 
-export default Step2;
+export default ResearchCredentials;
