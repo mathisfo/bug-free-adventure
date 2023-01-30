@@ -20,7 +20,7 @@ const ExerciseCard = ({
     <div
       className={`grid h-72 w-full rounded-xl ${
         successRate > 0 || (attempts > 0 && type == "EXAMPLE")
-          ? `bg-green-200 dark:bg-green-300`
+          ? `lighter-green-color`
           : attempts > 0 && successRate == 0 && type !== "EXAMPLE"
           ? `bg-yellow-100 dark:bg-yellow-200`
           : `course-card`
@@ -41,10 +41,10 @@ const ExerciseCard = ({
         <div
           className={`flex h-28 w-28 flex-row items-stretch rounded-full p-4 ${
             successRate > 0 || (attempts > 0 && type == "EXAMPLE")
-              ? `bg-green-400 dark:bg-green-400`
+              ? `green-color`
               : attempts > 0 && successRate == 0 && type !== "EXAMPLE"
-              ? `bg-yellow-300`
-              : `bg-blue-200 dark:bg-[#1d203a]`
+              ? `bg-[#fecd66]`
+              : `bg-gray-200 dark:bg-[#303335]`
           }`}
         >
           {type == "EXAMPLE" && attempts == 0 ? (

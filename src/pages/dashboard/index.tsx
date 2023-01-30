@@ -17,7 +17,7 @@ const Dashboard: NextPage = () => {
       progress: 20,
       completedTasks: 5,
       allTasks: 25,
-      bg: "second-course-card",
+      bg: "course-card",
       iconColor: "bg-rose-400",
     },
   ];

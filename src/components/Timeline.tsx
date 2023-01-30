@@ -34,15 +34,15 @@ const TimelineWrapper = (props: { recommendedActivities: Activity[] }) => {
             rel="noreferrer"
           >
             {activity.type == "EXAMPLE" ? (
-              <span className="absolute -left-3 flex h-8 w-8 items-center justify-center rounded-full bg-[#3c3b95] ring-8 ring-white dark:bg-[#E54799] dark:bg-blue-900 dark:ring-gray-900">
+              <span className="absolute -left-3 flex h-8 w-8 items-center justify-center rounded-full bg-[#3c3b95] dark:bg-[#DE5B7E]">
                 <DocumentTextIcon className="h-5 w-5 text-white"></DocumentTextIcon>
               </span>
             ) : activity.type == "CODING" ? (
-              <span className="absolute -left-3 flex h-8 w-8 items-center justify-center rounded-full bg-[#5f80f4] ring-8 ring-white dark:bg-[#6BFF93] dark:bg-blue-900 dark:ring-gray-900">
+              <span className="absolute -left-3 flex h-8 w-8 items-center justify-center rounded-full bg-[#5f80f4] dark:bg-[#6BFF93]">
                 <FlagIcon className="h-5 w-5 text-white"></FlagIcon>
               </span>
             ) : (
-              <span className="absolute -left-3 flex h-8 w-8 items-center justify-center rounded-full bg-[#9293cf] ring-8 ring-white dark:bg-[#7759EB] dark:ring-gray-900">
+              <span className="absolute -left-3 flex h-8 w-8 items-center justify-center rounded-full bg-[#988efe]  dark:bg-[#988efe]">
                 <CommandLineIcon className="h-5 w-5 text-white"></CommandLineIcon>
               </span>
             )}

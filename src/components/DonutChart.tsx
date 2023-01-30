@@ -6,13 +6,11 @@ const DonutChart = ({
   size,
   bg,
   fillColor,
-  fillColorDark,
   progress,
 }: {
   size: string;
   bg: string;
   fillColor: string;
-  fillColorDark: string;
   progress: number;
 }) => {
   const { theme } = useTheme();
@@ -46,7 +44,7 @@ const DonutChart = ({
       title: "To go",
       value: `${Math.round(progress)}`,
 
-      color: `${theme == "dark" ? fillColorDark : fillColor}`,
+      color: `${fillColor}`,
     },
   ];
 
@@ -63,7 +61,7 @@ const DonutChart = ({
         label={({ dataEntry }) => dataEntry.value + "%"}
         labelStyle={(index) => ({
           fill: data[index].color,
-          fontSize: "14px",
+          fontSize: "18px",
           fontFamily: "sans-serif",
         })}
         labelPosition={0}

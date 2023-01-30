@@ -16,7 +16,7 @@ const SignIn = () => {
   }
 
   return (
-    <div className="back-layer dark:dark-back-layer fixed h-full w-full ">
+    <div className="fixed h-full w-full bg-gradient-to-r from-indigo-300 to-cyan-500 dark:bg-[#212124] ">
       <div className="mx-auto my-24 h-3/4 w-1/2 rounded-lg bg-white dark:bg-[#292e50]">
         <div className="grid justify-items-end p-8">
           <ToggleTheme />

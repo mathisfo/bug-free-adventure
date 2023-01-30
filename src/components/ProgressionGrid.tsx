@@ -33,11 +33,11 @@ const ProgressionGrid = (props: ProgressionGridInterface) => {
   return (
     <div className="mt-12 grid grid-cols-2 space-y-1">
       <div className="row-start-1 flex flex-row items-center space-x-2 justify-self-end pb-4 pr-4">
-        <div className="h-4 w-4 items-center rounded-md bg-green-400 dark:bg-green-500"></div>
+        <div className="green-color h-4 w-4 items-center rounded-md"></div>
         <p className="text-sm">Finished</p>
-        <div className="h-4 w-4 items-center rounded-md bg-green-200 dark:bg-green-300"></div>
+        <div className="lighter-green-color h-4 w-4 items-center rounded-md"></div>
         <p className="text-sm">Started</p>
-        <div className="h-4 w-4 items-center rounded-md bg-gray-200 dark:bg-[#3F485F]"></div>
+        <div className="h-4 w-4 items-center rounded-md bg-gray-200 dark:bg-[#404143]"></div>
         <p className="text-sm">To do</p>
       </div>
       <div className="row-start-2 flex items-center gap-6">
@@ -65,10 +65,10 @@ const ProgressionGrid = (props: ProgressionGridInterface) => {
                   onMouseLeave={() => setIsShowing(null)}
                   className={`${boxStyling} ${
                     item.attempts > 0
-                      ? "bg-green-400 dark:bg-green-500"
+                      ? "green-color"
                       : item.successRate === 0 && item.visited
-                      ? "bg-green-200 dark:bg-green-300"
-                      : "bg-gray-200 dark:bg-[#3F485F]"
+                      ? "lighter-green-color"
+                      : "bg-gray-200 dark:bg-[#404143]"
                   } `}
                 >
                   {isShowing?.activityName === item.activityName && (
@@ -108,10 +108,10 @@ const ProgressionGrid = (props: ProgressionGridInterface) => {
                   onMouseLeave={() => setIsShowing(null)}
                   className={`${boxStyling} ${
                     item.successRate > 0
-                      ? "bg-green-400 dark:bg-green-500"
+                      ? "green-color"
                       : item.successRate === 0 && item.attempts > 0
-                      ? "bg-green-200 dark:bg-green-300"
-                      : "bg-gray-200 dark:bg-[#3F485F]"
+                      ? "lighter-green-color"
+                      : "bg-gray-200 dark:bg-[#404143]"
                   } `}
                 >
                   {isShowing?.activityName === item.activityName && (
@@ -151,10 +151,10 @@ const ProgressionGrid = (props: ProgressionGridInterface) => {
                   onMouseLeave={() => setIsShowing(null)}
                   className={`${boxStyling} ${
                     item.successRate > 0
-                      ? "bg-green-400 dark:bg-green-500"
+                      ? "green-color"
                       : item.successRate === 0 && item.attempts > 0
-                      ? "bg-green-200 dark:bg-green-300"
-                      : "bg-gray-200 dark:bg-[#3F485F]"
+                      ? "lighter-green-color"
+                      : "bg-gray-200 dark:bg-[#404143]"
                   } `}
                 >
                   {isShowing?.activityName === item.activityName && (
