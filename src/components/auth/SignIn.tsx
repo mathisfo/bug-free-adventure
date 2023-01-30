@@ -63,10 +63,10 @@ const SignIn = () => {
                 Log in
               </Button>
               <Button
-                className="bg-sky-500 from-[#6e69ed] to-[#ab5cfb] dark:bg-gradient-to-tr"
+                className="my-2 bg-sky-500 from-[#6e69ed] to-[#ab5cfb] dark:bg-gradient-to-tr"
                 onClick={() => signIn()}
               >
-                Sign in Providers
+                Sign in with Discord
               </Button>
               <div className="flex flex-row">
                 <p className="text-color pt-5  text-sm">
