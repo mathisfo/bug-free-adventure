@@ -1,4 +1,5 @@
-import { Card, Checkbox, Label, TextInput } from "flowbite-react";
+import { Button, Card, Checkbox, Label, TextInput } from "flowbite-react";
+import { useRouter } from "next/router";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { HiAtSymbol, HiMail, HiUser } from "react-icons/hi";
 import { OnboardingForm } from "../../server/schema/UserSchema";
@@ -6,6 +7,7 @@ import { api } from "../../utils/api";
 
 const UIOnboarding = () => {
   const { register, handleSubmit } = useForm<OnboardingForm>();
+  const router = useRouter();
 
   const mutation = api.userRouter.submitOnboarding.useMutation();
   const ctx = api.useContext();
@@ -14,7 +16,10 @@ const UIOnboarding = () => {
     console.log(data);
 
     mutation.mutate(data, {
-      onSuccess: () => ctx.invalidate(),
+      onSuccess: () => {
+        ctx.invalidate();
+        router.reload();
+      },
     });
   };
 
@@ -278,6 +283,13 @@ const UIOnboarding = () => {
         <input
           className="m-inline-flex m-7 justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
           type="submit"
+          value={
+            mutation.isLoading
+              ? "Loading.."
+              : mutation.isSuccess
+              ? "Success!"
+              : "Loading.."
+          }
         />
       </form>
     </div>
