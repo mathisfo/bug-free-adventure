@@ -5,6 +5,7 @@ import {
   EllipsisHorizontalCircleIcon,
   XCircleIcon,
 } from "@heroicons/react/24/outline";
+import { type as typeEnum } from "@prisma/client";
 import Link from "next/link";
 import { useState } from "react";
 import { Activity } from "../server/schema/LearnerActivitySchema";
@@ -44,6 +45,63 @@ const CourseStatus = () => {
     }));
   };
 
+  const ActivityProgressWithType = (
+    type: string,
+    module: string
+  ): { success: number; total: number; asPercentage: number } => {
+    if (type === "challenges") {
+      const success = activites.challenges
+        .filter((act) => act.relatedTopic === module)
+        .filter((act) => act.successRate > 0).length;
+
+      const total = activites.challenges.filter(
+        (act) => act.relatedTopic === module
+      ).length;
+      return {
+        success: success,
+        total: total,
+        asPercentage: (success / total) * 100,
+      };
+    }
+
+    if (type === "examples") {
+      const success = activites.examples
+        .filter((act) => act.relatedTopic === module)
+        .filter((act) => act.attempts > 0).length;
+
+      console.log(success);
+
+      const total = activites.examples.filter(
+        (act) => act.relatedTopic === module
+      ).length;
+
+      console.log(total);
+
+      return {
+        success: success,
+        total: total,
+        asPercentage: (success / total) * 100,
+      };
+    }
+
+    if (type === "coding") {
+      const success = activites.coding
+        .filter((act) => act.relatedTopic === module)
+        .filter((act) => act.successRate > 0).length;
+
+      const total = activites.coding.filter(
+        (act) => act.relatedTopic === module
+      ).length;
+      return {
+        success: success,
+        total: total,
+        asPercentage: (success / total) * 100,
+      };
+    }
+
+    return { success: 0, total: 0, asPercentage: 0 };
+  };
+
   return (
     <div className="background-color relative w-full  overflow-x-auto rounded-lg">
       <table className="text-color w-full table-fixed text-left text-sm">
@@ -61,14 +119,13 @@ const CourseStatus = () => {
                 <tr
                   key={module.name}
                   className="text-md background-color cursor-pointer border-b hover:bg-gray-50 dark:border-gray-700 hover:dark:bg-[#3F485F] "
-                  // onClick={() => setOpen(!open)}
                   onClick={() => handleClick(index)}
                 >
                   <th className="flex flex-row py-4 px-6">
                     {clickedIndex[index] ? (
-                      <ChevronDownIcon className="text-color mr-2 h-4 w-4"></ChevronDownIcon>
+                      <ChevronDownIcon className="text-color mr-2 h-4 w-4" />
                     ) : (
-                      <ChevronRightIcon className="text-color mr-2 h-4 w-4"></ChevronRightIcon>
+                      <ChevronRightIcon className="text-color mr-2 h-4 w-4" />
                     )}
                     <Link href={`Java/${module.name}`}>{module.name}</Link>
                   </th>
@@ -76,17 +133,17 @@ const CourseStatus = () => {
                   <td className="py-4 px-6">
                     {module.overallProgress == 100 ? (
                       <div className="flex flex-row items-center gap-1">
-                        <CheckCircleIcon className="h-5 w-5 text-emerald-400 dark:text-green-400"></CheckCircleIcon>
+                        <CheckCircleIcon className="h-5 w-5 text-emerald-400 dark:text-green-400" />
                         Done
                       </div>
                     ) : module.overallProgress > 0 ? (
                       <div className="flex flex-row items-center gap-1">
-                        <EllipsisHorizontalCircleIcon className="h-5 w-5 text-blue-400 dark:text-[#6f69ee]"></EllipsisHorizontalCircleIcon>
+                        <EllipsisHorizontalCircleIcon className="h-5 w-5 text-blue-400 dark:text-[#6f69ee]" />
                         In progress
                       </div>
                     ) : (
                       <div className="flex flex-row items-center gap-1">
-                        <XCircleIcon className="dark:test-rose-500 h-5 w-5 text-rose-400"></XCircleIcon>
+                        <XCircleIcon className="dark:test-rose-500 h-5 w-5 text-rose-400" />
                         Not started
                       </div>
                     )}
@@ -116,12 +173,7 @@ const CourseStatus = () => {
                               href={{
                                 pathname: `Java/${module.name}`,
                                 query: {
-                                  type:
-                                    activityType == "coding"
-                                      ? activityType.toUpperCase()
-                                      : activityType
-                                          .toUpperCase()
-                                          .slice(0, activityType.length - 1),
+                                  type: activityType,
                                 },
                               }}
                             >
@@ -132,46 +184,18 @@ const CourseStatus = () => {
                           <td className="py-4 px-12">
                             <div className="text-color flex flex-row font-bold">
                               {
-                                [
-                                  ...activites.challenges,
-                                  ...activites.coding,
-                                  ...activites.examples,
-                                ]
-                                  .filter((act) =>
-                                    act.type === "CODING"
-                                      ? act.type === activityType.toUpperCase()
-                                      : act.type + "S" ===
-                                        activityType.toUpperCase()
-                                  )
-                                  .filter(
-                                    (act: Activity) =>
-                                      act.relatedTopic === module.name
-                                  )
-                                  .filter((act) =>
-                                    act.type == "EXAMPLE"
-                                      ? act.attempts > 0
-                                      : act.successRate > 0
-                                  ).length
+                                ActivityProgressWithType(
+                                  activityType,
+                                  module.name
+                                ).success
                               }
                               /
                               <div className="font-normal">
                                 {
-                                  [
-                                    ...activites.challenges,
-                                    ...activites.coding,
-                                    ...activites.examples,
-                                  ]
-                                    .filter((act) =>
-                                      act.type === "CODING"
-                                        ? act.type ===
-                                          activityType.toUpperCase()
-                                        : act.type + "S" ===
-                                          activityType.toUpperCase()
-                                    )
-                                    .filter(
-                                      (e: Activity) =>
-                                        e.relatedTopic === module.name
-                                    ).length
+                                  ActivityProgressWithType(
+                                    activityType,
+                                    module.name
+                                  ).total
                                 }{" "}
                                 tasks done{" "}
                               </div>
@@ -182,87 +206,23 @@ const CourseStatus = () => {
                               <div
                                 className={`h-2 rounded bg-rose-400 dark:bg-[#6BFF93]`}
                                 style={{
-                                  width:
-                                    ([
-                                      ...activites.challenges,
-                                      ...activites.coding,
-                                      ...activites.examples,
-                                    ]
-                                      .filter((act) =>
-                                        act.type === "CODING"
-                                          ? act.type ===
-                                            activityType.toUpperCase()
-                                          : act.type + "S" ===
-                                            activityType.toUpperCase()
-                                      )
-                                      .filter(
-                                        (e: Activity) =>
-                                          e.relatedTopic === module.name
-                                      )
-                                      .filter((e) =>
-                                        e.type == "EXAMPLE"
-                                          ? e.attempts > 0
-                                          : e.successRate > 0
-                                      ).length /
-                                      [
-                                        ...activites.challenges,
-                                        ...activites.coding,
-                                        ...activites.examples,
-                                      ]
-                                        .filter((act) =>
-                                          act.type === "CODING"
-                                            ? act.type ===
-                                              activityType.toUpperCase()
-                                            : act.type + "S" ===
-                                              activityType.toUpperCase()
-                                        )
-                                        .filter(
-                                          (e: Activity) =>
-                                            e.relatedTopic === module.name
-                                        ).length) *
-                                      100 +
-                                    "%",
+                                  width: ActivityProgressWithType(
+                                    activityType,
+                                    module.name
+                                  ).asPercentage,
                                 }}
                               ></div>
                             </div>
                             <div className="text-xs">
                               {Math.ceil(
-                                ([
-                                  ...activites.challenges,
-                                  ...activites.coding,
-                                  ...activites.examples,
-                                ]
-                                  .filter((act) =>
-                                    act.type === "CODING"
-                                      ? act.type === activityType.toUpperCase()
-                                      : act.type + "S" ===
-                                        activityType.toUpperCase()
-                                  )
-                                  .filter(
-                                    (act: Activity) =>
-                                      act.relatedTopic === module.name
-                                  )
-                                  .filter((act) =>
-                                    act.type == "EXAMPLE"
-                                      ? act.attempts > 0
-                                      : act.successRate > 0
-                                  ).length /
-                                  [
-                                    ...activites.challenges,
-                                    ...activites.coding,
-                                    ...activites.examples,
-                                  ]
-                                    .filter((act) =>
-                                      act.type === "CODING"
-                                        ? act.type ===
-                                          activityType.toUpperCase()
-                                        : act.type + "S" ===
-                                          activityType.toUpperCase()
-                                    )
-                                    .filter(
-                                      (e: Activity) =>
-                                        e.relatedTopic === module.name
-                                    ).length) *
+                                (ActivityProgressWithType(
+                                  activityType,
+                                  module.name
+                                ).success /
+                                  ActivityProgressWithType(
+                                    activityType,
+                                    module.name
+                                  ).total) *
                                   100
                               )}{" "}
                               %
