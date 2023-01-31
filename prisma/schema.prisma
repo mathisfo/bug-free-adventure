@@ -38,19 +38,33 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String            @id @default(cuid())
   name          String?
-  email         String?   @unique
+  email         String?           @unique
   emailVerified DateTime?
   image         String?
   createdAt     DateTime?
-  protusId      String?   @unique
+  protusId      String?           @unique
   updatedAt     DateTime?
-  onBoarded     Boolean   @default(false)
+  onBoarded     Boolean           @default(false)
   USNEmail      String?
   leaderboard   Boolean?
   accounts      Account[]
   sessions      Session[]
+  history       ExerciseHistory[]
+}
+
+model ExerciseHistory {
+  historyId String @id @default(cuid())
+
+  visitedAt   DateTime
+  completedAt DateTime
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  activityResourceId String           @unique
+  ActivityResource   ActivityResource @relation(fields: [activityResourceId], references: [id])
 }
 
 model VerificationToken {
@@ -63,25 +77,26 @@ model VerificationToken {
 
 model Course {
   courseName String
-  id         Int      @id @default(autoincrement())
+  id         String   @id @default(cuid())
   modules    Module[]
 }
 
 model ActivityResource {
-  type       type
-  name       String
-  url        String
-  id         Int    @id @default(autoincrement())
-  moduleId   Int
-  activityId String @unique
-  relation   Module @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+  type        type
+  name        String
+  url         String
+  id          String            @id @default(cuid())
+  moduleId    String
+  activityId  String            @unique
+  relation    Module            @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+  userHistory ExerciseHistory[]
 }
 
 model Module {
   moduleName       String
   order            Int
-  id               Int                @id @default(autoincrement())
-  courseId         Int
+  id               String             @id @default(cuid())
+  courseId         String
   ActivityResource ActivityResource[]
   relation         Course             @relation(fields: [courseId], references: [id], onDelete: Cascade)
 }

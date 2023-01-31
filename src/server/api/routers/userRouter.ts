@@ -79,4 +79,16 @@ export const userRouter = createTRPCRouter({
         },
       });
     }),
+  getExerciseHistoryOnUser: protectedProcedure
+    .input(z.object({ userId: z.string() }))
+    .query(async ({ ctx, input }) => {
+      return await ctx.prisma.exerciseHistory.findMany({
+        where: {
+          userId: input.userId,
+        },
+        include: {
+          ActivityResource: true,
+        },
+      });
+    }),
 });
