@@ -58,7 +58,7 @@ const Courses = () => {
               bg="#d1d5db"
               fillColor="#988efe"
               progress={overallProgress()}
-            />
+            ></DonutChart>
           </div>
         </div>
         <CourseStatus />

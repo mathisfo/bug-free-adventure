@@ -31,14 +31,6 @@ const DonutChart = ({
     );
   }
 
-  /*   const overallProgress = () => {
-    return learnerAnalytics.moduleAnalytics
-      .map((e) => e.overallProgress)
-      .reduce((acc, val) => {
-        return acc + (val / learnerAnalytics.moduleAnalytics.length) * 100;
-      }, 0);
-  }; */
-
   const data: any = [
     {
       title: "To go",
