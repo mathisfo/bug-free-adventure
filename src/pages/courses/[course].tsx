@@ -3,11 +3,8 @@ import CourseStatus from "../../components/CourseStatus";
 import DonutChart from "../../components/DonutChart";
 import TopMenu from "../../components/Breadcrumbs";
 import { api } from "../../utils/api";
-import { useSession } from "next-auth/react";
 
 const Courses = () => {
-  const { data: session, status } = useSession();
-
   const {
     data: learnerAnalytics,
     isSuccess,

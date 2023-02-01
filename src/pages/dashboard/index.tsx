@@ -1,6 +1,7 @@
 import { NextPage } from "next/types";
 import Assignments from "../../components/Assignments";
 import CourseCard from "../../components/CourseCard";
+import ExerciseHistory from "../../components/home/ExerciseHistory";
 
 const Dashboard: NextPage = () => {
   const courses = [
@@ -24,7 +25,7 @@ const Dashboard: NextPage = () => {
 
   return (
     <div>
-      <div className="background-color col-span-4 mr-4 h-full rounded-r-lg p-16 ">
+      <div className="background-color col-span-4 mr-4 h-screen rounded-r-lg p-16 ">
         <div className="text-color mb-4 text-xl font-semibold">My courses</div>
         <div className="flex flex-row">
           {courses.map((course) => {
@@ -42,9 +43,9 @@ const Dashboard: NextPage = () => {
           })}
         </div>
         <div className="text-color mt-8 mb-4 text-lg font-semibold">
-          My assignments
+          History
         </div>
-        <Assignments />
+        <ExerciseHistory />
       </div>
     </div>
   );

@@ -35,7 +35,7 @@ const ModuleStatistics = () => {
 
   const typeofActivity = (): Activity[] => {
     switch (type) {
-      case typeEnum.CHALLENGE: {
+      case "challenges": {
         return learnerAnalytics.activityAnalytics.challenges.sort(
           (firstActivity, secondActivity) =>
             firstActivity.successRate > secondActivity.successRate
@@ -48,14 +48,14 @@ const ModuleStatistics = () => {
         );
       }
 
-      case typeEnum.EXAMPLE: {
+      case "examples": {
         return learnerAnalytics.activityAnalytics.examples.sort(
           (firstActivity, secondActivity) =>
             firstActivity.attempts - secondActivity.attempts
         );
       }
 
-      case typeEnum.CODING: {
+      case "coding": {
         return learnerAnalytics.activityAnalytics.coding.sort(
           (firstActivity, secondActivity) =>
             firstActivity.successRate > secondActivity.successRate

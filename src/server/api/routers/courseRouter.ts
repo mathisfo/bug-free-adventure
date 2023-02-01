@@ -1,6 +1,6 @@
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
-import { createTRPCRouter, publicProcedure } from "../trpc";
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 
 export const courseRouter = createTRPCRouter({
   getCourses: publicProcedure.query(async ({ ctx }) => {
@@ -30,7 +30,7 @@ export const courseRouter = createTRPCRouter({
   getActivityResourcesOnModuleId: publicProcedure
     .input(
       z.object({
-        moduleId: z.number(),
+        moduleId: z.string(),
       })
     )
     .query(async ({ ctx, input }) => {
