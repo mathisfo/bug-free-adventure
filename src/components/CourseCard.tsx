@@ -57,7 +57,7 @@ const CourseCard = (props: ActivityCardProps) => {
   return (
     <div
       onClick={(e) => onClick("/courses/Java", e)}
-      className={`mr-4 w-2/5 cursor-pointer rounded-lg bg-white p-2 transition duration-300 ease-in-out hover:scale-105`}
+      className={`course-card mr-4 w-2/5 cursor-pointer rounded-lg p-2 transition duration-300 ease-in-out hover:scale-105`}
     >
       <div className="my-4 ml-4 flex flex-row items-center">
         <div
@@ -84,7 +84,7 @@ const CourseCard = (props: ActivityCardProps) => {
       <div className="mb-4 flex w-full flex-row items-center">
         <div className="fill-color-light mx-4  h-2 w-4/5 rounded">
           <div
-            className={`h-2 rounded  bg-[#627bfc] dark:bg-[#f97316]`}
+            className={`green-color h-2  rounded`}
             style={{ width: (exercisesDone / allExercises) * 100 + "%" }}
           ></div>
         </div>

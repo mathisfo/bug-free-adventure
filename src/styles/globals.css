@@ -9,6 +9,12 @@
   .sidebar-color {
     @apply bg-white dark:bg-[#26272A];
   }
+  .signin-background {
+    @apply dark:signin-background-dark bg-gradient-to-r from-indigo-300 to-cyan-500;
+  }
+  .signin-background-dark {
+    @apply bg-gradient-to-r from-[#2a2d2f] to-[#2a2d2f];
+  }
   .text-color {
     @apply text-gray-700 dark:text-white;
   }
