@@ -89,13 +89,13 @@ const SignIn = () => {
               type="email"
               id="email"
               onChange={(event) => setEmail(event.target.value)}
-              className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-slate-300 dark:border-gray-600 dark:bg-slate-50 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+              className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-zinc-600 dark:bg-[#303335] dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
               placeholder=""
               required
             ></input>
             <div className="mt-4 grid justify-items-center">
               <Button
-                className="bg-sky-500 from-[#6e69ed] to-[#ab5cfb] dark:bg-gradient-to-tr"
+                className="bg-[#988efe]"
                 onClick={() =>
                   resetPassword("email", {
                     email: email,
@@ -119,13 +119,13 @@ const SignIn = () => {
               type="email"
               id="email"
               onChange={(event) => setEmail(event.target.value)}
-              className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-slate-300 dark:border-gray-600 dark:bg-slate-50 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+              className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-zinc-600 dark:bg-[#303335] dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
               placeholder=""
               required
             ></input>
             <div className="mt-4 grid justify-items-center">
               <Button
-                className="bg-sky-500 from-[#6e69ed] to-[#ab5cfb] dark:bg-gradient-to-tr"
+                className="bg-[#988efe]"
                 onClick={() =>
                   signIn("email", {
                     email: email,
