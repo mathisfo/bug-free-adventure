@@ -4,13 +4,7 @@ import { list } from "postcss";
 import { Activity } from "../server/schema/LearnerActivitySchema";
 import { api } from "../utils/api";
 
-interface ActivityCardProps {
-  type: string;
-  bg: string;
-  fillColor: string;
-  moduleName?: string;
-}
-const CourseCard = (props: ActivityCardProps) => {
+const CourseCard = () => {
   const router = useRouter();
 
   const {

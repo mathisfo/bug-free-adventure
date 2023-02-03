@@ -48,15 +48,7 @@ const Dashboard: NextPage = () => {
         </div>
         <div className="flex flex-row">
           {courses.map((course) => {
-            return (
-              <CourseCard
-                key={course.course}
-                course={course.course}
-                progress={course.progress}
-                completedTasks={course.completedTasks}
-                allTasks={course.allTasks}
-              ></CourseCard>
-            );
+            return <CourseCard></CourseCard>;
           })}
         </div>
         <div className="text-color mt-8 mb-4 text-lg font-semibold">
