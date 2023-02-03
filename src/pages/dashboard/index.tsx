@@ -29,17 +29,6 @@ const Dashboard: NextPage = () => {
 
   const activities = learnerAnalytics.activityAnalytics;
 
-  const courses = [
-    {
-      course: "Java",
-      progress: 45,
-      completedTasks: 7,
-      allTasks: 23,
-      bg: "course-card",
-      iconColor: "bg-blue-400",
-    },
-  ];
-
   return (
     <div>
       <div className="background-color col-span-4 mr-4 h-screen rounded-r-lg p-16 ">
@@ -47,9 +36,7 @@ const Dashboard: NextPage = () => {
           My courses
         </div>
         <div className="flex flex-row">
-          {courses.map((course) => {
-            return <CourseCard></CourseCard>;
-          })}
+          <CourseCard />
         </div>
         <div className="text-color mt-8 mb-4 text-lg font-semibold">
           History
