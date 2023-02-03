@@ -2,9 +2,19 @@ import { Prisma } from "@prisma/client";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 import { onboardingSchema } from "../../schema/UserSchema";
-import { createTRPCRouter, protectedProcedure } from "../trpc";
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 
 export const userRouter = createTRPCRouter({
+  getLeaderBoard: publicProcedure.query(async ({ ctx }) => {
+    return await ctx.prisma.user.findMany({
+      where: {
+        leaderboard: true,
+      },
+      include: {
+        history: true,
+      },
+    });
+  }),
   getUserInfo: protectedProcedure
     .input(
       z.object({
