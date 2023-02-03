@@ -64,7 +64,7 @@ model ExerciseHistory {
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   activityResourceId String           @unique
-  ActivityResource   ActivityResource @relation(fields: [activityResourceId], references: [id])
+  ActivityResource   ActivityResource @relation(fields: [activityResourceId], references: [activityId])
 }
 
 model VerificationToken {

@@ -91,4 +91,16 @@ export const userRouter = createTRPCRouter({
         },
       });
     }),
+  addExerciseHistoryToUser: protectedProcedure
+    .input(z.object({ activityId: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      return await ctx.prisma.exerciseHistory.create({
+        data: {
+          userId: ctx.session.user.id,
+          activityResourceId: input.activityId,
+          visitedAt: new Date(),
+          completedAt: new Date(),
+        },
+      });
+    }),
 });

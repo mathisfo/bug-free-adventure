@@ -5,9 +5,13 @@ import ActivityCard from "../../components/ActivityCard";
 import ExerciseCard from "../../components/ExerciseCard";
 import ProgressionGrid from "../../components/ProgressionGrid";
 import Timeline from "../../components/Timeline";
-import { Activity } from "../../server/schema/LearnerActivitySchema";
+import {
+  Activity,
+  ActivityAnalytics,
+} from "../../server/schema/LearnerActivitySchema";
 import { api } from "../../utils/api";
 import Breadcrumbs from "../../components/Breadcrumbs";
+import { useEffect, useState } from "react";
 
 const ModuleStatistics = () => {
   const {
@@ -17,6 +21,37 @@ const ModuleStatistics = () => {
   } = api.learnerActivityRouter.getLearnerActivity.useQuery();
 
   const { data: session, status } = useSession();
+
+  const mutation = api.userRouter.addExerciseHistoryToUser.useMutation();
+
+  const [previousData, setPreviousData] =
+    useState<typeof learnerAnalytics>(undefined);
+
+  const [selectedActivity, setSelectedActivity] = useState<string | undefined>(
+    undefined
+  );
+
+  useEffect(() => {
+    if (learnerAnalytics && previousData) {
+      const selected = learnerAnalytics.activityAnalytics.challenges.find(
+        (act) => act.activityId === selectedActivity
+      );
+      const dataPrevious = previousData.activityAnalytics.challenges.find(
+        (act) => act.activityId === selectedActivity
+      );
+
+      if (selected && dataPrevious) {
+        if (
+          dataPrevious.successRate === 0 &&
+          selected.successRate > 0 &&
+          selectedActivity
+        ) {
+          mutation.mutate({ activityId: selectedActivity });
+        }
+      }
+    }
+    setPreviousData(learnerAnalytics);
+  }, [learnerAnalytics, mutation, previousData, selectedActivity]);
 
   const router = useRouter();
 
@@ -126,7 +161,7 @@ const ModuleStatistics = () => {
     <>
       <Breadcrumbs
         currentPage={module ? module[1] : "404"}
-        currentType={type as string}
+        currentType={type == "CODING" ? type : type + "S"}
       />
       <div className=" background-color absolute mt-6 grid w-full  overflow-x-auto rounded-lg">
         <div className="flex flex-row items-center space-x-2 justify-self-end pb-4 pr-12 pt-6">
@@ -153,6 +188,7 @@ const ModuleStatistics = () => {
                         session.user?.protusId +
                         "&grp=NorwayFall2022B&sid=TEST&cid=352"
                       }
+                      onClick={() => setSelectedActivity(activity.activityId)}
                       rel="noreferrer"
                     >
                       <ExerciseCard
