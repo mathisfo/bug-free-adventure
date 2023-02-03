@@ -4,13 +4,16 @@
 
 @layer components {
   .background-color {
-    @apply bg-white dark:bg-[#141627];
+    @apply bg-[#f9f9fb] dark:bg-[#2a2d2f];
   }
-  .sidebar-background-color {
-    @apply dark:sidebar-dark bg-white;
+  .sidebar-color {
+    @apply bg-white dark:bg-[#26272A];
   }
-  .sidebar-dark {
-    @apply bg-gradient-to-tr from-[#2D1735] via-[#20233D] to-[#20233D];
+  .signin-background {
+    @apply dark:signin-background-dark bg-gradient-to-r from-indigo-300 to-cyan-500;
+  }
+  .signin-background-dark {
+    @apply bg-gradient-to-r from-[#2a2d2f] to-[#2a2d2f];
   }
   .text-color {
     @apply text-gray-700 dark:text-white;
@@ -19,25 +22,19 @@
     @apply text-gray-400 dark:opacity-75;
   }
   .fill-color-light {
-    @apply bg-gray-200 dark:bg-gray-400;
+    @apply bg-gray-200 dark:bg-[#404143];
   }
   .back-layer {
     @apply dark:dark-back-layer bg-gradient-to-r from-indigo-300 to-cyan-500;
   }
   .dark-back-layer {
-    @apply bg-gradient-to-tr from-[#141627] to-[#232745];
+    @apply bg-gradient-to-r from-[#1C1C1F] to-[#1C1C1F];
   }
   .assignment-background {
-    @apply dark:course-card-dark bg-gradient-to-tr from-[#D4D5E5] via-[#DEDFEF] to-[#F4F8FC];
+    @apply bg-gradient-to-tr from-[#D4D5E5] via-[#DEDFEF] to-[#F4F8FC] dark:bg-[#212124];
   }
   .course-card {
-    @apply dark:course-card-dark bg-gradient-to-tr from-[#C7DDFE] via-blue-100 to-[#E4EFFF];
-  }
-  .course-card-dark {
-    @apply bg-gradient-to-tr from-[#1c1f37] to-[#2F3358];
-  }
-  .second-course-card {
-    @apply dark:course-card-dark bg-gradient-to-tr from-[#FED1D3] via-rose-100 to-[#FFEEEF];
+    @apply bg-white dark:bg-[#212124];
   }
   .icon {
     @apply bg-indigo-300 dark:bg-[#6f69ee];
@@ -47,6 +44,27 @@
   }
   .loading {
     @apply bg-[#d1d5db] opacity-25;
+  }
+  .purple-color {
+    @apply bg-[#988efe];
+  }
+  .green-color {
+    @apply bg-[#0de890];
+  }
+  .text-green-color {
+    @apply text-[#0de890];
+  }
+  .lighter-green-color {
+    @apply bg-[#86f4c8];
+  }
+  .text-blue-color {
+    @apply text-[#627bfc];
+  }
+  .text-pink-color {
+    @apply text-[#DE5B7E];
+  }
+  .text-yellow-color {
+    @apply text-[#fecd66];
   }
 }
 

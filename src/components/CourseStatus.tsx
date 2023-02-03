@@ -105,7 +105,7 @@ const CourseStatus = () => {
   return (
     <div className="background-color relative w-full  overflow-x-auto rounded-lg">
       <table className="text-color w-full table-fixed text-left text-sm">
-        <thead className="dark:course-card-dark bg-[#F5F5F5] uppercase dark:text-gray-400">
+        <thead className="bg-[#eaeaea] uppercase dark:bg-[#212124] dark:text-gray-400">
           <tr>
             <th className="py-3 px-6">Module</th>
             <th className="py-3 px-6">Status</th>
@@ -118,10 +118,10 @@ const CourseStatus = () => {
               <>
                 <tr
                   key={module.name}
-                  className="text-md background-color cursor-pointer border-b hover:bg-gray-50 dark:border-gray-700 hover:dark:bg-[#3F485F] "
+                  className="text-md background-color cursor-pointer border-b hover:bg-gray-50 dark:border-zinc-700 hover:dark:bg-[#242427]"
                   onClick={() => handleClick(index)}
                 >
-                  <th className="flex flex-row py-4 px-6">
+                  <th className="flex flex-row py-4 px-6 uppercase">
                     {clickedIndex[index] ? (
                       <ChevronDownIcon className="text-color mr-2 h-4 w-4" />
                     ) : (
@@ -133,25 +133,31 @@ const CourseStatus = () => {
                   <td className="py-4 px-6">
                     {module.overallProgress == 100 ? (
                       <div className="flex flex-row items-center gap-1">
-                        <CheckCircleIcon className="h-5 w-5 text-emerald-400 dark:text-green-400" />
-                        Done
+                        <CheckCircleIcon className="text-green-color h-5 w-5"></CheckCircleIcon>
+                        <p className="font-semibold uppercase opacity-75">
+                          Done
+                        </p>
                       </div>
                     ) : module.overallProgress > 0 ? (
                       <div className="flex flex-row items-center gap-1">
-                        <EllipsisHorizontalCircleIcon className="h-5 w-5 text-blue-400 dark:text-[#6f69ee]" />
-                        In progress
+                        <EllipsisHorizontalCircleIcon className="text-blue-color h-5 w-5"></EllipsisHorizontalCircleIcon>
+                        <p className="font-semibold uppercase opacity-75">
+                          In progress
+                        </p>
                       </div>
                     ) : (
                       <div className="flex flex-row items-center gap-1">
-                        <XCircleIcon className="dark:test-rose-500 h-5 w-5 text-rose-400" />
-                        Not started
+                        <XCircleIcon className="text-pink-color h-5 w-5"></XCircleIcon>
+                        <p className="font-semibold uppercase opacity-75">
+                          Not started
+                        </p>
                       </div>
                     )}
                   </td>
                   <td className="flex flex-row py-4 px-6">
                     <div className="fill-color-light mx-4 h-2 w-2/3 rounded">
                       <div
-                        className={`h-2 rounded bg-blue-400 dark:bg-[#11E64A]`}
+                        className={`green-color h-2 rounded`}
                         style={{ width: module.overallProgress * 100 + "%" }}
                       ></div>
                     </div>
@@ -166,7 +172,7 @@ const CourseStatus = () => {
                       (activityType, index) => (
                         <tr
                           key={index}
-                          className="text-md cursor-pointer border-b bg-[#F5F5F5] hover:bg-gray-50 dark:border-gray-700 dark:bg-[#1c1f37] hover:dark:bg-[#3F485F] "
+                          className="text-md cursor-pointer border-b bg-[#F5F5F5] hover:bg-gray-50 dark:border-zinc-700 dark:bg-[#303335] hover:dark:bg-[#242427]"
                         >
                           <th className="py-4 px-12">
                             <Link
@@ -204,7 +210,7 @@ const CourseStatus = () => {
                           <td className="flex flex-row py-4 px-6 ">
                             <div className="fill-color-light mx-4 h-2 w-2/3 rounded">
                               <div
-                                className={`h-2 rounded bg-rose-400 dark:bg-[#6BFF93]`}
+                                className={`lighter-green-color h-2 rounded`}
                                 style={{
                                   width: ActivityProgressWithType(
                                     activityType,

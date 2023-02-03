@@ -48,9 +48,9 @@ const Sidebar = ({ children }: { children: React.ReactElement }) => {
   const { data: session, status } = useSession();
 
   const menuItemStyling =
-    "text-color hover:text-gray-900 dark:hover:bg-[#503597] dark:hover:text-white hover:bg-indigo-50";
+    "text-color hover:text-gray-900 dark:hover:bg-[#1C1C1F] dark:hover:text-white hover:bg-indigo-50";
   const currentItemStyling =
-    "text-violet-800 dark:text-white bg-indigo-100 dark:bg-[#6f69ee] dark:hover:bg-[#847FF7] hover:text-gray-900 hover:bg-indigo-50";
+    "text-gray-900 dark:text-white bg-indigo-50 dark:bg-[#303335]/75 dark:hover:bg-[#1C1C1F] hover:bg-indigo-100";
 
   if (status === "loading") {
     return <Spinner />;
@@ -65,15 +65,12 @@ const Sidebar = ({ children }: { children: React.ReactElement }) => {
           ) : (
             <div className="back-layer grid grid-cols-5 px-2 pt-2 ">
               <div className="grid-col-1 z-index-2 grid h-screen">
-                <div className="background-color relative rounded-l-lg border-r-4 py-8 dark:border-gray-500 ">
+                <div className="sidebar-color relative rounded-l-lg py-8 dark:border-gray-500 ">
                   <div className="flex flex-shrink-0 justify-center px-2">
                     <Greeting />
                   </div>
                   <div className="mt-5 flex flex-grow flex-col">
-                    <nav
-                      className="background-color flex-1 space-y-1 px-2"
-                      aria-label="Sidebar"
-                    >
+                    <nav className="flex-1 space-y-1 px-2" aria-label="Sidebar">
                       {navigation.map((item) =>
                         !item.children ? (
                           <div key={item.name}>
@@ -87,12 +84,7 @@ const Sidebar = ({ children }: { children: React.ReactElement }) => {
                               )}
                             >
                               <item.icon
-                                className={classNames(
-                                  item.current
-                                    ? "text-violet-800"
-                                    : "text-gray-400 group-hover:text-gray-500",
-                                  "mr-3 h-6 w-6 flex-shrink-0"
-                                )}
+                                className="mr-3 h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
                                 aria-hidden="true"
                               />
                               {item.name}
@@ -146,7 +138,12 @@ const Sidebar = ({ children }: { children: React.ReactElement }) => {
                                       key={subItem.name}
                                       as="a"
                                       href={subItem.href}
-                                      className="group flex w-full items-center rounded-md py-2 pl-11 pr-2 text-sm font-medium text-gray-700 hover:bg-indigo-50 dark:text-gray-400 dark:hover:bg-[#503597] dark:hover:text-white"
+                                      className={classNames(
+                                        item.current
+                                          ? currentItemStyling
+                                          : menuItemStyling,
+                                        "group flex w-full items-center rounded-md py-2 pl-11 pl-2 text-sm font-medium opacity-60"
+                                      )}
                                     >
                                       {subItem.name}
                                     </Disclosure.Button>
@@ -183,7 +180,7 @@ const Sidebar = ({ children }: { children: React.ReactElement }) => {
                     <ToggleTheme />
                   </div>
                 </div>
-                <div className="w-full py-4 ">{children}</div>
+                <div className="w-full">{children}</div>
               </div>
             </div>
           )}

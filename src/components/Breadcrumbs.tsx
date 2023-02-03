@@ -36,17 +36,18 @@ const TopMenu = (props: TopMenuProps) => {
   const types = ["example", "challenge", "coding"];
 
   const currentItemStyling =
-    "text-color uppercase text-sm font-semibold bg-indigo-100 dark:bg-[#6f69ee] dark:hover:bg-[#847FF7]";
-  const menuItemStyling = "text-color uppercase text-sm font-semibold";
+    "text-gray-900 dark:text-white bg-indigo-50 dark:bg-[#303335]/75 dark:hover:bg-[#1C1C1F] hover:bg-indigo-100";
+  const menuItemStyling =
+    "text-color hover:text-gray-900 dark:hover:bg-[#1C1C1F] dark:hover:text-white hover:bg-indigo-50";
 
   function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(" ");
   }
 
   return (
-    <div className="background-color">
+    <div className="background-color mt-2">
       <div className="mx-auto max-w-7xl">
-        <div className="flex h-12 items-center justify-between border-b-2 border-gray-100 py-6 dark:border-gray-500 md:justify-start md:space-x-4">
+        <div className="place-y-0 flex h-12 items-center justify-between py-6 dark:border-gray-500 md:justify-start md:space-x-4">
           <div
             className={classNames(
               router.asPath === "/courses"
@@ -56,7 +57,7 @@ const TopMenu = (props: TopMenuProps) => {
             )}
           >
             <Link href="/courses/Java">
-              <div className="flex flex-row items-center uppercase hover:cursor-pointer">
+              <div className="flex flex-row items-center text-sm font-semibold uppercase hover:cursor-pointer">
                 <ChartBarIcon className="text-color mr-1 h-6 w-6 "></ChartBarIcon>
                 Java
               </div>
@@ -78,7 +79,11 @@ const TopMenu = (props: TopMenuProps) => {
             <div className="text-color flex flex-row items-center text-sm font-semibold uppercase">
               {chevron}
               <div className="pl-4">
-                <Dropdown label={props.currentType} inline={true}>
+                <Dropdown
+                  label={props.currentType}
+                  inline={true}
+                  className="dark:bg-[#26272A]"
+                >
                   {types.map((item) => (
                     <a
                       href={

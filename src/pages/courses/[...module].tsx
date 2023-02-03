@@ -80,7 +80,7 @@ const ModuleStatistics = () => {
         <Breadcrumbs currentPage={module ? module[1] : "404"} />
         <div className="m-4 grid h-screen grid-cols-2 grid-rows-2">
           <div className="col-start-1 space-y-8 space-x-4 p-14">
-            <div className="text-color mb-4 text-xl font-semibold">
+            <div className="text-color mb-4 text-lg font-semibold uppercase opacity-75">
               Recommended next steps
             </div>
             <Timeline
@@ -101,25 +101,19 @@ const ModuleStatistics = () => {
             <ActivityCard
               type="EXAMPLE"
               bg="bg-gradient-to-r from-[#3c3b95] via-[#44439f] to-[#3c3b95] "
-              boxColor="bg-[#4c4aa2]"
-              fillColor="#ED3695"
-              fillColorDark="#E54799"
+              fillColor="#DE5B7E"
               moduleName={module ? module[1] : "404"}
             />
             <ActivityCard
               type="CHALLENGE"
               bg="bg-gradient-to-r from-[#9293cf] via-[#9a9bd0] to-[#9293cf]"
-              boxColor="bg-[#A3a6d8]"
-              fillColor="#ED3695"
-              fillColorDark="#7759EB"
+              fillColor="#988efe"
               moduleName={module ? module[1] : "404"}
             />
             <ActivityCard
               type="CODING"
               bg="bg-gradient-to-r from-[#5f80f4] via-[#6c8af3] to-[#5f80f4]"
-              boxColor="bg-[#7795f6]"
-              fillColor="#ED3695"
-              fillColorDark="#6BFF93"
+              fillColor="#0de890"
               moduleName={module ? module[1] : "404"}
             />
           </div>
@@ -136,14 +130,14 @@ const ModuleStatistics = () => {
       />
       <div className=" background-color absolute mt-6 grid w-full  overflow-x-auto rounded-lg">
         <div className="flex flex-row items-center space-x-2 justify-self-end pb-4 pr-12 pt-6">
-          <div className="h-4 w-4 items-center rounded-md bg-emerald-300 dark:bg-emerald-900"></div>
+          <div className="h-4 w-4 items-center rounded-md bg-green-400 dark:bg-green-400"></div>
           <p className="text-sm">Finished</p>
-          <div className="h-4 w-4 items-center rounded-md bg-yellow-200 dark:bg-orange-600"></div>
+          <div className="h-4 w-4 items-center rounded-md bg-[#fecd66]"></div>
           <p className="text-sm">Started</p>
-          <div className="h-4 w-4 items-center rounded-md bg-blue-100 dark:bg-[#2F3358]"></div>
+          <div className="course-card h-4 w-4 items-center rounded-md"></div>
           <p className="text-sm">To do</p>
         </div>
-        <div className="mx-12 mt-4 grid grid-cols-4 gap-8">
+        <div className="mx-12 my-16 mt-4 grid grid-cols-4 gap-8">
           {module
             ? typeofActivity()
                 .filter((activity) => activity.relatedTopic == module[1])

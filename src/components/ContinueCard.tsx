@@ -18,26 +18,26 @@ const ContinueCard = (props: { recommendedActivities: Activity[] }) => {
   return (
     <div className="space-y-4">
       <div className="course-card grid w-full grid-cols-3 grid-rows-2 rounded-lg px-2">
-        <div className="text-color col-span-2 col-start-1 px-2 pt-2 text-lg">
+        <div className="text-color col-span-2 col-start-1 px-2 pt-2 text-sm font-semibold uppercase opacity-75">
           Continue where you left of
         </div>
         <div className="col-span-2 col-start-1 flex flex-row place-content-between items-center">
-          <div className="text-color p-2 font-semibold">Bais</div>
+          <div className="text-color p-2 text-lg font-semibold">Bais</div>
         </div>
-        <div className="col-start-3 row-span-2 row-start-1 m-2 my-auto flex h-16 w-16 place-self-end rounded-lg bg-[#C7DDFE] dark:bg-[#7d8393]/75">
-          <PlayIcon className="m-auto w-8 cursor-pointer text-gray-700 hover:scale-125 dark:text-[#f97316]"></PlayIcon>
+        <div className="col-start-3 row-span-2 row-start-1 m-2 my-auto flex h-16 w-16 place-self-end rounded-lg bg-[#eaeaea] dark:bg-[#303335]/75">
+          <PlayIcon className="text-yellow-color m-auto w-8 cursor-pointer hover:scale-125"></PlayIcon>
         </div>
       </div>
-      <div className="second-course-card grid w-full grid-cols-3 grid-rows-2 rounded-lg px-2">
-        <div className="text-color col-span-2 col-start-1 px-2 pt-2 text-lg">
+      <div className="course-card grid w-full grid-cols-3 grid-rows-2 rounded-lg px-2">
+        <div className="text-color col-span-2 col-start-1 px-2 pt-2 text-sm font-semibold uppercase opacity-75">
           Continue to recommended exercise
         </div>
         <div className="col-span-2 col-start-1 flex flex-row place-content-between items-center">
-          <div className="text-color px-2 pb-2 font-semibold">
+          <div className="text-color p-2 text-lg font-semibold">
             {props.recommendedActivities[0]?.activityName}
           </div>
         </div>
-        <div className="col-start-3 row-span-2 row-start-1 m-2 my-auto  flex h-16 w-16 items-center place-self-end rounded-lg bg-[#FED1D3] dark:bg-[#7d8393]/75">
+        <div className="col-start-3 row-span-2 row-start-1 m-2 my-auto  flex h-16 w-16 items-center place-self-end rounded-lg bg-[#eaeaea] dark:bg-[#303335]/75">
           <a
             target="_blank"
             href={
@@ -50,7 +50,7 @@ const ContinueCard = (props: { recommendedActivities: Activity[] }) => {
             className="mx-auto"
           >
             {" "}
-            <PlayIcon className="m-auto w-8 cursor-pointer text-gray-700 hover:scale-125 dark:text-[#f97316]"></PlayIcon>
+            <PlayIcon className="text-yellow-color m-auto w-8 cursor-pointer hover:scale-125"></PlayIcon>
           </a>
         </div>
       </div>

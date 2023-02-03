@@ -11,8 +11,20 @@ const Courses = () => {
     isLoading,
   } = api.learnerActivityRouter.getLearnerActivity.useQuery();
 
-  if (isLoading || !isSuccess) {
-    return <div>Loading...</div>;
+  if (!isSuccess || isLoading) {
+    return (
+      <div className="mx-auto mt-32 w-4/5 rounded-md p-4">
+        <div className="flex animate-pulse space-x-4">
+          <div className="flex-1 space-y-6 py-1">
+            <div className="loading h-8 rounded"></div>
+            <div className="loading h-8 rounded"></div>
+            <div className="loading h-8 rounded"></div>
+            <div className="loading h-8 rounded"></div>
+            <div className="loading h-8 rounded"></div>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   const activities = learnerAnalytics.activityAnalytics;
@@ -44,10 +56,9 @@ const Courses = () => {
             <DonutChart
               size="176px"
               bg="#d1d5db"
-              fillColor="#60a5fa"
-              fillColorDark="#11E64A"
+              fillColor="#988efe"
               progress={overallProgress()}
-            />
+            ></DonutChart>
           </div>
         </div>
         <CourseStatus />

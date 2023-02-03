@@ -10,9 +10,7 @@ import DonutChart from "./DonutChart";
 interface ActivityCardProps {
   type: string;
   bg: string;
-  boxColor: string;
   fillColor: string;
-  fillColorDark: string;
   moduleName?: string;
 }
 
@@ -70,8 +68,8 @@ const ActivityCard = (props: ActivityCardProps) => {
   return (
     <div
       className={`${
-        theme == "dark" ? "bg-[#1c1f37]" : props.bg
-      }  grid  w-4/5 grid-cols-5 rounded-lg text-white`}
+        theme == "dark" ? "course-card" : "bg-white"
+      }  text-color  grid w-4/5 grid-cols-5 rounded-lg`}
     >
       <div className="col-span-3 col-start-1 flex flex-row items-baseline space-x-2 p-4 font-semibold">
         <p className="text-6xl">
@@ -86,14 +84,13 @@ const ActivityCard = (props: ActivityCardProps) => {
       </div>
       <div
         className={`${
-          theme == "dark" ? "bg-[#2F3358]" : props.boxColor
+          theme == "dark" ? "bg-[#26272A]" : "bg-gray-200"
         } col-span-2 col-start-4 row-span-2 h-full rounded-lg p-4`}
       >
         <DonutChart
           size="110px"
           bg="white"
           fillColor={props.fillColor}
-          fillColorDark={props.fillColorDark}
           progress={Math.ceil(
             (listOfExercises.filter((e: Activity) =>
               props.type === "EXAMPLE"
@@ -120,7 +117,9 @@ const ActivityCard = (props: ActivityCardProps) => {
           }}
         >
           <div className="flex flex-row hover:cursor-pointer">
-            <p>{"Show all " + props.type.toLowerCase() + "s"}</p>
+            <p className="underline">
+              {"Show all " + props.type.toLowerCase() + "s"}
+            </p>
             <p className="self-center">{chevron}</p>
           </div>
         </Link>

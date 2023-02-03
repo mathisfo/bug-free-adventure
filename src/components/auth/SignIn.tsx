@@ -16,8 +16,8 @@ const SignIn = () => {
   }
 
   return (
-    <div className="back-layer dark:dark-back-layer fixed h-full w-full ">
-      <div className="mx-auto my-24 h-3/4 w-1/2 rounded-lg bg-white dark:bg-[#292e50]">
+    <div className="signin-background fixed h-full w-full">
+      <div className="course-card mx-auto my-24 h-3/4 w-1/2 rounded-lg">
         <div className="grid justify-items-end p-8">
           <ToggleTheme />
         </div>
@@ -32,7 +32,7 @@ const SignIn = () => {
               type="email"
               id="email"
               onChange={(event) => setEmail(event.target.value)}
-              className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-slate-300 dark:border-gray-600 dark:bg-slate-50 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+              className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-zinc-600 dark:bg-[#303335] dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
               placeholder=""
               required
             ></input>
@@ -40,7 +40,7 @@ const SignIn = () => {
             <input
               type="password"
               id="password"
-              className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-slate-300 dark:border-gray-600 dark:bg-slate-50 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+              className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-zinc-600 dark:bg-[#303335] dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
               placeholder=""
               required
             ></input>
@@ -52,7 +52,7 @@ const SignIn = () => {
             </p>
             <div className="mt-4 grid justify-items-center">
               <Button
-                className="bg-sky-500 from-[#6e69ed] to-[#ab5cfb] dark:bg-gradient-to-tr"
+                className="bg-[#988efe]"
                 onClick={() =>
                   signIn("email", {
                     email: email,
@@ -62,11 +62,8 @@ const SignIn = () => {
               >
                 Log in
               </Button>
-              <Button
-                className="bg-sky-500 from-[#6e69ed] to-[#ab5cfb] dark:bg-gradient-to-tr"
-                onClick={() => signIn()}
-              >
-                Sign in Providers
+              <Button className="my-2 bg-[#988efe]" onClick={() => signIn()}>
+                Sign in with Discord
               </Button>
               <div className="flex flex-row">
                 <p className="text-color pt-5  text-sm">
@@ -92,13 +89,13 @@ const SignIn = () => {
               type="email"
               id="email"
               onChange={(event) => setEmail(event.target.value)}
-              className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-slate-300 dark:border-gray-600 dark:bg-slate-50 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+              className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-zinc-600 dark:bg-[#303335] dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
               placeholder=""
               required
             ></input>
             <div className="mt-4 grid justify-items-center">
               <Button
-                className="bg-sky-500 from-[#6e69ed] to-[#ab5cfb] dark:bg-gradient-to-tr"
+                className="bg-[#988efe]"
                 onClick={() =>
                   resetPassword("email", {
                     email: email,
@@ -122,13 +119,13 @@ const SignIn = () => {
               type="email"
               id="email"
               onChange={(event) => setEmail(event.target.value)}
-              className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-slate-300 dark:border-gray-600 dark:bg-slate-50 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+              className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-zinc-600 dark:bg-[#303335] dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
               placeholder=""
               required
             ></input>
             <div className="mt-4 grid justify-items-center">
               <Button
-                className="bg-sky-500 from-[#6e69ed] to-[#ab5cfb] dark:bg-gradient-to-tr"
+                className="bg-[#988efe]"
                 onClick={() =>
                   signIn("email", {
                     email: email,

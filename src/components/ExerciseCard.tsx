@@ -18,23 +18,33 @@ const ExerciseCard = ({
 }) => {
   return (
     <div
-      className={`grid h-72 w-full rounded ${
+      className={`grid h-72 w-full rounded-xl ${
         successRate > 0 || (attempts > 0 && type == "EXAMPLE")
-          ? `bg-emerald-100 dark:bg-emerald-800`
+          ? `lighter-green-color`
           : attempts > 0 && successRate == 0 && type !== "EXAMPLE"
-          ? `bg-yellow-100 dark:bg-orange-400`
+          ? `bg-yellow-100 dark:bg-yellow-200`
           : `course-card`
       }`}
     >
-      <p className="text-color px-4 pt-4 text-lg font-semibold">{name}</p>
+      <p
+        className={`text-color px-4 pt-4 text-lg font-semibold ${
+          successRate > 0 || (attempts > 0 && type == "EXAMPLE")
+            ? `text-slate-800 dark:text-slate-800`
+            : attempts > 0 && successRate == 0 && type !== "EXAMPLE"
+            ? `text-slate-800 dark:text-slate-800`
+            : `text-color`
+        }`}
+      >
+        {name}
+      </p>
       <div className="grid justify-items-center">
         <div
           className={`flex h-28 w-28 flex-row items-stretch rounded-full p-4 ${
             successRate > 0 || (attempts > 0 && type == "EXAMPLE")
-              ? `bg-emerald-300 dark:bg-emerald-900`
+              ? `green-color`
               : attempts > 0 && successRate == 0 && type !== "EXAMPLE"
-              ? `bg-yellow-200 dark:bg-orange-600`
-              : `bg-blue-200 dark:bg-[#1d203a]`
+              ? `bg-[#fecd66]`
+              : `bg-gray-200 dark:bg-[#303335]`
           }`}
         >
           {type == "EXAMPLE" && attempts == 0 ? (
@@ -49,11 +59,31 @@ const ExerciseCard = ({
         </div>
       </div>
       <div className="mx-4 flex flex-row justify-between">
-        <p className="text-color text-sm font-semibold">{type}</p>
+        <p
+          className={`text-color text-sm font-semibold ${
+            successRate > 0 || (attempts > 0 && type == "EXAMPLE")
+              ? `text-slate-800 dark:text-slate-800`
+              : attempts > 0 && successRate == 0 && type !== "EXAMPLE"
+              ? `text-slate-800 dark:text-slate-800`
+              : `text-color`
+          }`}
+        >
+          {type}
+        </p>
         {type == "EXAMPLE" ? (
           <></>
         ) : (
-          <p className="text-color text-sm">{attempts} attempts</p>
+          <p
+            className={`text-color text-sm font-semibold ${
+              successRate > 0 || (attempts > 0 && type == "EXAMPLE")
+                ? `text-slate-800 dark:text-slate-800`
+                : attempts > 0 && successRate == 0 && type !== "EXAMPLE"
+                ? `text-slate-800 dark:text-slate-800`
+                : `text-color`
+            }`}
+          >
+            {attempts} attempts
+          </p>
         )}
       </div>
     </div>
