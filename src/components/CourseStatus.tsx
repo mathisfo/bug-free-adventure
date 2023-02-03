@@ -212,10 +212,11 @@ const CourseStatus = () => {
                               <div
                                 className={`lighter-green-color h-2 rounded`}
                                 style={{
-                                  width: ActivityProgressWithType(
-                                    activityType,
-                                    module.name
-                                  ).asPercentage,
+                                  width:
+                                    ActivityProgressWithType(
+                                      activityType,
+                                      module.name
+                                    ).asPercentage + "%",
                                 }}
                               ></div>
                             </div>
