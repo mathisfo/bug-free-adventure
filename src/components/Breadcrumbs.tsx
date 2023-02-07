@@ -40,10 +40,6 @@ const TopMenu = (props: TopMenuProps) => {
   const menuItemStyling =
     "text-color hover:text-gray-900 dark:hover:bg-[#1C1C1F] dark:hover:text-white hover:bg-indigo-50";
 
-  function classNames(...classes: string[]) {
-    return classes.filter(Boolean).join(" ");
-  }
-
   return (
     <div className="background-color mt-2">
       <div className="mx-auto max-w-7xl">

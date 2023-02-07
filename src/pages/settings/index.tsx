@@ -1,3 +1,5 @@
+import Leaderboard from "../../components/Leaderboard";
+
 const Settings = () => {
   return (
     <div>
