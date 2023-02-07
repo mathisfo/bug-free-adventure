@@ -14,12 +14,14 @@ import Greeting from "./Greeting";
 import Onboarding from "./onboarding/Onboarding";
 import UIOnboarding from "./onboarding/UIOnboarding";
 import ToggleTheme from "./ToggleTheme";
+
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
 const Sidebar = ({ children }: { children: React.ReactElement }) => {
   const router = useRouter();
+  const iconPath = process.env.PUBLIC_URL + "/icons/";
 
   const navigation = [
     {
@@ -32,10 +34,7 @@ const Sidebar = ({ children }: { children: React.ReactElement }) => {
       name: "Courses",
       icon: FolderIcon,
       current: router.asPath === "/courses",
-      children: [
-        { name: "Java", href: "/courses/Java" },
-        { name: "Python", href: "/courses/Python" },
-      ],
+      children: [{ name: "Java", href: "/courses/Java" }],
     },
     {
       name: "Settings",
@@ -52,8 +51,46 @@ const Sidebar = ({ children }: { children: React.ReactElement }) => {
   const currentItemStyling =
     "text-gray-900 dark:text-white bg-indigo-50 dark:bg-[#303335]/75 dark:hover:bg-[#1C1C1F] hover:bg-indigo-100";
 
+  <div className="mx-auto w-full rounded-md p-4">
+    <div className="flex animate-pulse space-x-4">
+      <div className="flex-1 space-y-6 py-1">
+        <div className="loading h-8 rounded"></div>
+        <div className="loading h-8 rounded"></div>
+        <div className="loading h-8 rounded"></div>
+        <div className="loading h-8 rounded"></div>
+        <div className="loading h-8 rounded"></div>
+      </div>
+    </div>
+  </div>;
+
   if (status === "loading") {
-    return <Spinner />;
+    return (
+      <div className="back-layer grid grid-cols-5 px-2 pt-2 ">
+        <div className="grid-col-1 z-index-2 grid h-screen">
+          <div className="sidebar-color relative rounded-l-lg py-8 dark:border-gray-500 ">
+            <div className="mb-12 mt-12 flex justify-center">
+              <img src="/logo.svg" alt="next" className="w-1/3" />
+            </div>
+            <div className="flex justify-center">
+              <div className="loading h-8 w-44 rounded"></div>
+            </div>
+            <div className="mt-5 flex-1 space-y-1 px-4">
+              <div className="loading h-8 rounded"></div>
+              <div className="loading h-8 rounded"></div>
+              <div className="loading h-8 rounded"></div>
+            </div>
+          </div>
+        </div>
+        <div className="grid-col-2 background-color relative col-span-4 grid overflow-auto rounded-r-lg">
+          <div className="absolute right-0 top-4">
+            <div className="mr-8 ">
+              <ToggleTheme />
+            </div>
+          </div>
+          <div className="w-full">{children}</div>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -66,6 +103,9 @@ const Sidebar = ({ children }: { children: React.ReactElement }) => {
             <div className="back-layer grid grid-cols-5 px-2 pt-2 ">
               <div className="grid-col-1 z-index-2 grid h-screen">
                 <div className="sidebar-color relative rounded-l-lg py-8 dark:border-gray-500 ">
+                  <div className="mb-12 mt-6 flex justify-center">
+                    <img src="/logo.svg" alt="next" className="w-1/3" />
+                  </div>
                   <div className="flex flex-shrink-0 justify-center px-2">
                     <Greeting />
                   </div>
