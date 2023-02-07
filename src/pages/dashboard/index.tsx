@@ -2,6 +2,7 @@ import { NextPage } from "next/types";
 import Assignments from "../../components/Assignments";
 import CourseCard from "../../components/CourseCard";
 import ExerciseHistory from "../../components/home/ExerciseHistory";
+import Leaderboard from "../../components/Leaderboard";
 import { api } from "../../utils/api";
 
 const Dashboard: NextPage = () => {
@@ -31,17 +32,27 @@ const Dashboard: NextPage = () => {
 
   return (
     <div>
-      <div className="background-color col-span-4 mr-4 h-screen rounded-r-lg p-16 ">
-        <div className="text-color mb-4 text-xl font-semibold uppercase opacity-75">
-          My courses
+      <div className="background-color mr-4 grid h-screen grid-cols-2 rounded-r-lg p-16 ">
+        <div className="cols-start-1 row-start-1">
+          <div className="text-color mb-4 text-xl font-semibold uppercase opacity-75">
+            My courses
+          </div>
+          <div className="flex w-full flex-row">
+            <CourseCard courseName="java" />
+          </div>
         </div>
-        <div className="flex flex-row">
-          <CourseCard />
+        <div className="cols-start-1 row-start-2">
+          <div className="text-color mb-4 mt-16 text-xl font-semibold uppercase opacity-75">
+            history
+          </div>
+          <ExerciseHistory />
         </div>
-        <div className="text-color mt-8 mb-4 text-lg font-semibold">
-          History
+        <div className="cols-start-2 row-start-1">
+          <div className="text-color mb-4 text-xl font-semibold uppercase opacity-75">
+            leaderboard
+          </div>
+          <Leaderboard />
         </div>
-        <ExerciseHistory />
       </div>
     </div>
   );
