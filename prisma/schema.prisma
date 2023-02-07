@@ -85,9 +85,8 @@ model ActivityResource {
   type        type
   name        String
   url         String
-  id          String            @id @default(cuid())
   moduleId    String
-  activityId  String            @unique
+  activityId  String            @id
   relation    Module            @relation(fields: [moduleId], references: [id], onDelete: Cascade)
   userHistory ExerciseHistory[]
 }

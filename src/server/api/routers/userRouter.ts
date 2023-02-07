@@ -6,13 +6,20 @@ import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 
 export const userRouter = createTRPCRouter({
   getLeaderBoard: publicProcedure.query(async ({ ctx }) => {
-    return await ctx.prisma.user.findMany({
+    const leaderboardUsers = await ctx.prisma.user.findMany({
       where: {
         leaderboard: true,
       },
       include: {
         history: true,
       },
+    });
+
+    return leaderboardUsers.map((user) => {
+      return {
+        name: user.name,
+        score: user.history.length,
+      };
     });
   }),
   getUserInfo: protectedProcedure
@@ -92,7 +99,7 @@ export const userRouter = createTRPCRouter({
   getExerciseHistoryOnUser: protectedProcedure
     .input(z.object({ userId: z.string() }))
     .query(async ({ ctx, input }) => {
-      return await ctx.prisma.exerciseHistory.findMany({
+      const history = await ctx.prisma.exerciseHistory.findMany({
         where: {
           userId: input.userId,
         },
@@ -100,6 +107,7 @@ export const userRouter = createTRPCRouter({
           ActivityResource: true,
         },
       });
+      return history;
     }),
   addExerciseHistoryToUser: protectedProcedure
     .input(z.object({ activityId: z.string() }))
