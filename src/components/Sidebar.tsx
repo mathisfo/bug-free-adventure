@@ -103,7 +103,7 @@ const Sidebar = ({ children }: { children: React.ReactElement }) => {
             <div className="back-layer grid grid-cols-5 px-2 pt-2 ">
               <div className="grid-col-1 z-index-2 grid h-screen">
                 <div className="sidebar-color relative rounded-l-lg py-8 dark:border-gray-500 ">
-                  <div className="mb-12 mt-6 flex justify-center">
+                  <div className="mb-6 mt-6 flex justify-center">
                     <img src="/logo.svg" alt="next" className="w-1/3" />
                   </div>
                   <div className="flex flex-shrink-0 justify-center px-2">
@@ -197,20 +197,18 @@ const Sidebar = ({ children }: { children: React.ReactElement }) => {
                     </nav>
                   </div>
                   <div className="absolute bottom-4 flex w-full flex-shrink-0 border-t border-gray-200 p-4 dark:border-gray-500">
-                    <a href="#" className="group block w-full flex-shrink-0">
-                      <div className="flex items-center space-x-2">
-                        <div>
-                          <UserCircleIcon className="text-color h-8 w-8"></UserCircleIcon>
-                        </div>
-                        <div className="text-color">{session.user?.name}</div>
-                        <div>
-                          <HiOutlineLogout
-                            className="text-color ml-14 h-6 w-6"
-                            onClick={() => signOut()}
-                          ></HiOutlineLogout>
-                        </div>
-                      </div>
-                    </a>
+                    <div className="group block flex w-full flex-shrink-0 flex-row items-center">
+                      <a href="/profile" className="flex flex-row items-center">
+                        <UserCircleIcon className="text-color mr-2 h-8 w-8"></UserCircleIcon>
+
+                        <p className="text-color">{session.user?.name}</p>
+                      </a>
+
+                      <HiOutlineLogout
+                        className="text-color absolute right-4 h-6 w-6 cursor-pointer"
+                        onClick={() => signOut()}
+                      ></HiOutlineLogout>
+                    </div>
                   </div>
                 </div>
               </div>
