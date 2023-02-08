@@ -1278,6 +1278,7 @@ async function main() {
         id: "clduelk2900023b6lbje3n09n",
       },
       {
+        name: "Tester6",
         USNEmail: "test@usn.no",
         protusId: "norway22193",
         leaderboard: true,
