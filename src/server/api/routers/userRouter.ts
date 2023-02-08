@@ -111,6 +111,7 @@ export const userRouter = createTRPCRouter({
           ActivityResource: true,
         },
       });
+
       return history;
     }),
   addExerciseHistoryToUser: protectedProcedure
