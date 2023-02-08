@@ -1,20 +1,26 @@
+import { useSession } from "next-auth/react";
+import { api } from "../utils/api";
+
 const Leaderboard = () => {
   function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(" ");
   }
 
-  const ranking = [
-    { rank: 1, name: "Person", score: 569 },
-    { rank: 2, name: "Person 1", score: 540 },
-    { rank: 3, name: "Person 2", score: 489 },
-    { rank: 4, name: "Person 3", score: 411 },
-    { rank: 5, name: "Person 4", score: 393 },
-    { rank: 6, name: "Person 5", score: 391 },
-    { rank: 7, name: "Person 6", score: 298 },
-    { rank: 8, name: "Person 7", score: 297 },
-    { rank: 9, name: "Person 8", score: 282 },
-    { rank: 10, name: "Person 9", score: 270 },
-  ];
+  const { data: session, status } = useSession();
+
+  const {
+    data: leaderboard,
+    isLoading,
+    isSuccess,
+  } = api.userRouter.getLeaderBoard.useQuery();
+
+  if (isLoading || !isSuccess) {
+    return <div>Loading...</div>;
+  }
+
+  if (status === "loading") {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="relative w-4/5 overflow-x-auto rounded-lg">
@@ -34,29 +40,29 @@ const Leaderboard = () => {
           </tr>
         </thead>
         <tbody>
-          {ranking.map((person) => {
+          {leaderboard.map((person, index) => {
             return (
               <tr
-                key={person.rank}
+                key={index}
                 className="text-color border-t bg-[#F5F5F5] font-semibold dark:border-zinc-700 dark:bg-[#303335] "
               >
                 <td className="grid place-items-center py-2 px-6 text-center">
                   <div
                     className={classNames(
-                      person.rank == 1
+                      index == 0
                         ? `bg-gradient-to-tr from-[#feda15] via-[#feea74] to-[#feda15] dark:text-gray-700`
-                        : person.rank == 2
+                        : index == 1
                         ? `bg-gradient-to-tr from-[#a7b1c9] via-[#dee2e7] to-[#a7b1c9] dark:text-gray-700`
-                        : person.rank == 3
+                        : index == 2
                         ? `bg-gradient-to-tr from-[#d89142] via-[#eaa85f] to-[#d89142] dark:text-gray-700`
                         : ``,
                       "h-5 w-5 rounded-2xl text-center"
                     )}
                   >
-                    {person.rank}
+                    {index + 1}
                   </div>
                 </td>
-                <td className=" py-2 px-6">{person.name}</td>
+                <td className="py-2 px-6">{person.name}</td>
                 <td className=" py-2 px-6 text-center">{person.score}</td>
               </tr>
             );

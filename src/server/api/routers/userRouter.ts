@@ -2,9 +2,30 @@ import { Prisma } from "@prisma/client";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 import { onboardingSchema } from "../../schema/UserSchema";
-import { createTRPCRouter, protectedProcedure } from "../trpc";
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 
 export const userRouter = createTRPCRouter({
+  getLeaderBoard: publicProcedure.query(async ({ ctx }) => {
+    const leaderboardUsers = await ctx.prisma.user.findMany({
+      take: 10,
+      where: {
+        leaderboard: true,
+      },
+      include: {
+        history: true,
+      },
+    });
+
+    return leaderboardUsers
+      .map((user) => {
+        return {
+          name: user.name,
+          userId: user.id,
+          score: user.history.length,
+        };
+      })
+      .sort((a, b) => b.score - a.score);
+  }),
   getUserInfo: protectedProcedure
     .input(
       z.object({
@@ -82,12 +103,25 @@ export const userRouter = createTRPCRouter({
   getExerciseHistoryOnUser: protectedProcedure
     .input(z.object({ userId: z.string() }))
     .query(async ({ ctx, input }) => {
-      return await ctx.prisma.exerciseHistory.findMany({
+      const history = await ctx.prisma.exerciseHistory.findMany({
         where: {
           userId: input.userId,
         },
         include: {
           ActivityResource: true,
+        },
+      });
+      return history;
+    }),
+  addExerciseHistoryToUser: protectedProcedure
+    .input(z.object({ activityId: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      return await ctx.prisma.exerciseHistory.create({
+        data: {
+          userId: ctx.session.user.id,
+          activityResourceId: input.activityId,
+          visitedAt: new Date(),
+          completedAt: new Date(),
         },
       });
     }),

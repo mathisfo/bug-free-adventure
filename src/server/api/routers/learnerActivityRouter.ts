@@ -17,7 +17,7 @@ export const learnerActivityRouter = createTRPCRouter({
 
     const activityResources = await ctx.prisma.activityResource.findMany({
       select: {
-        activityId: true,
+        id: true,
         name: true,
         url: true,
       },

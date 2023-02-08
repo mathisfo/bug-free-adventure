@@ -288,7 +288,7 @@ const UIOnboarding = () => {
               ? "Loading.."
               : mutation.isSuccess
               ? "Success!"
-              : "Loading.."
+              : "Submit"
           }
         />
       </form>
