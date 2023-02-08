@@ -80,7 +80,9 @@ const ActivityCard = (props: ActivityCardProps) => {
             ).length
           }
         </p>
-        <p className="text-2xl lowercase">{props.type + "s"}</p>
+        <p className="text-2xl lowercase">
+          {props.type == "CODING" ? props.type : props.type + "s"}
+        </p>
       </div>
       <div
         className={`${
@@ -112,8 +114,13 @@ const ActivityCard = (props: ActivityCardProps) => {
       <div className="col-span-3 col-start-1 flex flex-row items-center space-x-1 p-4 text-sm">
         <Link
           href={{
-            pathname: `Java/${props.moduleName}/${props.type}`,
-            query: { type: props.type.toUpperCase() },
+            pathname: `Java/${props.moduleName}/${props.type.toLowerCase()}`,
+            query: {
+              type:
+                props.type == "CODING"
+                  ? props.type.toLowerCase()
+                  : props.type.toLowerCase() + "s",
+            },
           }}
         >
           <div className="flex flex-row hover:cursor-pointer">

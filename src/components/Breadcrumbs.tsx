@@ -33,7 +33,7 @@ const TopMenu = (props: TopMenuProps) => {
   const router = useRouter();
   const { type } = router.query;
 
-  const types = ["example", "challenge", "coding"];
+  const types = ["examples", "challenges", "coding"];
 
   const currentItemStyling =
     "text-gray-900 dark:text-white bg-indigo-50 dark:bg-[#303335]/75 dark:hover:bg-[#1C1C1F] hover:bg-indigo-100";
@@ -92,20 +92,19 @@ const TopMenu = (props: TopMenuProps) => {
                         "/" +
                         item +
                         "?type=" +
-                        item.toUpperCase()
+                        item
                       }
                       rel="noreferrer"
                       key={item}
                     >
                       <Dropdown.Item
                         className={classNames(
-                          props.currentType == item.toUpperCase() + "S" ||
-                            props.currentType == item.toUpperCase()
+                          props.currentType == item.toUpperCase()
                             ? currentItemStyling
                             : menuItemStyling
                         )}
                       >
-                        {item.toUpperCase() == "CODING" ? item : item + "S"}
+                        {item.toUpperCase()}
                       </Dropdown.Item>
                     </a>
                   ))}

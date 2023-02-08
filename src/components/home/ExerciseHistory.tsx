@@ -1,18 +1,10 @@
-import {
-  ChevronDownIcon,
-  ChevronRightIcon,
-  CheckCircleIcon,
-  EllipsisHorizontalCircleIcon,
-  XCircleIcon,
-  FlagIcon,
-} from "@heroicons/react/24/outline";
+import { FlagIcon } from "@heroicons/react/24/outline";
 import { ExerciseHistory } from "@prisma/client";
-import { TRPCClientError } from "@trpc/client";
 import { useSession } from "next-auth/react";
-import Link from "next/link";
-import { useState } from "react";
-import { Activity } from "../../server/schema/LearnerActivitySchema";
+import { string, z } from "zod";
 import { api } from "../../utils/api";
+
+type SortedHistory = Array<ExerciseHistory>;
 
 const ExerciseHistoryComp = () => {
   const { data: session, status } = useSession({ required: true });
@@ -21,29 +13,23 @@ const ExerciseHistoryComp = () => {
     return <div>Loading...</div>;
   }
 
-  const { data: history, isLoading } =
-    api.userRouter.getExerciseHistoryOnUser.useQuery({
-      userId: session.user.id,
-    });
+  const {
+    data: history,
+    isLoading,
+    isSuccess,
+  } = api.userRouter.getExerciseHistoryOnUser.useQuery({
+    userId: session.user.id,
+  });
 
-  if (isLoading) {
+  if (isLoading || !isSuccess) {
     return <div>Loading...</div>;
   }
 
-  console.log(history);
-
   return (
     <>
-      {history ? (
+      {history.length > 0 ? (
         <div className="background-color relative col-span-4 mr-4 w-full  overflow-x-auto rounded-r-lg">
           <div className="mb-4 rounded-lg border border-gray-100 bg-gray-50 p-5 dark:border-gray-700 dark:bg-gray-800">
-            {history
-              .sort((a, b) => b.completedAt.valueOf() - a.completedAt.valueOf())
-              .map((hist) => (
-                <div key={hist.historyId}>
-                  <time className="text-lg font-semibold text-gray-900 dark:text-white"></time>
-                </div>
-              ))}
             <time className="text-lg font-semibold text-gray-900 dark:text-white">
               January 13th, 2022
             </time>

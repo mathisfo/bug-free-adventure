@@ -4,13 +4,7 @@ import { list } from "postcss";
 import { Activity } from "../server/schema/LearnerActivitySchema";
 import { api } from "../utils/api";
 
-interface ActivityCardProps {
-  type: string;
-  bg: string;
-  fillColor: string;
-  moduleName?: string;
-}
-const CourseCard = (props: ActivityCardProps) => {
+const CourseCard = ({ courseName }: { courseName: string }) => {
   const router = useRouter();
 
   const {
@@ -66,7 +60,7 @@ const CourseCard = (props: ActivityCardProps) => {
           <CommandLineIcon className="text-white"></CommandLineIcon>
         </div>
         <div className="text-color px-4 py-4 text-2xl font-semibold uppercase">
-          Java
+          {courseName.toUpperCase()}
         </div>
       </div>
       <div className="text-color flex flex-row items-baseline px-4 pt-2 text-lg font-bold">

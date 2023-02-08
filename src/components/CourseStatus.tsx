@@ -5,10 +5,8 @@ import {
   EllipsisHorizontalCircleIcon,
   XCircleIcon,
 } from "@heroicons/react/24/outline";
-import { type as typeEnum } from "@prisma/client";
 import Link from "next/link";
 import { useState } from "react";
-import { Activity } from "../server/schema/LearnerActivitySchema";
 import { api } from "../utils/api";
 
 const CourseStatus = () => {
@@ -212,10 +210,11 @@ const CourseStatus = () => {
                               <div
                                 className={`lighter-green-color h-2 rounded`}
                                 style={{
-                                  width: ActivityProgressWithType(
-                                    activityType,
-                                    module.name
-                                  ).asPercentage,
+                                  width:
+                                    ActivityProgressWithType(
+                                      activityType,
+                                      module.name
+                                    ).asPercentage + "%",
                                 }}
                               ></div>
                             </div>
