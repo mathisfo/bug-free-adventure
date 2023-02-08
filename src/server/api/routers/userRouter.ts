@@ -7,6 +7,7 @@ import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 export const userRouter = createTRPCRouter({
   getLeaderBoard: publicProcedure.query(async ({ ctx }) => {
     const leaderboardUsers = await ctx.prisma.user.findMany({
+      take: 10,
       where: {
         leaderboard: true,
       },
@@ -15,12 +16,15 @@ export const userRouter = createTRPCRouter({
       },
     });
 
-    return leaderboardUsers.map((user) => {
-      return {
-        name: user.name,
-        score: user.history.length,
-      };
-    });
+    return leaderboardUsers
+      .map((user) => {
+        return {
+          name: user.name,
+          userId: user.id,
+          score: user.history.length,
+        };
+      })
+      .sort((a, b) => b.score - a.score);
   }),
   getUserInfo: protectedProcedure
     .input(

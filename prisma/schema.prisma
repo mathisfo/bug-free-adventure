@@ -63,8 +63,8 @@ model ExerciseHistory {
   userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  activityResourceId String           @unique
-  ActivityResource   ActivityResource @relation(fields: [activityResourceId], references: [activityId])
+  activityResourceId String
+  ActivityResource   ActivityResource @relation(fields: [activityResourceId], references: [id], onDelete: Cascade)
 }
 
 model VerificationToken {
@@ -86,7 +86,7 @@ model ActivityResource {
   name        String
   url         String
   moduleId    String
-  activityId  String            @id
+  id          String            @id @default(cuid())
   relation    Module            @relation(fields: [moduleId], references: [id], onDelete: Cascade)
   userHistory ExerciseHistory[]
 }
