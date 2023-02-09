@@ -126,4 +126,17 @@ export const userRouter = createTRPCRouter({
         },
       });
     }),
+
+  updateLastActivityVisited: protectedProcedure
+    .input(z.object({ activityId: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      return await ctx.prisma.user.update({
+        where: {
+          id: ctx.session.user.id,
+        },
+        data: {
+          lastActivityVisitedId: input.activityId,
+        },
+      });
+    }),
 });

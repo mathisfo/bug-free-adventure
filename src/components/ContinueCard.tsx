@@ -1,9 +1,12 @@
 import { PlayIcon } from "@heroicons/react/24/solid";
 import { useSession } from "next-auth/react";
 import { Activity } from "../server/schema/LearnerActivitySchema";
+import { api } from "../utils/api";
 
 const ContinueCard = (props: { recommendedActivities: Activity[] }) => {
   const { data: session, status } = useSession();
+
+  const mutation = api.userRouter.updateLastActivityVisited.useMutation();
 
   const { recommendedActivities } = props;
 
