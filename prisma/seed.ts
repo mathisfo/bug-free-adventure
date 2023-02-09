@@ -1,5 +1,4 @@
 import { PrismaClient, type } from "@prisma/client";
-import { connect } from "http2";
 
 const prisma = new PrismaClient();
 
