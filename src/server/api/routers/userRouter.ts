@@ -1,4 +1,4 @@
-import { Prisma } from "@prisma/client";
+import { Prisma, type } from "@prisma/client";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 import { onboardingSchema } from "../../schema/UserSchema";
@@ -113,6 +113,26 @@ export const userRouter = createTRPCRouter({
       });
 
       return history;
+    }),
+  getExerciseHistoryOnUserWithType: protectedProcedure
+    .input(
+      z.object({
+        userId: z.string(),
+        acctype: z.nativeEnum(type),
+      })
+    )
+    .query(async ({ ctx, input }) => {
+      const history = await ctx.prisma.exerciseHistory.findMany({
+        where: {
+          userId: input.userId,
+          ActivityResource: {
+            type: input.acctype,
+          },
+        },
+        include: {
+          ActivityResource: true,
+        },
+      });
     }),
   addExerciseHistoryToUser: protectedProcedure
     .input(z.object({ activityId: z.string() }))
