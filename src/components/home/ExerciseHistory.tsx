@@ -33,8 +33,6 @@ const ExerciseHistoryComp = () => {
       if (!acc[date]) {
         acc[date] = [];
       }
-      console.log("acc", acc);
-      console.log("curr", curr);
 
       acc[date]?.push(curr);
       return acc;
@@ -42,22 +40,25 @@ const ExerciseHistoryComp = () => {
     {} as { [key: string]: Array<ExerciseHistory & ActivityResource> }
   );
 
+  console.log("grouped", grouped);
+
   const result = Object.values(grouped);
+  console.log("result", result);
 
   return (
     <>
       {result ? (
         <div className="background-color relative col-span-4 mr-4 w-full  overflow-x-auto rounded-r-lg ">
-          {Object.keys(grouped).map((date, index) => (
+          {Object.entries(grouped).map((e, index) => (
             <div
-              key={date}
+              key={index}
               className="mb-4 rounded-lg border border-gray-100 bg-gray-50 p-5 dark:border-gray-700 dark:bg-gray-800"
             >
               <time className="text-lg font-semibold text-gray-900 dark:text-white">
-                {date}
+                {e[0]}
               </time>
               <ol className="divider-gray-200 mt-3 divide-y dark:divide-gray-700 ">
-                {result?.[index].map((hist) => (
+                {e[1].map((hist) => (
                   <div
                     key={hist.historyId}
                     className="rounded-lg border-gray-100 bg-gray-50 p-5 dark:border-gray-700 dark:bg-gray-800"
