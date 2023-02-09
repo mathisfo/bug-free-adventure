@@ -27,13 +27,18 @@ const ExerciseHistoryComp = () => {
 
   const grouped = history.reduce(
     (
-      acc: { [x: string]: any[] },
+      acc: {
+        [x: string]: any[];
+      },
       curr: { completedAt: string | number | Date }
     ) => {
       const date = new Date(curr.completedAt).toDateString();
       if (!acc[date]) {
         acc[date] = [];
       }
+      console.log("acc", acc);
+      console.log("curr", curr);
+
       acc[date]?.push(curr);
       return acc;
     },
