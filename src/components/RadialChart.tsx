@@ -4,11 +4,7 @@ import { RadialBarChart, PolarAngleAxis, RadialBar, Legend } from "recharts";
 import { Activity } from "../server/schema/LearnerActivitySchema";
 import { api } from "../utils/api";
 
-interface RadialChartProps {
-  type: string;
-}
-
-const RadialChart = (props: RadialChartProps) => {
+const RadialChart = () => {
   const {
     data: learnerAnalytics,
     isSuccess,
