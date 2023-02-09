@@ -1,10 +1,7 @@
 import { FlagIcon } from "@heroicons/react/24/outline";
 import { ActivityResource, ExerciseHistory } from "@prisma/client";
 import { useSession } from "next-auth/react";
-import { string, z } from "zod";
 import { api } from "../../utils/api";
-
-type SortedHistory = Array<ExerciseHistory>;
 
 const ExerciseHistoryComp = () => {
   const { data: session, status } = useSession({ required: true });
@@ -47,10 +44,6 @@ const ExerciseHistoryComp = () => {
 
   const result = Object.values(grouped);
 
-  console.log(Object.keys(grouped));
-
-  console.log(result);
-
   return (
     <>
       {result ? (
@@ -64,7 +57,7 @@ const ExerciseHistoryComp = () => {
                 {date}
               </time>
               <ol className="divider-gray-200 mt-3 divide-y dark:divide-gray-700 ">
-                {Object.values(grouped)?.[index].map((hist) => (
+                {result?.[index].map((hist) => (
                   <div
                     key={hist.historyId}
                     className="rounded-lg border-gray-100 bg-gray-50 p-5 dark:border-gray-700 dark:bg-gray-800"

@@ -5,14 +5,11 @@ import {
   FolderIcon,
   UserCircleIcon,
 } from "@heroicons/react/24/outline";
-import { Spinner } from "flowbite-react";
 import { signOut, useSession } from "next-auth/react";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import { HiOutlineLogout } from "react-icons/hi";
 import SignIn from "./auth/SignIn";
 import Greeting from "./Greeting";
-import Onboarding from "./onboarding/Onboarding";
 import UIOnboarding from "./onboarding/UIOnboarding";
 import ToggleTheme from "./ToggleTheme";
 
