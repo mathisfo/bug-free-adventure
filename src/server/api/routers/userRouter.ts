@@ -1,7 +1,7 @@
 import { Prisma } from "@prisma/client";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
-import { onboardingSchema } from "../../schema/UserSchema";
+import { onboardingSchema, toDoSchema } from "../../schema/UserSchema";
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 
 export const userRouter = createTRPCRouter({
@@ -123,6 +123,33 @@ export const userRouter = createTRPCRouter({
           activityResourceId: input.activityId,
           visitedAt: new Date(),
           completedAt: new Date(),
+        },
+      });
+    }),
+  getToDoOnUser: protectedProcedure
+    .input(z.object({ userId: z.string() }))
+    .query(async ({ ctx, input }) => {
+      const todo = await ctx.prisma.toDo.findMany({
+        where: {
+          userId: input.userId,
+        },
+      });
+      return todo
+        .sort(
+          (a, b) =>
+            new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime()
+        )
+        .sort((a, b) => (a === b ? 0 : a ? -1 : 1));
+    }),
+  addToDoToUser: protectedProcedure
+    .input(z.object({ toDo: toDoSchema }))
+    .mutation(async ({ ctx, input }) => {
+      return await ctx.prisma.toDo.create({
+        data: {
+          userId: input.toDo.userId,
+          dueDate: input.toDo.dueDate,
+          completed: false,
+          name: input.toDo.name,
         },
       });
     }),
