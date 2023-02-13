@@ -62,8 +62,11 @@ const SignIn = () => {
               >
                 Log in
               </Button>
-              <Button className="my-2 bg-[#988efe]" onClick={() => signIn()}>
-                Sign in with Discord
+              <Button
+                className="my-2 bg-[#988efe]"
+                onClick={() => signIn("github", { callbackUrl: "/dashboard" })}
+              >
+                Sign in with Github
               </Button>
               <div className="flex flex-row">
                 <p className="text-color pt-5  text-sm">
