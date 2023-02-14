@@ -1,15 +1,13 @@
-/* import { TRPCError } from "@trpc/server";
+import { PlusIcon } from "@heroicons/react/24/outline";
+import { ToDo } from "@prisma/client";
+import { TRPCError } from "@trpc/server";
 import { useSession } from "next-auth/react";
-import { Input } from "postcss";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { ToDoForm } from "../../server/schema/UserSchema";
 import { api } from "../../utils/api";
-import { PlusIcon } from "@heroicons/react/24/outline";
-import { useState } from "react";
-import { z } from "zod";
 
 const ToDo = () => {
-  const context = api.useContext();
+  const ctx = api.useContext();
 
   const { data: session, status } = useSession({ required: true });
   const { register, handleSubmit } = useForm<ToDoForm>();
@@ -20,21 +18,35 @@ const ToDo = () => {
 
   const addToDoMutation = api.userRouter.addToDoToUser.useMutation({
     onMutate: async (newToDo) => {
-      await context.userRouter.getToDoOnUser.cancel();
-      const previousToDo = context.userRouter.getToDoOnUser.getData({
+      await ctx.userRouter.getToDoOnUser.cancel();
+      const previousToDo = ctx.userRouter.getToDoOnUser.getData({
         userId: session.user.id,
       });
-    if (previousToDo)  { context.userRouter.getToDoOnUser.setData(
-        { userId: session.user.id },
-        (old) => if (old) {
-          return [...old, {newToDo}]
+      if (previousToDo) {
+        ctx.userRouter.getToDoOnUser.setData(
+          { userId: session.user.id },
+          (old: any) => {
+            if (old) {
+              return [...old, { newToDo }];
+            } else {
+              return [{ newToDo }];
+            }
+          }
+        );
+      }
+
+      return () => {
+        if (previousToDo) {
+          ctx.userRouter.getToDoOnUser.setData(
+            { userId: session.user.id },
+            previousToDo
+          );
         }
-      );
-      return { previousToDo };
+      };
     },
     onSuccess: async () => {
-      await context.userRouter.getToDoOnUser.invalidate()
-    }
+      await ctx.userRouter.getToDoOnUser.invalidate();
+    },
   });
 
   const setCompletedMutation = api.userRouter.setToDoCompleted.useMutation();
@@ -77,7 +89,7 @@ const ToDo = () => {
       },
       {
         onSuccess: () => {
-          context.invalidate();
+          ctx.invalidate();
         },
         onError: () => {
           throw new TRPCError({
@@ -166,5 +178,3 @@ const ToDo = () => {
 };
 
 export default ToDo;
- */
-export {};
