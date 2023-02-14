@@ -53,6 +53,14 @@ model User {
   accounts      Account[]
   sessions      Session[]
   history       ExerciseHistory[]
+  preferences   UserPreferences[]
+}
+
+model UserPreferences {
+  id                 String   @id @default(cuid())
+  userId             String
+  selectedComponents String[] @default([])
+  user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model ExerciseHistory {
