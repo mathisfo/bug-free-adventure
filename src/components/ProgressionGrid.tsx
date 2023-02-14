@@ -9,7 +9,6 @@ interface ProgressionGridInterface {
 const ProgressionGrid = (props: ProgressionGridInterface) => {
   const { data: session, status } = useSession();
   const [isShowing, setIsShowing] = useState<Activity | null>();
-  console.log("SHOW", isShowing);
 
   const handleHover = (child: Activity) => {
     setIsShowing(child);

@@ -13,8 +13,6 @@ const UIOnboarding = () => {
   const ctx = api.useContext();
 
   const onSubmit: SubmitHandler<OnboardingForm> = (data: OnboardingForm) => {
-    console.log(data);
-
     mutation.mutate(data, {
       onSuccess: () => {
         ctx.invalidate();

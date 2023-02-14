@@ -28,8 +28,7 @@ const ToDoComp = () => {
         { userId: session.user.id },
         (old: any) => [...old, newToDo.toDo]
       );
-      console.log("newToDo", newToDo);
-      console.log("prevData", prevData);
+
       return { prevData };
     },
     // Invalidate the query after the mutation is complete to sync wit server
@@ -51,8 +50,6 @@ const ToDoComp = () => {
   }
 
   const onSubmit: SubmitHandler<ToDoForm> = (data: ToDoForm) => {
-    console.log(data);
-
     addToDoMutation.mutate(
       {
         toDo: { ...data, userId: session.user.id },
