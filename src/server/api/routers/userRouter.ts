@@ -133,15 +133,27 @@ export const userRouter = createTRPCRouter({
         where: {
           userId: input.userId,
         },
+        select: {
+          todoId: true,
+          dueDate: true,
+          completed: true,
+          name: true,
+          userId: true,
+        },
       });
-      return todo
-        .sort(
-          (a, b) =>
-            new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime()
-        )
-        .sort((a, b) =>
-          a.completed === b.completed ? 0 : b.completed ? -1 : 1
-        );
+
+      if (todo.length > 0) {
+        return todo
+          .sort(
+            (a, b) =>
+              new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime()
+          )
+          .sort((a, b) =>
+            a.completed === b.completed ? 0 : b.completed ? -1 : 1
+          );
+      }
+
+      return [];
     }),
   addToDoToUser: protectedProcedure
     .input(z.object({ toDo: toDoSchema }))
