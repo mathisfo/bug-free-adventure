@@ -1,4 +1,4 @@
-import { TRPCError } from "@trpc/server";
+/* import { TRPCError } from "@trpc/server";
 import { useSession } from "next-auth/react";
 import { Input } from "postcss";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -6,19 +6,38 @@ import { ToDoForm } from "../../server/schema/UserSchema";
 import { api } from "../../utils/api";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
+import { z } from "zod";
 
 const ToDo = () => {
-  const { register, handleSubmit } = useForm<ToDoForm>();
-  const [clicked, setClicked] = useState(false);
-  const mutation = api.userRouter.addToDoToUser.useMutation();
-
-  const ctx = api.useContext();
+  const context = api.useContext();
 
   const { data: session, status } = useSession({ required: true });
+  const { register, handleSubmit } = useForm<ToDoForm>();
 
   if (status == "loading") {
     return <div>Loading...</div>;
   }
+
+  const addToDoMutation = api.userRouter.addToDoToUser.useMutation({
+    onMutate: async (newToDo) => {
+      await context.userRouter.getToDoOnUser.cancel();
+      const previousToDo = context.userRouter.getToDoOnUser.getData({
+        userId: session.user.id,
+      });
+    if (previousToDo)  { context.userRouter.getToDoOnUser.setData(
+        { userId: session.user.id },
+        (old) => if (old) {
+          return [...old, {newToDo}]
+        }
+      );
+      return { previousToDo };
+    },
+    onSuccess: async () => {
+      await context.userRouter.getToDoOnUser.invalidate()
+    }
+  });
+
+  const setCompletedMutation = api.userRouter.setToDoCompleted.useMutation();
 
   const {
     data: todo,
@@ -33,7 +52,7 @@ const ToDo = () => {
   const onSubmit: SubmitHandler<ToDoForm> = (data: ToDoForm) => {
     console.log(data);
 
-    mutation.mutate(
+    addToDoMutation.mutate(
       {
         toDo: { ...data, userId: session.user.id },
       },
@@ -51,8 +70,27 @@ const ToDo = () => {
     );
   };
 
+  const onComplete = (todoId: string) => {
+    setCompletedMutation.mutate(
+      {
+        todoId: todoId,
+      },
+      {
+        onSuccess: () => {
+          context.invalidate();
+        },
+        onError: () => {
+          throw new TRPCError({
+            code: "INTERNAL_SERVER_ERROR",
+            message: "failed to set todo to completed",
+          });
+        },
+      }
+    );
+  };
+
   return (
-    <div className="course-card text-color mx-4 mb-8 h-full w-full rounded-2xl p-8">
+    <div className="course-card text-color mx-4 mb-8 h-full w-full rounded-2xl p-12">
       <div className="tems-center mx-8 mb-8 mt-2 grid grid-cols-2 grid-rows-1">
         <h1 className="col-start-1 mx-auto flex items-center text-4xl font-semibold">
           TO <p className="text-blue-color">DO</p>'S
@@ -82,7 +120,7 @@ const ToDo = () => {
               </p>
               <div className="col-start-5 mr-8 place-self-end">
                 <div
-                  onClick={(e) => setClicked(!clicked)}
+                  onClick={() => onComplete(item.todoId)}
                   className={`${
                     item.completed
                       ? `border-[#988efe] opacity-75`
@@ -100,7 +138,7 @@ const ToDo = () => {
           );
         })}
       </div>
-      {/* <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <label
           htmlFor="name"
           className="block text-sm font-medium text-gray-700"
@@ -120,11 +158,13 @@ const ToDo = () => {
           id="dueDate"
         ></input>
         <button type="submit">
-          {mutation.isLoading ? "Loading.." : "Add to do"}
+          {addToDoMutation.isLoading ? "Loading.." : "Add to do"}
         </button>
-      </form> */}
+      </form>
     </div>
   );
 };
 
 export default ToDo;
+ */
+export {};

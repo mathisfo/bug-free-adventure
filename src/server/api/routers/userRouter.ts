@@ -139,7 +139,9 @@ export const userRouter = createTRPCRouter({
           (a, b) =>
             new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime()
         )
-        .sort((a, b) => (a === b ? 0 : a ? -1 : 1));
+        .sort((a, b) =>
+          a.completed === b.completed ? 0 : b.completed ? -1 : 1
+        );
     }),
   addToDoToUser: protectedProcedure
     .input(z.object({ toDo: toDoSchema }))
@@ -150,6 +152,18 @@ export const userRouter = createTRPCRouter({
           dueDate: input.toDo.dueDate,
           completed: false,
           name: input.toDo.name,
+        },
+      });
+    }),
+  setToDoCompleted: protectedProcedure
+    .input(z.object({ todoId: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      return await ctx.prisma.toDo.update({
+        where: {
+          todoId: input.todoId,
+        },
+        data: {
+          completed: true,
         },
       });
     }),
