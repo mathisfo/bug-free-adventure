@@ -7,7 +7,6 @@ import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 export const userRouter = createTRPCRouter({
   getLeaderBoard: publicProcedure.query(async ({ ctx }) => {
     const leaderboardUsers = await ctx.prisma.user.findMany({
-      take: 10,
       where: {
         leaderboard: true,
       },
