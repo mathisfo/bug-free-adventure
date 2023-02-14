@@ -26,7 +26,7 @@ const ToDoComp = () => {
       });
       ctx.userRouter.getToDoOnUser.setData(
         { userId: session.user.id },
-        (old: Array<ToDo>) => [...old, newToDo.toDo]
+        (old: any) => [...old, newToDo.toDo]
       );
       console.log("newToDo", newToDo);
       console.log("prevData", prevData);
