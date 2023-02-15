@@ -33,7 +33,7 @@ const ToDoComp = () => {
     },
     // Invalidate the query after the mutation is complete to sync wit server
     onSettled() {
-      ctx.userRouter.getToDoOnUser.invalidate();
+      ctx.userRouter.getToDoOnUser.invalidate({ userId: session.user.id });
     },
   });
 
