@@ -2,6 +2,7 @@ import HistoryGraph from "./HistoryGraph";
 import ExerciseHistory from "./home/ExerciseHistory";
 import Leaderboard from "./Leaderboard";
 import { SelectedEnum } from "@prisma/client";
+import ToDoComp from "./todo/ToDoComp";
 
 interface ISelectedComponentsProps {
   selected: Array<SelectedEnum>;
@@ -43,7 +44,7 @@ const SelectedComponentsContainer = (props: ISelectedComponentsProps) => {
         <div className="text-color mb-4 mt-16 text-xl font-semibold uppercase opacity-75">
           todo
         </div>
-        <p>TODO comp here when merged</p>
+        <ToDoComp />
       </div>
     ),
   };

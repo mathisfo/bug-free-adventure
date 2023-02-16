@@ -88,7 +88,7 @@ const ToDoComp = () => {
     <div className="course-card text-color mx-4 mb-8 h-full w-full rounded-2xl p-12">
       <div className="tems-center mx-8 mb-8 mt-2 grid grid-cols-2 grid-rows-1">
         <h1 className="col-start-1 mx-auto flex items-center text-4xl font-semibold">
-          TO <p className="text-blue-color">DO</p>`&apos;`S
+          TO <p className="text-blue-color">DO</p>S
         </h1>
         <PlusIcon className="col-start-2 h-8 w-8 cursor-pointer place-self-end" />
       </div>
