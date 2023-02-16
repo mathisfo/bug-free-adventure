@@ -82,11 +82,6 @@ const HistoryGraph = () => {
   };
 
   const labels = Object.keys(grouped);
-  console.log(labels);
-
-  console.log(Object.values(grouped));
-
-  console.log(Object.entries(grouped).map((e) => e[1].length));
 
   const data = {
     labels,

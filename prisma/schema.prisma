@@ -54,6 +54,7 @@ model User {
   sessions      Session[]
   history       ExerciseHistory[]
   preferences   UserPreference[]
+  todo          ToDo[]
 }
 
 model UserPreference {
@@ -76,6 +77,17 @@ model ExerciseHistory {
 
   activityResourceId String
   ActivityResource   ActivityResource @relation(fields: [activityResourceId], references: [id], onDelete: Cascade)
+}
+
+model ToDo {
+  todoId String @id @default(cuid())
+
+  dueDate   DateTime
+  completed Boolean
+  name      String
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model VerificationToken {

@@ -16,4 +16,11 @@ export const onboardingSchema = z.object({
   leaderboard: z.boolean(),
 });
 
+export const toDoSchema = z.object({
+  dueDate: z.date(),
+  name: z.string(),
+  userId: z.string(),
+});
+
+export type ToDoForm = z.infer<typeof toDoSchema>;
 export type OnboardingForm = z.infer<typeof onboardingSchema>;

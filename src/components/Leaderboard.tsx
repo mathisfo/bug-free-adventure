@@ -22,6 +22,11 @@ const Leaderboard = () => {
     return <div>Loading...</div>;
   }
 
+  const leaderboardTop10 = leaderboard.slice(0, 10);
+  const leaderboardPosition =
+    leaderboard.findIndex((x) => x.userId === session?.user.id) + 1;
+  const userScore = leaderboard[leaderboardPosition - 1]?.score;
+
   return (
     <div className="relative w-4/5 overflow-x-auto rounded-lg">
       <div className="text-color absolute right-0 top-0 grid h-6 w-16 place-items-center rounded-t-lg bg-gray-200 text-sm font-semibold uppercase dark:bg-[#212124] ">
@@ -40,11 +45,16 @@ const Leaderboard = () => {
           </tr>
         </thead>
         <tbody>
-          {leaderboard.map((person, index) => {
+          {leaderboardTop10.map((person, index) => {
             return (
               <tr
                 key={index}
-                className="text-color border-t bg-[#F5F5F5] font-semibold dark:border-zinc-700 dark:bg-[#303335] "
+                className={classNames(
+                  person.userId == session?.user.id
+                    ? `bg-[#BFF7E0] dark:bg-[#BFF7E0] dark:text-gray-700`
+                    : `bg-[#fafafa]`,
+                  `text-color border-t  font-semibold dark:border-zinc-700 dark:bg-[#303335]`
+                )}
               >
                 <td className="grid place-items-center py-2 px-6 text-center">
                   <div
@@ -67,15 +77,19 @@ const Leaderboard = () => {
               </tr>
             );
           })}
-          <tr className="text-color border-t-2 border-[#EFADBF]  bg-[#F7D6DF] font-semibold dark:text-gray-700  ">
-            <td className="grid place-items-center border-r border-[#F7D6DF] py-2 px-6 text-center">
-              16
-            </td>
-            <td className=" py-2 px-6">Me</td>
-            <td className=" border-l border-[#F7D6DF] py-2 px-6 text-center">
-              130
-            </td>
-          </tr>
+          {leaderboardTop10.some((e) => e.userId === session?.user.id) ? (
+            <></>
+          ) : (
+            <tr className="text-color border-t-2 border-[#EFADBF]  bg-[#F7D6DF] font-semibold dark:text-gray-700  ">
+              <td className="grid place-items-center border-r border-[#F7D6DF] py-2 px-6 text-center">
+                {leaderboardPosition}
+              </td>
+              <td className=" py-2 px-6">{session?.user.name}</td>
+              <td className=" border-l border-[#F7D6DF] py-2 px-6 text-center">
+                {userScore}
+              </td>
+            </tr>
+          )}
         </tbody>
       </table>
     </div>
