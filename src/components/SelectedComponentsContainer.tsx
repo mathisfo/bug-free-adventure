@@ -5,10 +5,13 @@ import { SelectedEnum } from "@prisma/client";
 
 interface ISelectedComponentsProps {
   selected: Array<SelectedEnum>;
+  leaderboard: boolean;
 }
 
 const SelectedComponentsContainer = (props: ISelectedComponentsProps) => {
-  const { selected } = props;
+  const { selected, leaderboard } = props;
+
+  console.log("selected", selected);
 
   const components: { [key: string]: React.ReactElement } = {
     HISTORYGRAPH: (
@@ -50,6 +53,7 @@ const SelectedComponentsContainer = (props: ISelectedComponentsProps) => {
       {selected.map((compEnum: string) => (
         <div key={compEnum}>{components[compEnum]}</div>
       ))}
+      {leaderboard && <div>{components["LEADERBOARD"]}</div>}
     </div>
   );
 };

@@ -53,13 +53,15 @@ model User {
   accounts      Account[]
   sessions      Session[]
   history       ExerciseHistory[]
-  preferences   UserPreference?
+  preferences   UserPreference[]
 }
 
 model UserPreference {
-  userId             String         @id @unique
+  id                 String         @id @default(cuid())
+  userId             String
   selectedComponents SelectedEnum[] @default([])
   leaderboard        Boolean        @default(false)
+  createdAt          DateTime       @default(now())
   user               User           @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 

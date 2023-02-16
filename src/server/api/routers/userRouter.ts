@@ -106,24 +106,25 @@ export const userRouter = createTRPCRouter({
           leaderboard: input.leaderboard,
           onBoarded: true,
           preferences: {
-            upsert: {
-              create: {
-                selectedComponents: {
-                  set: input.selectedComponents as selectedCompsEnum[],
-                },
-                leaderboard: input.leaderboard,
+            create: {
+              selectedComponents: {
+                set: input.selectedComponents as selectedCompsEnum[],
               },
-              update: {
-                selectedComponents: {
-                  set: input.selectedComponents as selectedCompsEnum[],
-                },
-                leaderboard: input.leaderboard,
-              },
+              leaderboard: input.leaderboard,
             },
           },
         },
       });
     }),
+
+  getUserPreferences: protectedProcedure.query(async ({ ctx }) => {
+    const preferences = await ctx.prisma.userPreference.findMany({
+      where: { userId: ctx.session.user.id },
+      orderBy: { createdAt: "desc" },
+      take: 1,
+    });
+    return preferences[0]!;
+  }),
 
   getExerciseHistoryOnUser: protectedProcedure
     .input(z.object({ userId: z.string() }))
