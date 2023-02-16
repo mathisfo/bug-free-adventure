@@ -44,7 +44,7 @@ const ExerciseHistoryComp = () => {
 
   return (
     <>
-      {result ? (
+      {result != undefined && result.length > 0 ? (
         <div className="background-color relative col-span-4 mr-4 w-full  overflow-x-auto rounded-r-lg ">
           {Object.entries(grouped).map((e, index) => (
             <div

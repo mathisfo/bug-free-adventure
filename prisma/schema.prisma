@@ -53,7 +53,17 @@ model User {
   accounts      Account[]
   sessions      Session[]
   history       ExerciseHistory[]
+  preferences   UserPreference[]
   todo          ToDo[]
+}
+
+model UserPreference {
+  id                 String         @id @default(cuid())
+  userId             String
+  selectedComponents SelectedEnum[] @default([])
+  leaderboard        Boolean        @default(false)
+  createdAt          DateTime       @default(now())
+  user               User           @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model ExerciseHistory {
@@ -72,9 +82,9 @@ model ExerciseHistory {
 model ToDo {
   todoId String @id @default(cuid())
 
-  dueDate DateTime 
+  dueDate   DateTime
   completed Boolean
-  name String 
+  name      String
 
   userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -117,4 +127,11 @@ enum type {
   EXAMPLE
   CHALLENGE
   CODING
+}
+
+enum SelectedEnum {
+  HISTORYGRAPH
+  LEADERBOARD
+  EXERCISEHISTORY
+  TODO
 }
