@@ -1,4 +1,8 @@
+import { SelectedEnum } from "@prisma/client";
 import { z } from "zod";
+
+const selectedComps = z.nativeEnum(SelectedEnum);
+export type selectedCompsEnum = z.infer<typeof selectedComps>;
 
 export const onboardingSchema = z.object({
   name: z.string(),
@@ -8,6 +12,7 @@ export const onboardingSchema = z.object({
     .gt(22101)
     .lt(22200)
     .int(),
+  selectedComponents: z.array(z.string()),
   leaderboard: z.boolean(),
 });
 

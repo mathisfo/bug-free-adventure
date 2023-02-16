@@ -1,8 +1,10 @@
+import { SelectedEnum } from "@prisma/client";
 import { NextPage } from "next/types";
 import Assignments from "../../components/Assignments";
 import CourseCard from "../../components/CourseCard";
 import ExerciseHistory from "../../components/home/ExerciseHistory";
 import Leaderboard from "../../components/Leaderboard";
+import SelectedComponentsContainer from "../../components/SelectedComponentsContainer";
 import { api } from "../../utils/api";
 
 const Dashboard: NextPage = () => {
@@ -41,18 +43,13 @@ const Dashboard: NextPage = () => {
             <CourseCard courseName="java" />
           </div>
         </div>
-        <div className="cols-start-1 row-start-2">
-          <div className="text-color mb-4 mt-16 text-xl font-semibold uppercase opacity-75">
-            history
-          </div>
-          <ExerciseHistory />
-        </div>
-        <div className="cols-start-2 row-start-1">
-          <div className="text-color mb-4 text-xl font-semibold uppercase opacity-75">
-            leaderboard
-          </div>
-          <Leaderboard />
-        </div>
+        <SelectedComponentsContainer
+          selected={[
+            SelectedEnum.HISTORYGRAPH,
+            SelectedEnum.EXERCISEHISTORY,
+            SelectedEnum.LEADERBOARD,
+          ]}
+        />
       </div>
     </div>
   );

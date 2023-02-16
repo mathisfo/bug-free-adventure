@@ -99,7 +99,18 @@ const HistoryGraph = () => {
       },
     ],
   };
-  return <Line options={options} data={data} />;
+  return (
+    <div>
+      {history && history.length > 0 ? (
+        <Line options={options} data={data} />
+      ) : (
+        <div>
+          You exercise history will show here once you have completed your first
+          task
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default HistoryGraph;

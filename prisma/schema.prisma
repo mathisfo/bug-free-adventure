@@ -53,14 +53,14 @@ model User {
   accounts      Account[]
   sessions      Session[]
   history       ExerciseHistory[]
-  preferences   UserPreferences[]
+  preferences   UserPreference?
 }
 
-model UserPreferences {
-  id                 String   @id @default(cuid())
-  userId             String
-  selectedComponents String[] @default([])
-  user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+model UserPreference {
+  userId             String         @id @unique
+  selectedComponents SelectedEnum[] @default([])
+  leaderboard        Boolean        @default(false)
+  user               User           @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model ExerciseHistory {
@@ -113,4 +113,11 @@ enum type {
   EXAMPLE
   CHALLENGE
   CODING
+}
+
+enum SelectedEnum {
+  HISTORYGRAPH
+  LEADERBOARD
+  EXERCISEHISTORY
+  TODO
 }

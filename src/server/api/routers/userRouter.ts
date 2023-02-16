@@ -1,7 +1,12 @@
-import { Prisma } from "@prisma/client";
+import { Prisma, PrismaClient } from "@prisma/client";
 import { TRPCError } from "@trpc/server";
+import { connect } from "http2";
 import { z } from "zod";
-import { onboardingSchema } from "../../schema/UserSchema";
+import {
+  OnboardingForm,
+  onboardingSchema,
+  selectedCompsEnum,
+} from "../../schema/UserSchema";
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 
 export const userRouter = createTRPCRouter({
@@ -91,15 +96,35 @@ export const userRouter = createTRPCRouter({
         where: {
           id: ctx.session.user.id,
         },
+        include: {
+          preferences: true,
+        },
         data: {
           name: input.name,
           USNEmail: input.USNEmail,
           protusId: "norway" + input.protusId,
           leaderboard: input.leaderboard,
           onBoarded: true,
+          preferences: {
+            upsert: {
+              create: {
+                selectedComponents: {
+                  set: input.selectedComponents as selectedCompsEnum[],
+                },
+                leaderboard: input.leaderboard,
+              },
+              update: {
+                selectedComponents: {
+                  set: input.selectedComponents as selectedCompsEnum[],
+                },
+                leaderboard: input.leaderboard,
+              },
+            },
+          },
         },
       });
     }),
+
   getExerciseHistoryOnUser: protectedProcedure
     .input(z.object({ userId: z.string() }))
     .query(async ({ ctx, input }) => {
