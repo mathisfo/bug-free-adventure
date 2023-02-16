@@ -1,7 +1,7 @@
 import { Prisma } from "@prisma/client";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
-import { onboardingSchema } from "../../schema/UserSchema";
+import { onboardingSchema, toDoSchema } from "../../schema/UserSchema";
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 
 export const userRouter = createTRPCRouter({
@@ -122,6 +122,59 @@ export const userRouter = createTRPCRouter({
           activityResourceId: input.activityId,
           visitedAt: new Date(),
           completedAt: new Date(),
+        },
+      });
+    }),
+  getToDoOnUser: protectedProcedure
+    .input(z.object({ userId: z.string() }))
+    .query(async ({ ctx, input }) => {
+      const todo = await ctx.prisma.toDo.findMany({
+        where: {
+          userId: input.userId,
+        },
+        select: {
+          todoId: true,
+          dueDate: true,
+          completed: true,
+          name: true,
+          userId: true,
+        },
+      });
+
+      if (todo.length > 0) {
+        return todo
+          .sort(
+            (a, b) =>
+              new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime()
+          )
+          .sort((a, b) =>
+            a.completed === b.completed ? 0 : b.completed ? -1 : 1
+          );
+      }
+
+      return [];
+    }),
+  addToDoToUser: protectedProcedure
+    .input(z.object({ toDo: toDoSchema }))
+    .mutation(async ({ ctx, input }) => {
+      return await ctx.prisma.toDo.create({
+        data: {
+          userId: input.toDo.userId,
+          dueDate: input.toDo.dueDate,
+          completed: false,
+          name: input.toDo.name,
+        },
+      });
+    }),
+  setToDoCompleted: protectedProcedure
+    .input(z.object({ todoId: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      return await ctx.prisma.toDo.update({
+        where: {
+          todoId: input.todoId,
+        },
+        data: {
+          completed: true,
         },
       });
     }),

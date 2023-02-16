@@ -67,13 +67,9 @@ const CourseStatus = () => {
         .filter((act) => act.relatedTopic === module)
         .filter((act) => act.attempts > 0).length;
 
-      console.log(success);
-
       const total = activites.examples.filter(
         (act) => act.relatedTopic === module
       ).length;
-
-      console.log(total);
 
       return {
         success: success,
