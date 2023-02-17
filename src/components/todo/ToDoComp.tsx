@@ -69,9 +69,9 @@ const ToDoComp = () => {
             message: "failed to add to do ",
           });
         },
-      },
-      reset()
+      }
     );
+    reset();
   };
 
   const onComplete = (todoId: string) => {
