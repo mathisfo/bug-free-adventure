@@ -1,8 +1,14 @@
-import { PlusIcon } from "@heroicons/react/24/outline";
+import {
+  PlusIcon,
+  EyeSlashIcon,
+  EyeIcon,
+  TrashIcon,
+} from "@heroicons/react/24/outline";
 import { ToDo } from "@prisma/client";
 import { TRPCError } from "@trpc/server";
 import { log } from "console";
 import { useSession } from "next-auth/react";
+import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { ToDoForm } from "../../server/schema/UserSchema";
 import { api } from "../../utils/api";
@@ -11,7 +17,9 @@ const ToDoComp = () => {
   const ctx = api.useContext();
 
   const { data: session, status } = useSession({ required: true });
-  const { register, handleSubmit } = useForm<ToDoForm>();
+  const { register, handleSubmit, reset } = useForm<ToDoForm>();
+  const [openAddToDo, setOpenAddToDo] = useState(false);
+  const [showCompleted, setShowCompleted] = useState(true);
 
   if (status == "loading") {
     return <div>Loading...</div>;
@@ -61,7 +69,8 @@ const ToDoComp = () => {
             message: "failed to add to do ",
           });
         },
-      }
+      },
+      reset()
     );
   };
 
@@ -84,26 +93,33 @@ const ToDoComp = () => {
     );
   };
 
+  function classNames(...classes: string[]) {
+    return classes.filter(Boolean).join(" ");
+  }
+
   return (
-    <div className="course-card text-color mx-4 mb-8 h-full w-full rounded-2xl p-12">
+    <div className="course-card text-color relative mx-4 mb-2 h-full w-full rounded-2xl p-12">
       <div className="tems-center mx-8 mb-8 mt-2 grid grid-cols-2 grid-rows-1">
         <h1 className="col-start-1 mx-auto flex items-center text-4xl font-semibold">
           TO <p className="text-blue-color">DO</p>S
         </h1>
-        <PlusIcon className="col-start-2 h-8 w-8 cursor-pointer place-self-end" />
       </div>
 
       {todo.length > 0 ? (
-        <div className={`grid grid-rows-${todo.length}`}>
+        <div className={`mb-2 grid grid-rows-${todo.length}`}>
           {todo.map((item, index) => {
             return (
               <div
                 key={index}
-                className={`grid grid-cols-5 row-start-${
-                  index + 1
-                } mb-3 flex flex-row items-end border-b py-2 dark:border-zinc-700 ${
-                  item.completed && `opacity-50`
-                }`}
+                className={
+                  !showCompleted && item.completed
+                    ? `hidden`
+                    : `grid grid-cols-5 row-start-${
+                        index + 1
+                      } mb-3 flex flex-row items-end border-b py-2 dark:border-zinc-700 ${
+                        item.completed && `opacity-50`
+                      }`
+                }
               >
                 <p className={`col-start-1 col-end-3 font-semibold`}>
                   {item.name}
@@ -115,7 +131,7 @@ const ToDoComp = () => {
                     day: "2-digit",
                   })}
                 </p>
-                <div className="col-start-5 mr-8 place-self-end">
+                <div className="col-start-5 mr-2 flex flex-row items-center gap-4 place-self-end">
                   <div
                     onClick={() => onComplete(item.todoId)}
                     className={`${
@@ -130,38 +146,71 @@ const ToDoComp = () => {
                       <></>
                     )}
                   </div>
+                  <TrashIcon
+                    className={classNames(
+                      !item.completed ? `opacity-50` : ``,
+                      `h-4 w-4 cursor-pointer`
+                    )}
+                  />
                 </div>
               </div>
             );
           })}
         </div>
       ) : (
-        <div>No todos yet!</div>
+        <div className="mb-2 text-sm font-semibold">
+          Add your first to do by clicking the plus sign!{" "}
+        </div>
       )}
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex grid grid-cols-10 grid-rows-1 flex-row "
+      >
+        <PlusIcon
+          onClick={() => setOpenAddToDo(!openAddToDo)}
+          className="col-start-1 col-end-2 h-7 w-7 cursor-pointer self-center"
+        />
+        {openAddToDo ? (
+          <div className="col-start-2 col-end-10 grid grid-cols-5">
+            <input
+              required
+              type="text"
+              {...register("name")}
+              id="name"
+              className="col-start-1 col-end-3 mr-1 rounded border-0 opacity-75 dark:bg-[#212124]"
+              placeholder="Your todo.."
+            ></input>
 
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <label
-          htmlFor="name"
-          className="block text-sm font-medium text-gray-700"
-        >
-          Name
-        </label>
-        <input type="text" {...register("name")} id="name"></input>
-        <label
-          htmlFor="date"
-          className="block text-sm font-medium text-gray-700"
-        >
-          Date
-        </label>
-        <input
-          type="date"
-          {...register("dueDate", { valueAsDate: true })}
-          id="dueDate"
-        ></input>
-        <button type="submit">
-          {addToDoMutation.isLoading ? "Loading.." : "Add to do"}
-        </button>
+            <input
+              type="date"
+              {...register("dueDate", { valueAsDate: true })}
+              id="dueDate"
+              required
+              className="col-start-3 col-end-5 rounded border-0 text-gray-700 text-white dark:bg-[#212124]"
+            ></input>
+            <button
+              type="submit"
+              className="col-start-5 place-self-end self-center rounded bg-[#627bfc] px-2 py-1 text-sm font-semibold text-white opacity-80"
+            >
+              ADD
+            </button>
+          </div>
+        ) : (
+          <></>
+        )}{" "}
       </form>
+
+      <div
+        onClick={() => setShowCompleted(!showCompleted)}
+        className="text-color-light absolute bottom-4 right-8 flex cursor-pointer flex-row gap-2 text-sm"
+      >
+        <p>{showCompleted ? "Hide completed tasks" : "Show completed tasks"}</p>
+        {showCompleted ? (
+          <EyeSlashIcon className="h-4 w-4 place-self-center" />
+        ) : (
+          <EyeIcon className="h-4 w-4 place-self-center" />
+        )}
+      </div>
     </div>
   );
 };
