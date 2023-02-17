@@ -48,7 +48,7 @@ const Courses = () => {
                 ...activities.challenges,
                 ...activities.coding,
                 ...activities.examples,
-              ].filter((e) => e.sequencing > 0)}
+              ].filter((e) => e.sequencing > 0 && e.successRate > 0)}
             />
           </div>
 

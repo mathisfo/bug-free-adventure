@@ -1,5 +1,6 @@
 import { useSession } from "next-auth/react";
 import { useState } from "react";
+import { useExerciseHistory } from "../hooks/useExerciseHistory";
 import { Activity } from "../server/schema/LearnerActivitySchema";
 import { api } from "../utils/api";
 
@@ -19,6 +20,11 @@ const ProgressionGrid = (props: ProgressionGridInterface) => {
     isSuccess,
     isLoading,
   } = api.learnerActivityRouter.getLearnerActivity.useQuery();
+  const [selectedActivity, setSelectedActivity] = useState<string | undefined>(
+    undefined
+  );
+
+  useExerciseHistory(modules, selectedActivity);
 
   if (isLoading || !isSuccess) return <div>Loading..</div>;
 
@@ -55,6 +61,7 @@ const ProgressionGrid = (props: ProgressionGridInterface) => {
                   session.user?.protusId +
                   "&grp=NorwayFall2022B&sid=TEST&cid=352"
                 }
+                onClick={() => setSelectedActivity(item.activityId)}
                 rel="noreferrer"
                 key={item.activityId}
               >
