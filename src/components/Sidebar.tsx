@@ -6,6 +6,7 @@ import {
   UserCircleIcon,
 } from "@heroicons/react/24/outline";
 import { signOut, useSession } from "next-auth/react";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { HiOutlineLogout } from "react-icons/hi";
 import SignIn from "./auth/SignIn";
@@ -119,7 +120,7 @@ const Sidebar = ({ children }: { children: React.ReactElement }) => {
                       {navigation.map((item) =>
                         !item.children ? (
                           <div key={item.name}>
-                            <a
+                            <Link
                               href={item.href}
                               className={classNames(
                                 item.current
@@ -133,7 +134,7 @@ const Sidebar = ({ children }: { children: React.ReactElement }) => {
                                 aria-hidden="true"
                               />
                               {item.name}
-                            </a>
+                            </Link>
                           </div>
                         ) : (
                           <Disclosure
@@ -203,11 +204,14 @@ const Sidebar = ({ children }: { children: React.ReactElement }) => {
                   </div>
                   <div className="absolute bottom-4 flex w-full flex-shrink-0 border-t border-gray-200 p-4 dark:border-gray-500">
                     <div className="group block flex w-full flex-shrink-0 flex-row items-center">
-                      <a href="/profile" className="flex flex-row items-center">
+                      <Link
+                        href="/profile"
+                        className="flex flex-row items-center"
+                      >
                         <UserCircleIcon className="text-color mr-2 h-8 w-8"></UserCircleIcon>
 
                         <p className="text-color">{session.user?.name}</p>
-                      </a>
+                      </Link>
 
                       <HiOutlineLogout
                         className="text-color absolute right-4 h-6 w-6 cursor-pointer"
