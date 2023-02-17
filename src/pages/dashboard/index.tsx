@@ -1,18 +1,16 @@
 import { NextPage } from "next/types";
-import Assignments from "../../components/Assignments";
 import CourseCard from "../../components/CourseCard";
-import ExerciseHistory from "../../components/home/ExerciseHistory";
-import Leaderboard from "../../components/Leaderboard";
+import SelectedComponentsContainer from "../../components/SelectedComponentsContainer";
 import { api } from "../../utils/api";
 
 const Dashboard: NextPage = () => {
   const {
-    data: learnerAnalytics,
-    isSuccess,
-    isLoading,
-  } = api.learnerActivityRouter.getLearnerActivity.useQuery();
+    data: userPreferences,
+    isSuccess: selectedSuccess,
+    isLoading: selectedLoading,
+  } = api.userRouter.getUserPreferences.useQuery();
 
-  if (!isSuccess || isLoading) {
+  if (!selectedSuccess || selectedLoading) {
     return (
       <div className="mx-auto mt-32 w-4/5 rounded-md p-4">
         <div className="flex animate-pulse space-x-4">
@@ -28,8 +26,6 @@ const Dashboard: NextPage = () => {
     );
   }
 
-  const activities = learnerAnalytics.activityAnalytics;
-
   return (
     <div>
       <div className="background-color mr-4 grid h-screen grid-cols-2 rounded-r-lg p-16 ">
@@ -41,18 +37,11 @@ const Dashboard: NextPage = () => {
             <CourseCard courseName="java" />
           </div>
         </div>
-        <div className="cols-start-1 row-start-2">
-          <div className="text-color mb-4 mt-16 text-xl font-semibold uppercase opacity-75">
-            history
-          </div>
-          <ExerciseHistory />
-        </div>
-        <div className="cols-start-2 row-start-1">
-          <div className="text-color mb-4 text-xl font-semibold uppercase opacity-75">
-            leaderboard
-          </div>
-          <Leaderboard />
-        </div>
+
+        <SelectedComponentsContainer
+          selected={userPreferences.selectedComponents}
+          leaderboard={userPreferences.leaderboard}
+        />
       </div>
     </div>
   );

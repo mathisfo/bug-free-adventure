@@ -16,7 +16,7 @@
     @apply bg-gradient-to-r from-[#2a2d2f] to-[#2a2d2f];
   }
   .text-color {
-    @apply text-gray-700 dark:text-white;
+    @apply text-gray-700 dark:text-[#fcfcfc];
   }
   .text-color-light {
     @apply text-gray-400 dark:opacity-75;

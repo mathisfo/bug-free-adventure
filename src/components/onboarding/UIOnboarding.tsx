@@ -144,8 +144,7 @@ const UIOnboarding = () => {
               <div className="mt-5 grid grid-cols-3 gap-4">
                 <Card
                   href="#"
-                  className="relative"
-                  class="course-card rounded-2xl border border-gray-400 dark:border-gray-700"
+                  className="course-card relative rounded-2xl border border-gray-400 dark:border-gray-700"
                 >
                   <h5 className="text-2xl font-bold tracking-tight">
                     Challenge Component
@@ -165,8 +164,7 @@ const UIOnboarding = () => {
 
                 <Card
                   href="#"
-                  className="relative"
-                  class="course-card rounded-2xl border border-gray-400 dark:border-gray-700"
+                  className="course-card relative rounded-2xl border border-gray-400 dark:border-gray-700"
                 >
                   <h5 className="text-2xl font-bold tracking-tight">
                     Challenge Component
@@ -186,8 +184,7 @@ const UIOnboarding = () => {
 
                 <Card
                   href="#"
-                  className="relative"
-                  class="course-card rounded-2xl border border-gray-400 dark:border-gray-700"
+                  className="course-card relative rounded-2xl border border-gray-400 dark:border-gray-700"
                 >
                   <h5 className="text-2xl font-bold tracking-tight">
                     Challenge Component
@@ -207,8 +204,7 @@ const UIOnboarding = () => {
 
                 <Card
                   href="#"
-                  className="relative"
-                  class="course-card rounded-2xl border border-gray-400 dark:border-gray-700"
+                  className="course-card relative rounded-2xl border border-gray-400 dark:border-gray-700"
                 >
                   <h5 className="text-2xl font-bold tracking-tight">
                     Challenge Component
@@ -228,8 +224,7 @@ const UIOnboarding = () => {
 
                 <Card
                   href="#"
-                  className="relative"
-                  class="course-card rounded-2xl border border-gray-400 dark:border-gray-700"
+                  className="course-card relative rounded-2xl border border-gray-400 dark:border-gray-700"
                 >
                   <h5 className="text-2xl font-bold tracking-tight">
                     Challenge Component
@@ -274,8 +269,7 @@ const UIOnboarding = () => {
               <div className="mt-5 grid grid-cols-3 gap-4">
                 <Card
                   href="#"
-                  className="relative"
-                  class="course-card rounded-2xl border border-gray-400 dark:border-gray-700"
+                  className="course-card relative rounded-2xl border border-gray-400 dark:border-gray-700"
                 >
                   <h5 className="text-2xl font-bold tracking-tight">
                     Leaderboard

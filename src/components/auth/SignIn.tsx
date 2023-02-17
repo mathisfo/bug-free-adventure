@@ -2,6 +2,7 @@ import { Button } from "flowbite-react";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 import ToggleTheme from "../ToggleTheme";
+import { AiOutlineGithub } from "react-icons/ai";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
@@ -17,127 +18,24 @@ const SignIn = () => {
 
   return (
     <div className="signin-background fixed h-full w-full">
-      <div className="course-card mx-auto my-24 h-3/4 w-1/2 rounded-lg">
+      <div className="course-card mx-auto my-24 h-3/5 w-1/3 rounded-lg">
         <div className="grid justify-items-end p-8">
           <ToggleTheme />
         </div>
-        {forgotPassword == false && signUp == false ? (
-          <div className="px-16 pt-12">
-            <p className="text-color text-4xl font-semibold">Hey!</p>
-            <p className="text-color">
-              Please log in using your university email
-            </p>
-            <p className="text-color pt-8 font-semibold">Email</p>
-            <input
-              type="email"
-              id="email"
-              onChange={(event) => setEmail(event.target.value)}
-              className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-zinc-600 dark:bg-[#303335] dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-              placeholder=""
-              required
-            ></input>
-            <p className="text-color pt-4 font-semibold">Password</p>
-            <input
-              type="password"
-              id="password"
-              className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-zinc-600 dark:bg-[#303335] dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-              placeholder=""
-              required
-            ></input>
-            <p
-              className="text-color grid justify-items-end pt-2 text-sm font-semibold underline hover:cursor-pointer"
-              onClick={() => setForgotPassword(true)}
+        <div className="px-16 pt-12">
+          <p className="text-color text-4xl font-semibold">Hey! 👋🏻</p>
+          <p className="text-color">
+            Please sign in using your GitHub account.
+          </p>
+          <div className="grid pt-8 ">
+            <Button
+              className="my-2 place-self-center bg-[#988efe]"
+              onClick={() => signIn("github", { callbackUrl: "/dashboard" })}
             >
-              Forgot your password?
-            </p>
-            <div className="mt-4 grid justify-items-center">
-              <Button
-                className="bg-[#988efe]"
-                onClick={() =>
-                  signIn("email", {
-                    email: email,
-                    callbackUrl: "/dashboard",
-                  })
-                }
-              >
-                Log in
-              </Button>
-              <Button className="my-2 bg-[#988efe]" onClick={() => signIn()}>
-                Sign in with Discord
-              </Button>
-              <div className="flex flex-row">
-                <p className="text-color pt-5  text-sm">
-                  Don&apos;t have an account yet?
-                </p>
-                <p
-                  className="text-color px-1 pt-5 text-sm font-semibold underline hover:cursor-pointer"
-                  onClick={() => setSignUp(true)}
-                >
-                  Sign up!
-                </p>
-              </div>
-            </div>
+              <AiOutlineGithub className="mr-2 h-6 w-6 " /> Sign in with Github
+            </Button>
           </div>
-        ) : forgotPassword ? (
-          <div className="px-16 pt-12">
-            <p className="text-color text-2xl font-semibold">Reset password</p>
-            <p className="text-color">
-              It&apos;s okay! We all forget sometimes 💙
-            </p>
-            <p className="text-color pt-8 font-semibold">Email</p>
-            <input
-              type="email"
-              id="email"
-              onChange={(event) => setEmail(event.target.value)}
-              className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-zinc-600 dark:bg-[#303335] dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-              placeholder=""
-              required
-            ></input>
-            <div className="mt-4 grid justify-items-center">
-              <Button
-                className="bg-[#988efe]"
-                onClick={() =>
-                  resetPassword("email", {
-                    email: email,
-                    callbackUrl: "",
-                  })
-                }
-              >
-                Reset password
-              </Button>
-            </div>
-          </div>
-        ) : (
-          <div className="px-16 pt-12">
-            <p className="text-color text-2xl font-semibold">Welcome!</p>
-            <p className="text-color">
-              We just need your university email and we&apos;ll send you a magic
-              link ✨
-            </p>
-            <p className="text-color pt-8 font-semibold">Email</p>
-            <input
-              type="email"
-              id="email"
-              onChange={(event) => setEmail(event.target.value)}
-              className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-zinc-600 dark:bg-[#303335] dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-              placeholder=""
-              required
-            ></input>
-            <div className="mt-4 grid justify-items-center">
-              <Button
-                className="bg-[#988efe]"
-                onClick={() =>
-                  signIn("email", {
-                    email: email,
-                    callbackUrl: "",
-                  })
-                }
-              >
-                Sign up
-              </Button>
-            </div>
-          </div>
-        )}
+        </div>
       </div>
     </div>
   );
