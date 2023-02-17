@@ -1,17 +1,14 @@
-import { type as typeEnum } from "@prisma/client";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import ActivityCard from "../../components/ActivityCard";
+import Breadcrumbs from "../../components/Breadcrumbs";
 import ExerciseCard from "../../components/ExerciseCard";
 import ProgressionGrid from "../../components/ProgressionGrid";
 import Timeline from "../../components/Timeline";
-import {
-  Activity,
-  ActivityAnalytics,
-} from "../../server/schema/LearnerActivitySchema";
+import { useExerciseHistory } from "../../hooks/useExerciseHistory";
+import { Activity } from "../../server/schema/LearnerActivitySchema";
 import { api } from "../../utils/api";
-import Breadcrumbs from "../../components/Breadcrumbs";
-import { useEffect, useState } from "react";
 
 const ModuleStatistics = () => {
   const {
@@ -21,12 +18,6 @@ const ModuleStatistics = () => {
   } = api.learnerActivityRouter.getLearnerActivity.useQuery();
 
   const { data: session, status } = useSession();
-
-  const mutation = api.userRouter.addExerciseHistoryToUser.useMutation();
-
-  const [previousData, setPreviousData] =
-    useState<typeof learnerAnalytics>(undefined);
-
   const [selectedActivity, setSelectedActivity] = useState<string | undefined>(
     undefined
   );
@@ -34,48 +25,7 @@ const ModuleStatistics = () => {
   // This hook is used to set the previous data to the current data
   // when the current data is loaded. It is necesarry because we need to monitor when an exercise's successRate goes from 0 to >0.
   // This way we know when the user has completed the exercise.
-  useEffect(() => {
-    if (learnerAnalytics && previousData) {
-      const allSelected = [
-        ...learnerAnalytics.activityAnalytics.challenges,
-        ...learnerAnalytics.activityAnalytics.coding,
-        ...learnerAnalytics.activityAnalytics.examples,
-      ];
-
-      const allPrevious = [
-        ...previousData.activityAnalytics.challenges,
-        ...previousData.activityAnalytics.coding,
-        ...previousData.activityAnalytics.examples,
-      ];
-      const selected = allSelected.find(
-        (act) => act.activityId === selectedActivity
-      );
-      const dataPrevious = allPrevious.find(
-        (act) => act.activityId === selectedActivity
-      );
-
-      if (selected && dataPrevious) {
-        if (
-          dataPrevious.successRate === 0 &&
-          selected.successRate > 0 &&
-          selectedActivity
-        ) {
-          mutation.mutate({ activityId: selectedActivity });
-        }
-
-        if (
-          dataPrevious.type === "EXAMPLE" &&
-          selected.type === "EXAMPLE" &&
-          dataPrevious.attempts === 0 &&
-          selected.attempts > 0 &&
-          selectedActivity
-        ) {
-          mutation.mutate({ activityId: selectedActivity });
-        }
-      }
-    }
-    setPreviousData(learnerAnalytics);
-  }, [learnerAnalytics, mutation, previousData, selectedActivity]);
+  useExerciseHistory(learnerAnalytics, selectedActivity);
 
   const router = useRouter();
 
@@ -143,6 +93,7 @@ const ModuleStatistics = () => {
               Recommended next steps
             </div>
             <Timeline
+              learnerAnalytics={learnerAnalytics}
               recommendedActivities={[
                 ...activities.challenges,
                 ...activities.coding,
