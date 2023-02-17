@@ -1,25 +1,49 @@
-import { Button, Card, Checkbox, Label, TextInput } from "flowbite-react";
+import { SelectedEnum } from "@prisma/client";
+import {
+  Alert,
+  Button,
+  Card,
+  Checkbox,
+  Label,
+  TextInput,
+} from "flowbite-react";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import {
   HiAtSymbol,
   HiMail,
   HiUser,
   HiArrowRight,
   HiArrowLeft,
+  HiInformationCircle,
 } from "react-icons/hi";
-import { OnboardingForm } from "../../server/schema/UserSchema";
+import {
+  OnboardingForm,
+  onboardingSchema,
+} from "../../server/schema/UserSchema";
 import { api } from "../../utils/api";
 import ToggleTheme from "../ToggleTheme";
 
 const UIOnboarding = () => {
-  const { register, handleSubmit } = useForm<OnboardingForm>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<OnboardingForm>({
+    resolver: zodResolver(onboardingSchema),
+    defaultValues: {
+      selectedComponents: [],
+    },
+  });
   const router = useRouter();
   const [page, setPage] = useState<string>("welcome");
 
   const mutation = api.userRouter.submitOnboarding.useMutation();
   const ctx = api.useContext();
+
+  console.log("errors", errors);
 
   const onSubmit: SubmitHandler<OnboardingForm> = (data: OnboardingForm) => {
     console.log(data);
@@ -41,9 +65,24 @@ const UIOnboarding = () => {
             <div className="pl-12 pt-12 ">
               <h1 className="text-4xl ">Welcome to Progresso! 👋🏻</h1>
               <h2 className="text-md pt-2">
-                We'll now take you through a few steps to set up your dashboard
-                to best suit your needs.
+                We will now take you through a few steps to set up your
+                dashboard to your needs.
               </h2>
+              <Alert
+                color="failure"
+                className="mt-2 mr-2"
+                icon={HiInformationCircle}
+              >
+                <span>{errors.protusId?.message}</span>
+              </Alert>
+              <Alert
+                color="failure"
+                className="mt-2 mr-2"
+                icon={HiInformationCircle}
+              >
+                <span>{errors.USNEmail?.message}</span>
+              </Alert>
+
               <h2 className="text-md pt-8 font-medium leading-6">
                 First of all, we need some basic information about you!
               </h2>
@@ -147,16 +186,20 @@ const UIOnboarding = () => {
                   className="course-card relative rounded-2xl border border-gray-400 dark:border-gray-700"
                 >
                   <h5 className="text-2xl font-bold tracking-tight">
-                    Challenge Component
+                    History Graph
                   </h5>
                   <div className="grid grid-cols-3 ">
                     <p className="col-span-2 col-start-1 text-sm text-gray-700 dark:text-gray-400">
-                      This component will show you the challenges you have
-                      completed and
+                      This component show you your progress per day reprented as
+                      a graph.
                     </p>
                     <div className="col-start-3 ml-4 h-16 w-16 rounded bg-blue-200"></div>
                     <div className="col-start-1 row-start-2 mt-4 flex items-center gap-2">
-                      <Checkbox id="select" />
+                      <Checkbox
+                        {...register("selectedComponents")}
+                        id="select"
+                        value={SelectedEnum.HISTORYGRAPH}
+                      />
                       <Label htmlFor="select">Select</Label>
                     </div>
                   </div>
@@ -167,16 +210,20 @@ const UIOnboarding = () => {
                   className="course-card relative rounded-2xl border border-gray-400 dark:border-gray-700"
                 >
                   <h5 className="text-2xl font-bold tracking-tight">
-                    Challenge Component
+                    Activity History
                   </h5>
                   <div className="grid grid-cols-3 ">
                     <p className="col-span-2 col-start-1 text-sm text-gray-700 dark:text-gray-400">
-                      This component will show you the challenges you have
-                      completed and
+                      This component is more detailed than Activity Graph. It
+                      shows your exercise activty per day.
                     </p>
                     <div className="col-start-3 ml-4 h-16 w-16 rounded bg-blue-200"></div>
                     <div className="col-start-1 row-start-2 mt-4 flex items-center gap-2">
-                      <Checkbox id="select" />
+                      <Checkbox
+                        {...register("selectedComponents")}
+                        id="select"
+                        value={SelectedEnum.EXERCISEHISTORY}
+                      />
                       <Label htmlFor="select">Select</Label>
                     </div>
                   </div>
@@ -186,57 +233,19 @@ const UIOnboarding = () => {
                   href="#"
                   className="course-card relative rounded-2xl border border-gray-400 dark:border-gray-700"
                 >
-                  <h5 className="text-2xl font-bold tracking-tight">
-                    Challenge Component
-                  </h5>
+                  <h5 className="text-2xl font-bold tracking-tight">TODO</h5>
                   <div className="grid grid-cols-3 ">
                     <p className="col-span-2 col-start-1 text-sm text-gray-700 dark:text-gray-400">
-                      This component will show you the challenges you have
-                      completed and
+                      This component enables you to keep track of your
+                      assignments with due date.
                     </p>
                     <div className="col-start-3 ml-4 h-16 w-16 rounded bg-blue-200"></div>
                     <div className="col-start-1 row-start-2 mt-4 flex items-center gap-2">
-                      <Checkbox id="select" />
-                      <Label htmlFor="select">Select</Label>
-                    </div>
-                  </div>
-                </Card>
-
-                <Card
-                  href="#"
-                  className="course-card relative rounded-2xl border border-gray-400 dark:border-gray-700"
-                >
-                  <h5 className="text-2xl font-bold tracking-tight">
-                    Challenge Component
-                  </h5>
-                  <div className="grid grid-cols-3 ">
-                    <p className="col-span-2 col-start-1 text-sm text-gray-700 dark:text-gray-400">
-                      This component will show you the challenges you have
-                      completed and
-                    </p>
-                    <div className="col-start-3 ml-4 h-16 w-16 rounded bg-blue-200"></div>
-                    <div className="col-start-1 row-start-2 mt-4 flex items-center gap-2">
-                      <Checkbox id="select" />
-                      <Label htmlFor="select">Select</Label>
-                    </div>
-                  </div>
-                </Card>
-
-                <Card
-                  href="#"
-                  className="course-card relative rounded-2xl border border-gray-400 dark:border-gray-700"
-                >
-                  <h5 className="text-2xl font-bold tracking-tight">
-                    Challenge Component
-                  </h5>
-                  <div className="grid grid-cols-3 ">
-                    <p className="col-span-2 col-start-1 text-sm text-gray-700 dark:text-gray-400">
-                      This component will show you the challenges you have
-                      completed and
-                    </p>
-                    <div className="col-start-3 ml-4 h-16 w-16 rounded bg-blue-200"></div>
-                    <div className="col-start-1 row-start-2 mt-4 flex items-center gap-2">
-                      <Checkbox id="select" />
+                      <Checkbox
+                        {...register("selectedComponents")}
+                        id="select"
+                        value={SelectedEnum.TODO}
+                      />
                       <Label htmlFor="select">Select</Label>
                     </div>
                   </div>
@@ -259,7 +268,7 @@ const UIOnboarding = () => {
           ) : page == "leaderboard" ? (
             <div className="pl-12 pt-12 pr-12">
               <h2 className="text-md font-medium leading-6">
-                Lastly, we want to know whether you're the competitive type.
+                Lastly, we want to know whether you are the competitive type.
               </h2>
               <p className="mt-1 text-sm text-gray-400">
                 By participating in the leaderboard you can compete against your
@@ -280,7 +289,13 @@ const UIOnboarding = () => {
                     </p>
                     <div className="col-start-3 ml-4 h-16 w-16 rounded bg-blue-200"></div>
                     <div className="col-start-1 row-start-2 mt-4 flex items-center gap-2">
-                      <Checkbox id="select" {...register("leaderboard")} />
+                      <input
+                        {...register("leaderboard")}
+                        id="leaderboard"
+                        name="leaderboard"
+                        type="checkbox"
+                        className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                      />
                       <Label htmlFor="select">Select</Label>
                     </div>
                   </div>
@@ -293,7 +308,8 @@ const UIOnboarding = () => {
               >
                 <HiArrowLeft className="mr-2" /> Go back
               </Button>
-              <Button
+              <input
+                className="absolute right-16 bottom-16 mr-2 mb-2 rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 type="submit"
                 value={
                   mutation.isLoading
@@ -302,15 +318,7 @@ const UIOnboarding = () => {
                     ? "Success!"
                     : "Submit"
                 }
-                className="absolute right-16 bottom-16"
-                onClick={() => setPage("leaderboard")}
-              >
-                {mutation.isLoading
-                  ? "Loading.."
-                  : mutation.isSuccess
-                  ? "Success!"
-                  : "Finish onboarding"}
-              </Button>
+              />
             </div>
           ) : (
             <></>
