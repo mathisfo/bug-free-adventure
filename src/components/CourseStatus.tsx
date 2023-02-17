@@ -5,10 +5,8 @@ import {
   EllipsisHorizontalCircleIcon,
   XCircleIcon,
 } from "@heroicons/react/24/outline";
-import { type as typeEnum } from "@prisma/client";
 import Link from "next/link";
 import { useState } from "react";
-import { Activity } from "../server/schema/LearnerActivitySchema";
 import { api } from "../utils/api";
 
 const CourseStatus = () => {
@@ -69,13 +67,9 @@ const CourseStatus = () => {
         .filter((act) => act.relatedTopic === module)
         .filter((act) => act.attempts > 0).length;
 
-      console.log(success);
-
       const total = activites.examples.filter(
         (act) => act.relatedTopic === module
       ).length;
-
-      console.log(total);
 
       return {
         success: success,

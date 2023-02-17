@@ -4,7 +4,7 @@ import { list } from "postcss";
 import { Activity } from "../server/schema/LearnerActivitySchema";
 import { api } from "../utils/api";
 
-const CourseCard = () => {
+const CourseCard = ({ courseName }: { courseName: string }) => {
   const router = useRouter();
 
   const {
@@ -51,7 +51,7 @@ const CourseCard = () => {
   return (
     <div
       onClick={(e) => onClick("/courses/Java", e)}
-      className={`course-card mr-4 w-2/5 cursor-pointer rounded-lg p-2 transition duration-300 ease-in-out hover:scale-105`}
+      className={`course-card mr-4 w-4/5 cursor-pointer rounded-lg p-2 transition duration-300 ease-in-out hover:scale-105`}
     >
       <div className="my-4 ml-4 flex flex-row items-center">
         <div
@@ -60,7 +60,7 @@ const CourseCard = () => {
           <CommandLineIcon className="text-white"></CommandLineIcon>
         </div>
         <div className="text-color px-4 py-4 text-2xl font-semibold uppercase">
-          Java
+          {courseName.toUpperCase()}
         </div>
       </div>
       <div className="text-color flex flex-row items-baseline px-4 pt-2 text-lg font-bold">

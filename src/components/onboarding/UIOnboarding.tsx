@@ -1,3 +1,5 @@
+import { SelectedEnum } from "@prisma/client";
+
 import { Button, Card, Checkbox, Label, TextInput } from "flowbite-react";
 import { useRouter } from "next/router";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -19,6 +21,10 @@ const UIOnboarding = () => {
       onSuccess: () => {
         ctx.invalidate();
         router.reload();
+      },
+      onError: (err) => {
+        console.log(err.message);
+        console.log(err.shape);
       },
     });
   };
@@ -149,69 +155,54 @@ const UIOnboarding = () => {
             <div className="mt-5 grid grid-cols-2 gap-2 md:col-span-2 md:mt-0">
               <Card href="#">
                 <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                  Challenge Component
+                  History Graph
                 </h5>
                 <p className="font-normal text-gray-700 dark:text-gray-400">
-                  This component will show you the challenges you have completed
-                  and
+                  This component show you your progress per day reprented as a
+                  graph
                 </p>
                 <div className="flex items-center gap-2">
-                  <Checkbox id="select" />
+                  <Checkbox
+                    {...register("selectedComponents")}
+                    id="select"
+                    value={SelectedEnum.HISTORYGRAPH}
+                  />
                   <Label htmlFor="select">Select</Label>
                 </div>
               </Card>
 
               <Card href="#">
                 <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                  Challenge Component
+                  Activity History
                 </h5>
                 <p className="font-normal text-gray-700 dark:text-gray-400">
-                  This component will show you the challenges you have completed
-                  and
+                  This component is more detailed than Activity Graph. It shows
+                  your exercise activty per day
                 </p>
                 <div className="flex items-center gap-2">
-                  <Checkbox id="select" />
+                  <Checkbox
+                    {...register("selectedComponents")}
+                    id="select"
+                    value={SelectedEnum.EXERCISEHISTORY}
+                  />
                   <Label htmlFor="select">Select</Label>
                 </div>
               </Card>
 
               <Card href="#">
                 <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                  Challenge Component
+                  TODO
                 </h5>
                 <p className="font-normal text-gray-700 dark:text-gray-400">
-                  This component will show you the challenges you have completed
-                  and
+                  This component enables you to keep track of your assignments
+                  with due date
                 </p>
                 <div className="flex items-center gap-2">
-                  <Checkbox id="select" />
-                  <Label htmlFor="select">Select</Label>
-                </div>
-              </Card>
-
-              <Card href="#">
-                <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                  Challenge Component
-                </h5>
-                <p className="font-normal text-gray-700 dark:text-gray-400">
-                  This component will show you the challenges you have completed
-                  and
-                </p>
-                <div className="flex items-center gap-2">
-                  <Checkbox id="select" />
-                  <Label htmlFor="select">Select</Label>
-                </div>
-              </Card>
-              <Card href="#">
-                <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                  Challenge Component
-                </h5>
-                <p className="font-normal text-gray-700 dark:text-gray-400">
-                  This component will show you the challenges you have completed
-                  and
-                </p>
-                <div className="flex items-center gap-2">
-                  <Checkbox id="select" />
+                  <Checkbox
+                    {...register("selectedComponents")}
+                    id="select"
+                    value={SelectedEnum.TODO}
+                  />
                   <Label htmlFor="select">Select</Label>
                 </div>
               </Card>
@@ -288,7 +279,7 @@ const UIOnboarding = () => {
               ? "Loading.."
               : mutation.isSuccess
               ? "Success!"
-              : "Loading.."
+              : "Submit"
           }
         />
       </form>
