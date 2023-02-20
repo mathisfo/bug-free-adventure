@@ -9,7 +9,7 @@ import {
 } from "flowbite-react";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { set, SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   HiAtSymbol,
@@ -30,6 +30,8 @@ const UIOnboarding = () => {
   const {
     register,
     handleSubmit,
+    trigger,
+    setValue,
     formState: { errors },
   } = useForm<OnboardingForm>({
     resolver: zodResolver(onboardingSchema),
@@ -40,10 +42,17 @@ const UIOnboarding = () => {
   const router = useRouter();
   const [page, setPage] = useState<string>("welcome");
 
-  const mutation = api.userRouter.submitOnboarding.useMutation();
   const ctx = api.useContext();
 
-  console.log("errors", errors);
+  const mutation = api.userRouter.submitOnboarding.useMutation();
+
+  const validateAndGoToNextPage = async () => {
+    const valid = await trigger(["USNEmail", "protusId", "name"]);
+
+    if (valid) {
+      setPage("components");
+    }
+  };
 
   const onSubmit: SubmitHandler<OnboardingForm> = (data: OnboardingForm) => {
     console.log(data);
@@ -68,20 +77,23 @@ const UIOnboarding = () => {
                 We will now take you through a few steps to set up your
                 dashboard to your needs.
               </h2>
-              <Alert
-                color="failure"
-                className="mt-2 mr-2"
-                icon={HiInformationCircle}
-              >
-                <span>{errors.protusId?.message}</span>
-              </Alert>
-              <Alert
-                color="failure"
-                className="mt-2 mr-2"
-                icon={HiInformationCircle}
-              >
-                <span>{errors.USNEmail?.message}</span>
-              </Alert>
+
+              <div>
+                {(errors.USNEmail || errors.protusId || errors.name) && (
+                  <div>
+                    {Object.values(errors).map((error) => (
+                      <Alert
+                        key={error?.type} // Use a unique property of the error object as key
+                        color="failure"
+                        className="mt-2 mr-2"
+                        icon={HiInformationCircle}
+                      >
+                        <span>{error?.message}</span>
+                      </Alert>
+                    ))}
+                  </div>
+                )}
+              </div>
 
               <h2 className="text-md pt-8 font-medium leading-6">
                 First of all, we need some basic information about you!
@@ -99,7 +111,8 @@ const UIOnboarding = () => {
                   id="name"
                   type="text"
                   icon={HiUser}
-                  placeholder="Ola Nordmann"
+                  color={errors.name && "failure"}
+                  placeholder="Ola"
                   required={true}
                 />
               </div>
@@ -122,6 +135,7 @@ const UIOnboarding = () => {
                     id="USNEmail"
                     type="email"
                     icon={HiMail}
+                    color={errors.USNEmail && "failure"}
                     placeholder="olanr@usn.no"
                     required={true}
                   />
@@ -153,6 +167,7 @@ const UIOnboarding = () => {
                     {...register("protusId", { valueAsNumber: true })}
                     id="protusId"
                     type="number"
+                    color={errors.protusId && "failure"}
                     icon={HiAtSymbol}
                     placeholder="22xxx"
                     required={true}
@@ -161,7 +176,7 @@ const UIOnboarding = () => {
               </div>
               <Button
                 className="absolute right-16 bottom-16"
-                onClick={() => setPage("components")}
+                onClick={() => validateAndGoToNextPage()}
               >
                 Choose your components
                 <HiArrowRight className="ml-2" />{" "}
@@ -180,11 +195,9 @@ const UIOnboarding = () => {
                 You can always go back into settings to change your preferences
                 later.
               </p>
-              <div className="mt-5 grid grid-cols-3 gap-4">
-                <Card
-                  href="#"
-                  className="course-card relative rounded-2xl border border-gray-400 dark:border-gray-700"
-                >
+
+              <div className="mt-5 grid select-none grid-cols-3 gap-4">
+                <Card className="course-card relative rounded-2xl border border-gray-400  dark:border-gray-700">
                   <h5 className="text-2xl font-bold tracking-tight">
                     History Graph
                   </h5>
@@ -205,10 +218,7 @@ const UIOnboarding = () => {
                   </div>
                 </Card>
 
-                <Card
-                  href="#"
-                  className="course-card relative rounded-2xl border border-gray-400 dark:border-gray-700"
-                >
+                <Card className="course-card relative rounded-2xl border border-gray-400  dark:border-gray-700">
                   <h5 className="text-2xl font-bold tracking-tight">
                     Activity History
                   </h5>
@@ -229,10 +239,7 @@ const UIOnboarding = () => {
                   </div>
                 </Card>
 
-                <Card
-                  href="#"
-                  className="course-card relative rounded-2xl border border-gray-400 dark:border-gray-700"
-                >
+                <Card className="course-card relative rounded-2xl border border-gray-400  dark:border-gray-700">
                   <h5 className="text-2xl font-bold tracking-tight">TODO</h5>
                   <div className="grid grid-cols-3 ">
                     <p className="col-span-2 col-start-1 text-sm text-gray-700 dark:text-gray-400">
@@ -276,10 +283,7 @@ const UIOnboarding = () => {
                 will show up on the leaderboard.
               </p>
               <div className="mt-5 grid grid-cols-3 gap-4">
-                <Card
-                  href="#"
-                  className="course-card relative rounded-2xl border border-gray-400 dark:border-gray-700"
-                >
+                <Card className="course-card relative rounded-2xl border border-gray-400  dark:border-gray-700">
                   <h5 className="text-2xl font-bold tracking-tight">
                     Leaderboard
                   </h5>
@@ -309,7 +313,7 @@ const UIOnboarding = () => {
                 <HiArrowLeft className="mr-2" /> Go back
               </Button>
               <input
-                className="absolute right-16 bottom-16 mr-2 mb-2 rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                className="absolute right-16 bottom-16 mr-2 mb-2 rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-medium text-white hover:cursor-pointer hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 type="submit"
                 value={
                   mutation.isLoading

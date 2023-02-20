@@ -10,6 +10,7 @@ import { log } from "console";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { Updater } from "react-query/types/core/utils";
 import { ToDoForm } from "../../server/schema/UserSchema";
 import { api } from "../../utils/api";
 
@@ -25,14 +26,20 @@ const ToDoComp = () => {
     return <div>Loading...</div>;
   }
 
+  const {
+    data: todo,
+    isSuccess,
+    isLoading,
+  } = api.userRouter.getToDosOnUser.useQuery({ userId: session.user.id });
+
   const addToDoMutation = api.userRouter.addToDoToUser.useMutation({
     async onMutate(newToDo) {
       // Optimistic update, delete the transaction from the list immediately
-      await ctx.userRouter.getToDoOnUser.cancel();
-      const prevData = ctx.userRouter.getToDoOnUser.getData({
+      await ctx.userRouter.getToDosOnUser.cancel();
+      const prevData = ctx.userRouter.getToDosOnUser.getData({
         userId: session.user.id,
       });
-      ctx.userRouter.getToDoOnUser.setData(
+      ctx.userRouter.getToDosOnUser.setData(
         { userId: session.user.id },
         (old: any) => [...old, newToDo.toDo]
       );
@@ -41,17 +48,37 @@ const ToDoComp = () => {
     },
     // Invalidate the query after the mutation is complete to sync wit server
     onSettled() {
-      ctx.userRouter.getToDoOnUser.invalidate({ userId: session.user.id });
+      ctx.userRouter.getToDosOnUser.invalidate({ userId: session.user.id });
     },
   });
 
-  const setCompletedMutation = api.userRouter.setToDoCompleted.useMutation();
+  const setCompletedMutation = api.userRouter.setToDoCompleted.useMutation({
+    async onMutate(newTodo) {
+      // Optimistic update, delete the transaction from the list immediately
+      await ctx.userRouter.getToDosOnUser.cancel();
+      const prevData = ctx.userRouter.getToDosOnUser.getData({
+        userId: session.user.id,
+      });
+      ctx.userRouter.getToDosOnUser.setData(
+        { userId: session.user.id },
+        (old: any) => {
+          const newTodos = old.map((todo: ToDo) => {
+            if (todo.todoId === newTodo.todoId) {
+              return { ...todo, completed: true };
+            }
+            return todo;
+          });
+          return newTodos;
+        }
+      );
 
-  const {
-    data: todo,
-    isSuccess,
-    isLoading,
-  } = api.userRouter.getToDoOnUser.useQuery({ userId: session.user.id });
+      return { prevData };
+    },
+    // Invalidate the query after the mutation is complete to sync wit server
+    onSettled() {
+      ctx.userRouter.getToDosOnUser.invalidate({ userId: session.user.id });
+    },
+  });
 
   if (isLoading || !isSuccess) {
     return <div>Loading...</div>;
