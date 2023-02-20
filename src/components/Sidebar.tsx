@@ -206,7 +206,7 @@ const Sidebar = ({ children }: { children: React.ReactElement }) => {
                   <div className="absolute bottom-4 flex w-full flex-shrink-0 border-t border-gray-200 p-4 dark:border-gray-500">
                     <div className="group block flex w-full flex-shrink-0 flex-row items-center">
                       <Link href="/profile">
-                        <div className="flex flex-row items-center">
+                        <div className="flex cursor-pointer flex-row items-center">
                           <UserCircleIcon className="text-color mr-2 h-8 w-8"></UserCircleIcon>
 
                           <p className="text-color">{session.user?.name}</p>
