@@ -177,10 +177,10 @@ const Sidebar = ({ children }: { children: React.ReactElement }) => {
                                       )}
                                     >
                                       <subItem.icon
-                                        className="mr-1 h-5 w-5 flex-shrink-0 text-gray-600 group-hover:text-gray-500"
+                                        className="mr-1 h-5 w-5 flex-shrink-0 text-gray-600 group-hover:text-gray-500 dark:text-gray-300"
                                         aria-hidden="true"
                                       />
-                                      <p className="text-gray-700">
+                                      <p className="text-gray-700 dark:text-gray-300">
                                         {subItem.name}
                                       </p>
                                     </Disclosure.Button>
