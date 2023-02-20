@@ -4,6 +4,7 @@ import {
   Cog6ToothIcon,
   FolderIcon,
   UserCircleIcon,
+  CommandLineIcon,
 } from "@heroicons/react/24/outline";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
@@ -33,7 +34,9 @@ const Sidebar = ({ children }: { children: React.ReactElement }) => {
       name: "Courses",
       icon: FolderIcon,
       current: router.asPath === "/courses",
-      children: [{ name: "Java", href: "/courses/Java" }],
+      children: [
+        { name: "Java", href: "/courses/Java", icon: CommandLineIcon },
+      ],
     },
     {
       name: "Settings",
@@ -170,10 +173,16 @@ const Sidebar = ({ children }: { children: React.ReactElement }) => {
                                         item.current
                                           ? currentItemStyling
                                           : menuItemStyling,
-                                        "group flex w-full items-center rounded-md py-2 pl-11 pl-2 text-sm font-medium opacity-60"
+                                        "group flex w-full items-center rounded-md py-2 pl-11 pl-2 text-sm font-medium opacity-80"
                                       )}
                                     >
-                                      {subItem.name}
+                                      <subItem.icon
+                                        className="mr-1 h-5 w-5 flex-shrink-0 text-gray-600 group-hover:text-gray-500"
+                                        aria-hidden="true"
+                                      />
+                                      <p className="text-gray-700">
+                                        {subItem.name}
+                                      </p>
                                     </Disclosure.Button>
                                   ))}
                                 </Disclosure.Panel>
