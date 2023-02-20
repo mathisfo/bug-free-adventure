@@ -111,9 +111,8 @@ const CourseStatus2 = () => {
           .slice(0, lengthOfArray / 2)
           .map((module, index) => {
             return (
-              <div>
+              <div key={module.name}>
                 <div
-                  key={module.name}
                   onClick={() => handleClick(index)}
                   className="relative -mb-4 h-16 w-full cursor-pointer items-center rounded-xl bg-[#889BFC] dark:bg-[#7D76CA]"
                 >
@@ -143,6 +142,7 @@ const CourseStatus2 = () => {
                       {Object.keys(learnerAnalytics.activityAnalytics).map(
                         (activityType, index) => (
                           <Link
+                            key={activityType}
                             href={{
                               pathname: `courses/Java/${module.name}`,
                               query: {
@@ -231,9 +231,8 @@ const CourseStatus2 = () => {
           .slice(lengthOfArray / 2, lengthOfArray)
           .map((module, index) => {
             return (
-              <div>
+              <div key={module.name}>
                 <div
-                  key={module.name}
                   onClick={() => handleClick(index)}
                   className="relative -mb-4 h-16 w-full cursor-pointer items-center rounded-xl bg-[#889BFC] dark:bg-[#7D76CA]"
                 >
