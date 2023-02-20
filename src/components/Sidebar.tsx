@@ -6,6 +6,7 @@ import {
   UserCircleIcon,
 } from "@heroicons/react/24/outline";
 import { signOut, useSession } from "next-auth/react";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { HiOutlineLogout } from "react-icons/hi";
 import SignIn from "./auth/SignIn";
@@ -108,7 +109,7 @@ const Sidebar = ({ children }: { children: React.ReactElement }) => {
             <div className="back-layer grid grid-cols-5 px-2 pt-2 ">
               <div className="grid-col-1 z-index-2 grid h-screen">
                 <div className="sidebar-color relative rounded-l-lg py-8 dark:border-gray-500 ">
-                  <div className="mb-12 mt-6 flex justify-center">
+                  <div className="mb-6 mt-6 flex justify-center">
                     <img src="/logo.svg" alt="next" className="w-1/3" />
                   </div>
                   <div className="flex flex-shrink-0 justify-center px-2">
@@ -119,21 +120,22 @@ const Sidebar = ({ children }: { children: React.ReactElement }) => {
                       {navigation.map((item) =>
                         !item.children ? (
                           <div key={item.name}>
-                            <a
-                              href={item.href}
-                              className={classNames(
-                                item.current
-                                  ? currentItemStyling
-                                  : menuItemStyling,
-                                "group flex w-full items-center rounded-md py-2 pl-2 text-sm font-medium"
-                              )}
-                            >
-                              <item.icon
-                                className="mr-3 h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
-                                aria-hidden="true"
-                              />
-                              {item.name}
-                            </a>
+                            <Link href={item.href}>
+                              <div
+                                className={classNames(
+                                  item.current
+                                    ? currentItemStyling
+                                    : menuItemStyling,
+                                  "group flex w-full cursor-pointer items-center rounded-md py-2 pl-2 text-sm font-medium"
+                                )}
+                              >
+                                <item.icon
+                                  className="mr-3 h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
+                                  aria-hidden="true"
+                                />
+                                <p>{item.name}</p>
+                              </div>
+                            </Link>
                           </div>
                         ) : (
                           <Disclosure
@@ -202,20 +204,20 @@ const Sidebar = ({ children }: { children: React.ReactElement }) => {
                     </nav>
                   </div>
                   <div className="absolute bottom-4 flex w-full flex-shrink-0 border-t border-gray-200 p-4 dark:border-gray-500">
-                    <a href="#" className="group block w-full flex-shrink-0">
-                      <div className="flex items-center space-x-2">
-                        <div>
-                          <UserCircleIcon className="text-color h-8 w-8"></UserCircleIcon>
+                    <div className="group block flex w-full flex-shrink-0 flex-row items-center">
+                      <Link href="/profile">
+                        <div className="flex cursor-pointer flex-row items-center">
+                          <UserCircleIcon className="text-color mr-2 h-8 w-8"></UserCircleIcon>
+
+                          <p className="text-color">{session.user?.name}</p>
                         </div>
-                        <div className="text-color">{session.user?.name}</div>
-                        <div>
-                          <HiOutlineLogout
-                            className="text-color ml-14 h-6 w-6"
-                            onClick={() => signOut()}
-                          ></HiOutlineLogout>
-                        </div>
-                      </div>
-                    </a>
+                      </Link>
+
+                      <HiOutlineLogout
+                        className="text-color absolute right-4 h-6 w-6 cursor-pointer"
+                        onClick={() => signOut()}
+                      ></HiOutlineLogout>
+                    </div>
                   </div>
                 </div>
               </div>

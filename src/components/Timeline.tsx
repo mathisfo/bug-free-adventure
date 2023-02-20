@@ -4,12 +4,23 @@ import {
   FlagIcon,
 } from "@heroicons/react/24/solid";
 import { useSession } from "next-auth/react";
+import { useState } from "react";
+import { useExerciseHistory } from "../hooks/useExerciseHistory";
 import { Activity } from "../server/schema/LearnerActivitySchema";
 
-const TimelineWrapper = (props: { recommendedActivities: Activity[] }) => {
+const TimelineWrapper = (props: {
+  recommendedActivities: Activity[];
+  learnerAnalytics: any;
+}) => {
   const { data: session, status } = useSession();
 
   const { recommendedActivities } = props;
+
+  const [selectedActivity, setSelectedActivity] = useState<string | undefined>(
+    undefined
+  );
+
+  useExerciseHistory(props.learnerAnalytics, selectedActivity);
 
   if (recommendedActivities.length === 0) {
     return <div>No recommendations have been generated yet</div>;
@@ -31,6 +42,7 @@ const TimelineWrapper = (props: { recommendedActivities: Activity[] }) => {
               session.user?.protusId +
               "&grp=NorwayFall2022B&sid=TEST&cid=352"
             }
+            onClick={() => setSelectedActivity(activity.activityId)}
             rel="noreferrer"
           >
             {activity.type == "EXAMPLE" ? (
