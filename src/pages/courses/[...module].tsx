@@ -33,7 +33,19 @@ const ModuleStatistics = () => {
   const { type } = router.query;
 
   if (isLoading || !isSuccess || status === "loading") {
-    return <div>Loading...</div>;
+    return (
+      <div className="mx-auto mt-32 w-4/5 rounded-md p-4">
+        <div className="flex animate-pulse space-x-4">
+          <div className="flex-1 space-y-6 py-1">
+            <div className="loading h-8 rounded"></div>
+            <div className="loading h-8 rounded"></div>
+            <div className="loading h-8 rounded"></div>
+            <div className="loading h-8 rounded"></div>
+            <div className="loading h-8 rounded"></div>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   if (status === "unauthenticated" || !session?.user) {
@@ -136,7 +148,7 @@ const ModuleStatistics = () => {
     <>
       <Breadcrumbs
         currentPage={module ? module[1] : "404"}
-        currentType={type == "CODING" ? type : type + "S"}
+        currentType={type}
       />
       <div className=" background-color absolute mt-6 grid w-full  overflow-x-auto rounded-lg">
         <div className="flex flex-row items-center space-x-2 justify-self-end pb-4 pr-12 pt-6">
