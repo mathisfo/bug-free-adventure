@@ -120,20 +120,21 @@ const Sidebar = ({ children }: { children: React.ReactElement }) => {
                       {navigation.map((item) =>
                         !item.children ? (
                           <div key={item.name}>
-                            <Link
-                              href={item.href}
-                              className={classNames(
-                                item.current
-                                  ? currentItemStyling
-                                  : menuItemStyling,
-                                "group flex w-full items-center rounded-md py-2 pl-2 text-sm font-medium"
-                              )}
-                            >
-                              <item.icon
-                                className="mr-3 h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
-                                aria-hidden="true"
-                              />
-                              {item.name}
+                            <Link href={item.href}>
+                              <div
+                                className={classNames(
+                                  item.current
+                                    ? currentItemStyling
+                                    : menuItemStyling,
+                                  "group flex w-full cursor-pointer items-center rounded-md py-2 pl-2 text-sm font-medium"
+                                )}
+                              >
+                                <item.icon
+                                  className="mr-3 h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
+                                  aria-hidden="true"
+                                />
+                                <p>{item.name}</p>
+                              </div>
                             </Link>
                           </div>
                         ) : (
@@ -204,13 +205,12 @@ const Sidebar = ({ children }: { children: React.ReactElement }) => {
                   </div>
                   <div className="absolute bottom-4 flex w-full flex-shrink-0 border-t border-gray-200 p-4 dark:border-gray-500">
                     <div className="group block flex w-full flex-shrink-0 flex-row items-center">
-                      <Link
-                        href="/profile"
-                        className="flex flex-row items-center"
-                      >
-                        <UserCircleIcon className="text-color mr-2 h-8 w-8"></UserCircleIcon>
+                      <Link href="/profile">
+                        <div className="flex flex-row items-center">
+                          <UserCircleIcon className="text-color mr-2 h-8 w-8"></UserCircleIcon>
 
-                        <p className="text-color">{session.user?.name}</p>
+                          <p className="text-color">{session.user?.name}</p>
+                        </div>
                       </Link>
 
                       <HiOutlineLogout
