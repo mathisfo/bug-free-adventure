@@ -6,7 +6,7 @@ const Profile = () => {
   const { data: session, status } = useSession({ required: true });
 
   if (status == "loading") {
-    return <div>Loading...</div>;
+    return <div></div>;
   }
 
   const {
@@ -18,10 +18,34 @@ const Profile = () => {
   });
 
   if (isLoading || !isSuccess) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <div className="background-color text-color mr-4 h-full w-1/2 rounded-r-lg p-16 ">
+          <div className="mb-16 mt-12">
+            <div className="grid grid-cols-3 items-baseline border-b dark:border-zinc-700">
+              <div className="loading h-8 rounded "></div>
+              <div className="loading h-8 rounded"></div>
+            </div>
+            <div className="my-8 grid grid-cols-3 items-baseline border-b dark:border-zinc-700">
+              <div className="loading h-8 rounded"></div>
+              <div className="loading h-8 rounded"></div>
+            </div>
+            <div className="my-8 grid grid-cols-3 items-baseline border-b dark:border-zinc-700">
+              <div className="loading h-8 rounded"></div>
+              <div className="loading h-8 rounded"></div>
+            </div>
+          </div>
+          <div className="text-md mb-4 flex flex-row gap-3 font-semibold uppercase">
+            <div className="loading h-8 rounded"></div>
+          </div>
+          <div className="my-8 grid grid-cols-3 items-baseline border-b dark:border-zinc-700">
+            <div className="loading h-8 rounded"></div>
+            <div className="loading h-8 rounded"></div>
+          </div>
+        </div>
+      </div>
+    );
   }
-
-  console.log("created at:" + session?.user?.createdAt?.toDateString);
 
   return (
     <div>

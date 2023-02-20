@@ -50,32 +50,13 @@ const Sidebar = ({ children }: { children: React.ReactElement }) => {
   const currentItemStyling =
     "text-gray-900 dark:text-white bg-indigo-50 dark:bg-[#303335]/75 dark:hover:bg-[#1C1C1F] hover:bg-indigo-100";
 
-  <div className="mx-auto w-full rounded-md p-4">
-    <div className="flex animate-pulse space-x-4">
-      <div className="flex-1 space-y-6 py-1">
-        <div className="loading h-8 rounded"></div>
-        <div className="loading h-8 rounded"></div>
-        <div className="loading h-8 rounded"></div>
-        <div className="loading h-8 rounded"></div>
-        <div className="loading h-8 rounded"></div>
-      </div>
-    </div>
-  </div>;
-
   if (status === "loading") {
     return (
       <div className="back-layer grid grid-cols-5 px-2 pt-2 ">
         <div className="grid-col-1 z-index-2 grid h-screen">
           <div className="sidebar-color relative rounded-l-lg py-8 dark:border-gray-500 ">
-            <div className="mb-12 mt-12 flex justify-center">
-              {/*
-              Uncomment when logo is found
-               <Image
-                src="/logo.svg"
-                alt="next"
-                layout="fill"
-                className="w-1/3"
-              /> */}
+            <div className="mb-6 mt-6 flex justify-center">
+              <img src="/logo.svg" alt="next" className="w-1/3" />
             </div>
             <div className="flex justify-center">
               <div className="loading h-8 w-44 rounded"></div>
