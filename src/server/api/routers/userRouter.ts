@@ -99,7 +99,7 @@ export const userRouter = createTRPCRouter({
         },
       });
     }),
-  getToDoOnUser: protectedProcedure
+  getToDosOnUser: protectedProcedure
     .input(z.object({ userId: z.string() }))
     .query(async ({ ctx, input }) => {
       const todo = await ctx.prisma.toDo.findMany({
