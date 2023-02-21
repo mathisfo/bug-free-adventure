@@ -1,4 +1,8 @@
-import { FlagIcon } from "@heroicons/react/24/outline";
+import {
+  CommandLineIcon,
+  DocumentTextIcon,
+  FlagIcon,
+} from "@heroicons/react/24/outline";
 import { ActivityResource, ExerciseHistory } from "@prisma/client";
 import { useSession } from "next-auth/react";
 import { api } from "../../utils/api";
@@ -7,7 +11,15 @@ const ExerciseHistoryComp = () => {
   const { data: session, status } = useSession({ required: true });
 
   if (status == "loading") {
-    return <div>Loading...</div>;
+    return (
+      <div className="mx-auto w-full rounded-md p-4">
+        <div className="flex animate-pulse space-x-4">
+          <div className="flex-1 space-y-6 py-1">
+            <div className="loading h-60 rounded"></div>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   const {
@@ -19,7 +31,15 @@ const ExerciseHistoryComp = () => {
   });
 
   if (isLoading || !isSuccess) {
-    return <div>Loading...</div>;
+    return (
+      <div className="mx-auto w-full rounded-md p-4">
+        <div className="flex animate-pulse space-x-4">
+          <div className="flex-1 space-y-6 py-1">
+            <div className="loading h-60 rounded"></div>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   const grouped = history.reduce(
@@ -45,20 +65,17 @@ const ExerciseHistoryComp = () => {
   return (
     <>
       {result != undefined && result.length > 0 ? (
-        <div className="background-color relative col-span-4 mr-4 w-full  overflow-x-auto rounded-r-lg ">
+        <div className="background-color w-full overflow-x-auto ">
           {Object.entries(grouped).map((e, index) => (
-            <div
-              key={index}
-              className="mb-4 rounded-lg border border-gray-100 bg-gray-50 p-5 dark:border-gray-700 dark:bg-gray-800"
-            >
-              <time className="text-lg font-semibold text-gray-900 dark:text-white">
+            <div key={index} className="course-card mb-4 rounded-lg p-5 ">
+              <time className="text-color text-lg font-semibold dark:text-white">
                 {e[0]}
               </time>
-              <ol className="divider-gray-200 mt-3 divide-y dark:divide-gray-700 ">
+              <ol className="mt-3 divide-y dark:divide-gray-700 ">
                 {e[1].map((hist) => (
                   <div
                     key={hist.historyId}
-                    className="rounded-lg border-gray-100 bg-gray-50 p-5 dark:border-gray-700 dark:bg-gray-800"
+                    className="mb-1  rounded-lg bg-[#f9f9fb] p-5 dark:bg-[#26272A]"
                   >
                     <li>
                       <a
@@ -72,7 +89,13 @@ const ExerciseHistoryComp = () => {
                             </span>
                           </div>
                           <span className="inline-flex items-center text-xs font-normal text-gray-500 dark:text-gray-400">
-                            <FlagIcon className="mr-1 h-3 w-3" />
+                            {hist.ActivityResource.type == "EXAMPLE" ? (
+                              <DocumentTextIcon className="mr-2 h-3 w-3 text-[#3c3b95]"></DocumentTextIcon>
+                            ) : hist.ActivityResource.type == "CODING" ? (
+                              <FlagIcon className="mr-2 h-3 w-3 text-[#5f80f4]"></FlagIcon>
+                            ) : (
+                              <CommandLineIcon className="mr-2 h-3 w-3 text-[#988efe]"></CommandLineIcon>
+                            )}
                             {hist.ActivityResource.type}
                           </span>
                         </div>
@@ -83,8 +106,6 @@ const ExerciseHistoryComp = () => {
               </ol>
             </div>
           ))}
-
-          <div className="background-color h-32"></div>
         </div>
       ) : (
         <div>You have no history yet</div>

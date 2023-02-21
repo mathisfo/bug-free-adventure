@@ -33,7 +33,18 @@ const ModuleStatistics = () => {
   const { type } = router.query;
 
   if (isLoading || !isSuccess || status === "loading") {
-    return <div>Loading...</div>;
+    return (
+      <div className="mx-12 mt-36 flex grid animate-pulse grid-cols-4 gap-8">
+        <div className="loading h-72 rounded"></div>
+        <div className="loading h-72 rounded"></div>
+        <div className="loading h-72 rounded"></div>
+        <div className="loading h-72 rounded"></div>
+        <div className="loading h-72 rounded"></div>
+        <div className="loading h-72 rounded"></div>
+        <div className="loading h-72 rounded"></div>
+        <div className="loading h-72 rounded"></div>
+      </div>
+    );
   }
 
   if (status === "unauthenticated" || !session?.user) {

@@ -1,5 +1,4 @@
 import {
-  BellAlertIcon,
   EyeIcon,
   EyeSlashIcon,
   PlusIcon,
@@ -24,7 +23,15 @@ const ToDoComp = () => {
   const [showCompleted, setShowCompleted] = useState(true);
 
   if (status == "loading") {
-    return <div>Loading...</div>;
+    return (
+      <div className="mx-auto w-full rounded-md p-4">
+        <div className="flex animate-pulse space-x-4">
+          <div className="flex-1 space-y-6 py-1">
+            <div className="loading h-64 rounded"></div>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   const {
@@ -105,7 +112,15 @@ const ToDoComp = () => {
   });
 
   if (isLoading || !isSuccess) {
-    return <div>Loading...</div>;
+    return (
+      <div className="mx-auto w-full rounded-md p-4">
+        <div className="flex animate-pulse space-x-4">
+          <div className="flex-1 space-y-6 py-1">
+            <div className="loading h-64 rounded"></div>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   const onSubmit: SubmitHandler<ToDoForm> = (data: ToDoForm) => {

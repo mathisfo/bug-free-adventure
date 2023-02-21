@@ -6,7 +6,19 @@ const Profile = () => {
   const { data: session, status } = useSession({ required: true });
 
   if (status == "loading") {
-    return <div>Loading...</div>;
+    return (
+      <div className="mx-auto mt-32 w-4/5 rounded-md p-4">
+        <div className="flex animate-pulse space-x-4">
+          <div className="flex-1 space-y-6 py-1">
+            <div className="loading h-8 rounded"></div>
+            <div className="loading h-8 rounded"></div>
+            <div className="loading h-8 rounded"></div>
+            <div className="loading h-8 rounded"></div>
+            <div className="loading h-8 rounded"></div>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   const {
@@ -18,7 +30,19 @@ const Profile = () => {
   });
 
   if (isLoading || !isSuccess) {
-    return <div>Loading...</div>;
+    return (
+      <div className="mx-auto mt-32 w-4/5 rounded-md p-4">
+        <div className="flex animate-pulse space-x-4">
+          <div className="flex-1 space-y-6 py-1">
+            <div className="loading h-8 rounded"></div>
+            <div className="loading h-8 rounded"></div>
+            <div className="loading h-8 rounded"></div>
+            <div className="loading h-8 rounded"></div>
+            <div className="loading h-8 rounded"></div>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   console.log("created at:" + session?.user?.createdAt?.toDateString);
@@ -42,11 +66,9 @@ const Profile = () => {
             </p>
           </div>
           <div className="my-8 grid grid-cols-3 items-baseline border-b dark:border-zinc-700">
-            <p className=" col-start-1 text-sm font-semibold uppercase">
-              Protus ID
-            </p>
+            <p className=" col-start-1 text-sm font-semibold uppercase">ID</p>
             <p className=" col-span-2 col-start-2 text-lg">
-              {session?.user?.protusId}
+              {session?.user?.protusId?.slice(6, 12)}
             </p>
           </div>
         </div>

@@ -14,8 +14,16 @@ const Leaderboard = () => {
     isSuccess,
   } = api.userRouter.getLeaderBoard.useQuery();
 
-  if (isLoading || !isSuccess) {
-    return <div>Loading...</div>;
+  if (!isSuccess || isLoading) {
+    return (
+      <div className="mx-auto w-full rounded-md p-4">
+        <div className="flex animate-pulse space-x-4">
+          <div className="flex-1 space-y-6 py-1">
+            <div className="loading mt-6 h-60 rounded"></div>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   if (status === "loading") {
@@ -28,7 +36,7 @@ const Leaderboard = () => {
   const userScore = leaderboard[leaderboardPosition - 1]?.score;
 
   return (
-    <div className="relative w-4/5 overflow-x-auto rounded-lg">
+    <div className="relative  overflow-x-auto rounded-lg">
       <div className="text-color absolute right-0 top-0 grid h-6 w-16 place-items-center rounded-t-lg bg-gray-200 text-sm font-semibold uppercase dark:bg-[#212124] ">
         <p>java</p>
       </div>
@@ -52,8 +60,8 @@ const Leaderboard = () => {
                 className={classNames(
                   person.userId == session?.user.id
                     ? `bg-[#BFF7E0] dark:bg-[#BFF7E0] dark:text-gray-700`
-                    : `bg-[#fafafa]`,
-                  `text-color border-t  font-semibold dark:border-zinc-700 dark:bg-[#303335]`
+                    : `bg-[#fff] dark:bg-[#212124]`,
+                  `text-color border-t  font-semibold dark:border-zinc-700 `
                 )}
               >
                 <td className="grid place-items-center py-2 px-6 text-center">
