@@ -217,7 +217,24 @@ const UIOnboarding = () => {
                     </div>
                   </div>
                 </Card>
-
+                <Card className="course-card relative rounded-2xl border border-gray-400  dark:border-gray-700">
+                  <h5 className="text-2xl font-bold tracking-tight">TODO</h5>
+                  <div className="grid grid-cols-3 ">
+                    <p className="col-span-2 col-start-1 text-sm text-gray-700 dark:text-gray-400">
+                      This component enables you to keep track of your
+                      assignments with due date.
+                    </p>
+                    <div className="col-start-3 ml-4 h-16 w-16 rounded bg-blue-200"></div>
+                    <div className="col-start-1 row-start-2 mt-4 flex items-center gap-2">
+                      <Checkbox
+                        {...register("selectedComponents")}
+                        id="select"
+                        value={SelectedEnum.TODO}
+                      />
+                      <Label htmlFor="select">Select</Label>
+                    </div>
+                  </div>
+                </Card>
                 <Card className="course-card relative rounded-2xl border border-gray-400  dark:border-gray-700">
                   <h5 className="text-2xl font-bold tracking-tight">
                     Activity History
@@ -233,25 +250,6 @@ const UIOnboarding = () => {
                         {...register("selectedComponents")}
                         id="select"
                         value={SelectedEnum.EXERCISEHISTORY}
-                      />
-                      <Label htmlFor="select">Select</Label>
-                    </div>
-                  </div>
-                </Card>
-
-                <Card className="course-card relative rounded-2xl border border-gray-400  dark:border-gray-700">
-                  <h5 className="text-2xl font-bold tracking-tight">TODO</h5>
-                  <div className="grid grid-cols-3 ">
-                    <p className="col-span-2 col-start-1 text-sm text-gray-700 dark:text-gray-400">
-                      This component enables you to keep track of your
-                      assignments with due date.
-                    </p>
-                    <div className="col-start-3 ml-4 h-16 w-16 rounded bg-blue-200"></div>
-                    <div className="col-start-1 row-start-2 mt-4 flex items-center gap-2">
-                      <Checkbox
-                        {...register("selectedComponents")}
-                        id="select"
-                        value={SelectedEnum.TODO}
                       />
                       <Label htmlFor="select">Select</Label>
                     </div>

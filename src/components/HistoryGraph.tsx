@@ -18,7 +18,15 @@ const HistoryGraph = () => {
   const { data: session, status } = useSession({ required: true });
 
   if (status == "loading") {
-    return <div>Loading...</div>;
+    return (
+      <div className="mx-auto w-full rounded-md p-4">
+        <div className="flex animate-pulse space-x-4">
+          <div className="flex-1 space-y-6 py-1">
+            <div className="loading h-60 rounded"></div>
+          </div>
+        </div>
+      </div>
+    );
   }
   const {
     data: history,
@@ -29,7 +37,15 @@ const HistoryGraph = () => {
   });
 
   if (isLoading || !isSuccess) {
-    return <div>Loading...</div>;
+    return (
+      <div className="mx-auto w-full rounded-md p-4">
+        <div className="flex animate-pulse space-x-4">
+          <div className="flex-1 space-y-6 py-1">
+            <div className="loading h-60 rounded"></div>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   const grouped = history.reduce(
@@ -95,7 +111,7 @@ const HistoryGraph = () => {
     ],
   };
   return (
-    <div>
+    <div className="course-card rounded-xl p-4">
       {history && history.length > 0 ? (
         <Line options={options} data={data} />
       ) : (

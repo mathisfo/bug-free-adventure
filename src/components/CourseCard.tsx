@@ -18,11 +18,7 @@ const CourseCard = ({ courseName }: { courseName: string }) => {
       <div className="mx-auto w-full rounded-md p-4">
         <div className="flex animate-pulse space-x-4">
           <div className="flex-1 space-y-6 py-1">
-            <div className="loading h-8 rounded"></div>
-            <div className="loading h-8 rounded"></div>
-            <div className="loading h-8 rounded"></div>
-            <div className="loading h-8 rounded"></div>
-            <div className="loading h-8 rounded"></div>
+            <div className="loading h-60 rounded"></div>
           </div>
         </div>
       </div>
@@ -51,7 +47,7 @@ const CourseCard = ({ courseName }: { courseName: string }) => {
   return (
     <div
       onClick={(e) => onClick("/courses/Java", e)}
-      className={`course-card mr-4 w-4/5 cursor-pointer rounded-lg p-2 transition duration-300 ease-in-out hover:scale-105`}
+      className={`course-card w-full cursor-pointer rounded-lg p-2 transition duration-300 ease-in-out hover:scale-105`}
     >
       <div className="my-4 ml-4 flex flex-row items-center">
         <div
