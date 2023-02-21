@@ -1,16 +1,17 @@
 import {
-  PlusIcon,
-  EyeSlashIcon,
+  BellAlertIcon,
   EyeIcon,
+  EyeSlashIcon,
+  PlusIcon,
   TrashIcon,
 } from "@heroicons/react/24/outline";
 import { ToDo } from "@prisma/client";
 import { TRPCError } from "@trpc/server";
-import { log } from "console";
+import { Badge } from "flowbite-react";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Updater } from "react-query/types/core/utils";
+import { HiInformationCircle } from "react-icons/hi";
 import { ToDoForm } from "../../server/schema/UserSchema";
 import { api } from "../../utils/api";
 
@@ -168,6 +169,27 @@ const ToDoComp = () => {
 
   return (
     <div className="course-card text-color relative mx-4 mb-2 h-full w-full rounded-2xl p-12">
+      <div>
+        {deleteTodoMutation.isError && (
+          <Badge icon={HiInformationCircle} color="failure">
+            Failed to delete Todo
+          </Badge>
+        )}
+      </div>
+      <div>
+        {addToDoMutation.isError && (
+          <Badge icon={HiInformationCircle} color="failure">
+            Failed to add Todo
+          </Badge>
+        )}
+      </div>
+      <div>
+        {setCompletedMutation.isError && (
+          <Badge icon={HiInformationCircle} color="failure">
+            Failed to complete Todo
+          </Badge>
+        )}
+      </div>
       <div className="tems-center mx-8 mb-8 mt-2 grid grid-cols-2 grid-rows-1">
         <h1 className="col-start-1 mx-auto flex items-center text-4xl font-semibold">
           TO <p className="text-blue-color">DO</p>S
