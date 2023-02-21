@@ -28,14 +28,6 @@ export const userRouter = createTRPCRouter({
       .sort((a, b) => b.score - a.score);
   }),
 
-  getLoggedInUser: protectedProcedure.query(async ({ ctx }) => {
-    return await ctx.prisma.user.findUnique({
-      where: {
-        id: ctx.session.user.id,
-      },
-    });
-  }),
-
   submitOnboarding: protectedProcedure
     .input(onboardingSchema)
     .mutation(async ({ ctx, input }) => {
@@ -149,6 +141,15 @@ export const userRouter = createTRPCRouter({
         },
         data: {
           completed: true,
+        },
+      });
+    }),
+  deleteTodo: protectedProcedure
+    .input(z.object({ todoId: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      return await ctx.prisma.toDo.delete({
+        where: {
+          todoId: input.todoId,
         },
       });
     }),
