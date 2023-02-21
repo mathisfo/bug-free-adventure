@@ -23,7 +23,15 @@ const ToDoComp = () => {
   const [showCompleted, setShowCompleted] = useState(true);
 
   if (status == "loading") {
-    return <div>Loading...</div>;
+    return (
+      <div className="mx-auto w-full rounded-md p-4">
+        <div className="flex animate-pulse space-x-4">
+          <div className="flex-1 space-y-6 py-1">
+            <div className="loading h-64 rounded"></div>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   const {
@@ -81,7 +89,15 @@ const ToDoComp = () => {
   });
 
   if (isLoading || !isSuccess) {
-    return <div>Loading...</div>;
+    return (
+      <div className="mx-auto w-full rounded-md p-4">
+        <div className="flex animate-pulse space-x-4">
+          <div className="flex-1 space-y-6 py-1">
+            <div className="loading h-64 rounded"></div>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   const onSubmit: SubmitHandler<ToDoForm> = (data: ToDoForm) => {
@@ -125,7 +141,7 @@ const ToDoComp = () => {
   }
 
   return (
-    <div className="course-card text-color relative mx-4 mb-2 h-full w-full rounded-2xl p-12">
+    <div className="course-card text-color relative  h-full w-full rounded-2xl p-8">
       <div className="tems-center mx-8 mb-8 mt-2 grid grid-cols-2 grid-rows-1">
         <h1 className="col-start-1 mx-auto flex items-center text-4xl font-semibold">
           TO <p className="text-blue-color">DO</p>S

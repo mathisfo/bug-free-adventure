@@ -50,18 +50,6 @@ const Sidebar = ({ children }: { children: React.ReactElement }) => {
   const currentItemStyling =
     "text-gray-900 dark:text-white bg-indigo-50 dark:bg-[#303335]/75 dark:hover:bg-[#1C1C1F] hover:bg-indigo-100";
 
-  <div className="mx-auto w-full rounded-md p-4">
-    <div className="flex animate-pulse space-x-4">
-      <div className="flex-1 space-y-6 py-1">
-        <div className="loading h-8 rounded"></div>
-        <div className="loading h-8 rounded"></div>
-        <div className="loading h-8 rounded"></div>
-        <div className="loading h-8 rounded"></div>
-        <div className="loading h-8 rounded"></div>
-      </div>
-    </div>
-  </div>;
-
   if (status === "loading") {
     return (
       <div className="back-layer grid grid-cols-5 px-2 pt-2 ">
