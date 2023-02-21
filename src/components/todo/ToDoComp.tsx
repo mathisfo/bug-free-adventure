@@ -80,6 +80,29 @@ const ToDoComp = () => {
     },
   });
 
+  const deleteTodoMutation = api.userRouter.deleteTodo.useMutation({
+    async onMutate(todoId) {
+      // Optimistic update, delete the transaction from the list immediately
+      await ctx.userRouter.getToDosOnUser.cancel();
+      const prevData = ctx.userRouter.getToDosOnUser.getData({
+        userId: session.user.id,
+      });
+      ctx.userRouter.getToDosOnUser.setData(
+        { userId: session.user.id },
+        (old: any) => {
+          const newTodos = old.filter((todo: ToDo) => {
+            return todo.todoId !== todoId.todoId;
+          });
+          return newTodos;
+        }
+      );
+      return { prevData };
+    },
+    onSettled() {
+      ctx.userRouter.getToDosOnUser.invalidate({ userId: session.user.id });
+    },
+  });
+
   if (isLoading || !isSuccess) {
     return <div>Loading...</div>;
   }
@@ -114,6 +137,25 @@ const ToDoComp = () => {
           throw new TRPCError({
             code: "INTERNAL_SERVER_ERROR",
             message: "failed to set todo to completed",
+          });
+        },
+      }
+    );
+  };
+
+  const onDeleteTodo = (todoId: string) => {
+    deleteTodoMutation.mutate(
+      {
+        todoId: todoId,
+      },
+      {
+        onSuccess: () => {
+          ctx.invalidate();
+        },
+        onError: () => {
+          throw new TRPCError({
+            code: "INTERNAL_SERVER_ERROR",
+            message: "Failed to delete todo",
           });
         },
       }
@@ -174,6 +216,7 @@ const ToDoComp = () => {
                     )}
                   </div>
                   <TrashIcon
+                    onClick={() => onDeleteTodo(item.todoId)}
                     className={classNames(
                       !item.completed ? `opacity-50` : ``,
                       `h-4 w-4 cursor-pointer`
