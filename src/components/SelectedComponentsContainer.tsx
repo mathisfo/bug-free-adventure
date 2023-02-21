@@ -50,7 +50,7 @@ const SelectedComponentsContainer = (props: ISelectedComponentsProps) => {
   };
 
   return (
-    <div>
+    <div className="grid grid-cols-2">
       {selected.map((compEnum: string) => (
         <div key={compEnum}>{components[compEnum]}</div>
       ))}

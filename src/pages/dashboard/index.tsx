@@ -29,19 +29,22 @@ const Dashboard: NextPage = () => {
   return (
     <div>
       <div className="background-color mr-4 grid h-screen grid-cols-2 rounded-r-lg p-16 ">
-        <div className="cols-start-1 row-start-1">
+        <div className="flex flex-col">
           <div className="text-color mb-4 text-xl font-semibold uppercase opacity-75">
             My courses
           </div>
-          <div className="flex w-full flex-row">
-            <CourseCard courseName="java" />
+          <div className="flex flex-col">
+            <div className="flex">
+              <CourseCard courseName="java" />
+            </div>
+            <div className="flex">
+              <SelectedComponentsContainer
+                selected={userPreferences.selectedComponents}
+                leaderboard={userPreferences.leaderboard}
+              />
+            </div>
           </div>
         </div>
-
-        <SelectedComponentsContainer
-          selected={userPreferences.selectedComponents}
-          leaderboard={userPreferences.leaderboard}
-        />
       </div>
     </div>
   );
