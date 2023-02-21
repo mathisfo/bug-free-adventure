@@ -11,6 +11,7 @@ export const ModuleSchema = z.object({
   id: z.number(),
   moduleName: z.string(),
   ActivityResource: z.array(ActivityResourceSchema),
+  description: z.string(),
 });
 
 export const CourseSchema = z.object({

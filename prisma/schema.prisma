@@ -121,6 +121,7 @@ model Module {
   courseId         String
   ActivityResource ActivityResource[]
   relation         Course             @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  description      String
 }
 
 enum type {

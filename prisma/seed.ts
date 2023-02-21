@@ -12,6 +12,8 @@ async function main() {
           {
             moduleName: "Variables and Operations",
             order: 1,
+            description:
+              "Variables are placeholders for values that are unknown when writing the program, or that can be changed along the way. In some programming languages you have to declare the variables before you use them. You tell the compiler what you call the variable, and what kind of data type it should be. After the variables have been declared, they must be initialized. That means giving them a value so that they can be used. After a variable has been initialized, it can be assigned different values.",
             ActivityResource: {
               create: [
                 {
@@ -128,6 +130,8 @@ async function main() {
           {
             moduleName: "Strings",
             order: 2,
+            description:
+              'String is associated with string literal in the form of double-quoted texts such as "Hello, world!". You can assign a string literal directly into a String variable, instead of calling the constructor to create a String instance.',
             ActivityResource: {
               create: [
                 {
@@ -250,6 +254,8 @@ async function main() {
           {
             moduleName: "Boolean Expressions",
             order: 3,
+            description:
+              "A type representing the logic values, true and false. Java calls the type boolean and uses the names (literals) true and false.",
             ActivityResource: {
               create: [
                 {
@@ -380,6 +386,8 @@ async function main() {
           {
             moduleName: "If-Else",
             order: 4,
+            description:
+              "The if control structure uses a condition to control whether one or more statements are executed.",
             ActivityResource: {
               create: [
                 {
@@ -480,6 +488,8 @@ async function main() {
           {
             moduleName: "While Loops",
             order: 5,
+            description:
+              'Loops are code that is executed multiple times. It is common to distinguish between while loops and for loops. A while loop checks a condition, and executes the code inside the loop as long as this condition is true. One must be careful when writing while loops; if the condition is not formulated correctly, you can end up with what is called an "infinite loop".',
             ActivityResource: {
               create: [
                 {
@@ -634,6 +644,8 @@ async function main() {
           {
             moduleName: "For Loops",
             order: 6,
+            description:
+              "Data-driven loops are loops that are driven by data in a collection, typically because you want to do something with each data element. Note that Java has two types of loops, general for loops and what are called for-each loops, because it loops through each element of a collection. Both variants use the for keyword, and the for-each variant is so-called syntactic sugar, since it is only a short form for something you can get for the general for loop.",
             ActivityResource: {
               create: [
                 {
@@ -740,6 +752,8 @@ async function main() {
           {
             moduleName: "Objects and Classes",
             order: 7,
+            description:
+              "Everything in Java is associated with classes and objects, along with its attributes and methods. For example: in real life, a car is an object. The car has attributes, such as weight and color, and methods, such as drive and brake.",
             ActivityResource: {
               create: [
                 {
@@ -822,6 +836,8 @@ async function main() {
           {
             moduleName: "Nested Loops",
             order: 8,
+            description:
+              "A  nested loop  is a (inner) loop that appears in the loop body of another (outer) loop. The inner or outer loop can be any type:  while ,  do while , or  for . For example, the inner loop can be a  while  loop while the outer loop can be a  for  loop. Of course, they can be the same kind of loops, too.",
             ActivityResource: {
               create: [
                 {
@@ -874,6 +890,8 @@ async function main() {
           {
             moduleName: "Arrays",
             order: 9,
+            description:
+              'An array is a data structure that with "slots" that are accessed using an integer index, typically starting on 0',
             ActivityResource: {
               create: [
                 {
@@ -1034,6 +1052,8 @@ async function main() {
           {
             moduleName: "Two-Dimensional Arrays",
             order: 10,
+            description:
+              "An array of more than one dimension is known as multi-dimensional array. The most commonly used multi-dimensional array is two dimensional array. If you know how to create one dimensional array and fact that  multi-dimensional arrays are just array of array in Java , then creating a 2 dimensional array should be easy.  ",
             ActivityResource: {
               create: [
                 {
@@ -1110,6 +1130,8 @@ async function main() {
           {
             moduleName: "Exception handling",
             order: 11,
+            descrption:
+              "An exception is an error that happens during execution of a program. When that error occurs, Java generate an exception that can be handled, which avoids program to crash. Exceptions are convenient in many ways for handling errors and special conditions in a program. When we think that a code segment exists which can produce an error then we can use exception handling.",
             ActivityResource: {
               create: [
                 {
@@ -1143,6 +1165,8 @@ async function main() {
           {
             moduleName: "File processing",
             order: 12,
+            description:
+              "File processing is performed in Java using various classes. The primary class used to handle files is called File. The File class is part of the  java.io package. ",
             ActivityResource: {
               create: [
                 {
@@ -1176,6 +1200,8 @@ async function main() {
           {
             moduleName: "ArrayLists",
             order: 13,
+            description:
+              "Collections in java is a framework that provides an architecture to store and manipulate the group of objects. Array lists are created with an initial size. When this size is exceeded, the collection is automatically enlarged. When objects are removed, the array may be shrunk. Though, it may be slower than standard arrays but can be helpful in programs where lots of manipulation in the array is needed.",
             ActivityResource: {
               create: [
                 {
@@ -1204,6 +1230,8 @@ async function main() {
           {
             moduleName: "Inheritance",
             order: 14,
+            description:
+              "The idea of inheritance is simple but powerful: When you want to create a new class and there is already a class that includes some of the code that you want, you can derive your new class from the existing class. In doing this, you can reuse the fields and methods of the existing class without having to write (and debug!) them yourself. A subclass inherits all the members (fields, methods, and nested classes) from its superclass. Constructors are not members, so they are not inherited by subclasses, but the constructor of the superclass can be invoked from the subclass.",
             ActivityResource: {
               create: [
                 {
