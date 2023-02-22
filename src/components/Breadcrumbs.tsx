@@ -83,7 +83,11 @@ const Breadcrumbs = (props: BreadcrumbsProps) => {
               {chevron}
               <div className="pl-4">
                 <Dropdown
-                  label={props.currentType.toUpperCase()}
+                  label={
+                    props.currentType == "coding"
+                      ? "CODING EXERCISES"
+                      : props.currentType.toUpperCase()
+                  }
                   inline={true}
                   className="dark:bg-zinc-800"
                 >
@@ -108,7 +112,9 @@ const Breadcrumbs = (props: BreadcrumbsProps) => {
                           "mx-2 flex justify-start rounded-lg p-2 hover:bg-indigo-100 dark:hover:bg-[#503597]"
                         )}
                       >
-                        {item.toUpperCase()}
+                        {item == "coding"
+                          ? "CODING EXERCISES"
+                          : item.toUpperCase()}
                       </Dropdown.Item>
                     </a>
                   ))}

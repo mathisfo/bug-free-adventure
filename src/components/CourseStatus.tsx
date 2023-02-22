@@ -177,8 +177,10 @@ const CourseStatus = () => {
                                 },
                               }}
                             >
-                              {activityType.charAt(0).toUpperCase() +
-                                activityType.slice(1)}
+                              {activityType == "coding"
+                                ? "Coding exercises"
+                                : activityType.charAt(0).toUpperCase() +
+                                  activityType.slice(1)}
                             </Link>
                           </th>
                           <td className="py-4 px-12">
