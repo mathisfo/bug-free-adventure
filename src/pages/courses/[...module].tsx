@@ -188,54 +188,6 @@ const ModuleStatistics = () => {
                 })
             : "404"}
         </div>
-        <table className="text-color w-full table-fixed text-left text-sm">
-          <thead className="dark:course-card-dark bg-[#F5F5F5] uppercase dark:text-gray-400">
-            <tr>
-              <th className="py-3 px-6">Activity</th>
-              <th className="py-3 px-6">Attempts</th>
-              <th className="py-3 px-6">Success</th>
-              <th className="py-3 px-6">Module</th>
-              <th className="py-3 px-6">Type</th>
-              <th className="py-3 px-6">Sequencing</th>
-            </tr>
-          </thead>
-          <tbody>
-            {module
-              ? typeofActivity()
-                  .filter((activity) => activity.relatedTopic == module[1])
-                  .map((activity) => {
-                    return (
-                      <tr
-                        key={activity.activityId}
-                        className="text-md background-color cursor-pointer border-b hover:bg-gray-50 dark:border-gray-700 hover:dark:bg-[#3F485F] "
-                      >
-                        <th className="py-4 px-6">
-                          <a
-                            target="_blank"
-                            href={
-                              activity.url +
-                              "&usr=" +
-                              session.user?.protusId +
-                              "&grp=NorwayFall2022B&sid=TEST&cid=352"
-                            }
-                            rel="noreferrer"
-                          >
-                            {activity.activityName}
-                          </a>
-                        </th>
-                        <td className="py-4 px-6">{activity.attempts}</td>
-                        <td className="flex flex-row py-4 px-6">
-                          <div>{activity.successRate}</div>
-                        </td>
-                        <td>{activity.relatedTopic}</td>
-                        <td>{activity.type}</td>
-                        <td>{activity.sequencing}</td>
-                      </tr>
-                    );
-                  })
-              : "404"}
-          </tbody>
-        </table>
       </div>
     </>
   );
