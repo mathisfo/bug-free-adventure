@@ -85,7 +85,7 @@ const Breadcrumbs = (props: BreadcrumbsProps) => {
                 <Dropdown
                   label={props.currentType.toUpperCase()}
                   inline={true}
-                  className="dark:bg-[#26272A]"
+                  className="dark:bg-zinc-800"
                 >
                   {types.map((item) => (
                     <a
@@ -105,7 +105,7 @@ const Breadcrumbs = (props: BreadcrumbsProps) => {
                           props.currentType == item.toUpperCase()
                             ? currentItemStyling
                             : menuItemStyling,
-                          "ml-8 flex justify-start rounded-lg p-2 hover:bg-indigo-100 dark:hover:bg-[#503597]"
+                          "mx-2 flex justify-start rounded-lg p-2 hover:bg-indigo-100 dark:hover:bg-[#503597]"
                         )}
                       >
                         {item.toUpperCase()}
