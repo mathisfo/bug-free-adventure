@@ -50,7 +50,7 @@ const ExerciseHistoryComp = () => {
 
     acc[date]?.push(curr);
     return acc;
-  }, {} as { [key: string]: Array<ExerciseHistory & ActivityResource> });
+  }, {} as { [key: string]: Array<ExerciseHistory & { ActivityResource: ActivityResource }> });
 
   console.log("grouped", grouped);
 

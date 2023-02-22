@@ -71,8 +71,8 @@ export const userRouter = createTRPCRouter({
       const history = await ctx.prisma.exerciseHistory.findMany({
         where: {
           userId: input.userId,
-          completedAt: {
-            not: null,
+          NOT: {
+            completedAt: null,
           },
         },
         include: {
