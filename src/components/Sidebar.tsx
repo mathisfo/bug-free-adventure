@@ -173,7 +173,7 @@ const Sidebar = ({ children }: { children: React.ReactElement }) => {
                                         item.current
                                           ? currentItemStyling
                                           : menuItemStyling,
-                                        "group flex w-full items-center rounded-md py-2 pl-11 pl-2 text-sm font-medium opacity-80"
+                                        "group flex w-full items-center rounded-md py-2 pl-11 pl-6 text-sm font-medium opacity-80"
                                       )}
                                     >
                                       <subItem.icon
