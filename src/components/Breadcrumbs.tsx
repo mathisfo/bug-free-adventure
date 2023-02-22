@@ -62,11 +62,14 @@ const Breadcrumbs = (props: BreadcrumbsProps) => {
           {props.currentPage ? (
             <div className="flex flex-row">
               {chevron}
-              <a href={"/courses/Java/" + props.currentPage} rel="noreferrer">
+              <Link
+                href={"/courses/Java/" + props.currentPage}
+                rel="noreferrer"
+              >
                 <p className="text-color pl-4 text-sm font-semibold uppercase">
                   {props.currentPage}
                 </p>
-              </a>
+              </Link>
             </div>
           ) : (
             <></>

@@ -26,6 +26,9 @@ const ProgressionGrid = (props: ProgressionGridInterface) => {
 
   useUpdateExerciseHistory(modules, selectedActivity);
 
+  const addExerciseHistoryMutation =
+    api.userRouter.addExerciseHistoryToUser.useMutation();
+
   if (isLoading || !isSuccess) return <div>Loading..</div>;
 
   if (status === "unauthenticated" || !session?.user) {
@@ -61,7 +64,12 @@ const ProgressionGrid = (props: ProgressionGridInterface) => {
                   session.user?.protusId +
                   "&grp=NorwayFall2022B&sid=TEST&cid=352"
                 }
-                onClick={() => setSelectedActivity(item.activityId)}
+                onClick={() => {
+                  setSelectedActivity(item.activityId);
+                  addExerciseHistoryMutation.mutate({
+                    activityId: item.activityId,
+                  });
+                }}
                 rel="noreferrer"
                 key={item.activityId}
               >
@@ -105,6 +113,12 @@ const ProgressionGrid = (props: ProgressionGridInterface) => {
                   session.user?.protusId +
                   "&grp=NorwayFall2022B&sid=TEST&cid=352"
                 }
+                onClick={() => {
+                  setSelectedActivity(item.activityId);
+                  addExerciseHistoryMutation.mutate({
+                    activityId: item.activityId,
+                  });
+                }}
                 rel="noreferrer"
                 key={item.activityId}
               >
@@ -148,6 +162,12 @@ const ProgressionGrid = (props: ProgressionGridInterface) => {
                   session.user?.protusId +
                   "&grp=NorwayFall2022B&sid=TEST&cid=352"
                 }
+                onClick={() => {
+                  setSelectedActivity(item.activityId);
+                  addExerciseHistoryMutation.mutate({
+                    activityId: item.activityId,
+                  });
+                }}
                 rel="noreferrer"
                 key={item.activityId}
               >
