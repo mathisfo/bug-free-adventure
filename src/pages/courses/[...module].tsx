@@ -6,7 +6,8 @@ import Breadcrumbs from "../../components/Breadcrumbs";
 import ExerciseCard from "../../components/ExerciseCard";
 import ProgressionGrid from "../../components/ProgressionGrid";
 import Timeline from "../../components/Timeline";
-import { useExerciseHistory } from "../../hooks/useExerciseHistory";
+import { useUpdateExerciseHistory } from "../../hooks/useUpdateExerciseHistory";
+
 import { Activity } from "../../server/schema/LearnerActivitySchema";
 import { api } from "../../utils/api";
 
@@ -22,10 +23,13 @@ const ModuleStatistics = () => {
     undefined
   );
 
+  const addExerciseHistoryMutation =
+    api.userRouter.addExerciseHistoryToUser.useMutation();
+
   // This hook is used to set the previous data to the current data
   // when the current data is loaded. It is necesarry because we need to monitor when an exercise's successRate goes from 0 to >0.
   // This way we know when the user has completed the exercise.
-  useExerciseHistory(learnerAnalytics, selectedActivity);
+  useUpdateExerciseHistory(learnerAnalytics, selectedActivity);
 
   const router = useRouter();
 
@@ -174,7 +178,12 @@ const ModuleStatistics = () => {
                         session.user?.protusId +
                         "&grp=NorwayFall2022B&sid=TEST&cid=352"
                       }
-                      onClick={() => setSelectedActivity(activity.activityId)}
+                      onClick={() => {
+                        setSelectedActivity(activity.activityId);
+                        addExerciseHistoryMutation.mutate({
+                          activityId: activity.activityId,
+                        });
+                      }}
                       rel="noreferrer"
                     >
                       <ExerciseCard

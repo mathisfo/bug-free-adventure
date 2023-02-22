@@ -1,6 +1,6 @@
 import { useSession } from "next-auth/react";
 import { useState } from "react";
-import { useExerciseHistory } from "../hooks/useExerciseHistory";
+import { useUpdateExerciseHistory } from "../hooks/useUpdateExerciseHistory";
 import { Activity } from "../server/schema/LearnerActivitySchema";
 import { api } from "../utils/api";
 
@@ -24,7 +24,7 @@ const ProgressionGrid = (props: ProgressionGridInterface) => {
     undefined
   );
 
-  useExerciseHistory(modules, selectedActivity);
+  useUpdateExerciseHistory(modules, selectedActivity);
 
   if (isLoading || !isSuccess) return <div>Loading..</div>;
 

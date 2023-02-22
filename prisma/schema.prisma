@@ -70,13 +70,15 @@ model ExerciseHistory {
   historyId String @id @default(cuid())
 
   visitedAt   DateTime
-  completedAt DateTime
+  completedAt DateTime?
 
   userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   activityResourceId String
   ActivityResource   ActivityResource @relation(fields: [activityResourceId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, activityResourceId], name: "userExerciseHistoryOnActivityResource")
 }
 
 model ToDo {

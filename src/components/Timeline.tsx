@@ -5,7 +5,8 @@ import {
 } from "@heroicons/react/24/solid";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
-import { useExerciseHistory } from "../hooks/useExerciseHistory";
+import { useUpdateExerciseHistory } from "../hooks/useUpdateExerciseHistory";
+
 import { Activity } from "../server/schema/LearnerActivitySchema";
 
 const TimelineWrapper = (props: {
@@ -20,7 +21,7 @@ const TimelineWrapper = (props: {
     undefined
   );
 
-  useExerciseHistory(props.learnerAnalytics, selectedActivity);
+  useUpdateExerciseHistory(props.learnerAnalytics, selectedActivity);
 
   if (recommendedActivities.length === 0) {
     return <div>No recommendations have been generated yet</div>;

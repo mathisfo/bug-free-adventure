@@ -1325,7 +1325,7 @@ async function main() {
         completedAt: new Date(2023, 1, 5),
         visitedAt: new Date(2023, 1, 5),
         userId: "clduelk2900003b6leubwp06d",
-        activityResourceId: "BmiCalculator2",
+        activityResourceId: "ifelse.if_else_if_grade",
       },
       {
         completedAt: new Date(2023, 1, 6),
@@ -1343,13 +1343,13 @@ async function main() {
         completedAt: new Date(2023, 1, 6),
         visitedAt: new Date(2023, 1, 6),
         userId: "clduelk2900013b6lq99hnzqx",
-        activityResourceId: "BmiCalculator2",
+        activityResourceId: "ifelse.if_else_if_grade",
       },
       {
         completedAt: new Date(2023, 1, 2),
         visitedAt: new Date(2023, 1, 2),
         userId: "clduelk2900003b6leubwp06d",
-        activityResourceId: "BmiCalculator2",
+        activityResourceId: "while4_coding",
       },
       {
         completedAt: new Date(2023, 1, 3),
@@ -1361,13 +1361,13 @@ async function main() {
         completedAt: new Date(2023, 1, 4),
         visitedAt: new Date(2023, 1, 4),
         userId: "clduelk2900023b6lbje3n09n",
-        activityResourceId: "BmiCalculator2",
+        activityResourceId: "ifelse.if_else_num",
       },
       {
         completedAt: new Date(2023, 1, 5),
         visitedAt: new Date(2023, 1, 5),
         userId: "clduelk2900023b6lbje3n09n",
-        activityResourceId: "BmiCalculator2",
+        activityResourceId: "ifelse.if_else_wage",
       },
       {
         completedAt: new Date(2023, 1, 6),
@@ -1379,13 +1379,13 @@ async function main() {
         completedAt: new Date(2023, 1, 5),
         visitedAt: new Date(2023, 1, 5),
         userId: "clduelk2900033b6lr9tne35c",
-        activityResourceId: "BmiCalculator2",
+        activityResourceId: "ifelse.if_else_num",
       },
       {
         completedAt: new Date(2023, 1, 6),
         visitedAt: new Date(2023, 1, 6),
         userId: "clduelk2900033b6lr9tne35c",
-        activityResourceId: "BmiCalculator2",
+        activityResourceId: "ifelse.if_else_if_grade",
       },
     ],
   });
