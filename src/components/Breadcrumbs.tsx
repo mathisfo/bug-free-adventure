@@ -60,10 +60,17 @@ const Breadcrumbs = (props: BreadcrumbsProps) => {
             </Link>
           </div>
           {props.currentPage ? (
-            <div className="flex flex-row">
+            <div className="flex flex-row items-center">
               {chevron}
               <a href={"/courses/Java/" + props.currentPage} rel="noreferrer">
-                <p className="text-color pl-4 text-sm font-semibold uppercase">
+                <p
+                  className={classNames(
+                    router.asPath === "/courses"
+                      ? currentItemStyling
+                      : menuItemStyling,
+                    "text-color flex justify-start rounded-lg p-2 pl-4 text-sm font-semibold uppercase hover:bg-indigo-100 dark:hover:bg-[#503597]"
+                  )}
+                >
                   {props.currentPage}
                 </p>
               </a>
@@ -97,7 +104,8 @@ const Breadcrumbs = (props: BreadcrumbsProps) => {
                         className={classNames(
                           props.currentType == item.toUpperCase()
                             ? currentItemStyling
-                            : menuItemStyling
+                            : menuItemStyling,
+                          "ml-8 flex justify-start rounded-lg p-2 hover:bg-indigo-100 dark:hover:bg-[#503597]"
                         )}
                       >
                         {item.toUpperCase()}
