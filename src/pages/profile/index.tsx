@@ -45,8 +45,6 @@ const Profile = () => {
     );
   }
 
-  console.log("created at:" + session?.user?.createdAt?.toDateString);
-
   return (
     <div>
       <div className="background-color text-color mr-4 h-full w-1/2 rounded-r-lg p-16 ">

@@ -147,7 +147,7 @@ const ModuleStatistics = () => {
     <>
       <Breadcrumbs
         currentPage={module ? module[1] : "404"}
-        currentType={type == "CODING" ? type : type + "S"}
+        currentType={type as string}
       />
       <div className=" background-color absolute mt-6 grid w-full  overflow-x-auto rounded-lg">
         <div className="flex flex-row items-center space-x-2 justify-self-end pb-4 pr-12 pt-6">
