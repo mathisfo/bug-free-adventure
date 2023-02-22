@@ -47,7 +47,7 @@ const CourseCard = ({ courseName }: { courseName: string }) => {
   return (
     <div
       onClick={(e) => onClick("/courses/Java", e)}
-      className={`course-card w-full cursor-pointer rounded-lg p-2 transition duration-300 ease-in-out hover:scale-105`}
+      className={`course-card w-full cursor-pointer rounded-lg p-4 transition duration-300 ease-in-out hover:scale-105`}
     >
       <div className="my-4 ml-4 flex flex-row items-center">
         <div

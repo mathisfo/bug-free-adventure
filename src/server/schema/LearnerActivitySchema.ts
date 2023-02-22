@@ -9,6 +9,7 @@ export const topicProgressSchema = z.object({
 
 export const topicAnalyticsSchema = z.object({
   name: z.string(),
+  description: z.string(),
   progress: topicProgressSchema,
   sequencing: z.object({
     examples: z.number(),

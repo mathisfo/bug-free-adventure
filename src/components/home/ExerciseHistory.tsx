@@ -67,7 +67,7 @@ const ExerciseHistoryComp = () => {
       {result != undefined && result.length > 0 ? (
         <div className="background-color w-full overflow-x-auto ">
           {Object.entries(grouped).map((e, index) => (
-            <div key={index} className="course-card mb-4 rounded-lg p-5 ">
+            <div key={index} className="course-card mb-4 rounded-lg p-8 ">
               <time className="text-color text-lg font-semibold dark:text-white">
                 {e[0]}
               </time>

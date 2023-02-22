@@ -183,7 +183,7 @@ const ToDoComp = () => {
   }
 
   return (
-    <div className="course-card text-color relative mx-4 mb-2 h-full w-full rounded-2xl p-12">
+    <div className="course-card text-color relative mb-2 h-full w-full rounded-xl p-8">
       <div>
         {deleteTodoMutation.isError && (
           <Badge icon={HiInformationCircle} color="failure">
