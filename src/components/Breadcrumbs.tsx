@@ -3,7 +3,7 @@ import { Dropdown } from "flowbite-react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-interface TopMenuProps {
+interface BreadcrumbsProps {
   currentPage?: string;
   currentType?: string;
 }
@@ -12,7 +12,7 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
-const TopMenu = (props: TopMenuProps) => {
+const Breadcrumbs = (props: BreadcrumbsProps) => {
   const chevron = (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -116,4 +116,4 @@ const TopMenu = (props: TopMenuProps) => {
   );
 };
 
-export default TopMenu;
+export default Breadcrumbs;

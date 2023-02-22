@@ -4,6 +4,7 @@ import {
   Cog6ToothIcon,
   FolderIcon,
   UserCircleIcon,
+  CommandLineIcon,
 } from "@heroicons/react/24/outline";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
@@ -33,7 +34,9 @@ const Sidebar = ({ children }: { children: React.ReactElement }) => {
       name: "Courses",
       icon: FolderIcon,
       current: router.asPath === "/courses",
-      children: [{ name: "Java", href: "/courses/Java" }],
+      children: [
+        { name: "Java", href: "/courses/Java", icon: CommandLineIcon },
+      ],
     },
     {
       name: "Settings",
@@ -55,15 +58,8 @@ const Sidebar = ({ children }: { children: React.ReactElement }) => {
       <div className="back-layer grid grid-cols-5 px-2 pt-2 ">
         <div className="grid-col-1 z-index-2 grid h-screen">
           <div className="sidebar-color relative rounded-l-lg py-8 dark:border-gray-500 ">
-            <div className="mb-12 mt-12 flex justify-center">
-              {/*
-              Uncomment when logo is found
-               <Image
-                src="/logo.svg"
-                alt="next"
-                layout="fill"
-                className="w-1/3"
-              /> */}
+            <div className="mb-6 mt-6 flex justify-center">
+              <img src="/logo.svg" alt="next" className="w-1/3" />
             </div>
             <div className="flex justify-center">
               <div className="loading h-8 w-44 rounded"></div>
@@ -177,10 +173,16 @@ const Sidebar = ({ children }: { children: React.ReactElement }) => {
                                         item.current
                                           ? currentItemStyling
                                           : menuItemStyling,
-                                        "group flex w-full items-center rounded-md py-2 pl-11 pl-2 text-sm font-medium opacity-60"
+                                        "group flex w-full items-center rounded-md py-2 pl-11 pl-2 text-sm font-medium opacity-80"
                                       )}
                                     >
-                                      {subItem.name}
+                                      <subItem.icon
+                                        className="mr-1 h-5 w-5 flex-shrink-0 text-gray-600 group-hover:text-gray-500 dark:text-gray-300"
+                                        aria-hidden="true"
+                                      />
+                                      <p className="text-gray-700 dark:text-gray-300">
+                                        {subItem.name}
+                                      </p>
                                     </Disclosure.Button>
                                   ))}
                                 </Disclosure.Panel>
