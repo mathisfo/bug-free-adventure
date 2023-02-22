@@ -215,17 +215,22 @@ const CourseStatus = () => {
                               ></div>
                             </div>
                             <div className="text-xs">
-                              {Math.ceil(
-                                (ActivityProgressWithType(
-                                  activityType,
-                                  module.name
-                                ).success /
-                                  ActivityProgressWithType(
-                                    activityType,
-                                    module.name
-                                  ).total) *
-                                  100
-                              )}{" "}
+                              {ActivityProgressWithType(
+                                activityType,
+                                module.name
+                              ).total == 0
+                                ? 100
+                                : Math.ceil(
+                                    (ActivityProgressWithType(
+                                      activityType,
+                                      module.name
+                                    ).success /
+                                      ActivityProgressWithType(
+                                        activityType,
+                                        module.name
+                                      ).total) *
+                                      100
+                                  )}{" "}
                               %
                             </div>
                           </td>
