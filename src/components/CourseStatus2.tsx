@@ -113,7 +113,7 @@ const CourseStatus2 = () => {
                   }
                   className="relative -mb-4 h-16 w-full cursor-pointer items-center rounded-xl bg-[#889BFC] dark:bg-[#7D76CA]"
                 >
-                  <p className="pl-4 pt-2 font-semibold uppercase">
+                  <p className="pl-4 pt-2 font-semibold uppercase text-white">
                     {module.name}
                   </p>
                   <div className="mt-2 flex flex-row items-center font-semibold">
@@ -123,14 +123,14 @@ const CourseStatus2 = () => {
                         style={{ width: module.overallProgress * 100 + "%" }}
                       ></div>
                     </div>
-                    <div className="text-xs">
+                    <div className="text-xs text-white">
                       {Math.ceil(module.overallProgress * 100)} %
                     </div>
                   </div>
                   {clickedIndex == index ? (
-                    <ChevronDownIcon className="absolute right-4 top-4 h-6 w-6 " />
+                    <ChevronDownIcon className="absolute right-4 top-4 h-6 w-6 text-white " />
                   ) : (
-                    <ChevronRightIcon className="absolute right-4 top-5 h-6 w-6" />
+                    <ChevronRightIcon className="absolute right-4 top-5 h-6 w-6 text-white" />
                   )}
                 </div>
                 {clickedIndex == index && (
