@@ -46,7 +46,7 @@ const Sidebar = ({ children }: { children: React.ReactElement }) => {
     },
   ];
 
-  const { data: session, status } = useSession();
+  const { data: session, status } = useSession({ required: true });
 
   const menuItemStyling =
     "text-color hover:text-gray-900 dark:hover:bg-[#1C1C1F] dark:hover:text-white hover:bg-indigo-50";
@@ -87,7 +87,7 @@ const Sidebar = ({ children }: { children: React.ReactElement }) => {
     <div>
       {session ? (
         <div>
-          {!session.user?.onBoarded ? (
+          {!session.user.onBoarded ? (
             <UIOnboarding />
           ) : (
             <div className="back-layer grid grid-cols-5 px-2 pt-2 ">

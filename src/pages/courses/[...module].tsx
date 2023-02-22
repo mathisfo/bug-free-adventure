@@ -34,16 +34,15 @@ const ModuleStatistics = () => {
 
   if (isLoading || !isSuccess || status === "loading") {
     return (
-      <div className="mx-auto mt-32 w-4/5 rounded-md p-4">
-        <div className="flex animate-pulse space-x-4">
-          <div className="flex-1 space-y-6 py-1">
-            <div className="loading h-8 rounded"></div>
-            <div className="loading h-8 rounded"></div>
-            <div className="loading h-8 rounded"></div>
-            <div className="loading h-8 rounded"></div>
-            <div className="loading h-8 rounded"></div>
-          </div>
-        </div>
+      <div className="mx-12 mt-36 flex grid animate-pulse grid-cols-4 gap-8">
+        <div className="loading h-72 rounded"></div>
+        <div className="loading h-72 rounded"></div>
+        <div className="loading h-72 rounded"></div>
+        <div className="loading h-72 rounded"></div>
+        <div className="loading h-72 rounded"></div>
+        <div className="loading h-72 rounded"></div>
+        <div className="loading h-72 rounded"></div>
+        <div className="loading h-72 rounded"></div>
       </div>
     );
   }

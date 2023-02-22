@@ -1,15 +1,16 @@
 import {
-  PlusIcon,
-  EyeSlashIcon,
   EyeIcon,
+  EyeSlashIcon,
+  PlusIcon,
   TrashIcon,
 } from "@heroicons/react/24/outline";
 import { ToDo } from "@prisma/client";
 import { TRPCError } from "@trpc/server";
-import { log } from "console";
+import { Badge } from "flowbite-react";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { HiInformationCircle } from "react-icons/hi";
 import { ToDoForm } from "../../server/schema/UserSchema";
 import { api } from "../../utils/api";
 
@@ -22,17 +23,31 @@ const ToDoComp = () => {
   const [showCompleted, setShowCompleted] = useState(true);
 
   if (status == "loading") {
-    return <div>Loading...</div>;
+    return (
+      <div className="mx-auto w-full rounded-md p-4">
+        <div className="flex animate-pulse space-x-4">
+          <div className="flex-1 space-y-6 py-1">
+            <div className="loading h-64 rounded"></div>
+          </div>
+        </div>
+      </div>
+    );
   }
+
+  const {
+    data: todo,
+    isSuccess,
+    isLoading,
+  } = api.userRouter.getToDosOnUser.useQuery({ userId: session.user.id });
 
   const addToDoMutation = api.userRouter.addToDoToUser.useMutation({
     async onMutate(newToDo) {
       // Optimistic update, delete the transaction from the list immediately
-      await ctx.userRouter.getToDoOnUser.cancel();
-      const prevData = ctx.userRouter.getToDoOnUser.getData({
+      await ctx.userRouter.getToDosOnUser.cancel();
+      const prevData = ctx.userRouter.getToDosOnUser.getData({
         userId: session.user.id,
       });
-      ctx.userRouter.getToDoOnUser.setData(
+      ctx.userRouter.getToDosOnUser.setData(
         { userId: session.user.id },
         (old: any) => [...old, newToDo.toDo]
       );
@@ -41,20 +56,71 @@ const ToDoComp = () => {
     },
     // Invalidate the query after the mutation is complete to sync wit server
     onSettled() {
-      ctx.userRouter.getToDoOnUser.invalidate({ userId: session.user.id });
+      ctx.userRouter.getToDosOnUser.invalidate({ userId: session.user.id });
     },
   });
 
-  const setCompletedMutation = api.userRouter.setToDoCompleted.useMutation();
+  const setCompletedMutation = api.userRouter.setToDoCompleted.useMutation({
+    async onMutate(newTodo) {
+      // Optimistic update, delete the transaction from the list immediately
+      await ctx.userRouter.getToDosOnUser.cancel();
+      const prevData = ctx.userRouter.getToDosOnUser.getData({
+        userId: session.user.id,
+      });
+      ctx.userRouter.getToDosOnUser.setData(
+        { userId: session.user.id },
+        (old: any) => {
+          const newTodos = old.map((todo: ToDo) => {
+            if (todo.todoId === newTodo.todoId) {
+              return { ...todo, completed: true };
+            }
+            return todo;
+          });
+          return newTodos;
+        }
+      );
 
-  const {
-    data: todo,
-    isSuccess,
-    isLoading,
-  } = api.userRouter.getToDoOnUser.useQuery({ userId: session.user.id });
+      return { prevData };
+    },
+    // Invalidate the query after the mutation is complete to sync wit server
+    onSettled() {
+      ctx.userRouter.getToDosOnUser.invalidate({ userId: session.user.id });
+    },
+  });
+
+  const deleteTodoMutation = api.userRouter.deleteTodo.useMutation({
+    async onMutate(todoId) {
+      // Optimistic update, delete the transaction from the list immediately
+      await ctx.userRouter.getToDosOnUser.cancel();
+      const prevData = ctx.userRouter.getToDosOnUser.getData({
+        userId: session.user.id,
+      });
+      ctx.userRouter.getToDosOnUser.setData(
+        { userId: session.user.id },
+        (old: any) => {
+          const newTodos = old.filter((todo: ToDo) => {
+            return todo.todoId !== todoId.todoId;
+          });
+          return newTodos;
+        }
+      );
+      return { prevData };
+    },
+    onSettled() {
+      ctx.userRouter.getToDosOnUser.invalidate({ userId: session.user.id });
+    },
+  });
 
   if (isLoading || !isSuccess) {
-    return <div>Loading...</div>;
+    return (
+      <div className="mx-auto w-full rounded-md p-4">
+        <div className="flex animate-pulse space-x-4">
+          <div className="flex-1 space-y-6 py-1">
+            <div className="loading h-64 rounded"></div>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   const onSubmit: SubmitHandler<ToDoForm> = (data: ToDoForm) => {
@@ -93,12 +159,52 @@ const ToDoComp = () => {
     );
   };
 
+  const onDeleteTodo = (todoId: string) => {
+    deleteTodoMutation.mutate(
+      {
+        todoId: todoId,
+      },
+      {
+        onSuccess: () => {
+          ctx.invalidate();
+        },
+        onError: () => {
+          throw new TRPCError({
+            code: "INTERNAL_SERVER_ERROR",
+            message: "Failed to delete todo",
+          });
+        },
+      }
+    );
+  };
+
   function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(" ");
   }
 
   return (
     <div className="course-card text-color relative mx-4 mb-2 h-full w-full rounded-2xl p-12">
+      <div>
+        {deleteTodoMutation.isError && (
+          <Badge icon={HiInformationCircle} color="failure">
+            Failed to delete Todo
+          </Badge>
+        )}
+      </div>
+      <div>
+        {addToDoMutation.isError && (
+          <Badge icon={HiInformationCircle} color="failure">
+            Failed to add Todo
+          </Badge>
+        )}
+      </div>
+      <div>
+        {setCompletedMutation.isError && (
+          <Badge icon={HiInformationCircle} color="failure">
+            Failed to complete Todo
+          </Badge>
+        )}
+      </div>
       <div className="tems-center mx-8 mb-8 mt-2 grid grid-cols-2 grid-rows-1">
         <h1 className="col-start-1 mx-auto flex items-center text-4xl font-semibold">
           TO <p className="text-blue-color">DO</p>S
@@ -147,6 +253,7 @@ const ToDoComp = () => {
                     )}
                   </div>
                   <TrashIcon
+                    onClick={() => onDeleteTodo(item.todoId)}
                     className={classNames(
                       !item.completed ? `opacity-50` : ``,
                       `h-4 w-4 cursor-pointer`
