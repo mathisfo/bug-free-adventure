@@ -1130,7 +1130,7 @@ async function main() {
           {
             moduleName: "Exception handling",
             order: 11,
-            descrption:
+            description:
               "An exception is an error that happens during execution of a program. When that error occurs, Java generate an exception that can be handled, which avoids program to crash. Exceptions are convenient in many ways for handling errors and special conditions in a program. When we think that a code segment exists which can produce an error then we can use exception handling.",
             ActivityResource: {
               create: [
