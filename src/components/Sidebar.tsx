@@ -93,10 +93,10 @@ const Sidebar = ({ children }: { children: React.ReactElement }) => {
             <div className="back-layer grid grid-cols-5 px-2 pt-2 ">
               <div className="grid-col-1 z-index-2 grid h-screen">
                 <div className="sidebar-color relative rounded-l-lg py-8 dark:border-gray-500 ">
-                  <div className="mb-6 mt-6 flex justify-center">
+                  <div className="mb-6 mt-6 flex items-center justify-center">
                     <img src="/logo.svg" alt="next" className="w-1/3" />
                   </div>
-                  <div className="flex flex-shrink-0 justify-center px-2">
+                  <div className="flex-y-grow my-8 flex justify-center px-4">
                     <Greeting />
                   </div>
                   <div className="mt-5 flex flex-grow flex-col">

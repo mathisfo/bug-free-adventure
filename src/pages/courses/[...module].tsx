@@ -115,7 +115,7 @@ const ModuleStatistics = () => {
             />
           </div>
 
-          <div className="col-span-2 col-start-1 row-start-2 p-12">
+          <div className="col-span-2 col-start-1 row-start-2 w-1/2 p-12">
             <ProgressionGrid currentPage={module ? module[1] : "404"} />
           </div>
           <div className="col-start-2 space-y-4 p-14">
