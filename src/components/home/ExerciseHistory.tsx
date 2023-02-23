@@ -108,7 +108,9 @@ const ExerciseHistoryComp = () => {
           ))}
         </div>
       ) : (
-        <div>You have no history yet</div>
+        <div className="course-card mb-4 rounded-lg p-4 ">
+          <div>You have no history yet</div>
+        </div>
       )}
     </>
   );

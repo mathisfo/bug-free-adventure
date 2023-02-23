@@ -1,21 +1,9 @@
 import { Button } from "flowbite-react";
 import { signIn } from "next-auth/react";
-import { useState } from "react";
 import ToggleTheme from "../ToggleTheme";
 import { AiOutlineGithub } from "react-icons/ai";
 
 const SignIn = () => {
-  const [email, setEmail] = useState("");
-  const [forgotPassword, setForgotPassword] = useState(false);
-  const [signUp, setSignUp] = useState(false);
-
-  function resetPassword(
-    arg0: string,
-    arg1: { email: string; callbackUrl: string }
-  ): void {
-    throw new Error("Function not implemented.");
-  }
-
   return (
     <div className="signin-background fixed h-full w-full">
       <div className="course-card mx-auto my-24 h-3/5 w-1/3 rounded-lg">

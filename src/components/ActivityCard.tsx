@@ -1,9 +1,6 @@
 import { useTheme } from "next-themes";
 import Link from "next/link";
-import {
-  Activity,
-  activityAnalyticsSchema,
-} from "../server/schema/LearnerActivitySchema";
+import { Activity } from "../server/schema/LearnerActivitySchema";
 import { api } from "../utils/api";
 import DonutChart from "./DonutChart";
 

@@ -21,7 +21,6 @@ function classNames(...classes: string[]) {
 
 const Sidebar = ({ children }: { children: React.ReactElement }) => {
   const router = useRouter();
-  const iconPath = process.env.PUBLIC_URL + "/icons/";
 
   const navigation = [
     {

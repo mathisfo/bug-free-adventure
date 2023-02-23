@@ -1,6 +1,6 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ActivityCard from "../../components/ActivityCard";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import ExerciseCard from "../../components/ExerciseCard";

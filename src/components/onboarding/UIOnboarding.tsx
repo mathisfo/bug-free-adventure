@@ -2,7 +2,7 @@ import { SelectedEnum } from "@prisma/client";
 import { Alert, Button, Card, Checkbox, Label } from "flowbite-react";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { set, SubmitHandler, useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   HiAtSymbol,
@@ -24,7 +24,6 @@ const UIOnboarding = () => {
     register,
     handleSubmit,
     trigger,
-    setValue,
     formState: { errors },
   } = useForm<OnboardingForm>({
     resolver: zodResolver(onboardingSchema),
@@ -255,8 +254,8 @@ const UIOnboarding = () => {
                 your progress and engagement when you complete assignments.
                 Please select the components you want your dashboard to include.
                 We advice that you choose all of them, and later remove the ones
-                you don't like or don't have any use of. You can always go back
-                into settings to change your preferences later.
+                you don&apos;t like or don&apos;t have any use of. You can
+                always go back into settings to change your preferences later.
               </p>
 
               <div className="mt-5 grid select-none grid-cols-3 gap-4">

@@ -1,4 +1,4 @@
-import { ChartBarIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
+import { ChartBarIcon } from "@heroicons/react/24/solid";
 import { Dropdown } from "flowbite-react";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -31,7 +31,6 @@ const Breadcrumbs = (props: BreadcrumbsProps) => {
   );
 
   const router = useRouter();
-  const { type } = router.query;
 
   const types = ["examples", "challenges", "coding"];
 

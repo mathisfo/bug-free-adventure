@@ -1,10 +1,6 @@
 import {
-  CheckCircleIcon,
   ChevronDownIcon,
   ChevronRightIcon,
-  EllipsisHorizontalCircleIcon,
-  XCircleIcon,
-  ChevronDoubleRightIcon,
   ArrowTopRightOnSquareIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
@@ -16,7 +12,7 @@ function classNames(...classes: string[]) {
 }
 
 const CourseStatus2 = () => {
-  const [clickedIndex, setClickedIndex] = useState<any>();
+  const [clickedIndex, setClickedIndex] = useState<number>();
 
   const {
     data: learnerAnalytics,

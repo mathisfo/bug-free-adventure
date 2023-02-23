@@ -1,6 +1,5 @@
 import { CommandLineIcon } from "@heroicons/react/24/outline";
 import { useRouter } from "next/router";
-import { list } from "postcss";
 import { Activity } from "../server/schema/LearnerActivitySchema";
 import { api } from "../utils/api";
 

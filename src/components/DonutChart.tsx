@@ -1,6 +1,4 @@
-import { useTheme } from "next-themes";
 import { PieChart } from "react-minimal-pie-chart";
-import { api } from "../utils/api";
 
 const DonutChart = ({
   size,
@@ -13,24 +11,6 @@ const DonutChart = ({
   fillColor: string;
   progress: number;
 }) => {
-  const { theme } = useTheme();
-  const {
-    data: learnerAnalytics,
-    isSuccess,
-    isLoading,
-  } = api.learnerActivityRouter.getLearnerActivity.useQuery();
-
-  if (!isSuccess || isLoading) {
-    return (
-      <div className="flex items-center justify-center">
-        <div
-          className="spinner-border loading-spinner inline-block h-44 w-44 animate-spin rounded-full border-8"
-          role="status"
-        ></div>
-      </div>
-    );
-  }
-
   const data: any = [
     {
       title: "To go",

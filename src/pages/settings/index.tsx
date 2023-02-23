@@ -1,6 +1,4 @@
 import CourseStatus2 from "../../components/CourseStatus2";
-import Leaderboard from "../../components/Leaderboard";
-import ToDoComp from "../../components/todo/ToDoComp";
 
 const Settings = () => {
   return (
