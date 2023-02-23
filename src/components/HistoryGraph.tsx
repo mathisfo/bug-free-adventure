@@ -48,23 +48,15 @@ const HistoryGraph = () => {
     );
   }
 
-  const grouped = history.reduce(
-    (
-      acc: {
-        [x: string]: any[];
-      },
-      curr: { completedAt: string | number | Date }
-    ) => {
-      const date = new Date(curr.completedAt).toDateString();
-      if (!acc[date]) {
-        acc[date] = [];
-      }
+  const grouped = history.reduce((acc: any, curr: any) => {
+    const date = new Date(curr.completedAt).toDateString();
+    if (!acc[date]) {
+      acc[date] = [];
+    }
 
-      acc[date]?.push(curr);
-      return acc;
-    },
-    {} as { [key: string]: Array<ExerciseHistory & ActivityResource> }
-  );
+    acc[date]?.push(curr);
+    return acc;
+  }, {} as { [key: string]: Array<ExerciseHistory & { ActivityResource: ActivityResource }> });
 
   ChartJS.register(
     CategoryScale,
@@ -98,13 +90,16 @@ const HistoryGraph = () => {
   };
 
   const labels = Object.keys(grouped);
+  const dataPoints: Array<
+    ExerciseHistory & { ActivityResource: ActivityResource }
+  >[] = Object.values(grouped);
 
   const data = {
     labels,
     datasets: [
       {
         label: "Java",
-        data: Object.entries(grouped).map((e) => e[1].length),
+        data: dataPoints.map((d) => d.length),
         borderColor: "rgb(255, 99, 132)",
         backgroundColor: "rgba(255, 99, 132, 0.5)",
       },

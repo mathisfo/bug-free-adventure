@@ -1,6 +1,6 @@
 import { useSession } from "next-auth/react";
 import { useState } from "react";
-import { useExerciseHistory } from "../hooks/useExerciseHistory";
+import { useUpdateExerciseHistory } from "../hooks/useUpdateExerciseHistory";
 import { Activity } from "../server/schema/LearnerActivitySchema";
 import { api } from "../utils/api";
 
@@ -24,7 +24,10 @@ const ProgressionGrid = (props: ProgressionGridInterface) => {
     undefined
   );
 
-  useExerciseHistory(modules, selectedActivity);
+  useUpdateExerciseHistory(modules, selectedActivity);
+
+  const addExerciseHistoryMutation =
+    api.userRouter.addExerciseHistoryToUser.useMutation();
 
   if (isLoading || !isSuccess) return <div>Loading..</div>;
 
@@ -61,7 +64,12 @@ const ProgressionGrid = (props: ProgressionGridInterface) => {
                   session.user?.protusId +
                   "&grp=NorwayFall2022B&sid=TEST&cid=352"
                 }
-                onClick={() => setSelectedActivity(item.activityId)}
+                onClick={() => {
+                  setSelectedActivity(item.activityId);
+                  addExerciseHistoryMutation.mutate({
+                    activityId: item.activityId,
+                  });
+                }}
                 rel="noreferrer"
                 key={item.activityId}
               >
@@ -105,6 +113,12 @@ const ProgressionGrid = (props: ProgressionGridInterface) => {
                   session.user?.protusId +
                   "&grp=NorwayFall2022B&sid=TEST&cid=352"
                 }
+                onClick={() => {
+                  setSelectedActivity(item.activityId);
+                  addExerciseHistoryMutation.mutate({
+                    activityId: item.activityId,
+                  });
+                }}
                 rel="noreferrer"
                 key={item.activityId}
               >
@@ -148,6 +162,12 @@ const ProgressionGrid = (props: ProgressionGridInterface) => {
                   session.user?.protusId +
                   "&grp=NorwayFall2022B&sid=TEST&cid=352"
                 }
+                onClick={() => {
+                  setSelectedActivity(item.activityId);
+                  addExerciseHistoryMutation.mutate({
+                    activityId: item.activityId,
+                  });
+                }}
                 rel="noreferrer"
                 key={item.activityId}
               >

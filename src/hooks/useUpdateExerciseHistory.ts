@@ -2,11 +2,11 @@ import { useState, useEffect } from "react";
 
 import { api } from "../utils/api";
 
-export const useExerciseHistory = (
+export const useUpdateExerciseHistory = (
   learnerAnalytics: any,
   selectedId: string | undefined
 ) => {
-  const mutation = api.userRouter.addExerciseHistoryToUser.useMutation();
+  const mutation = api.userRouter.updateExerciseHistory.useMutation();
 
   const [previousData, setPreviousData] =
     useState<typeof learnerAnalytics>(undefined);

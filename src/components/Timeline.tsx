@@ -5,8 +5,10 @@ import {
 } from "@heroicons/react/24/solid";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
-import { useExerciseHistory } from "../hooks/useExerciseHistory";
+import { useUpdateExerciseHistory } from "../hooks/useUpdateExerciseHistory";
+
 import { Activity } from "../server/schema/LearnerActivitySchema";
+import { api } from "../utils/api";
 
 const TimelineWrapper = (props: {
   recommendedActivities: Activity[];
@@ -20,7 +22,10 @@ const TimelineWrapper = (props: {
     undefined
   );
 
-  useExerciseHistory(props.learnerAnalytics, selectedActivity);
+  useUpdateExerciseHistory(props.learnerAnalytics, selectedActivity);
+
+  const addExerciseHistoryMutation =
+    api.userRouter.addExerciseHistoryToUser.useMutation();
 
   if (recommendedActivities.length === 0) {
     return <div>No recommendations have been generated yet</div>;
@@ -42,7 +47,12 @@ const TimelineWrapper = (props: {
               session.user?.protusId +
               "&grp=NorwayFall2022B&sid=TEST&cid=352"
             }
-            onClick={() => setSelectedActivity(activity.activityId)}
+            onClick={() => {
+              setSelectedActivity(activity.activityId);
+              addExerciseHistoryMutation.mutate({
+                activityId: activity.activityId,
+              });
+            }}
             rel="noreferrer"
           >
             {activity.type == "EXAMPLE" ? (
