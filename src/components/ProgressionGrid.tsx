@@ -1,6 +1,6 @@
 import { useSession } from "next-auth/react";
 import { useState } from "react";
-import { useExerciseHistory } from "../hooks/useExerciseHistory";
+import { useUpdateExerciseHistory } from "../hooks/useUpdateExerciseHistory";
 import { Activity } from "../server/schema/LearnerActivitySchema";
 import { api } from "../utils/api";
 
@@ -24,7 +24,10 @@ const ProgressionGrid = (props: ProgressionGridInterface) => {
     undefined
   );
 
-  useExerciseHistory(modules, selectedActivity);
+  useUpdateExerciseHistory(modules, selectedActivity);
+
+  const addExerciseHistoryMutation =
+    api.userRouter.addExerciseHistoryToUser.useMutation();
 
   if (isLoading || !isSuccess) return <div>Loading..</div>;
 
@@ -36,7 +39,7 @@ const ProgressionGrid = (props: ProgressionGridInterface) => {
     "w-10 h-10 items-center rounded-md cursor-pointer hover:scale-105 transition duration-300 ease-in-out";
 
   return (
-    <div className="mt-12 space-y-1 ">
+    <div className=" w-1/2 space-y-1">
       <div className="flex flex-row items-center justify-end space-x-2 pb-4 pr-4">
         <div className="green-color h-4 w-4 items-center rounded-md"></div>
         <p className="text-sm">Finished</p>
@@ -63,7 +66,12 @@ const ProgressionGrid = (props: ProgressionGridInterface) => {
                   session.user?.protusId +
                   "&grp=NorwayFall2022B&sid=TEST&cid=352"
                 }
-                onClick={() => setSelectedActivity(item.activityId)}
+                onClick={() => {
+                  setSelectedActivity(item.activityId);
+                  addExerciseHistoryMutation.mutate({
+                    activityId: item.activityId,
+                  });
+                }}
                 rel="noreferrer"
                 key={item.activityId}
               >
@@ -108,6 +116,12 @@ const ProgressionGrid = (props: ProgressionGridInterface) => {
                   session.user?.protusId +
                   "&grp=NorwayFall2022B&sid=TEST&cid=352"
                 }
+                onClick={() => {
+                  setSelectedActivity(item.activityId);
+                  addExerciseHistoryMutation.mutate({
+                    activityId: item.activityId,
+                  });
+                }}
                 rel="noreferrer"
                 key={item.activityId}
               >
@@ -152,6 +166,12 @@ const ProgressionGrid = (props: ProgressionGridInterface) => {
                   session.user?.protusId +
                   "&grp=NorwayFall2022B&sid=TEST&cid=352"
                 }
+                onClick={() => {
+                  setSelectedActivity(item.activityId);
+                  addExerciseHistoryMutation.mutate({
+                    activityId: item.activityId,
+                  });
+                }}
                 rel="noreferrer"
                 key={item.activityId}
               >

@@ -71,6 +71,9 @@ export const userRouter = createTRPCRouter({
       const history = await ctx.prisma.exerciseHistory.findMany({
         where: {
           userId: input.userId,
+          NOT: {
+            completedAt: null,
+          },
         },
         include: {
           ActivityResource: true,
@@ -82,11 +85,32 @@ export const userRouter = createTRPCRouter({
   addExerciseHistoryToUser: protectedProcedure
     .input(z.object({ activityId: z.string() }))
     .mutation(async ({ ctx, input }) => {
-      return await ctx.prisma.exerciseHistory.create({
-        data: {
+      return await ctx.prisma.exerciseHistory.upsert({
+        where: {
+          userExerciseHistoryOnActivityResource: {
+            userId: ctx.session.user.id,
+            activityResourceId: input.activityId,
+          },
+        },
+        create: {
           userId: ctx.session.user.id,
           activityResourceId: input.activityId,
           visitedAt: new Date(),
+        },
+        update: {},
+      });
+    }),
+  updateExerciseHistory: protectedProcedure
+    .input(z.object({ activityId: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      return await ctx.prisma.exerciseHistory.update({
+        where: {
+          userExerciseHistoryOnActivityResource: {
+            userId: ctx.session.user.id,
+            activityResourceId: input.activityId,
+          },
+        },
+        data: {
           completedAt: new Date(),
         },
       });

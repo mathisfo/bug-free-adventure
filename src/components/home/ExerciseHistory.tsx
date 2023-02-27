@@ -42,23 +42,17 @@ const ExerciseHistoryComp = () => {
     );
   }
 
-  const grouped = history.reduce(
-    (
-      acc: {
-        [x: string]: any[];
-      },
-      curr: { completedAt: string | number | Date }
-    ) => {
-      const date = new Date(curr.completedAt).toDateString();
-      if (!acc[date]) {
-        acc[date] = [];
-      }
+  const grouped = history.reduce((acc: any, curr: any) => {
+    const date = new Date(curr.completedAt).toDateString();
+    if (!acc[date]) {
+      acc[date] = [];
+    }
 
-      acc[date]?.push(curr);
-      return acc;
-    },
-    {} as { [key: string]: Array<ExerciseHistory & ActivityResource> }
-  );
+    acc[date]?.push(curr);
+    return acc;
+  }, {} as { [key: string]: Array<ExerciseHistory & { ActivityResource: ActivityResource }> });
+
+  console.log("grouped", grouped);
 
   const result = Object.values(grouped);
 
@@ -66,43 +60,49 @@ const ExerciseHistoryComp = () => {
     <>
       {result != undefined && result.length > 0 ? (
         <div className="background-color w-full overflow-x-auto ">
-          {Object.entries(grouped).map((e, index) => (
+          {Object.keys(grouped).map((e, index) => (
             <div key={index} className="course-card mb-4 rounded-lg p-8 ">
               <time className="text-color text-lg font-semibold dark:text-white">
-                {e[0]}
+                {e}
               </time>
               <ol className="mt-3 divide-y dark:divide-gray-700 ">
-                {e[1].map((hist) => (
-                  <div
-                    key={hist.historyId}
-                    className="mb-1  rounded-lg bg-[#f9f9fb] p-5 dark:bg-[#26272A]"
-                  >
-                    <li>
-                      <a
-                        href={hist.url}
-                        className="block items-center p-3 hover:bg-gray-100 dark:hover:bg-gray-700 sm:flex"
-                      >
-                        <div className="text-gray-600 dark:text-gray-400">
-                          <div className="text-base font-normal">
-                            <span className="font-medium text-gray-900 dark:text-white">
-                              {hist.ActivityResource.name}
+                {grouped[e].map(
+                  (
+                    hist: ExerciseHistory & {
+                      ActivityResource: ActivityResource;
+                    }
+                  ) => (
+                    <div
+                      key={hist.historyId}
+                      className="mb-1  rounded-lg bg-[#f9f9fb] p-5 dark:bg-[#26272A]"
+                    >
+                      <li>
+                        <a
+                          href={hist.ActivityResource.url}
+                          className="block items-center p-3 hover:bg-gray-100 dark:hover:bg-gray-700 sm:flex"
+                        >
+                          <div className="text-gray-600 dark:text-gray-400">
+                            <div className="text-base font-normal">
+                              <span className="font-medium text-gray-900 dark:text-white">
+                                {hist.ActivityResource.name}
+                              </span>
+                            </div>
+                            <span className="inline-flex items-center text-xs font-normal text-gray-500 dark:text-gray-400">
+                              {hist.ActivityResource.type == "EXAMPLE" ? (
+                                <DocumentTextIcon className="mr-2 h-3 w-3 text-[#3c3b95]"></DocumentTextIcon>
+                              ) : hist.ActivityResource.type == "CODING" ? (
+                                <FlagIcon className="mr-2 h-3 w-3 text-[#5f80f4]"></FlagIcon>
+                              ) : (
+                                <CommandLineIcon className="mr-2 h-3 w-3 text-[#988efe]"></CommandLineIcon>
+                              )}
+                              {hist.ActivityResource.type}
                             </span>
                           </div>
-                          <span className="inline-flex items-center text-xs font-normal text-gray-500 dark:text-gray-400">
-                            {hist.ActivityResource.type == "EXAMPLE" ? (
-                              <DocumentTextIcon className="mr-2 h-3 w-3 text-[#3c3b95]"></DocumentTextIcon>
-                            ) : hist.ActivityResource.type == "CODING" ? (
-                              <FlagIcon className="mr-2 h-3 w-3 text-[#5f80f4]"></FlagIcon>
-                            ) : (
-                              <CommandLineIcon className="mr-2 h-3 w-3 text-[#988efe]"></CommandLineIcon>
-                            )}
-                            {hist.ActivityResource.type}
-                          </span>
-                        </div>
-                      </a>
-                    </li>
-                  </div>
-                ))}
+                        </a>
+                      </li>
+                    </div>
+                  )
+                )}
               </ol>
             </div>
           ))}

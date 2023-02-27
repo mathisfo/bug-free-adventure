@@ -1,8 +1,8 @@
 import ContinueCard from "../../components/ContinueCard";
 import CourseStatus from "../../components/CourseStatus";
 import DonutChart from "../../components/DonutChart";
-import TopMenu from "../../components/Breadcrumbs";
 import { api } from "../../utils/api";
+import Breadcrumbs from "../../components/Breadcrumbs";
 
 const Courses = () => {
   const {
@@ -39,8 +39,8 @@ const Courses = () => {
 
   return (
     <div>
-      <TopMenu currentPage={""} currentType={""} />
-      <div className="background-color col-span-4 mr-4 h-screen rounded-r-lg p-14">
+      <Breadcrumbs currentPage={""} currentType={""} />
+      <div className="background-color mr-4 h-screen p-14">
         <div className="mb-24 flex flex-row">
           <div className="w-3/5 ">
             <ContinueCard

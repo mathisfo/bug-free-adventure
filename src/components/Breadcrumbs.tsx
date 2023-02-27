@@ -61,7 +61,10 @@ const Breadcrumbs = (props: BreadcrumbsProps) => {
           {props.currentPage ? (
             <div className="flex flex-row items-center">
               {chevron}
-              <a href={"/courses/Java/" + props.currentPage} rel="noreferrer">
+              <Link
+                href={"/courses/Java/" + props.currentPage}
+                rel="noreferrer"
+              >
                 <p
                   className={classNames(
                     router.asPath === "/courses"
@@ -72,7 +75,7 @@ const Breadcrumbs = (props: BreadcrumbsProps) => {
                 >
                   {props.currentPage}
                 </p>
-              </a>
+              </Link>
             </div>
           ) : (
             <></>
