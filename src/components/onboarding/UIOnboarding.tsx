@@ -18,6 +18,7 @@ import {
 } from "../../server/schema/UserSchema";
 import { api } from "../../utils/api";
 import ToggleTheme from "../ToggleTheme";
+import SelectedComponentsSubmitter from "./SelectedComponentSubmitter";
 
 const UIOnboarding = () => {
   const {
@@ -207,11 +208,11 @@ const UIOnboarding = () => {
             </div>
           ) : page == "components" ? (
             <div className="pl-12 pt-12 pr-12">
-              <h2 className="text-md font-medium leading-6">
+              <h2 className="text-lg font-medium leading-6">
                 Second, we want to know which components you want to display in
                 your dashboard.
               </h2>
-              <p className="mt-1 text-sm text-gray-400">
+              <p className="text-md mt-1 text-gray-400">
                 This dashboard utilizes a number of different ways to represent
                 your progress and engagement when you complete assignments.
                 Please select the components you want your dashboard to include.
@@ -220,76 +221,31 @@ const UIOnboarding = () => {
                 always go back into settings to change your preferences later.
               </p>
 
-              <div className="mt-5 grid select-none grid-cols-3 gap-4">
-                <Card className="course-card relative rounded-2xl border border-gray-400  dark:border-gray-700">
-                  <h5 className="text-2xl font-bold tracking-tight">
-                    History Graph
-                  </h5>
-                  <div className="grid grid-cols-3 ">
-                    <p className="col-span-2 col-start-1 text-sm text-gray-700 dark:text-gray-400">
-                      This component shows you how much you work per day
-                      reprented as a graph.
-                    </p>
-                    <div className="col-start-3 ml-4 h-16 w-16 rounded bg-blue-200"></div>
-                    <div className="col-start-1 row-start-2 mt-4 flex items-center gap-2">
-                      <Checkbox
-                        {...register("selectedComponents")}
-                        id="select"
-                        value={SelectedEnum.HISTORYGRAPH}
-                      />
-                      <Label htmlFor="select">Select</Label>
-                    </div>
-                  </div>
-                </Card>
-                <Card className="course-card relative rounded-2xl border border-gray-400  dark:border-gray-700">
-                  <h5 className="text-2xl font-bold tracking-tight">
-                    TODO List
-                  </h5>
-                  <div className="grid grid-cols-3 ">
-                    <p className="col-span-2 col-start-1 text-sm text-gray-700 dark:text-gray-400">
-                      This component enables you to keep track of your
-                      assignments with due dates.
-                    </p>
-                    <div className="col-start-3 ml-4 h-16 w-16 rounded bg-blue-200"></div>
-                    <div className="col-start-1 row-start-2 mt-4 flex items-center gap-2">
-                      <Checkbox
-                        {...register("selectedComponents")}
-                        id="select"
-                        value={SelectedEnum.TODO}
-                      />
-                      <Label htmlFor="select">Select</Label>
-                    </div>
-                  </div>
-                </Card>
-                <Card className="course-card relative rounded-2xl border border-gray-400  dark:border-gray-700">
-                  <h5 className="text-2xl font-bold tracking-tight">
-                    Activity History
-                  </h5>
-                  <div className="grid grid-cols-3 ">
-                    <p className="col-span-2 col-start-1 text-sm text-gray-700 dark:text-gray-400">
-                      This component is more detailed than Activity Graph. It
-                      shows your exercise activty per day, as a list.
-                    </p>
-                    <div className="col-start-3 ml-4 h-16 w-16 rounded bg-blue-200"></div>
-                    <div className="col-start-1 row-start-2 mt-4 flex items-center gap-2">
-                      <Checkbox
-                        {...register("selectedComponents")}
-                        id="select"
-                        value={SelectedEnum.EXERCISEHISTORY}
-                      />
-                      <Label htmlFor="select">Select</Label>
-                    </div>
-                  </div>
-                </Card>
+              <div className="mt-5 grid select-none grid-cols-2 gap-x-8 gap-y-4">
+                <SelectedComponentsSubmitter
+                  name="History Graph"
+                  info="This component shows you how much you work per day
+                      reprented as a graph."
+                />
+                <SelectedComponentsSubmitter
+                  name="TODO List"
+                  info="This component enables you to keep track of your
+                      assignments with due dates."
+                />
+                <SelectedComponentsSubmitter
+                  name="Activity History"
+                  info="This component is more detailed than Activity Graph. It
+                      shows your exercise activty per day, as a list."
+                />
               </div>
               <Button
-                className="absolute left-16 bottom-16"
+                className="absolute left-16 bottom-6"
                 onClick={() => setPage("welcome")}
               >
                 <HiArrowLeft className="mr-2" /> Go back
               </Button>
               <Button
-                className="absolute right-16 bottom-16"
+                className="absolute right-16 bottom-6"
                 onClick={() => setPage("leaderboard")}
               >
                 Next page
@@ -298,10 +254,10 @@ const UIOnboarding = () => {
             </div>
           ) : page == "leaderboard" ? (
             <div className="pl-12 pt-12 pr-12">
-              <h2 className="text-md font-medium leading-6">
+              <h2 className="text-lg font-medium leading-6">
                 Lastly, we want to know whether you are the competitive type.
               </h2>
-              <p className="mt-1 text-sm text-gray-400">
+              <p className="text-md mt-1 text-gray-400">
                 By participating in the leaderboard you can compete against your
                 classmates to see who completes the most exercises. Your
                 nickname will show up on the leaderboard.
