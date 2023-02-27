@@ -24,6 +24,7 @@ const UIOnboarding = () => {
     register,
     handleSubmit,
     trigger,
+    getValues,
     formState: { errors },
   } = useForm<OnboardingForm>({
     resolver: zodResolver(onboardingSchema),
@@ -37,22 +38,29 @@ const UIOnboarding = () => {
   const ctx = api.useContext();
 
   const mutation = api.userRouter.submitOnboarding.useMutation();
+  const [selectLeaderboard, setSelectleaderboard] = useState(false);
 
   const validateAndGoToNextPage = async () => {
-    const valid = await trigger(["USNEmail", "protusId", "name"]);
+    const valid = await trigger(["USNEmail", "protusId"]);
 
     if (valid) {
       setPage("components");
     }
   };
 
-  const onSubmit: SubmitHandler<OnboardingForm> = (data: OnboardingForm) => {
-    mutation.mutate(data, {
-      onSuccess: () => {
-        ctx.invalidate();
-        router.reload();
-      },
-    });
+  const onSubmit: SubmitHandler<OnboardingForm> = async (
+    data: OnboardingForm
+  ) => {
+    const validName = await trigger("name");
+
+    if (validName) {
+      mutation.mutate(data, {
+        onSuccess: () => {
+          ctx.invalidate();
+          router.reload();
+        },
+      });
+    }
   };
 
   function classNames(...classes: string[]) {
@@ -76,7 +84,7 @@ const UIOnboarding = () => {
               </h2>
 
               <div>
-                {(errors.USNEmail || errors.protusId || errors.name) && (
+                {(errors.USNEmail || errors.protusId) && (
                   <div>
                     {Object.values(errors).map((error) => (
                       <Alert
@@ -92,50 +100,6 @@ const UIOnboarding = () => {
                 )}
               </div>
 
-              <h2 className="text-md pt-8 font-medium leading-6">
-                First of all, we need some basic information about you!
-              </h2>
-              <label
-                htmlFor="name"
-                className="mb-2 block pt-8 text-sm font-medium text-gray-900 dark:text-white"
-              >
-                First name
-              </label>
-              <p className="my-1 text-sm text-gray-400">
-                Your name will be displayed on the leaderboard if you choose to
-                participate in that.
-              </p>
-              <div className="flex w-1/5">
-                <span
-                  className={classNames(
-                    errors.name
-                      ? "border-red-500 bg-red-50 text-red-900 placeholder-red-700 focus:border-red-500 focus:ring-red-500 dark:border-red-400 dark:bg-red-100"
-                      : " border-zinc-300 bg-zinc-200  text-gray-900 dark:border-zinc-600 dark:bg-zinc-700 dark:text-gray-400",
-                    "inline-flex items-center rounded-l-md border border-r-0 px-3 text-sm"
-                  )}
-                >
-                  <HiUser
-                    className={
-                      errors.name
-                        ? " text-red-700"
-                        : "text-gray-600 dark:text-gray-200"
-                    }
-                  />
-                </span>
-                <input
-                  {...register("name")}
-                  type="text"
-                  id="name"
-                  className={classNames(
-                    errors.name
-                      ? "border-red-500 bg-red-50 p-2.5 text-red-900 placeholder-red-700 focus:border-red-500 focus:ring-red-500 dark:border-red-400 dark:bg-red-100"
-                      : "border-zinc-300 bg-gray-50 text-gray-900  focus:border-blue-500 focus:ring-blue-500 dark:border-zinc-600  dark:bg-zinc-800 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500",
-                    "block flex-1 rounded-none rounded-r-lg border p-2.5 text-sm"
-                  )}
-                  placeholder="Ola"
-                  required={true}
-                ></input>
-              </div>
               <div>
                 <label
                   htmlFor="mail"
@@ -151,7 +115,7 @@ const UIOnboarding = () => {
                 <div className="flex w-1/5">
                   <span
                     className={classNames(
-                      errors.name
+                      errors.USNEmail
                         ? "border-red-500 bg-red-50 text-red-900 placeholder-red-700 focus:border-red-500 focus:ring-red-500 dark:border-red-400 dark:bg-red-100"
                         : " border-zinc-300 bg-zinc-200  text-gray-900 dark:border-zinc-600 dark:bg-zinc-700 dark:text-gray-400",
                       "inline-flex items-center rounded-l-md border border-r-0 px-3 text-sm"
@@ -159,7 +123,7 @@ const UIOnboarding = () => {
                   >
                     <HiAtSymbol
                       className={
-                        errors.name
+                        errors.USNEmail
                           ? " text-red-700"
                           : "text-gray-600 dark:text-gray-200"
                       }
@@ -169,9 +133,9 @@ const UIOnboarding = () => {
                     {...register("USNEmail")}
                     type="email"
                     id="USNEmail"
-                    color={errors.name && "failure"}
+                    color={errors.USNEmail && "failure"}
                     className={classNames(
-                      errors.name
+                      errors.USNEmail
                         ? "border-red-500 bg-red-50 p-2.5 text-red-900 placeholder-red-700 focus:border-red-500 focus:ring-red-500 dark:border-red-400 dark:bg-red-100"
                         : "border-zinc-300 bg-gray-50 text-gray-900  focus:border-blue-500 focus:ring-blue-500 dark:border-zinc-600  dark:bg-zinc-800 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500",
                       "block flex-1 rounded-none rounded-r-lg border p-2.5 text-sm"
@@ -203,7 +167,7 @@ const UIOnboarding = () => {
                 <div className="flex w-1/5">
                   <span
                     className={classNames(
-                      errors.name
+                      errors.protusId
                         ? "border-red-500 bg-red-50 text-red-900 placeholder-red-700 focus:border-red-500 focus:ring-red-500 dark:border-red-400 dark:bg-red-100"
                         : " border-zinc-300 bg-zinc-200  text-gray-900 dark:border-zinc-600 dark:bg-zinc-700 dark:text-gray-400",
                       "inline-flex items-center rounded-l-md border border-r-0 px-3 text-sm"
@@ -211,19 +175,19 @@ const UIOnboarding = () => {
                   >
                     <HiIdentification
                       className={
-                        errors.name
+                        errors.protusId
                           ? " text-red-700"
                           : "text-gray-600 dark:text-gray-200"
                       }
                     />
                   </span>
                   <input
-                    {...register("protusId")}
-                    type="protusId"
+                    {...register("protusId", { valueAsNumber: true })}
+                    type="number"
                     id="number"
-                    color={errors.name && "failure"}
+                    color={errors.protusId && "failure"}
                     className={classNames(
-                      errors.name
+                      errors.protusId
                         ? "border-red-500 bg-red-50 p-2.5 text-red-900 placeholder-red-700 focus:border-red-500 focus:ring-red-500 dark:border-red-400 dark:bg-red-100"
                         : "border-zinc-300 bg-gray-50 text-gray-900  focus:border-blue-500 focus:ring-blue-500 dark:border-zinc-600  dark:bg-zinc-800 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500",
                       "block flex-1 rounded-none rounded-r-lg border p-2.5 text-sm"
@@ -339,9 +303,21 @@ const UIOnboarding = () => {
               </h2>
               <p className="mt-1 text-sm text-gray-400">
                 By participating in the leaderboard you can compete against your
-                classmates to see who completes the most assignments. Your name
-                will show up on the leaderboard.
+                classmates to see who completes the most exercises. Your
+                nickname will show up on the leaderboard.
               </p>
+              {mutation.isError && (
+                <Alert color="failure" icon={HiInformationCircle}>
+                  The ID you submitted is taken by another user. If you are
+                  certain you entered your ID correctly, please contact{" "}
+                  <a
+                    className="text-indigo-600"
+                    href="mailto:boban.vesin@ntnu.no"
+                  >
+                    Boban Vesin
+                  </a>
+                </Alert>
+              )}
               <div className="mt-5 grid grid-cols-3 gap-4">
                 <Card className="course-card relative rounded-2xl border border-gray-400  dark:border-gray-700">
                   <h5 className="text-2xl font-bold tracking-tight">
@@ -358,6 +334,7 @@ const UIOnboarding = () => {
                         id="leaderboard"
                         name="leaderboard"
                         type="checkbox"
+                        onClick={() => setSelectleaderboard(!selectLeaderboard)}
                         className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                       />
                       <Label htmlFor="select">Select</Label>
@@ -365,6 +342,61 @@ const UIOnboarding = () => {
                   </div>
                 </Card>
               </div>
+              {selectLeaderboard && (
+                <div>
+                  <h2 className="text-md pt-8 font-medium leading-6">
+                    We need your nickname to be displayed in the leaderboard
+                  </h2>
+                  <p className="mt-1 text-sm text-gray-400">
+                    This information will be displayed publicly so be careful
+                    what you share.
+                  </p>
+                  <label
+                    htmlFor="name"
+                    className="block pt-8 text-sm font-medium"
+                  >
+                    Nickname
+                  </label>
+                  <div className="mt-1 flex rounded-md">
+                    <div className="flex w-1/5">
+                      <span
+                        className={classNames(
+                          errors.name
+                            ? "border-red-500 bg-red-50 text-red-900 placeholder-red-700 focus:border-red-500 focus:ring-red-500 dark:border-red-400 dark:bg-red-100"
+                            : " border-zinc-300 bg-zinc-200  text-gray-900 dark:border-zinc-600 dark:bg-zinc-700 dark:text-gray-400",
+                          "inline-flex items-center rounded-l-md border border-r-0 px-3 text-sm"
+                        )}
+                      >
+                        <HiUser
+                          className={
+                            errors.name
+                              ? " text-red-700"
+                              : "text-gray-600 dark:text-gray-200"
+                          }
+                        />
+                      </span>
+                      <input
+                        {...register("name")}
+                        type="text"
+                        id="name"
+                        className={classNames(
+                          errors.name
+                            ? "border-red-500 bg-red-50 p-2.5 text-red-900 placeholder-red-700 focus:border-red-500 focus:ring-red-500 dark:border-red-400 dark:bg-red-100"
+                            : "border-zinc-300 bg-gray-50 text-gray-900  focus:border-blue-500 focus:ring-blue-500 dark:border-zinc-600  dark:bg-zinc-800 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500",
+                          "block flex-1 rounded-none rounded-r-lg border p-2.5 text-sm"
+                        )}
+                        placeholder="Ola"
+                        required={true}
+                      ></input>
+                    </div>
+                  </div>
+                  {errors.name && (
+                    <div className="text-sm text-red-500">
+                      {errors.name.message}
+                    </div>
+                  )}
+                </div>
+              )}
 
               <Button
                 className="absolute left-16 bottom-16"
