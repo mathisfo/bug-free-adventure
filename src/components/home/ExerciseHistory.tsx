@@ -52,8 +52,6 @@ const ExerciseHistoryComp = () => {
     return acc;
   }, {} as { [key: string]: Array<ExerciseHistory & { ActivityResource: ActivityResource }> });
 
-  console.log("grouped", grouped);
-
   const result = Object.values(grouped);
 
   return (
