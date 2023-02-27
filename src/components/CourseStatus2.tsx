@@ -137,7 +137,7 @@ const CourseStatus2 = () => {
                           <Link
                             key={activityType}
                             href={{
-                              pathname: `courses/Java/${module.name}`,
+                              pathname: `Java/${module.name}`,
                               query: {
                                 type: activityType,
                               },
@@ -148,8 +148,7 @@ const CourseStatus2 = () => {
                                 index + 1
                               } flex cursor-pointer flex-row items-baseline gap-3`}
                             >
-                              {activityType.charAt(0).toUpperCase() +
-                                activityType.slice(1)}
+                              {activityType}
                               <div
                                 className={classNames(
                                   ActivityProgressWithType(
@@ -198,9 +197,10 @@ const CourseStatus2 = () => {
                       )}
                     </div>
                     <p className="pb-4 text-sm">{module.description}</p>
-                    <Link href={`courses/Java/${module.name}`}>
-                      <div className="text-md flex cursor-pointer flex-row items-end pb-4 uppercase ">
-                        Show all <p className="mx-1 font-bold">{module.name}</p>{" "}
+                    <Link href={`Java/${module.name}`}>
+                      <div className="text-md flex cursor-pointer flex-row items-end pb-4 font-semibold uppercase ">
+                        Show all{" "}
+                        <p className="mx-1 text-[#988efe]">{module.name}</p>{" "}
                         exercises{" "}
                         <ArrowTopRightOnSquareIcon className="ml-2 h-5 w-5" />
                       </div>
@@ -246,14 +246,14 @@ const CourseStatus2 = () => {
                   )}
                 </div>
                 {clickedIndex == index + lengthOfArray / 2 && (
-                  <div className="rounded-xl bg-[#AEBBFC] pl-4 dark:bg-[#3C3D52]">
+                  <div className="fill-color-light rounded-xl  pl-4">
                     <div className="grid grid-cols-3 pt-8 pb-4  text-sm font-semibold uppercase">
                       {Object.keys(learnerAnalytics.activityAnalytics).map(
                         (activityType, index) => (
                           <Link
                             key={activityType}
                             href={{
-                              pathname: `courses/Java/${module.name}`,
+                              pathname: `Java/${module.name}`,
                               query: {
                                 type: activityType,
                               },
@@ -314,9 +314,10 @@ const CourseStatus2 = () => {
                       )}
                     </div>
                     <p className="pb-4 text-sm">{module.description}</p>
-                    <Link href={`courses/Java/${module.name}`}>
-                      <div className="text-md flex cursor-pointer flex-row items-end pb-4 uppercase ">
-                        Show all <p className="mx-1 font-bold">{module.name}</p>{" "}
+                    <Link href={`Java/${module.name}`}>
+                      <div className="text-md flex cursor-pointer flex-row items-end pb-4 font-semibold uppercase ">
+                        Show all{" "}
+                        <p className="mx-1 text-[#988efe]">{module.name}</p>{" "}
                         exercises{" "}
                         <ArrowTopRightOnSquareIcon className="ml-2 h-5 w-5" />
                       </div>
