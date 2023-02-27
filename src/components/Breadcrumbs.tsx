@@ -59,7 +59,7 @@ const Breadcrumbs = (props: BreadcrumbsProps) => {
             </Link>
           </div>
           {props.currentPage ? (
-            <div className="flex flex-row items-center">
+            <div className="flex flex-row items-center ">
               {chevron}
               <Link
                 href={"/courses/Java/" + props.currentPage}
@@ -70,7 +70,7 @@ const Breadcrumbs = (props: BreadcrumbsProps) => {
                     router.asPath === "/courses"
                       ? currentItemStyling
                       : menuItemStyling,
-                    "text-color flex justify-start rounded-lg p-2 pl-4 text-sm font-semibold uppercase hover:bg-indigo-100 dark:hover:bg-[#503597]"
+                    "text-color flex justify-start rounded-lg p-2 pl-4 text-sm font-semibold uppercase hover:cursor-pointer hover:bg-indigo-100 dark:hover:bg-[#503597]"
                   )}
                 >
                   {props.currentPage}
