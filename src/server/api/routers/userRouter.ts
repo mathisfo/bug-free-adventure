@@ -169,6 +169,7 @@ export const userRouter = createTRPCRouter({
           userId: input.toDo.userId,
           dueDate: input.toDo.dueDate,
           completed: false,
+          completedAt: new Date(),
           name: input.toDo.name,
         },
       });
@@ -182,6 +183,7 @@ export const userRouter = createTRPCRouter({
         },
         data: {
           completed: true,
+          completedAt: new Date(),
         },
       });
     }),

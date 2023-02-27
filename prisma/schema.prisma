@@ -84,9 +84,11 @@ model ExerciseHistory {
 model ToDo {
   todoId String @id @default(cuid())
 
-  dueDate   DateTime
-  completed Boolean
-  name      String
+  dueDate     DateTime
+  completed   Boolean
+  name        String
+  completedAt DateTime?
+  createdAt   DateTime  @default(now())
 
   userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
