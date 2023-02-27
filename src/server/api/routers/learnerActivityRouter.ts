@@ -20,6 +20,12 @@ export const learnerActivityRouter = createTRPCRouter({
         id: true,
         name: true,
         url: true,
+        relation: {
+          select: {
+            description: true,
+            moduleName: true,
+          },
+        },
       },
     });
 

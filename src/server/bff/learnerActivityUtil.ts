@@ -6,7 +6,15 @@ import {
 
 export function reMapLearnerActivityUtil(
   api: any,
-  names: { name: string; id: string; url: string }[]
+  names: {
+    name: string;
+    id: string;
+    url: string;
+    relation: {
+      moduleName: string;
+      description: string;
+    };
+  }[]
 ) {
   const remapped: LearnerActivityBFFApi = {
     learner: {
@@ -45,6 +53,9 @@ export function reMapLearnerActivityUtil(
       progress: progress,
       sequencing: sequencing,
       overallProgress: "",
+      description:
+        names.find((e) => e.relation.moduleName === key)?.relation
+          .description ?? "",
     };
 
     topicObj.name = key;

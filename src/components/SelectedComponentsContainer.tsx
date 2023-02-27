@@ -13,8 +13,6 @@ interface ISelectedComponentsProps {
 const SelectedComponentsContainer = (props: ISelectedComponentsProps) => {
   const { selected, leaderboard } = props;
 
-  console.log("selected", selected);
-
   const components: { [key: string]: React.ReactElement } = {
     HISTORYGRAPH: (
       <div>

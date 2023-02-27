@@ -1,23 +1,16 @@
 import { SelectedEnum } from "@prisma/client";
-import {
-  Alert,
-  Button,
-  Card,
-  Checkbox,
-  Label,
-  TextInput,
-} from "flowbite-react";
+import { Alert, Button, Card, Checkbox, Label } from "flowbite-react";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { set, SubmitHandler, useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   HiAtSymbol,
-  HiMail,
   HiUser,
   HiArrowRight,
   HiArrowLeft,
   HiInformationCircle,
+  HiIdentification,
 } from "react-icons/hi";
 import {
   OnboardingForm,
@@ -31,7 +24,7 @@ const UIOnboarding = () => {
     register,
     handleSubmit,
     trigger,
-    setValue,
+    getValues,
     formState: { errors },
   } = useForm<OnboardingForm>({
     resolver: zodResolver(onboardingSchema),
@@ -45,30 +38,42 @@ const UIOnboarding = () => {
   const ctx = api.useContext();
 
   const mutation = api.userRouter.submitOnboarding.useMutation();
+  const [selectLeaderboard, setSelectleaderboard] = useState(false);
 
   const validateAndGoToNextPage = async () => {
-    const valid = await trigger(["USNEmail", "protusId", "name"]);
+    const valid = await trigger(["USNEmail", "protusId"]);
 
     if (valid) {
       setPage("components");
     }
   };
 
-  const onSubmit: SubmitHandler<OnboardingForm> = (data: OnboardingForm) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<OnboardingForm> = async (
+    data: OnboardingForm
+  ) => {
+    const validName = await trigger("name");
 
-    mutation.mutate(data, {
-      onSuccess: () => {
-        ctx.invalidate();
-        router.reload();
-      },
-    });
+    if (validName) {
+      mutation.mutate(data, {
+        onSuccess: () => {
+          ctx.invalidate();
+          router.reload();
+        },
+      });
+    }
   };
 
+  function classNames(...classes: string[]) {
+    return classes.filter(Boolean).join(" ");
+  }
+
   return (
-    <div className="back-layer text-color h-screen w-full px-32 pb-16">
-      <ToggleTheme />
+    <div className="back-layer text-color mb-8 h-screen w-full px-32 pb-16">
+      <div className="h-8"></div>
       <div className="background-color relative mx-auto h-full w-full rounded-2xl">
+        <div className="absolute right-4 top-4">
+          <ToggleTheme />
+        </div>
         <form onSubmit={handleSubmit(onSubmit)}>
           {page == "welcome" ? (
             <div className="pl-12 pt-12 ">
@@ -79,7 +84,7 @@ const UIOnboarding = () => {
               </h2>
 
               <div>
-                {(errors.USNEmail || errors.protusId || errors.name) && (
+                {(errors.USNEmail || errors.protusId) && (
                   <div>
                     {Object.values(errors).map((error) => (
                       <Alert
@@ -95,62 +100,59 @@ const UIOnboarding = () => {
                 )}
               </div>
 
-              <h2 className="text-md pt-8 font-medium leading-6">
-                First of all, we need some basic information about you!
-              </h2>
-              <p className="mt-1 text-sm text-gray-400">
-                This information will be displayed publicly so be careful what
-                you share.
-              </p>
-              <label htmlFor="name" className="block pt-8 text-sm font-medium">
-                Name
-              </label>
-              <div className="mt-1 flex rounded-md">
-                <TextInput
-                  {...register("name")}
-                  id="name"
-                  type="text"
-                  icon={HiUser}
-                  color={errors.name && "failure"}
-                  placeholder="Ola"
-                  required={true}
-                />
-              </div>
-
               <div>
                 <label
-                  htmlFor="about"
-                  className="block pt-6 text-sm font-medium"
+                  htmlFor="mail"
+                  className="mb-2 block pt-8 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  USN Mail
+                  USN mail
                 </label>
-                <p className="mt-1 text-sm text-gray-400">
+                <p className="my-1 text-sm text-gray-400">
                   Your USN email will be used to identify you during the testing
                   phase. Rest assured that you will be anonymized in the final
                   report, and deleted after the test phase is finished.
                 </p>
-                <div className="mt-1 flex">
-                  <TextInput
+                <div className="flex w-1/5">
+                  <span
+                    className={classNames(
+                      errors.USNEmail
+                        ? "border-red-500 bg-red-50 text-red-900 placeholder-red-700 focus:border-red-500 focus:ring-red-500 dark:border-red-400 dark:bg-red-100"
+                        : " border-zinc-300 bg-zinc-200  text-gray-900 dark:border-zinc-600 dark:bg-zinc-700 dark:text-gray-400",
+                      "inline-flex items-center rounded-l-md border border-r-0 px-3 text-sm"
+                    )}
+                  >
+                    <HiAtSymbol
+                      className={
+                        errors.USNEmail
+                          ? " text-red-700"
+                          : "text-gray-600 dark:text-gray-200"
+                      }
+                    />
+                  </span>
+                  <input
                     {...register("USNEmail")}
-                    id="USNEmail"
                     type="email"
-                    icon={HiMail}
+                    id="USNEmail"
                     color={errors.USNEmail && "failure"}
+                    className={classNames(
+                      errors.USNEmail
+                        ? "border-red-500 bg-red-50 p-2.5 text-red-900 placeholder-red-700 focus:border-red-500 focus:ring-red-500 dark:border-red-400 dark:bg-red-100"
+                        : "border-zinc-300 bg-gray-50 text-gray-900  focus:border-blue-500 focus:ring-blue-500 dark:border-zinc-600  dark:bg-zinc-800 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500",
+                      "block flex-1 rounded-none rounded-r-lg border p-2.5 text-sm"
+                    )}
                     placeholder="olanr@usn.no"
                     required={true}
-                  />
+                  ></input>
                 </div>
               </div>
-
               <div>
                 <label
-                  htmlFor="about"
-                  className="block pt-6 text-sm font-medium"
+                  htmlFor="mail"
+                  className="mb-2 block pt-8 text-sm font-medium text-gray-900 dark:text-white"
                 >
                   Your ID
                 </label>
-
-                <p className="mt-1 text-sm text-gray-400">
+                <p className="my-1 text-sm text-gray-400">
                   Your ID has been sent to you on your USN mail. It is a five
                   digit number starting with 22 (ex: 22170). If you have not
                   received a email please contact{" "}
@@ -162,16 +164,37 @@ const UIOnboarding = () => {
                   </a>
                   .
                 </p>
-                <div className="mt-1 flex">
-                  <TextInput
+                <div className="flex w-1/5">
+                  <span
+                    className={classNames(
+                      errors.protusId
+                        ? "border-red-500 bg-red-50 text-red-900 placeholder-red-700 focus:border-red-500 focus:ring-red-500 dark:border-red-400 dark:bg-red-100"
+                        : " border-zinc-300 bg-zinc-200  text-gray-900 dark:border-zinc-600 dark:bg-zinc-700 dark:text-gray-400",
+                      "inline-flex items-center rounded-l-md border border-r-0 px-3 text-sm"
+                    )}
+                  >
+                    <HiIdentification
+                      className={
+                        errors.protusId
+                          ? " text-red-700"
+                          : "text-gray-600 dark:text-gray-200"
+                      }
+                    />
+                  </span>
+                  <input
                     {...register("protusId", { valueAsNumber: true })}
-                    id="protusId"
                     type="number"
+                    id="number"
                     color={errors.protusId && "failure"}
-                    icon={HiAtSymbol}
+                    className={classNames(
+                      errors.protusId
+                        ? "border-red-500 bg-red-50 p-2.5 text-red-900 placeholder-red-700 focus:border-red-500 focus:ring-red-500 dark:border-red-400 dark:bg-red-100"
+                        : "border-zinc-300 bg-gray-50 text-gray-900  focus:border-blue-500 focus:ring-blue-500 dark:border-zinc-600  dark:bg-zinc-800 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500",
+                      "block flex-1 rounded-none rounded-r-lg border p-2.5 text-sm"
+                    )}
                     placeholder="22xxx"
                     required={true}
-                  />
+                  ></input>
                 </div>
               </div>
               <Button
@@ -192,8 +215,9 @@ const UIOnboarding = () => {
                 This dashboard utilizes a number of different ways to represent
                 your progress and engagement when you complete assignments.
                 Please select the components you want your dashboard to include.
-                You can always go back into settings to change your preferences
-                later.
+                We advice that you choose all of them, and later remove the ones
+                you don&apos;t like or don&apos;t have any use of. You can
+                always go back into settings to change your preferences later.
               </p>
 
               <div className="mt-5 grid select-none grid-cols-3 gap-4">
@@ -203,8 +227,8 @@ const UIOnboarding = () => {
                   </h5>
                   <div className="grid grid-cols-3 ">
                     <p className="col-span-2 col-start-1 text-sm text-gray-700 dark:text-gray-400">
-                      This component show you your progress per day reprented as
-                      a graph.
+                      This component shows you how much you work per day
+                      reprented as a graph.
                     </p>
                     <div className="col-start-3 ml-4 h-16 w-16 rounded bg-blue-200"></div>
                     <div className="col-start-1 row-start-2 mt-4 flex items-center gap-2">
@@ -218,11 +242,13 @@ const UIOnboarding = () => {
                   </div>
                 </Card>
                 <Card className="course-card relative rounded-2xl border border-gray-400  dark:border-gray-700">
-                  <h5 className="text-2xl font-bold tracking-tight">TODO</h5>
+                  <h5 className="text-2xl font-bold tracking-tight">
+                    TODO List
+                  </h5>
                   <div className="grid grid-cols-3 ">
                     <p className="col-span-2 col-start-1 text-sm text-gray-700 dark:text-gray-400">
                       This component enables you to keep track of your
-                      assignments with due date.
+                      assignments with due dates.
                     </p>
                     <div className="col-start-3 ml-4 h-16 w-16 rounded bg-blue-200"></div>
                     <div className="col-start-1 row-start-2 mt-4 flex items-center gap-2">
@@ -242,7 +268,7 @@ const UIOnboarding = () => {
                   <div className="grid grid-cols-3 ">
                     <p className="col-span-2 col-start-1 text-sm text-gray-700 dark:text-gray-400">
                       This component is more detailed than Activity Graph. It
-                      shows your exercise activty per day.
+                      shows your exercise activty per day, as a list.
                     </p>
                     <div className="col-start-3 ml-4 h-16 w-16 rounded bg-blue-200"></div>
                     <div className="col-start-1 row-start-2 mt-4 flex items-center gap-2">
@@ -277,9 +303,21 @@ const UIOnboarding = () => {
               </h2>
               <p className="mt-1 text-sm text-gray-400">
                 By participating in the leaderboard you can compete against your
-                classmates to see who completes the most assignments. Your name
-                will show up on the leaderboard.
+                classmates to see who completes the most exercises. Your
+                nickname will show up on the leaderboard.
               </p>
+              {mutation.isError && (
+                <Alert color="failure" icon={HiInformationCircle}>
+                  The ID you submitted is taken by another user. If you are
+                  certain you entered your ID correctly, please contact{" "}
+                  <a
+                    className="text-indigo-600"
+                    href="mailto:boban.vesin@ntnu.no"
+                  >
+                    Boban Vesin
+                  </a>
+                </Alert>
+              )}
               <div className="mt-5 grid grid-cols-3 gap-4">
                 <Card className="course-card relative rounded-2xl border border-gray-400  dark:border-gray-700">
                   <h5 className="text-2xl font-bold tracking-tight">
@@ -296,6 +334,7 @@ const UIOnboarding = () => {
                         id="leaderboard"
                         name="leaderboard"
                         type="checkbox"
+                        onClick={() => setSelectleaderboard(!selectLeaderboard)}
                         className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                       />
                       <Label htmlFor="select">Select</Label>
@@ -303,6 +342,61 @@ const UIOnboarding = () => {
                   </div>
                 </Card>
               </div>
+              {selectLeaderboard && (
+                <div>
+                  <h2 className="text-md pt-8 font-medium leading-6">
+                    We need your nickname to be displayed in the leaderboard
+                  </h2>
+                  <p className="mt-1 text-sm text-gray-400">
+                    This information will be displayed publicly so be careful
+                    what you share.
+                  </p>
+                  <label
+                    htmlFor="name"
+                    className="block pt-8 text-sm font-medium"
+                  >
+                    Nickname
+                  </label>
+                  <div className="mt-1 flex rounded-md">
+                    <div className="flex w-1/5">
+                      <span
+                        className={classNames(
+                          errors.name
+                            ? "border-red-500 bg-red-50 text-red-900 placeholder-red-700 focus:border-red-500 focus:ring-red-500 dark:border-red-400 dark:bg-red-100"
+                            : " border-zinc-300 bg-zinc-200  text-gray-900 dark:border-zinc-600 dark:bg-zinc-700 dark:text-gray-400",
+                          "inline-flex items-center rounded-l-md border border-r-0 px-3 text-sm"
+                        )}
+                      >
+                        <HiUser
+                          className={
+                            errors.name
+                              ? " text-red-700"
+                              : "text-gray-600 dark:text-gray-200"
+                          }
+                        />
+                      </span>
+                      <input
+                        {...register("name")}
+                        type="text"
+                        id="name"
+                        className={classNames(
+                          errors.name
+                            ? "border-red-500 bg-red-50 p-2.5 text-red-900 placeholder-red-700 focus:border-red-500 focus:ring-red-500 dark:border-red-400 dark:bg-red-100"
+                            : "border-zinc-300 bg-gray-50 text-gray-900  focus:border-blue-500 focus:ring-blue-500 dark:border-zinc-600  dark:bg-zinc-800 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500",
+                          "block flex-1 rounded-none rounded-r-lg border p-2.5 text-sm"
+                        )}
+                        placeholder="Ola"
+                        required={true}
+                      ></input>
+                    </div>
+                  </div>
+                  {errors.name && (
+                    <div className="text-sm text-red-500">
+                      {errors.name.message}
+                    </div>
+                  )}
+                </div>
+              )}
 
               <Button
                 className="absolute left-16 bottom-16"
