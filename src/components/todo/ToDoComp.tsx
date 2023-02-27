@@ -271,7 +271,7 @@ const ToDoComp = () => {
       )}
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex grid grid-cols-10 grid-rows-1 flex-row "
+        className="mb-2 flex grid grid-cols-10 grid-rows-1 flex-row"
       >
         <PlusIcon
           onClick={() => setOpenAddToDo(!openAddToDo)}
