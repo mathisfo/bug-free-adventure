@@ -1,4 +1,8 @@
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime";
+import { TRPCClientError } from "@trpc/client";
+import { TRPCError } from "@trpc/server";
 import { z } from "zod";
+import Trpc from "../../../pages/api/trpc/[trpc]";
 import {
   onboardingSchema,
   selectedCompsEnum,
@@ -27,33 +31,46 @@ export const userRouter = createTRPCRouter({
       })
       .sort((a, b) => b.score - a.score);
   }),
-
   submitOnboarding: protectedProcedure
     .input(onboardingSchema)
     .mutation(async ({ ctx, input }) => {
-      return await ctx.prisma.user.update({
-        where: {
-          id: ctx.session.user.id,
-        },
-        include: {
-          preferences: true,
-        },
-        data: {
-          name: input.name,
-          USNEmail: input.USNEmail,
-          protusId: "norway" + input.protusId,
-          leaderboard: input.leaderboard,
-          onBoarded: true,
-          preferences: {
-            create: {
-              selectedComponents: {
-                set: input.selectedComponents as selectedCompsEnum[],
+      try {
+        const user = await ctx.prisma.user.update({
+          where: {
+            id: ctx.session.user.id,
+          },
+          include: {
+            preferences: true,
+          },
+          data: {
+            name: input.name,
+            USNEmail: input.USNEmail,
+            protusId: "norway" + input.protusId,
+            leaderboard: input.leaderboard,
+            onBoarded: true,
+            preferences: {
+              create: {
+                selectedComponents: {
+                  set: input.selectedComponents as selectedCompsEnum[],
+                },
+                leaderboard: input.leaderboard,
               },
-              leaderboard: input.leaderboard,
             },
           },
-        },
-      });
+        });
+      } catch (e) {
+        if (e instanceof PrismaClientKnownRequestError) {
+          // P2022: Unique constraint failed
+          // Prisma error codes: https://www.prisma.io/docs/reference/api-reference/error-reference#error-codes
+          if (e.code === "P2002") {
+            throw new TRPCError({
+              code: "INTERNAL_SERVER_ERROR",
+              message: "Id already exists. Check your ID",
+            });
+          }
+        }
+        throw e;
+      }
     }),
 
   getUserPreferences: protectedProcedure.query(async ({ ctx }) => {

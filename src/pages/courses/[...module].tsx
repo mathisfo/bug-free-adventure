@@ -147,6 +147,10 @@ const ModuleStatistics = () => {
     );
   }
 
+  const desc = learnerAnalytics.moduleAnalytics.find(
+    (e) => e.name === module![1]
+  )?.name;
+
   return (
     <>
       <Breadcrumbs

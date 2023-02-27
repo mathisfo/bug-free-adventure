@@ -45,24 +45,31 @@ const UIOnboarding = () => {
   const ctx = api.useContext();
 
   const mutation = api.userRouter.submitOnboarding.useMutation();
+  const [selectLeaderboard, setSelectleaderboard] = useState(false);
 
   const validateAndGoToNextPage = async () => {
-    const valid = await trigger(["USNEmail", "protusId", "name"]);
+    const valid = await trigger(["USNEmail", "protusId"]);
 
     if (valid) {
       setPage("components");
     }
   };
 
-  const onSubmit: SubmitHandler<OnboardingForm> = (data: OnboardingForm) => {
+  const onSubmit: SubmitHandler<OnboardingForm> = async (
+    data: OnboardingForm
+  ) => {
     console.log(data);
 
-    mutation.mutate(data, {
-      onSuccess: () => {
-        ctx.invalidate();
-        router.reload();
-      },
-    });
+    const validName = await trigger("name");
+
+    if (validName) {
+      mutation.mutate(data, {
+        onSuccess: () => {
+          ctx.invalidate();
+          router.reload();
+        },
+      });
+    }
   };
 
   return (
@@ -79,7 +86,7 @@ const UIOnboarding = () => {
               </h2>
 
               <div>
-                {(errors.USNEmail || errors.protusId || errors.name) && (
+                {(errors.USNEmail || errors.protusId) && (
                   <div>
                     {Object.values(errors).map((error) => (
                       <Alert
@@ -93,28 +100,6 @@ const UIOnboarding = () => {
                     ))}
                   </div>
                 )}
-              </div>
-
-              <h2 className="text-md pt-8 font-medium leading-6">
-                First of all, we need some basic information about you!
-              </h2>
-              <p className="mt-1 text-sm text-gray-400">
-                This information will be displayed publicly so be careful what
-                you share.
-              </p>
-              <label htmlFor="name" className="block pt-8 text-sm font-medium">
-                Name
-              </label>
-              <div className="mt-1 flex rounded-md">
-                <TextInput
-                  {...register("name")}
-                  id="name"
-                  type="text"
-                  icon={HiUser}
-                  color={errors.name && "failure"}
-                  placeholder="Ola"
-                  required={true}
-                />
               </div>
 
               <div>
@@ -277,9 +262,21 @@ const UIOnboarding = () => {
               </h2>
               <p className="mt-1 text-sm text-gray-400">
                 By participating in the leaderboard you can compete against your
-                classmates to see who completes the most assignments. Your name
-                will show up on the leaderboard.
+                classmates to see who completes the most exercises. Your
+                nickname will show up on the leaderboard.
               </p>
+              {mutation.isError && (
+                <Alert color="failure" icon={HiInformationCircle}>
+                  The ID you submitted is taken by another user. If you are
+                  certain you entered your ID correctly, please contact{" "}
+                  <a
+                    className="text-indigo-600"
+                    href="mailto:boban.vesin@ntnu.no"
+                  >
+                    Boban Vesin
+                  </a>
+                </Alert>
+              )}
               <div className="mt-5 grid grid-cols-3 gap-4">
                 <Card className="course-card relative rounded-2xl border border-gray-400  dark:border-gray-700">
                   <h5 className="text-2xl font-bold tracking-tight">
@@ -296,6 +293,7 @@ const UIOnboarding = () => {
                         id="leaderboard"
                         name="leaderboard"
                         type="checkbox"
+                        onClick={() => setSelectleaderboard(!selectLeaderboard)}
                         className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                       />
                       <Label htmlFor="select">Select</Label>
@@ -303,6 +301,44 @@ const UIOnboarding = () => {
                   </div>
                 </Card>
               </div>
+              {selectLeaderboard && (
+                <div>
+                  <h2 className="text-md pt-8 font-medium leading-6">
+                    We need your nickname to be displayed in the leaderboard
+                  </h2>
+                  <p className="mt-1 text-sm text-gray-400">
+                    This information will be displayed publicly so be careful
+                    what you share.
+                  </p>
+                  <label
+                    htmlFor="name"
+                    className="block pt-8 text-sm font-medium"
+                  >
+                    Nickname
+                  </label>
+                  <div className="mt-1 flex rounded-md">
+                    <TextInput
+                      {...register("name")}
+                      id="name"
+                      type="text"
+                      icon={HiUser}
+                      color={errors.name && "failure"}
+                      placeholder="Nickname"
+                      helperText={
+                        <div className="flex">
+                          {errors.name && (
+                            <div className="flex">
+                              <HiInformationCircle />
+                              {errors.name.message}
+                            </div>
+                          )}
+                        </div>
+                      }
+                      required={true}
+                    />
+                  </div>
+                </div>
+              )}
 
               <Button
                 className="absolute left-16 bottom-16"
