@@ -52,8 +52,6 @@ const ExerciseHistoryComp = () => {
     return acc;
   }, {} as { [key: string]: Array<ExerciseHistory & { ActivityResource: ActivityResource }> });
 
-  console.log("grouped", grouped);
-
   const result = Object.values(grouped);
 
   return (
@@ -61,7 +59,7 @@ const ExerciseHistoryComp = () => {
       {result != undefined && result.length > 0 ? (
         <div className="background-color w-full overflow-x-auto ">
           {Object.keys(grouped).map((e, index) => (
-            <div key={index} className="course-card mb-4 rounded-lg p-5 ">
+            <div key={index} className="course-card mb-4 rounded-lg p-8 ">
               <time className="text-color text-lg font-semibold dark:text-white">
                 {e}
               </time>
@@ -108,7 +106,9 @@ const ExerciseHistoryComp = () => {
           ))}
         </div>
       ) : (
-        <div>You have no history yet</div>
+        <div className="course-card mb-4 rounded-lg p-4 ">
+          <div>You have no history yet</div>
+        </div>
       )}
     </>
   );

@@ -1,6 +1,6 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ActivityCard from "../../components/ActivityCard";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import ExerciseCard from "../../components/ExerciseCard";
@@ -98,50 +98,57 @@ const ModuleStatistics = () => {
     }
   };
 
+  const description = learnerAnalytics.moduleAnalytics.find(
+    (e) => e.name === module![1]
+  )?.description;
+
   if (!type) {
     return (
       <div>
         <Breadcrumbs currentPage={module ? module[1] : "404"} />
-        <div className="m-4 grid h-screen grid-cols-2 grid-rows-2">
-          <div className="col-start-1 space-y-8 space-x-4 p-14">
-            <div className="text-color mb-4 text-lg font-semibold uppercase opacity-75">
-              Recommended next steps
+        <div className="course-card my-6 mx-12 rounded-lg p-6">
+          {description}
+        </div>
+        <div className="m-4 h-screen ">
+          <div className="flex flex-row gap-16">
+            <div className="w-1/2 space-y-8 pt-2 pl-14">
+              <div className="text-color mb-4 text-lg font-semibold uppercase opacity-75">
+                Recommended next steps
+              </div>
+              <Timeline
+                learnerAnalytics={learnerAnalytics}
+                recommendedActivities={[
+                  ...activities.challenges,
+                  ...activities.coding,
+                  ...activities.examples,
+                ].filter(
+                  (e) => e.sequencing > 0 && e.relatedTopic === module![1]
+                )}
+              />
             </div>
-            <Timeline
-              learnerAnalytics={learnerAnalytics}
-              recommendedActivities={[
-                ...activities.challenges,
-                ...activities.coding,
-                ...activities.examples,
-              ].filter(
-                (e) => e.sequencing > 0 && e.relatedTopic === module![1]
-              )}
-            />
+            <div className="w-1/2 space-y-4 pt-2">
+              <ActivityCard
+                type="EXAMPLE"
+                bg="bg-gradient-to-r from-[#3c3b95] via-[#44439f] to-[#3c3b95] "
+                fillColor="#DE5B7E"
+                moduleName={module ? module[1] : "404"}
+              />
+              <ActivityCard
+                type="CHALLENGE"
+                bg="bg-gradient-to-r from-[#9293cf] via-[#9a9bd0] to-[#9293cf]"
+                fillColor="#988efe"
+                moduleName={module ? module[1] : "404"}
+              />
+              <ActivityCard
+                type="CODING"
+                bg="bg-gradient-to-r from-[#5f80f4] via-[#6c8af3] to-[#5f80f4]"
+                fillColor="#0de890"
+                moduleName={module ? module[1] : "404"}
+              />
+            </div>
           </div>
-
-          <div className="col-span-2 col-start-1 row-start-2 p-12">
-            <ProgressionGrid currentPage={module ? module[1] : "404"} />
-          </div>
-          <div className="col-start-2 space-y-4 p-14">
-            <ActivityCard
-              type="EXAMPLE"
-              bg="bg-gradient-to-r from-[#3c3b95] via-[#44439f] to-[#3c3b95] "
-              fillColor="#DE5B7E"
-              moduleName={module ? module[1] : "404"}
-            />
-            <ActivityCard
-              type="CHALLENGE"
-              bg="bg-gradient-to-r from-[#9293cf] via-[#9a9bd0] to-[#9293cf]"
-              fillColor="#988efe"
-              moduleName={module ? module[1] : "404"}
-            />
-            <ActivityCard
-              type="CODING"
-              bg="bg-gradient-to-r from-[#5f80f4] via-[#6c8af3] to-[#5f80f4]"
-              fillColor="#0de890"
-              moduleName={module ? module[1] : "404"}
-            />
-          </div>
+          <ProgressionGrid currentPage={module ? module[1] : "404"} />
+          <div className="h-80"></div>
         </div>
       </div>
     );
@@ -197,54 +204,6 @@ const ModuleStatistics = () => {
                 })
             : "404"}
         </div>
-        <table className="text-color w-full table-fixed text-left text-sm">
-          <thead className="dark:course-card-dark bg-[#F5F5F5] uppercase dark:text-gray-400">
-            <tr>
-              <th className="py-3 px-6">Activity</th>
-              <th className="py-3 px-6">Attempts</th>
-              <th className="py-3 px-6">Success</th>
-              <th className="py-3 px-6">Module</th>
-              <th className="py-3 px-6">Type</th>
-              <th className="py-3 px-6">Sequencing</th>
-            </tr>
-          </thead>
-          <tbody>
-            {module
-              ? typeofActivity()
-                  .filter((activity) => activity.relatedTopic == module[1])
-                  .map((activity) => {
-                    return (
-                      <tr
-                        key={activity.activityId}
-                        className="text-md background-color cursor-pointer border-b hover:bg-gray-50 dark:border-gray-700 hover:dark:bg-[#3F485F] "
-                      >
-                        <th className="py-4 px-6">
-                          <a
-                            target="_blank"
-                            href={
-                              activity.url +
-                              "&usr=" +
-                              session.user?.protusId +
-                              "&grp=NorwayFall2022B&sid=TEST&cid=352"
-                            }
-                            rel="noreferrer"
-                          >
-                            {activity.activityName}
-                          </a>
-                        </th>
-                        <td className="py-4 px-6">{activity.attempts}</td>
-                        <td className="flex flex-row py-4 px-6">
-                          <div>{activity.successRate}</div>
-                        </td>
-                        <td>{activity.relatedTopic}</td>
-                        <td>{activity.type}</td>
-                        <td>{activity.sequencing}</td>
-                      </tr>
-                    );
-                  })
-              : "404"}
-          </tbody>
-        </table>
       </div>
     </>
   );

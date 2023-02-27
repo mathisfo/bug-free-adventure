@@ -39,8 +39,8 @@ const ProgressionGrid = (props: ProgressionGridInterface) => {
     "w-10 h-10 items-center rounded-md cursor-pointer hover:scale-105 transition duration-300 ease-in-out";
 
   return (
-    <div className="mt-12 grid grid-cols-2 space-y-1">
-      <div className="row-start-1 flex flex-row items-center space-x-2 justify-self-end pb-4 pr-4">
+    <div className=" w-1/2 space-y-1">
+      <div className="flex flex-row items-center justify-end space-x-2 pb-4 pr-4">
         <div className="green-color h-4 w-4 items-center rounded-md"></div>
         <p className="text-sm">Finished</p>
         <div className="lighter-green-color h-4 w-4 items-center rounded-md"></div>
@@ -48,11 +48,13 @@ const ProgressionGrid = (props: ProgressionGridInterface) => {
         <div className="h-4 w-4 items-center rounded-md bg-gray-200 dark:bg-[#404143]"></div>
         <p className="text-sm">To do</p>
       </div>
-      <div className="row-start-2 flex items-center gap-6">
-        <p className="text-color col-start-1 w-24 text-end text-sm font-semibold uppercase">
-          Examples
-        </p>
-        <div className="col-start-2 flex flex-row space-x-1">
+      <div className="grid-auto-cols grid grid-cols-5 gap-1">
+        <div className="col-span-2 col-start-1 row-start-1 mr-4 flex flex items-center items-center justify-end gap-6 gap-6">
+          <p className="text-color text-end text-sm font-semibold uppercase">
+            Examples
+          </p>
+        </div>
+        <div className="col-start-3 row-start-1 flex flex-row space-x-1">
           {modules.activityAnalytics.examples
             .filter((e) => e.relatedTopic == props.currentPage)
             .map((item) => (
@@ -96,12 +98,13 @@ const ProgressionGrid = (props: ProgressionGridInterface) => {
               </a>
             ))}
         </div>
-      </div>
-      <div className="row-start-3 flex  items-center gap-6">
-        <p className="text-color col-start-1 w-24 text-end text-sm font-semibold uppercase">
-          Challenges
-        </p>
-        <div className=" col-start-2 flex flex-row space-x-1">
+
+        <div className="col-span-2 col-start-1 row-start-2 mr-4 flex items-center justify-end gap-6">
+          <p className="text-color text-end text-sm font-semibold uppercase">
+            Challenges
+          </p>
+        </div>
+        <div className=" col-start-3 row-start-2 flex flex-row space-x-1">
           {modules.activityAnalytics.challenges
             .filter((e) => e.relatedTopic == props.currentPage)
             .map((item) => (
@@ -145,12 +148,13 @@ const ProgressionGrid = (props: ProgressionGridInterface) => {
               </a>
             ))}
         </div>
-      </div>
-      <div className="row-start-4  flex items-center gap-6">
-        <p className="text-color col-start-1 w-24 text-end text-sm font-semibold uppercase">
-          Coding
-        </p>
-        <div className="col-start-2 flex flex-row space-x-1">
+
+        <div className="col-span-2 col-start-1 row-start-3 mr-4 flex items-center justify-end gap-6">
+          <p className="text-color text-end text-sm font-semibold uppercase ">
+            Coding exercises
+          </p>
+        </div>
+        <div className="col-start-3 row-start-3 flex flex-row space-x-1">
           {modules.activityAnalytics.coding
             .filter((e) => e.relatedTopic == props.currentPage)
             .map((item) => (

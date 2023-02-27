@@ -106,7 +106,7 @@ const HistoryGraph = () => {
     ],
   };
   return (
-    <div className="course-card rounded-xl p-4">
+    <div className="course-card rounded-lg p-4">
       {history && history.length > 0 ? (
         <Line options={options} data={data} />
       ) : (
