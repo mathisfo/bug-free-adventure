@@ -1,4 +1,4 @@
-import { ChartBarIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
+import { ChartBarIcon } from "@heroicons/react/24/solid";
 import { Dropdown } from "flowbite-react";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -31,7 +31,6 @@ const Breadcrumbs = (props: BreadcrumbsProps) => {
   );
 
   const router = useRouter();
-  const { type } = router.query;
 
   const types = ["examples", "challenges", "coding"];
 
@@ -60,13 +59,20 @@ const Breadcrumbs = (props: BreadcrumbsProps) => {
             </Link>
           </div>
           {props.currentPage ? (
-            <div className="flex flex-row">
+            <div className="flex flex-row items-center ">
               {chevron}
               <Link
                 href={"/courses/Java/" + props.currentPage}
                 rel="noreferrer"
               >
-                <p className="text-color pl-4 text-sm font-semibold uppercase">
+                <p
+                  className={classNames(
+                    router.asPath === "/courses"
+                      ? currentItemStyling
+                      : menuItemStyling,
+                    "text-color flex justify-start rounded-lg p-2 pl-4 text-sm font-semibold uppercase hover:cursor-pointer hover:bg-indigo-100 dark:hover:bg-[#503597]"
+                  )}
+                >
                   {props.currentPage}
                 </p>
               </Link>
@@ -79,9 +85,13 @@ const Breadcrumbs = (props: BreadcrumbsProps) => {
               {chevron}
               <div className="pl-4">
                 <Dropdown
-                  label={props.currentType.toUpperCase()}
+                  label={
+                    props.currentType == "coding"
+                      ? "CODING EXERCISES"
+                      : props.currentType.toUpperCase()
+                  }
                   inline={true}
-                  className="dark:bg-[#26272A]"
+                  className="dark:bg-zinc-800"
                 >
                   {types.map((item) => (
                     <a
@@ -100,10 +110,13 @@ const Breadcrumbs = (props: BreadcrumbsProps) => {
                         className={classNames(
                           props.currentType == item.toUpperCase()
                             ? currentItemStyling
-                            : menuItemStyling
+                            : menuItemStyling,
+                          "mx-2 flex justify-start rounded-lg p-2 hover:bg-indigo-100 dark:hover:bg-[#503597]"
                         )}
                       >
-                        {item.toUpperCase()}
+                        {item == "coding"
+                          ? "CODING EXERCISES"
+                          : item.toUpperCase()}
                       </Dropdown.Item>
                     </a>
                   ))}

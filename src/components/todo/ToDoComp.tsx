@@ -183,7 +183,7 @@ const ToDoComp = () => {
   }
 
   return (
-    <div className="course-card text-color relative mx-4 mb-2 h-full w-full rounded-2xl p-12">
+    <div className="course-card text-color relative mb-2 h-full w-full rounded-xl p-8">
       <div>
         {deleteTodoMutation.isError && (
           <Badge icon={HiInformationCircle} color="failure">
@@ -284,7 +284,7 @@ const ToDoComp = () => {
               type="text"
               {...register("name")}
               id="name"
-              className="col-start-1 col-end-3 mr-1 rounded border-0 opacity-75 dark:bg-[#212124]"
+              className="text-color-light col-start-1 col-end-3 mr-1 rounded border-0 opacity-75 dark:bg-[#212124]"
               placeholder="Your todo.."
             ></input>
 
@@ -293,7 +293,7 @@ const ToDoComp = () => {
               {...register("dueDate", { valueAsDate: true })}
               id="dueDate"
               required
-              className="col-start-3 col-end-5 rounded border-0 text-gray-700 text-white dark:bg-[#212124]"
+              className="text-color-light col-start-3 col-end-5 rounded border-0 dark:bg-[#212124]"
             ></input>
             <button
               type="submit"

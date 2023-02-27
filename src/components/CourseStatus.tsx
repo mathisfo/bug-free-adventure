@@ -10,7 +10,7 @@ import { useState } from "react";
 import { api } from "../utils/api";
 
 const CourseStatus = () => {
-  const [clickedIndex, setClickedIndex] = useState<any>({});
+  const [clickedIndex, setClickedIndex] = useState<number>();
 
   const {
     data: learnerAnalytics,
@@ -35,13 +35,6 @@ const CourseStatus = () => {
   }
 
   const activites = learnerAnalytics.activityAnalytics;
-
-  const handleClick = (index: number) => {
-    setClickedIndex((state: any[]) => ({
-      ...state,
-      [index]: !state[index],
-    }));
-  };
 
   const ActivityProgressWithType = (
     type: string,
@@ -113,10 +106,14 @@ const CourseStatus = () => {
                 <tr
                   key={module.name}
                   className="text-md background-color cursor-pointer border-b hover:bg-gray-50 dark:border-zinc-700 hover:dark:bg-[#242427]"
-                  onClick={() => handleClick(index)}
+                  onClick={() =>
+                    clickedIndex == index
+                      ? setClickedIndex(-1)
+                      : setClickedIndex(index)
+                  }
                 >
                   <th className="flex flex-row py-4 px-6 uppercase">
-                    {clickedIndex[index] ? (
+                    {clickedIndex == index ? (
                       <ChevronDownIcon className="text-color mr-2 h-4 w-4" />
                     ) : (
                       <ChevronRightIcon className="text-color mr-2 h-4 w-4" />
@@ -160,7 +157,7 @@ const CourseStatus = () => {
                     </div>
                   </td>
                 </tr>
-                {clickedIndex[index] && (
+                {clickedIndex == index && (
                   <>
                     {Object.keys(learnerAnalytics.activityAnalytics).map(
                       (activityType, index) => (
@@ -177,8 +174,10 @@ const CourseStatus = () => {
                                 },
                               }}
                             >
-                              {activityType.charAt(0).toUpperCase() +
-                                activityType.slice(1)}
+                              {activityType == "coding"
+                                ? "Coding exercises"
+                                : activityType.charAt(0).toUpperCase() +
+                                  activityType.slice(1)}
                             </Link>
                           </th>
                           <td className="py-4 px-12">
@@ -215,17 +214,22 @@ const CourseStatus = () => {
                               ></div>
                             </div>
                             <div className="text-xs">
-                              {Math.ceil(
-                                (ActivityProgressWithType(
-                                  activityType,
-                                  module.name
-                                ).success /
-                                  ActivityProgressWithType(
-                                    activityType,
-                                    module.name
-                                  ).total) *
-                                  100
-                              )}{" "}
+                              {ActivityProgressWithType(
+                                activityType,
+                                module.name
+                              ).total == 0
+                                ? 100
+                                : Math.ceil(
+                                    (ActivityProgressWithType(
+                                      activityType,
+                                      module.name
+                                    ).success /
+                                      ActivityProgressWithType(
+                                        activityType,
+                                        module.name
+                                      ).total) *
+                                      100
+                                  )}{" "}
                               %
                             </div>
                           </td>

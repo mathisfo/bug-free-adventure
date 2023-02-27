@@ -7,10 +7,12 @@ export type selectedCompsEnum = z.infer<typeof selectedComps>;
 export const onboardingSchema = z.object({
   name: z
     .string()
-    .min(2, { message: "Your name must be at least two characters long" })
-    .max(12, { message: "Your name is too long" }),
+    .min(2, { message: "Your name must be at least two characters long." })
+    .max(20, {
+      message: "The length of your name can be of maximum 20 characters.",
+    }),
   USNEmail: z.string().email().endsWith("@usn.no", {
-    message: "Your email must be an USN email",
+    message: "Your email must be an USN email.",
   }),
   protusId: z
     .number({ invalid_type_error: "Your ID should be between 22101 and 22200" })
