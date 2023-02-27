@@ -1,5 +1,5 @@
 import ContinueCard from "../../components/ContinueCard";
-import CourseStatus from "../../components/CourseStatus";
+import CourseStatus2 from "../../components/CourseStatus2";
 import DonutChart from "../../components/DonutChart";
 import { api } from "../../utils/api";
 import Breadcrumbs from "../../components/Breadcrumbs";
@@ -61,7 +61,7 @@ const Courses = () => {
             ></DonutChart>
           </div>
         </div>
-        <CourseStatus />
+        <CourseStatus2 />
         <div className="background-color h-32"></div>
       </div>
     </div>

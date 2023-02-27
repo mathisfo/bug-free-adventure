@@ -107,9 +107,9 @@ const CourseStatus2 = () => {
                       ? setClickedIndex(-1)
                       : setClickedIndex(index)
                   }
-                  className="relative -mb-4 h-16 w-full cursor-pointer items-center rounded-xl bg-[#889BFC] dark:bg-[#7D76CA]"
+                  className="course-card relative -mb-4 h-16 w-full cursor-pointer items-center rounded-xl"
                 >
-                  <p className="pl-4 pt-2 font-semibold uppercase text-white">
+                  <p className="pl-4 pt-2 font-semibold uppercase">
                     {module.name}
                   </p>
                   <div className="mt-2 flex flex-row items-center font-semibold">
@@ -119,18 +119,18 @@ const CourseStatus2 = () => {
                         style={{ width: module.overallProgress * 100 + "%" }}
                       ></div>
                     </div>
-                    <div className="text-xs text-white">
+                    <div className="text-xs">
                       {Math.ceil(module.overallProgress * 100)} %
                     </div>
                   </div>
                   {clickedIndex == index ? (
-                    <ChevronDownIcon className="absolute right-4 top-4 h-6 w-6 text-white " />
+                    <ChevronDownIcon className="absolute right-4 top-4 h-6 w-6" />
                   ) : (
-                    <ChevronRightIcon className="absolute right-4 top-5 h-6 w-6 text-white" />
+                    <ChevronRightIcon className="absolute right-4 top-5 h-6 w-6" />
                   )}
                 </div>
                 {clickedIndex == index && (
-                  <div className="rounded-xl bg-[#AEBBFC] pl-4 dark:bg-[#3C3D52]">
+                  <div className="fill-color-light rounded-xl pl-4">
                     <div className="grid grid-cols-3 pt-8 pb-4  text-sm font-semibold uppercase">
                       {Object.keys(learnerAnalytics.activityAnalytics).map(
                         (activityType, index) => (
@@ -173,7 +173,7 @@ const CourseStatus2 = () => {
                                       0
                                     ? "bg-[#fecd66] text-gray-700"
                                     : "background-color",
-                                  "flex h-6 w-10 items-center rounded dark:text-white"
+                                  "flex h-6 w-10 items-center rounded"
                                 )}
                               >
                                 <p className="mx-auto">
@@ -223,12 +223,12 @@ const CourseStatus2 = () => {
                       ? setClickedIndex(-1)
                       : setClickedIndex(index + lengthOfArray / 2)
                   }
-                  className="relative -mb-4 h-16 w-full cursor-pointer items-center rounded-xl bg-[#889BFC] dark:bg-[#7D76CA]"
+                  className="course-card relative -mb-4 h-16 w-full cursor-pointer items-center rounded-xl"
                 >
-                  <p className="pl-4 pt-2 font-semibold uppercase text-white">
+                  <p className="pl-4 pt-2 font-semibold uppercase">
                     {module.name}
                   </p>
-                  <div className="mt-2 flex flex-row items-center font-semibold text-white">
+                  <div className="mt-2 flex flex-row items-center font-semibold">
                     <div className="fill-color-light mx-4 h-2 w-1/2 rounded">
                       <div
                         className={`green-color h-2 rounded`}
@@ -240,13 +240,88 @@ const CourseStatus2 = () => {
                     </div>
                   </div>
                   {clickedIndex == index + lengthOfArray / 2 ? (
-                    <ChevronDownIcon className="absolute right-4 top-4 h-6 w-6 text-white" />
+                    <ChevronDownIcon className="absolute right-4 top-4 h-6 w-6" />
                   ) : (
-                    <ChevronRightIcon className="absolute right-4 top-5 h-6 w-6 text-white" />
+                    <ChevronRightIcon className="absolute right-4 top-5 h-6 w-6" />
                   )}
                 </div>
                 {clickedIndex == index + lengthOfArray / 2 && (
-                  <div className="h-44 rounded-xl bg-[#AEBBFC] dark:bg-[#3C3D52]"></div>
+                  <div className="rounded-xl bg-[#AEBBFC] pl-4 dark:bg-[#3C3D52]">
+                    <div className="grid grid-cols-3 pt-8 pb-4  text-sm font-semibold uppercase">
+                      {Object.keys(learnerAnalytics.activityAnalytics).map(
+                        (activityType, index) => (
+                          <Link
+                            key={activityType}
+                            href={{
+                              pathname: `courses/Java/${module.name}`,
+                              query: {
+                                type: activityType,
+                              },
+                            }}
+                          >
+                            <div
+                              className={`col-start-${
+                                index + 1
+                              } flex cursor-pointer flex-row items-baseline gap-3`}
+                            >
+                              {activityType.charAt(0).toUpperCase() +
+                                activityType.slice(1)}
+                              <div
+                                className={classNames(
+                                  ActivityProgressWithType(
+                                    activityType,
+                                    module.name
+                                  ).success /
+                                    ActivityProgressWithType(
+                                      activityType,
+                                      module.name
+                                    ).total ===
+                                    1
+                                    ? "green-color"
+                                    : ActivityProgressWithType(
+                                        activityType,
+                                        module.name
+                                      ).success /
+                                        ActivityProgressWithType(
+                                          activityType,
+                                          module.name
+                                        ).total >
+                                      0
+                                    ? "bg-[#fecd66] text-gray-700"
+                                    : "background-color",
+                                  "flex h-6 w-10 items-center rounded"
+                                )}
+                              >
+                                <p className="mx-auto">
+                                  {
+                                    ActivityProgressWithType(
+                                      activityType,
+                                      module.name
+                                    ).success
+                                  }
+                                  /
+                                  {
+                                    ActivityProgressWithType(
+                                      activityType,
+                                      module.name
+                                    ).total
+                                  }
+                                </p>
+                              </div>
+                            </div>
+                          </Link>
+                        )
+                      )}
+                    </div>
+                    <p className="pb-4 text-sm">{module.description}</p>
+                    <Link href={`courses/Java/${module.name}`}>
+                      <div className="text-md flex cursor-pointer flex-row items-end pb-4 uppercase ">
+                        Show all <p className="mx-1 font-bold">{module.name}</p>{" "}
+                        exercises{" "}
+                        <ArrowTopRightOnSquareIcon className="ml-2 h-5 w-5" />
+                      </div>
+                    </Link>
+                  </div>
                 )}
               </div>
             );
