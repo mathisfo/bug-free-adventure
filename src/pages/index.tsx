@@ -1,6 +1,6 @@
 import { NextPage } from "next/types";
-import SelectedComponentsContainer from "../../components/SelectedComponentsContainer";
-import { api } from "../../utils/api";
+import SelectedComponentsContainer from "../components/SelectedComponentsContainer";
+import { api } from "../utils/api";
 
 const Dashboard: NextPage = () => {
   const {
