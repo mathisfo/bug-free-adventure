@@ -1,5 +1,5 @@
 import { SelectedEnum } from "@prisma/client";
-import { Alert, Button, Card, Checkbox, Label } from "flowbite-react";
+import { Alert, Button, Checkbox } from "flowbite-react";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -18,7 +18,6 @@ import {
 } from "../../server/schema/UserSchema";
 import { api } from "../../utils/api";
 import ToggleTheme from "../ToggleTheme";
-import SelectedComponentsSubmitter from "./SelectedComponentSubmitter";
 
 const UIOnboarding = () => {
   const {
@@ -340,7 +339,9 @@ const UIOnboarding = () => {
                     </p>
                     <div className="my-8 ml-4 flex items-center gap-2 ">
                       <input
-                        {...register("leaderboard")}
+                        {...(register("leaderboard"),
+                        { value: selectLeaderboard })}
+                        value={SelectedEnum.TODO}
                         id="leaderboard"
                         name="leaderboard"
                         type="checkbox"
