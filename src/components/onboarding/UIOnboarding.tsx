@@ -20,6 +20,7 @@ import { api } from "../../utils/api";
 import ToggleTheme from "../ToggleTheme";
 import Image from "next/image";
 import LeaderboardPreview from "../previews/LeaderboardPreview";
+import ExercisePlannerPreview from "../previews/ExercisePlannerPreview";
 
 const UIOnboarding = () => {
   const {
@@ -52,14 +53,12 @@ const UIOnboarding = () => {
   };
 
   const onSubmit: SubmitHandler<OnboardingForm> = (data: OnboardingForm) => {
-    console.log(data);
-
-    /*  mutation.mutate(data, {
+    mutation.mutate(data, {
       onSuccess: () => {
         ctx.invalidate();
         router.reload();
       },
-    }); */
+    });
   };
 
   function classNames(...classes: string[]) {
@@ -242,14 +241,16 @@ const UIOnboarding = () => {
                 </Card>
                 <Card className="course-card relative rounded-2xl border border-gray-400  dark:border-gray-700">
                   <h5 className="text-2xl font-bold tracking-tight">
-                    TODO List
+                    Exercise Planner
                   </h5>
                   <div className="grid grid-cols-3 ">
                     <p className="col-span-2 col-start-1 text-sm text-gray-700 dark:text-gray-400">
                       This component enables you to keep track of your
                       assignments with due dates.
                     </p>
-                    <div className="col-start-3 ml-4 h-16 w-16 rounded bg-blue-200"></div>
+                    <div className="col-start-3 ml-4">
+                      <ExercisePlannerPreview />
+                    </div>
                     <div className="col-start-1 row-start-2 mt-4 flex items-center gap-2">
                       <Checkbox
                         {...register("selectedComponents")}
