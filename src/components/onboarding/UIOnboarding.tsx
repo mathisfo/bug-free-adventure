@@ -222,21 +222,75 @@ const UIOnboarding = () => {
               </p>
 
               <div className="mt-5 grid select-none grid-cols-2 gap-x-8 gap-y-4">
-                <SelectedComponentsSubmitter
-                  name="History Graph"
-                  info="This component shows you how much you work per day
-                      reprented as a graph."
-                />
-                <SelectedComponentsSubmitter
-                  name="TODO List"
-                  info="This component enables you to keep track of your
-                      assignments with due dates."
-                />
-                <SelectedComponentsSubmitter
-                  name="Activity History"
-                  info="This component is more detailed than Activity Graph. It
-                      shows your exercise activty per day, as a list."
-                />
+                <div className="course-card relative grid grid-cols-2 gap-8 rounded-2xl border border-zinc-400 px-6 pt-6 dark:border-zinc-600">
+                  <div className="col-start-1">
+                    <h5 className="mb-2 text-2xl font-bold tracking-tight">
+                      History Graph
+                    </h5>
+
+                    <p className="col-start-1 text-sm text-gray-700 dark:text-gray-400">
+                      This component shows you how much you work per day
+                      reprented as a graph.
+                    </p>
+                    <div className="my-8 ml-4 flex items-center gap-2 ">
+                      <Checkbox
+                        {...register("selectedComponents")}
+                        id="select"
+                        value={SelectedEnum.HISTORYGRAPH}
+                      />
+                      <label htmlFor="select">Select</label>
+                    </div>
+                  </div>
+                  <div className="col-start-2 grid items-center ">
+                    <div className=" h-32 w-32 self-center rounded bg-blue-200"></div>
+                  </div>
+                </div>
+                <div className="course-card relative grid grid-cols-2 gap-8 rounded-2xl border border-zinc-400 px-6 pt-6 dark:border-zinc-600">
+                  <div className="col-start-1">
+                    <h5 className="mb-2 text-2xl font-bold tracking-tight">
+                      TODO List
+                    </h5>
+
+                    <p className="col-start-1 text-sm text-gray-700 dark:text-gray-400">
+                      This component enables you to keep track of your
+                      assignments with due dates.
+                    </p>
+                    <div className="my-8 ml-4 flex items-center gap-2 ">
+                      <Checkbox
+                        {...register("selectedComponents")}
+                        id="select"
+                        value={SelectedEnum.TODO}
+                      />
+                      <label htmlFor="select">Select</label>
+                    </div>
+                  </div>
+                  <div className="col-start-2 grid items-center ">
+                    <div className=" h-32 w-32 self-center rounded bg-blue-200"></div>
+                  </div>
+                </div>
+                <div className="course-card relative grid grid-cols-2 gap-8 rounded-2xl border border-zinc-400 px-6 pt-6 dark:border-zinc-600">
+                  <div className="col-start-1">
+                    <h5 className="mb-2 text-2xl font-bold tracking-tight">
+                      Activity History
+                    </h5>
+
+                    <p className="col-start-1 text-sm text-gray-700 dark:text-gray-400">
+                      This component is more detailed than Activity Graph. It
+                      shows your exercise activty per day, as a list.
+                    </p>
+                    <div className="my-8 ml-4 flex items-center gap-2 ">
+                      <Checkbox
+                        {...register("selectedComponents")}
+                        id="select"
+                        value={SelectedEnum.EXERCISEHISTORY}
+                      />
+                      <label htmlFor="select">Select</label>
+                    </div>
+                  </div>
+                  <div className="col-start-2 grid items-center ">
+                    <div className=" h-32 w-32 self-center rounded bg-blue-200"></div>
+                  </div>
+                </div>
               </div>
               <Button
                 className="absolute left-16 bottom-6"
@@ -275,16 +329,16 @@ const UIOnboarding = () => {
                 </Alert>
               )}
               <div className="mt-5 grid grid-cols-3 gap-4">
-                <Card className="course-card relative rounded-2xl border border-gray-400  dark:border-gray-700">
-                  <h5 className="text-2xl font-bold tracking-tight">
-                    Leaderboard
-                  </h5>
-                  <div className="grid grid-cols-3 ">
-                    <p className="col-span-2 col-start-1 text-sm text-gray-700 dark:text-gray-400">
+                <div className="course-card relative grid grid-cols-2 gap-8 rounded-2xl border border-zinc-400 px-6 pt-6 dark:border-zinc-600">
+                  <div className="col-start-1">
+                    <h5 className="mb-2 text-2xl font-bold tracking-tight">
+                      Leaderboard
+                    </h5>
+
+                    <p className="col-start-1 text-sm text-gray-700 dark:text-gray-400">
                       I would like to participate in the leaderboard
                     </p>
-                    <div className="col-start-3 ml-4 h-16 w-16 rounded bg-blue-200"></div>
-                    <div className="col-start-1 row-start-2 mt-4 flex items-center gap-2">
+                    <div className="my-8 ml-4 flex items-center gap-2 ">
                       <input
                         {...register("leaderboard")}
                         id="leaderboard"
@@ -293,10 +347,13 @@ const UIOnboarding = () => {
                         onClick={() => setSelectleaderboard(!selectLeaderboard)}
                         className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                       />
-                      <Label htmlFor="select">Select</Label>
+                      <label htmlFor="select">Select</label>
                     </div>
                   </div>
-                </Card>
+                  <div className="col-start-2 grid items-center ">
+                    <div className=" h-32 w-32 self-center rounded bg-blue-200"></div>
+                  </div>
+                </div>
               </div>
               {selectLeaderboard && (
                 <div>

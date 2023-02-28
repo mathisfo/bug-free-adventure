@@ -17,7 +17,13 @@ export const userRouter = createTRPCRouter({
         leaderboard: true,
       },
       include: {
-        history: true,
+        history: {
+          where: {
+            NOT: {
+              completedAt: null,
+            },
+          },
+        },
       },
     });
 
