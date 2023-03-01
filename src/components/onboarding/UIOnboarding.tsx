@@ -18,13 +18,17 @@ import {
 } from "../../server/schema/UserSchema";
 import { api } from "../../utils/api";
 import ToggleTheme from "../ToggleTheme";
+import Image from "next/image";
+import LeaderboardPreview from "../previews/LeaderboardPreview";
+import ExercisePlannerPreview from "../previews/ExercisePlannerPreview";
 
 const UIOnboarding = () => {
   const {
     register,
     handleSubmit,
     trigger,
-    getValues,
+
+    watch,
     formState: { errors },
   } = useForm<OnboardingForm>({
     resolver: zodResolver(onboardingSchema),
@@ -34,11 +38,11 @@ const UIOnboarding = () => {
   });
   const router = useRouter();
   const [page, setPage] = useState<string>("welcome");
+  const showName = watch("leaderboard");
 
   const ctx = api.useContext();
 
   const mutation = api.userRouter.submitOnboarding.useMutation();
-  const [selectLeaderboard, setSelectleaderboard] = useState(false);
 
   const validateAndGoToNextPage = async () => {
     const valid = await trigger(["USNEmail", "protusId"]);
@@ -48,19 +52,14 @@ const UIOnboarding = () => {
     }
   };
 
-  const onSubmit: SubmitHandler<OnboardingForm> = async (
-    data: OnboardingForm
-  ) => {
-    const validName = await trigger("name");
-
-    if (validName) {
-      mutation.mutate(data, {
-        onSuccess: () => {
-          ctx.invalidate();
-          router.reload();
-        },
-      });
-    }
+  const onSubmit: SubmitHandler<OnboardingForm> = (data: OnboardingForm) => {
+    console.log(data);
+    /* mutation.mutate(data, {
+      onSuccess: () => {
+        ctx.invalidate();
+        router.reload();
+      },
+    }); */
   };
 
   function classNames(...classes: string[]) {
@@ -243,14 +242,16 @@ const UIOnboarding = () => {
                 </Card>
                 <Card className="course-card relative rounded-2xl border border-gray-400  dark:border-gray-700">
                   <h5 className="text-2xl font-bold tracking-tight">
-                    TODO List
+                    Exercise Planner
                   </h5>
                   <div className="grid grid-cols-3 ">
                     <p className="col-span-2 col-start-1 text-sm text-gray-700 dark:text-gray-400">
                       This component enables you to keep track of your
                       assignments with due dates.
                     </p>
-                    <div className="col-start-3 ml-4 h-16 w-16 rounded bg-blue-200"></div>
+                    <div className="col-start-3 ml-4">
+                      <ExercisePlannerPreview />
+                    </div>
                     <div className="col-start-1 row-start-2 mt-4 flex items-center gap-2">
                       <Checkbox
                         {...register("selectedComponents")}
@@ -318,85 +319,89 @@ const UIOnboarding = () => {
                   </a>
                 </Alert>
               )}
-              <div className="mt-5 grid grid-cols-3 gap-4">
+              <div className="mt-5 grid gap-4">
                 <Card className="course-card relative rounded-2xl border border-gray-400  dark:border-gray-700">
                   <h5 className="text-2xl font-bold tracking-tight">
                     Leaderboard
                   </h5>
-                  <div className="grid grid-cols-3 ">
-                    <p className="col-span-2 col-start-1 text-sm text-gray-700 dark:text-gray-400">
+                  <div className="grid grid-cols-4 gap-4 ">
+                    <div className="col-span-2 col-start-1 text-sm text-gray-700 dark:text-gray-400">
                       I would like to participate in the leaderboard
-                    </p>
-                    <div className="col-start-3 ml-4 h-16 w-16 rounded bg-blue-200"></div>
+                      {showName && (
+                        <div className="p-1">
+                          <h2 className="text-md pt-8 font-medium leading-6">
+                            We need your nickname to be displayed in the
+                            leaderboard
+                          </h2>
+                          <p className="mt-1 text-sm text-gray-400">
+                            This information will be displayed publicly so be
+                            careful what you share.
+                          </p>
+                          <label
+                            htmlFor="name"
+                            className="block pt-8 text-sm font-medium"
+                          >
+                            Nickname
+                          </label>
+                          <div className="mt-1 flex rounded-md">
+                            <div className="flex w-1/5">
+                              <span
+                                className={classNames(
+                                  errors.name
+                                    ? "border-red-500 bg-red-50 text-red-900 placeholder-red-700 focus:border-red-500 focus:ring-red-500 dark:border-red-400 dark:bg-red-100"
+                                    : " border-zinc-300 bg-zinc-200  text-gray-900 dark:border-zinc-600 dark:bg-zinc-700 dark:text-gray-400",
+                                  "inline-flex items-center rounded-l-md border border-r-0 px-3 text-sm"
+                                )}
+                              >
+                                <HiUser
+                                  className={
+                                    errors.name
+                                      ? " text-red-700"
+                                      : "text-gray-600 dark:text-gray-200"
+                                  }
+                                />
+                              </span>
+                              <input
+                                {...register("name")}
+                                type="text"
+                                id="name"
+                                className={classNames(
+                                  errors.name
+                                    ? "border-red-500 bg-red-50 p-2.5 text-red-900 placeholder-red-700 focus:border-red-500 focus:ring-red-500 dark:border-red-400 dark:bg-red-100"
+                                    : "border-zinc-300 bg-gray-50 text-gray-900  focus:border-blue-500 focus:ring-blue-500 dark:border-zinc-600  dark:bg-zinc-800 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500",
+                                  "block flex-1 rounded-none rounded-r-lg border p-2.5 text-sm"
+                                )}
+                                placeholder="Ola"
+                                required={false}
+                              ></input>
+                            </div>
+                          </div>
+                          {errors.name && (
+                            <div className="text-sm text-red-500">
+                              {errors.name.message}
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="col-span-2 col-start-3 rounded">
+                      <LeaderboardPreview />
+                    </div>
                     <div className="col-start-1 row-start-2 mt-4 flex items-center gap-2">
                       <input
                         {...register("leaderboard")}
                         id="leaderboard"
                         name="leaderboard"
                         type="checkbox"
-                        onClick={() => setSelectleaderboard(!selectLeaderboard)}
                         className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                       />
+
                       <Label htmlFor="select">Select</Label>
                     </div>
                   </div>
                 </Card>
               </div>
-              {selectLeaderboard && (
-                <div>
-                  <h2 className="text-md pt-8 font-medium leading-6">
-                    We need your nickname to be displayed in the leaderboard
-                  </h2>
-                  <p className="mt-1 text-sm text-gray-400">
-                    This information will be displayed publicly so be careful
-                    what you share.
-                  </p>
-                  <label
-                    htmlFor="name"
-                    className="block pt-8 text-sm font-medium"
-                  >
-                    Nickname
-                  </label>
-                  <div className="mt-1 flex rounded-md">
-                    <div className="flex w-1/5">
-                      <span
-                        className={classNames(
-                          errors.name
-                            ? "border-red-500 bg-red-50 text-red-900 placeholder-red-700 focus:border-red-500 focus:ring-red-500 dark:border-red-400 dark:bg-red-100"
-                            : " border-zinc-300 bg-zinc-200  text-gray-900 dark:border-zinc-600 dark:bg-zinc-700 dark:text-gray-400",
-                          "inline-flex items-center rounded-l-md border border-r-0 px-3 text-sm"
-                        )}
-                      >
-                        <HiUser
-                          className={
-                            errors.name
-                              ? " text-red-700"
-                              : "text-gray-600 dark:text-gray-200"
-                          }
-                        />
-                      </span>
-                      <input
-                        {...register("name")}
-                        type="text"
-                        id="name"
-                        className={classNames(
-                          errors.name
-                            ? "border-red-500 bg-red-50 p-2.5 text-red-900 placeholder-red-700 focus:border-red-500 focus:ring-red-500 dark:border-red-400 dark:bg-red-100"
-                            : "border-zinc-300 bg-gray-50 text-gray-900  focus:border-blue-500 focus:ring-blue-500 dark:border-zinc-600  dark:bg-zinc-800 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500",
-                          "block flex-1 rounded-none rounded-r-lg border p-2.5 text-sm"
-                        )}
-                        placeholder="Ola"
-                        required={true}
-                      ></input>
-                    </div>
-                  </div>
-                  {errors.name && (
-                    <div className="text-sm text-red-500">
-                      {errors.name.message}
-                    </div>
-                  )}
-                </div>
-              )}
 
               <Button
                 className="absolute left-16 bottom-16"

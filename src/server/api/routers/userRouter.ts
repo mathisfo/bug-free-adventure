@@ -1,8 +1,6 @@
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime";
-import { TRPCClientError } from "@trpc/client";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
-import Trpc from "../../../pages/api/trpc/[trpc]";
 import {
   onboardingSchema,
   selectedCompsEnum,
