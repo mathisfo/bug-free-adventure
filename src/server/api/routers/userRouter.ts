@@ -80,6 +80,29 @@ export const userRouter = createTRPCRouter({
     return preferences[0]!;
   }),
 
+  getLastUnfinishedActivity: protectedProcedure.query(async ({ ctx }) => {
+    const unfinishedActivity = await ctx.prisma.exerciseHistory.findMany({
+      where: {
+        userId: ctx.session.user.id,
+        completedAt: null,
+      },
+      include: {
+        ActivityResource: { include: { relation: true } },
+        user: true,
+      },
+      orderBy: {
+        visitedAt: "desc",
+      },
+      take: 1,
+    });
+
+    if (unfinishedActivity.length === 0) {
+      return null;
+    }
+
+    return unfinishedActivity[0];
+  }),
+
   getExerciseHistoryOnUser: protectedProcedure
     .input(z.object({ userId: z.string() }))
     .query(async ({ ctx, input }) => {
@@ -167,6 +190,7 @@ export const userRouter = createTRPCRouter({
           userId: input.toDo.userId,
           dueDate: input.toDo.dueDate,
           completed: false,
+          completedAt: new Date(),
           name: input.toDo.name,
         },
       });
@@ -180,6 +204,7 @@ export const userRouter = createTRPCRouter({
         },
         data: {
           completed: true,
+          completedAt: new Date(),
         },
       });
     }),
