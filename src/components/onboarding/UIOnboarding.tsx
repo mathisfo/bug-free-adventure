@@ -221,7 +221,7 @@ const UIOnboarding = () => {
                 always go back into settings to change your preferences later.
               </p>
 
-              <div className="relative mt-5 grid  w-full select-none grid-cols-2 gap-x-8 gap-y-4 overflow-x-auto">
+              <div className="relative mt-5 grid h-screen w-full select-none grid-cols-2 gap-x-8 gap-y-4 overflow-y-auto">
                 <div className="course-card rounded-2xl border border-zinc-400 px-6 pt-6 dark:border-zinc-600">
                   <h5 className="mb-2 text-2xl font-bold tracking-tight">
                     History Graph
