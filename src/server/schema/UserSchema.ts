@@ -30,6 +30,13 @@ export const onboardingSchema = z
       message: "Name must be at least three characters long",
       path: ["name"],
     }
+  )
+  .refine(
+    (data) => !data.leaderboard || (data.name ? data.name.length < 15 : false),
+    {
+      message: "Name must be fewer than 15 characters",
+      path: ["name"],
+    }
   );
 
 export const toDoSchema = z.object({

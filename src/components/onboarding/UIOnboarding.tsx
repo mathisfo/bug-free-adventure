@@ -53,12 +53,13 @@ const UIOnboarding = () => {
   };
 
   const onSubmit: SubmitHandler<OnboardingForm> = (data: OnboardingForm) => {
-    mutation.mutate(data, {
+    console.log(data);
+    /* mutation.mutate(data, {
       onSuccess: () => {
         ctx.invalidate();
         router.reload();
       },
-    });
+    }); */
   };
 
   function classNames(...classes: string[]) {
