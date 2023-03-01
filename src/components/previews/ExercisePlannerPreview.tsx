@@ -36,7 +36,7 @@ const ExercisePlannerPreview = () => {
   ];
 
   return (
-    <div className="course-card text-color relative mb-2 h-full w-full rounded-xl p-8">
+    <div className="course-card text-color relative mb-2 h-auto w-auto rounded-xl p-8">
       <div className="tems-center mx-8 mb-8 mt-2 grid grid-cols-2 grid-rows-1">
         <h1 className="col-start-1 mx-auto flex items-center text-4xl font-semibold">
           TO <p className="text-blue-color">DO</p>S
@@ -71,7 +71,7 @@ const ExercisePlannerPreview = () => {
                       item.completed
                         ? `border-[#988efe] opacity-75`
                         : `border-zinc-300`
-                    } grid h-6 w-6 cursor-pointer rounded-lg  border-2 bg-white hover:border-[#627bfc] dark:bg-[#fcfcfc]`}
+                    } grid h-6 w-6 rounded-lg  border-2 bg-white dark:bg-[#fcfcfc]`}
                   >
                     {item.completed ? (
                       <div className=" h-4 w-4 place-self-center rounded-md bg-[#988efe]"></div>
@@ -82,7 +82,7 @@ const ExercisePlannerPreview = () => {
                   <TrashIcon
                     className={classNames(
                       !item.completed ? `opacity-50` : ``,
-                      `h-4 w-4 cursor-pointer`
+                      `h-4 w-4`
                     )}
                   />
                 </div>
@@ -96,10 +96,10 @@ const ExercisePlannerPreview = () => {
         </div>
       )}
       <form className="mb-2 flex grid grid-cols-10 grid-rows-1 flex-row">
-        <PlusIcon className="col-start-1 col-end-2 h-7 w-7 cursor-pointer self-center" />
+        <PlusIcon className="col-start-1 col-end-2 h-7 w-7 self-center" />
       </form>
 
-      <div className="text-color-light absolute bottom-4 right-8 flex cursor-pointer flex-row gap-2 text-sm">
+      <div className="text-color-light absolute bottom-4 right-8 flex flex-row gap-2 text-sm">
         <EyeSlashIcon className="h-4 w-4 place-self-center" />
       </div>
     </div>

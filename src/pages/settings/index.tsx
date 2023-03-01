@@ -1,5 +1,6 @@
 import { Checkbox } from "flowbite-react";
 import { NextPage } from "next";
+import ExercisePlannerPreview from "../../components/previews/ExercisePlannerPreview";
 
 const Settings: NextPage = () => {
   return (
@@ -32,7 +33,7 @@ const Settings: NextPage = () => {
             <div className="course-card relative grid grid-cols-2 gap-8 rounded-2xl border border-zinc-400 px-6 pt-6 dark:border-zinc-600">
               <div className="col-start-1">
                 <h5 className="mb-2 text-2xl font-bold tracking-tight">
-                  TODO List
+                  Exercise Planner
                 </h5>
 
                 <p className="col-start-1 text-sm text-gray-700 dark:text-gray-400">
@@ -64,7 +65,7 @@ const Settings: NextPage = () => {
                 </div>
               </div>
               <div className="col-start-2 grid items-center ">
-                <div className=" h-32 w-32 self-center rounded bg-blue-200"></div>
+                <ExercisePlannerPreview />
               </div>
             </div>
           </div>

@@ -21,6 +21,8 @@ import ToggleTheme from "../ToggleTheme";
 import Image from "next/image";
 import LeaderboardPreview from "../previews/LeaderboardPreview";
 import ExercisePlannerPreview from "../previews/ExercisePlannerPreview";
+import HistoryGraphPreview from "../previews/HistoryGraphPreview";
+import ExerciseHistoryPreview from "../previews/ExerciseHistoryPreview";
 
 const UIOnboarding = () => {
   const {
@@ -219,74 +221,68 @@ const UIOnboarding = () => {
                 always go back into settings to change your preferences later.
               </p>
 
-              <div className="mt-5 grid select-none grid-cols-2 gap-x-8 gap-y-4">
-                <div className="course-card relative grid grid-cols-2 gap-8 rounded-2xl border border-zinc-400 px-6 pt-6 dark:border-zinc-600">
-                  <div className="col-start-1">
-                    <h5 className="mb-2 text-2xl font-bold tracking-tight">
-                      History Graph
-                    </h5>
+              <div className="relative mt-5 grid  w-full select-none grid-cols-2 gap-x-8 gap-y-4 overflow-x-auto">
+                <div className="course-card rounded-2xl border border-zinc-400 px-6 pt-6 dark:border-zinc-600">
+                  <h5 className="mb-2 text-2xl font-bold tracking-tight">
+                    History Graph
+                  </h5>
 
-                    <p className="col-start-1 text-sm text-gray-700 dark:text-gray-400">
-                      This component shows you how much you work per day
-                      reprented as a graph.
-                    </p>
-                    <div className="my-8 ml-4 flex items-center gap-2 ">
-                      <Checkbox
-                        {...register("selectedComponents")}
-                        id="select"
-                        value={SelectedEnum.HISTORYGRAPH}
-                      />
-                      <label htmlFor="select">Select</label>
-                    </div>
+                  <p className="col-start-1 text-sm text-gray-700 dark:text-gray-400">
+                    This component shows you how much you work per day reprented
+                    as a graph.
+                  </p>
+                  <HistoryGraphPreview />
+                  <div className="my-8 ml-4 flex items-center gap-2 ">
+                    <Checkbox
+                      {...register("selectedComponents")}
+                      id="select"
+                      value={SelectedEnum.HISTORYGRAPH}
+                    />
+                    <label htmlFor="select">Select</label>
                   </div>
-                  <div className="col-start-2 grid items-center ">
-                    <div className=" h-32 w-32 self-center rounded bg-blue-200"></div>
+
+                  <div className="col-start-2 grid items-center "></div>
+                </div>
+                <div className="course-card h-auto grid-cols-1 rounded-2xl border border-zinc-400 px-6 pt-6 dark:border-zinc-600">
+                  <h5 className="mb-2 text-2xl font-bold tracking-tight">
+                    Exercise Planner
+                  </h5>
+
+                  <p className="text-sm text-gray-700 dark:text-gray-400">
+                    This component enables you to keep track of your assignments
+                    with due dates.
+                  </p>
+                  <div>
+                    <ExercisePlannerPreview />
+                  </div>
+
+                  <div className="my-8 ml-4 flex items-center gap-2 ">
+                    <Checkbox
+                      {...register("selectedComponents")}
+                      id="select"
+                      value={SelectedEnum.TODO}
+                    />
+
+                    <label htmlFor="select">Select</label>
                   </div>
                 </div>
-                <div className="course-card relative grid grid-cols-2 gap-8 rounded-2xl border border-zinc-400 px-6 pt-6 dark:border-zinc-600">
-                  <div className="col-start-1">
-                    <h5 className="mb-2 text-2xl font-bold tracking-tight">
-                      TODO List
-                    </h5>
+                <div className="course-card grid-cols-1 gap-8 rounded-2xl border border-zinc-400 px-6 pt-6 dark:border-zinc-600">
+                  <h5 className="mb-2 text-2xl font-bold tracking-tight">
+                    Activity History
+                  </h5>
 
-                    <p className="col-start-1 text-sm text-gray-700 dark:text-gray-400">
-                      This component enables you to keep track of your
-                      assignments with due dates.
-                    </p>
-                    <div className="my-8 ml-4 flex items-center gap-2 ">
-                      <Checkbox
-                        {...register("selectedComponents")}
-                        id="select"
-                        value={SelectedEnum.TODO}
-                      />
-                      <label htmlFor="select">Select</label>
-                    </div>
-                  </div>
-                  <div className="col-start-2 grid items-center ">
-                    <div className=" h-32 w-32 self-center rounded bg-blue-200"></div>
-                  </div>
-                </div>
-                <div className="course-card relative grid grid-cols-2 gap-8 rounded-2xl border border-zinc-400 px-6 pt-6 dark:border-zinc-600">
-                  <div className="col-start-1">
-                    <h5 className="mb-2 text-2xl font-bold tracking-tight">
-                      Activity History
-                    </h5>
-
-                    <p className="col-start-1 text-sm text-gray-700 dark:text-gray-400">
-                      This component is more detailed than Activity Graph. It
-                      shows your exercise activty per day, as a list.
-                    </p>
-                    <div className="my-8 ml-4 flex items-center gap-2 ">
-                      <Checkbox
-                        {...register("selectedComponents")}
-                        id="select"
-                        value={SelectedEnum.EXERCISEHISTORY}
-                      />
-                      <label htmlFor="select">Select</label>
-                    </div>
-                  </div>
-                  <div className="col-start-2 grid items-center ">
-                    <div className=" h-32 w-32 self-center rounded bg-blue-200"></div>
+                  <p className="col-start-1 text-sm text-gray-700 dark:text-gray-400">
+                    This component is more detailed than Activity Graph. It
+                    shows your exercise activty per day, as a list.
+                  </p>
+                  <ExerciseHistoryPreview />
+                  <div className="my-8 ml-4 flex items-center gap-2 ">
+                    <Checkbox
+                      {...register("selectedComponents")}
+                      id="select"
+                      value={SelectedEnum.EXERCISEHISTORY}
+                    />
+                    <label htmlFor="select">Select</label>
                   </div>
                 </div>
               </div>
