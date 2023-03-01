@@ -25,9 +25,9 @@ const Sidebar = ({ children }: { children: React.ReactElement }) => {
   const navigation = [
     {
       name: "Dashboard",
-      href: "/dashboard",
+      href: "/",
       icon: ChartBarIcon,
-      current: router.asPath === "/dashboard",
+      current: router.asPath === "/",
     },
     {
       name: "Courses",

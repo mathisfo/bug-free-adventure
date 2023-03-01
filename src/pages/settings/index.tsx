@@ -1,6 +1,7 @@
 import { Checkbox } from "flowbite-react";
+import { NextPage } from "next";
 
-const Settings = () => {
+const Settings: NextPage = () => {
   return (
     <div>
       <div className="background-color col-span-4 mr-4 h-screen rounded-r-lg p-16 ">

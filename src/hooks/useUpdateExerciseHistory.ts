@@ -1,3 +1,4 @@
+import { contextProps } from "@trpc/react-query/shared";
 import { useState, useEffect } from "react";
 
 import { api } from "../utils/api";
@@ -6,7 +7,12 @@ export const useUpdateExerciseHistory = (
   learnerAnalytics: any,
   selectedId: string | undefined
 ) => {
-  const mutation = api.userRouter.updateExerciseHistory.useMutation();
+  const ctx = api.useContext();
+  const mutation = api.userRouter.updateExerciseHistory.useMutation({
+    onSuccess: () => {
+      ctx.userRouter.getLastUnfinishedActivity.refetch();
+    },
+  });
 
   const [previousData, setPreviousData] =
     useState<typeof learnerAnalytics>(undefined);

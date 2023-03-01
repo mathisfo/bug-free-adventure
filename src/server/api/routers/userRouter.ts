@@ -1,8 +1,6 @@
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime";
-import { TRPCClientError } from "@trpc/client";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
-import Trpc from "../../../pages/api/trpc/[trpc]";
 import {
   onboardingSchema,
   selectedCompsEnum,
@@ -86,6 +84,29 @@ export const userRouter = createTRPCRouter({
       take: 1,
     });
     return preferences[0]!;
+  }),
+
+  getLastUnfinishedActivity: protectedProcedure.query(async ({ ctx }) => {
+    const unfinishedActivity = await ctx.prisma.exerciseHistory.findMany({
+      where: {
+        userId: ctx.session.user.id,
+        completedAt: null,
+      },
+      include: {
+        ActivityResource: { include: { relation: true } },
+        user: true,
+      },
+      orderBy: {
+        visitedAt: "desc",
+      },
+      take: 1,
+    });
+
+    if (unfinishedActivity.length === 0) {
+      return null;
+    }
+
+    return unfinishedActivity[0];
   }),
 
   getExerciseHistoryOnUser: protectedProcedure
@@ -175,6 +196,7 @@ export const userRouter = createTRPCRouter({
           userId: input.toDo.userId,
           dueDate: input.toDo.dueDate,
           completed: false,
+          completedAt: new Date(),
           name: input.toDo.name,
         },
       });
@@ -188,6 +210,7 @@ export const userRouter = createTRPCRouter({
         },
         data: {
           completed: true,
+          completedAt: new Date(),
         },
       });
     }),

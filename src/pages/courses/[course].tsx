@@ -43,13 +43,7 @@ const Courses = () => {
       <div className="background-color mr-4 h-screen p-14">
         <div className="mb-24 flex flex-row">
           <div className="w-3/5 ">
-            <ContinueCard
-              recommendedActivities={[
-                ...activities.challenges,
-                ...activities.coding,
-                ...activities.examples,
-              ].filter((e) => e.sequencing > 0 && e.successRate > 0)}
-            />
+            <ContinueCard />
           </div>
 
           <div className="w-2/5 items-center px-20">
