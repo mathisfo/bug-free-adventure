@@ -3,6 +3,8 @@ import {
   ArrowTrendingDownIcon,
 } from "@heroicons/react/24/solid";
 import { useSession } from "next-auth/react";
+import { list } from "postcss";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { api } from "../utils/api";
 
 function classNames(...classes: string[]) {
@@ -26,13 +28,31 @@ const Stats = () => {
 
   const {
     data: history,
-    isLoading,
-    isSuccess,
+    isLoading: historyIsLoading,
+    isSuccess: historyIsSuccess,
   } = api.userRouter.getExerciseHistoryOnUser.useQuery({
     userId: session.user.id,
   });
 
-  if (isLoading || !isSuccess) {
+  if (historyIsLoading || !historyIsSuccess) {
+    return (
+      <div className="mx-auto w-full rounded-md p-4">
+        <div className="flex animate-pulse space-x-4">
+          <div className="flex-1 space-y-6 py-1">
+            <div className="loading h-60 rounded"></div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  const {
+    data: learnerAnalytics,
+    isSuccess: learnerIsSuccess,
+    isLoading: learnerIsLoading,
+  } = api.learnerActivityRouter.getLearnerActivity.useQuery();
+
+  if (learnerIsLoading || !learnerIsSuccess) {
     return (
       <div className="mx-auto w-full rounded-md p-4">
         <div className="flex animate-pulse space-x-4">
@@ -61,6 +81,15 @@ const Stats = () => {
       e.completedAt < sevenDaysAgo
   );
 
+  function getProgress(numberLast7Days: number, number7DaysBefore: number) {
+    return (numberLast7Days === 0 && exercisesDone7DaysBefore.length === 0) ||
+      numberLast7Days === 0
+      ? 0
+      : number7DaysBefore === 0
+      ? 100
+      : Math.round(numberLast7Days / number7DaysBefore);
+  }
+
   const StatsWithType = (
     type: string
   ): {
@@ -74,12 +103,7 @@ const Stats = () => {
     const done7DaysBefore = exercisesDone7DaysBefore.filter(
       (e) => e.ActivityResource.type == type
     ).length;
-    const changeInPercentage =
-      (doneLast7Days === 0 && done7DaysBefore === 0) || doneLast7Days === 0
-        ? 0
-        : done7DaysBefore === 0
-        ? 100
-        : Math.round(done7DaysBefore / doneLast7Days);
+    const changeInPercentage = getProgress(doneLast7Days, done7DaysBefore);
 
     return {
       doneLast7Days: doneLast7Days,
@@ -207,7 +231,7 @@ const Stats = () => {
       </div>
       <div className="my-6">
         <p className="text-md font-semibold uppercase">
-          Average time spent on exercises
+          Average attempts on exercises
         </p>
         <p className="text-color-light text-sm font-semibold uppercase ">
           Last 7 days compared to the 7 days before
@@ -269,10 +293,33 @@ const Stats = () => {
       </div>
       <div className="my-4 flex flex-row justify-center font-semibold uppercase">
         <p>You did</p>
-        <div className="mx-1 w-12 rounded bg-[#0de890]">
-          <p className="text-center text-white">10%</p>
+        <div
+          className={classNames(
+            getProgress(
+              exercisesDoneLast7Days.length,
+              exercisesDone7DaysBefore.length
+            ) > 0
+              ? "bg-[#0de890]"
+              : "bg-[#DE5B7E]",
+            "mx-1 w-12 rounded "
+          )}
+        >
+          <p className="text-center text-white">
+            {getProgress(
+              exercisesDoneLast7Days.length,
+              exercisesDone7DaysBefore.length
+            )}
+            %
+          </p>
         </div>
-        <p>more than last week 📈</p>
+        <p>
+          {getProgress(
+            exercisesDoneLast7Days.length,
+            exercisesDone7DaysBefore.length
+          ) < 0
+            ? "less than last week 📉"
+            : "more than last week 📈"}
+        </p>
       </div>
     </div>
   );

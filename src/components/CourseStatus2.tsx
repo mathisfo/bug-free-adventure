@@ -36,18 +36,18 @@ const CourseStatus2 = () => {
     );
   }
 
-  const activites = learnerAnalytics.activityAnalytics;
+  const activities = learnerAnalytics.activityAnalytics;
 
   const ActivityProgressWithType = (
     type: string,
     module: string
   ): { success: number; total: number; asPercentage: number } => {
     if (type === "challenges") {
-      const success = activites.challenges
+      const success = activities.challenges
         .filter((act) => act.relatedTopic === module)
         .filter((act) => act.successRate > 0).length;
 
-      const total = activites.challenges.filter(
+      const total = activities.challenges.filter(
         (act) => act.relatedTopic === module
       ).length;
       return {
@@ -58,11 +58,11 @@ const CourseStatus2 = () => {
     }
 
     if (type === "examples") {
-      const success = activites.examples
+      const success = activities.examples
         .filter((act) => act.relatedTopic === module)
         .filter((act) => act.attempts > 0).length;
 
-      const total = activites.examples.filter(
+      const total = activities.examples.filter(
         (act) => act.relatedTopic === module
       ).length;
 
@@ -74,11 +74,11 @@ const CourseStatus2 = () => {
     }
 
     if (type === "coding") {
-      const success = activites.coding
+      const success = activities.coding
         .filter((act) => act.relatedTopic === module)
         .filter((act) => act.successRate > 0).length;
 
-      const total = activites.coding.filter(
+      const total = activities.coding.filter(
         (act) => act.relatedTopic === module
       ).length;
       return {
