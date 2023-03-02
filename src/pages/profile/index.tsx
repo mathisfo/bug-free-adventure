@@ -49,7 +49,7 @@ const Profile = () => {
   return (
     <div>
       <Stats />
-      <div className="background-color text-color mr-4 h-full w-1/2 rounded-r-lg p-16 ">
+      <div className="background-color text-color mr-4 w-1/2 rounded-r-lg p-16 ">
         <div className="mb-16 mt-12">
           <div className="grid grid-cols-3 items-baseline border-b dark:border-zinc-700">
             <p className=" col-start-1 text-sm font-semibold uppercase">Name</p>

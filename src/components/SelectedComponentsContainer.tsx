@@ -64,7 +64,6 @@ const SelectedComponentsContainer = (props: ISelectedComponentsProps) => {
           <div key={compEnum}>{components[compEnum]}</div>
         ))}
       </div>
-      <div className="background-color h-32"></div>
     </div>
   );
 };

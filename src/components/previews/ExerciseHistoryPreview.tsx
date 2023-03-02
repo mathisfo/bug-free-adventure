@@ -72,11 +72,11 @@ const ExerciseHistoryPreview = () => {
       {result != undefined && result.length > 0 ? (
         <div className="background-color w-full overflow-x-auto ">
           {Object.keys(grouped).map((e, index) => (
-            <div key={index} className="course-card mb-4 rounded-lg p-8 ">
+            <div key={index} className="course-card rounded-lg p-4 ">
               <time className="text-color text-lg font-semibold dark:text-white">
                 {e}
               </time>
-              <ol className="mt-3 divide-y dark:divide-gray-700 ">
+              <ol className="mt-2 divide-y dark:divide-gray-700 ">
                 {grouped[e].map(
                   (
                     hist: ExerciseHistory & {
@@ -85,7 +85,7 @@ const ExerciseHistoryPreview = () => {
                   ) => (
                     <div
                       key={hist.historyId}
-                      className="mb-1  rounded-lg bg-[#f9f9fb] p-5 dark:bg-[#26272A]"
+                      className="rounded-lg bg-[#f9f9fb] p-4 dark:bg-[#26272A]"
                     >
                       <li>
                         <a

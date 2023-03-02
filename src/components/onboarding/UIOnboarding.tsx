@@ -23,6 +23,7 @@ import LeaderboardPreview from "../previews/LeaderboardPreview";
 import ExercisePlannerPreview from "../previews/ExercisePlannerPreview";
 import HistoryGraphPreview from "../previews/HistoryGraphPreview";
 import ExerciseHistoryPreview from "../previews/ExerciseHistoryPreview";
+import StatsPreview from "../previews/StatsPreview";
 
 const UIOnboarding = () => {
   const {
@@ -68,14 +69,17 @@ const UIOnboarding = () => {
     return classes.filter(Boolean).join(" ");
   }
 
+  const height = Math.ceil(innerHeight / 2 + 89);
+  console.log(height);
+
   return (
     <div className="back-layer text-color mb-8 h-screen w-full px-32 pb-16">
       <div className="h-8"></div>
-      <div className="background-color relative mx-auto h-full w-full rounded-2xl">
+      <div className="background-color relative mx-auto h-full w-full overflow-y-auto rounded-2xl">
         <div className="absolute right-4 top-4">
           <ToggleTheme />
         </div>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} className="h-full">
           {page == "welcome" ? (
             <div className="pl-12 pt-12 ">
               <h1 className="text-4xl ">Welcome to Progresso! 👋🏻</h1>
@@ -207,7 +211,7 @@ const UIOnboarding = () => {
               </Button>
             </div>
           ) : page == "components" ? (
-            <div className="pl-12 pt-12 pr-12">
+            <div className="pl-12 pt-12 pr-12 pb-20">
               <h2 className="text-lg font-medium leading-6">
                 Second, we want to know which components you want to display in
                 your dashboard.
@@ -220,8 +224,9 @@ const UIOnboarding = () => {
                 you don&apos;t like or don&apos;t have any use of. You can
                 always go back into settings to change your preferences later.
               </p>
-
-              <div className="relative mt-5 grid h-screen w-full select-none grid-cols-2 gap-x-8 gap-y-4 overflow-y-auto">
+              <div
+                className={`mt-5 grid w-full select-none grid-cols-2 gap-x-8 gap-y-4  overflow-auto hover:overscroll-contain`}
+              >
                 <div className="course-card rounded-2xl border border-zinc-400 px-6 pt-6 dark:border-zinc-600">
                   <h5 className="mb-2 text-2xl font-bold tracking-tight">
                     History Graph
@@ -285,20 +290,37 @@ const UIOnboarding = () => {
                     <label htmlFor="select">Select</label>
                   </div>
                 </div>
+                <div className="course-card rounded-2xl border border-zinc-400 px-6 pt-6 dark:border-zinc-600">
+                  <h5 className="mb-2 text-2xl font-bold tracking-tight">
+                    Stats
+                  </h5>
+
+                  <p className="col-start-1 text-sm text-gray-700 dark:text-gray-400">
+                    This component shows you some stats about the work you have
+                    put in the previous week compared to the week before.
+                  </p>
+                  <StatsPreview />
+                  <div className="my-8 ml-4 flex items-center gap-2 ">
+                    <Checkbox
+                      {...register("selectedComponents")}
+                      id="select"
+                      value={SelectedEnum.HISTORYGRAPH}
+                    />
+                    <label htmlFor="select">Select</label>
+                  </div>
+
+                  <div className="col-start-2 grid items-center "></div>
+                </div>
               </div>
-              <Button
-                className="absolute left-16 bottom-6"
-                onClick={() => setPage("welcome")}
-              >
-                <HiArrowLeft className="mr-2" /> Go back
-              </Button>
-              <Button
-                className="absolute right-16 bottom-6"
-                onClick={() => setPage("leaderboard")}
-              >
-                Next page
-                <HiArrowRight className="ml-2" />{" "}
-              </Button>
+              <div className="mt-12 flex flex-row justify-center gap-16">
+                <Button onClick={() => setPage("welcome")}>
+                  <HiArrowLeft className="mr-2" /> Go back
+                </Button>
+                <Button onClick={() => setPage("leaderboard")}>
+                  Next page
+                  <HiArrowRight className="ml-2" />{" "}
+                </Button>
+              </div>
             </div>
           ) : page == "leaderboard" ? (
             <div className="pl-12 pt-12 pr-12">

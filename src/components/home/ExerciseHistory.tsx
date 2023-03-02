@@ -72,12 +72,12 @@ const ExerciseHistoryComp = () => {
                   ) => (
                     <div
                       key={hist.historyId}
-                      className="mb-1  rounded-lg bg-[#f9f9fb] p-5 dark:bg-[#26272A]"
+                      className="rounded-lg bg-[#f9f9fb] p-5 hover:scale-105 dark:bg-[#26272A]"
                     >
                       <li>
                         <a
                           href={hist.ActivityResource.url}
-                          className="block items-center p-3 hover:bg-gray-100 dark:hover:bg-gray-700 sm:flex"
+                          className="block items-center p-3 sm:flex"
                         >
                           <div className="text-gray-600 dark:text-gray-400">
                             <div className="text-base font-normal">
