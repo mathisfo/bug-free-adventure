@@ -1,5 +1,5 @@
 import { SelectedEnum } from "@prisma/client";
-import { Alert, Button, Checkbox } from "flowbite-react";
+import { Alert, Button, Card, Checkbox, Label } from "flowbite-react";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -21,6 +21,8 @@ import ToggleTheme from "../ToggleTheme";
 import Image from "next/image";
 import LeaderboardPreview from "../previews/LeaderboardPreview";
 import ExercisePlannerPreview from "../previews/ExercisePlannerPreview";
+import HistoryGraphPreview from "../previews/HistoryGraphPreview";
+import ExerciseHistoryPreview from "../previews/ExerciseHistoryPreview";
 
 const UIOnboarding = () => {
   const {
@@ -219,74 +221,68 @@ const UIOnboarding = () => {
                 always go back into settings to change your preferences later.
               </p>
 
-              <div className="mt-5 grid select-none grid-cols-2 gap-x-8 gap-y-4">
-                <div className="course-card relative grid grid-cols-2 gap-8 rounded-2xl border border-zinc-400 px-6 pt-6 dark:border-zinc-600">
-                  <div className="col-start-1">
-                    <h5 className="mb-2 text-2xl font-bold tracking-tight">
-                      History Graph
-                    </h5>
+              <div className="relative mt-5 grid h-screen w-full select-none grid-cols-2 gap-x-8 gap-y-4 overflow-y-auto">
+                <div className="course-card rounded-2xl border border-zinc-400 px-6 pt-6 dark:border-zinc-600">
+                  <h5 className="mb-2 text-2xl font-bold tracking-tight">
+                    History Graph
+                  </h5>
 
-                    <p className="col-start-1 text-sm text-gray-700 dark:text-gray-400">
-                      This component shows you how much you work per day
-                      reprented as a graph.
-                    </p>
-                    <div className="my-8 ml-4 flex items-center gap-2 ">
-                      <Checkbox
-                        {...register("selectedComponents")}
-                        id="select"
-                        value={SelectedEnum.HISTORYGRAPH}
-                      />
-                      <label htmlFor="select">Select</label>
-                    </div>
+                  <p className="col-start-1 text-sm text-gray-700 dark:text-gray-400">
+                    This component shows you how much you work per day reprented
+                    as a graph.
+                  </p>
+                  <HistoryGraphPreview />
+                  <div className="my-8 ml-4 flex items-center gap-2 ">
+                    <Checkbox
+                      {...register("selectedComponents")}
+                      id="select"
+                      value={SelectedEnum.HISTORYGRAPH}
+                    />
+                    <label htmlFor="select">Select</label>
                   </div>
-                  <div className="col-start-2 grid items-center ">
-                    <div className=" h-32 w-32 self-center rounded bg-blue-200"></div>
+
+                  <div className="col-start-2 grid items-center "></div>
+                </div>
+                <div className="course-card h-auto grid-cols-1 rounded-2xl border border-zinc-400 px-6 pt-6 dark:border-zinc-600">
+                  <h5 className="mb-2 text-2xl font-bold tracking-tight">
+                    Exercise Planner
+                  </h5>
+
+                  <p className="text-sm text-gray-700 dark:text-gray-400">
+                    This component enables you to keep track of your assignments
+                    with due dates.
+                  </p>
+                  <div>
+                    <ExercisePlannerPreview />
+                  </div>
+
+                  <div className="my-8 ml-4 flex items-center gap-2 ">
+                    <Checkbox
+                      {...register("selectedComponents")}
+                      id="select"
+                      value={SelectedEnum.TODO}
+                    />
+
+                    <label htmlFor="select">Select</label>
                   </div>
                 </div>
-                <div className="course-card relative grid grid-cols-2 gap-8 rounded-2xl border border-zinc-400 px-6 pt-6 dark:border-zinc-600">
-                  <div className="col-start-1">
-                    <h5 className="mb-2 text-2xl font-bold tracking-tight">
-                      TODO List
-                    </h5>
+                <div className="course-card grid-cols-1 gap-8 rounded-2xl border border-zinc-400 px-6 pt-6 dark:border-zinc-600">
+                  <h5 className="mb-2 text-2xl font-bold tracking-tight">
+                    Activity History
+                  </h5>
 
-                    <p className="col-start-1 text-sm text-gray-700 dark:text-gray-400">
-                      This component enables you to keep track of your
-                      assignments with due dates.
-                    </p>
-                    <div className="my-8 ml-4 flex items-center gap-2 ">
-                      <Checkbox
-                        {...register("selectedComponents")}
-                        id="select"
-                        value={SelectedEnum.TODO}
-                      />
-                      <label htmlFor="select">Select</label>
-                    </div>
-                  </div>
-                  <div className="col-start-2 grid items-center ">
-                    <div className=" h-32 w-32 self-center rounded bg-blue-200"></div>
-                  </div>
-                </div>
-                <div className="course-card relative grid grid-cols-2 gap-8 rounded-2xl border border-zinc-400 px-6 pt-6 dark:border-zinc-600">
-                  <div className="col-start-1">
-                    <h5 className="mb-2 text-2xl font-bold tracking-tight">
-                      Activity History
-                    </h5>
-
-                    <p className="col-start-1 text-sm text-gray-700 dark:text-gray-400">
-                      This component is more detailed than Activity Graph. It
-                      shows your exercise activty per day, as a list.
-                    </p>
-                    <div className="my-8 ml-4 flex items-center gap-2 ">
-                      <Checkbox
-                        {...register("selectedComponents")}
-                        id="select"
-                        value={SelectedEnum.EXERCISEHISTORY}
-                      />
-                      <label htmlFor="select">Select</label>
-                    </div>
-                  </div>
-                  <div className="col-start-2 grid items-center ">
-                    <div className=" h-32 w-32 self-center rounded bg-blue-200"></div>
+                  <p className="col-start-1 text-sm text-gray-700 dark:text-gray-400">
+                    This component is more detailed than Activity Graph. It
+                    shows your exercise activty per day, as a list.
+                  </p>
+                  <ExerciseHistoryPreview />
+                  <div className="my-8 ml-4 flex items-center gap-2 ">
+                    <Checkbox
+                      {...register("selectedComponents")}
+                      id="select"
+                      value={SelectedEnum.EXERCISEHISTORY}
+                    />
+                    <label htmlFor="select">Select</label>
                   </div>
                 </div>
               </div>
@@ -306,10 +302,10 @@ const UIOnboarding = () => {
             </div>
           ) : page == "leaderboard" ? (
             <div className="pl-12 pt-12 pr-12">
-              <h2 className="text-lg font-medium leading-6">
+              <h2 className="text-md font-medium leading-6">
                 Lastly, we want to know whether you are the competitive type.
               </h2>
-              <p className="text-md mt-1 text-gray-400">
+              <p className="mt-1 text-sm text-gray-400">
                 By participating in the leaderboard you can compete against your
                 classmates to see who completes the most exercises. Your
                 nickname will show up on the leaderboard.
@@ -326,33 +322,88 @@ const UIOnboarding = () => {
                   </a>
                 </Alert>
               )}
-              <div className="mt-5 grid grid-cols-3 gap-4">
-                <div className="course-card relative grid grid-cols-2 gap-8 rounded-2xl border border-zinc-400 px-6 pt-6 dark:border-zinc-600">
-                  <div className="col-start-1">
-                    <h5 className="mb-2 text-2xl font-bold tracking-tight">
-                      Leaderboard
-                    </h5>
-
-                    <p className="col-start-1 text-sm text-gray-700 dark:text-gray-400">
+              <div className="mt-5 grid gap-4">
+                <Card className="course-card relative rounded-2xl border border-gray-400  dark:border-gray-700">
+                  <h5 className="text-2xl font-bold tracking-tight">
+                    Leaderboard
+                  </h5>
+                  <div className="grid grid-cols-4 gap-4 ">
+                    <div className="col-span-2 col-start-1 text-sm text-gray-700 dark:text-gray-400">
                       I would like to participate in the leaderboard
-                    </p>
-                    <div className="my-8 ml-4 flex items-center gap-2 ">
+                      {showName && (
+                        <div className="p-1">
+                          <h2 className="text-md pt-8 font-medium leading-6">
+                            We need your nickname to be displayed in the
+                            leaderboard
+                          </h2>
+                          <p className="mt-1 text-sm text-gray-400">
+                            This information will be displayed publicly so be
+                            careful what you share.
+                          </p>
+                          <label
+                            htmlFor="name"
+                            className="block pt-8 text-sm font-medium"
+                          >
+                            Nickname
+                          </label>
+                          <div className="mt-1 flex rounded-md">
+                            <div className="flex w-1/5">
+                              <span
+                                className={classNames(
+                                  errors.name
+                                    ? "border-red-500 bg-red-50 text-red-900 placeholder-red-700 focus:border-red-500 focus:ring-red-500 dark:border-red-400 dark:bg-red-100"
+                                    : " border-zinc-300 bg-zinc-200  text-gray-900 dark:border-zinc-600 dark:bg-zinc-700 dark:text-gray-400",
+                                  "inline-flex items-center rounded-l-md border border-r-0 px-3 text-sm"
+                                )}
+                              >
+                                <HiUser
+                                  className={
+                                    errors.name
+                                      ? " text-red-700"
+                                      : "text-gray-600 dark:text-gray-200"
+                                  }
+                                />
+                              </span>
+                              <input
+                                {...register("name")}
+                                type="text"
+                                id="name"
+                                className={classNames(
+                                  errors.name
+                                    ? "border-red-500 bg-red-50 p-2.5 text-red-900 placeholder-red-700 focus:border-red-500 focus:ring-red-500 dark:border-red-400 dark:bg-red-100"
+                                    : "border-zinc-300 bg-gray-50 text-gray-900  focus:border-blue-500 focus:ring-blue-500 dark:border-zinc-600  dark:bg-zinc-800 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500",
+                                  "block flex-1 rounded-none rounded-r-lg border p-2.5 text-sm"
+                                )}
+                                placeholder="Ola"
+                                required={false}
+                              ></input>
+                            </div>
+                          </div>
+                          {errors.name && (
+                            <div className="text-sm text-red-500">
+                              {errors.name.message}
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="col-span-2 col-start-3 rounded">
+                      <LeaderboardPreview />
+                    </div>
+                    <div className="col-start-1 row-start-2 mt-4 flex items-center gap-2">
                       <input
-                        {...(register("leaderboard"),
-                        { value: selectLeaderboard })}
-                        value={SelectedEnum.TODO}
+                        {...register("leaderboard")}
                         id="leaderboard"
                         name="leaderboard"
                         type="checkbox"
                         className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                       />
-                      <label htmlFor="select">Select</label>
+
+                      <Label htmlFor="select">Select</Label>
                     </div>
                   </div>
-                  <div className="col-start-2 grid items-center ">
-                    <div className=" h-32 w-32 self-center rounded bg-blue-200"></div>
-                  </div>
-                </div>
+                </Card>
               </div>
 
               <Button
