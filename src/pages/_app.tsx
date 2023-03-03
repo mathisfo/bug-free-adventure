@@ -15,14 +15,6 @@ const MyApp: AppType<{ session: Session | null }> = ({
     <ThemeProvider attribute="class" enableSystem={false}>
       <SessionProvider session={session}>
         <div className="fixed w-full">
-          <style global jsx>{`
-            html,
-            body {
-              height: 100%;
-              overflow: hidden;
-              position: fixed;
-            }
-          `}</style>
           <Sidebar>
             <Component {...pageProps} />
           </Sidebar>

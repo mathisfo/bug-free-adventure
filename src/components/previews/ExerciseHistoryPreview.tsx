@@ -7,40 +7,53 @@ import { ActivityResource, ExerciseHistory } from "@prisma/client";
 import { useSession } from "next-auth/react";
 import { api } from "../../utils/api";
 
-const ExerciseHistoryComp = () => {
-  const { data: session, status } = useSession({ required: true });
-
-  if (status == "loading") {
-    return (
-      <div className="mx-auto w-full rounded-md p-4">
-        <div className="flex animate-pulse space-x-4">
-          <div className="flex-1 space-y-6 py-1">
-            <div className="loading h-60 rounded"></div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  const {
-    data: history,
-    isLoading,
-    isSuccess,
-  } = api.userRouter.getExerciseHistoryOnUser.useQuery({
-    userId: session.user.id,
-  });
-
-  if (isLoading || !isSuccess) {
-    return (
-      <div className="mx-auto w-full rounded-md p-4">
-        <div className="flex animate-pulse space-x-4">
-          <div className="flex-1 space-y-6 py-1">
-            <div className="loading h-60 rounded"></div>
-          </div>
-        </div>
-      </div>
-    );
-  }
+const ExerciseHistoryPreview = () => {
+  const history: (ExerciseHistory & {
+    ActivityResource: ActivityResource;
+  })[] = [
+    {
+      historyId: "mock",
+      completedAt: new Date("2023-03-01"),
+      visitedAt: new Date("2023-03-01"),
+      userId: "mock",
+      activityResourceId: "mock",
+      ActivityResource: {
+        id: "mock",
+        moduleId: "mock",
+        name: "Java",
+        type: "CHALLENGE",
+        url: "https://www.w3schools.com/java/",
+      },
+    },
+    {
+      historyId: "mock",
+      completedAt: new Date("2023-03-02"),
+      visitedAt: new Date("2023-03-02"),
+      userId: "mock",
+      activityResourceId: "mock",
+      ActivityResource: {
+        id: "mock",
+        moduleId: "mock",
+        name: "Java",
+        type: "CHALLENGE",
+        url: "https://www.w3schools.com/java/",
+      },
+    },
+    {
+      historyId: "mock",
+      completedAt: new Date("2023-03-02"),
+      visitedAt: new Date("2023-03-02"),
+      userId: "mock",
+      activityResourceId: "mock",
+      ActivityResource: {
+        id: "mock",
+        moduleId: "mock",
+        name: "Java",
+        type: "CHALLENGE",
+        url: "https://www.w3schools.com/java/",
+      },
+    },
+  ];
 
   const grouped = history.reduce((acc: any, curr: any) => {
     const date = new Date(curr.completedAt).toDateString();
@@ -59,11 +72,11 @@ const ExerciseHistoryComp = () => {
       {result != undefined && result.length > 0 ? (
         <div className="background-color w-full overflow-x-auto ">
           {Object.keys(grouped).map((e, index) => (
-            <div key={index} className="course-card mb-4 rounded-lg p-8 ">
+            <div key={index} className="course-card rounded-lg p-4 ">
               <time className="text-color text-lg font-semibold dark:text-white">
                 {e}
               </time>
-              <ol className="mt-3 divide-y dark:divide-gray-700 ">
+              <ol className="mt-2 divide-y dark:divide-gray-700 ">
                 {grouped[e].map(
                   (
                     hist: ExerciseHistory & {
@@ -72,12 +85,12 @@ const ExerciseHistoryComp = () => {
                   ) => (
                     <div
                       key={hist.historyId}
-                      className="rounded-lg bg-[#f9f9fb] p-5 hover:scale-105 dark:bg-[#26272A]"
+                      className="rounded-lg bg-[#f9f9fb] p-4 dark:bg-[#26272A]"
                     >
                       <li>
                         <a
                           href={hist.ActivityResource.url}
-                          className="block items-center p-3 sm:flex"
+                          className="block items-center p-3 hover:bg-gray-100 dark:hover:bg-gray-700 sm:flex"
                         >
                           <div className="text-gray-600 dark:text-gray-400">
                             <div className="text-base font-normal">
@@ -114,4 +127,4 @@ const ExerciseHistoryComp = () => {
   );
 };
 
-export default ExerciseHistoryComp;
+export default ExerciseHistoryPreview;

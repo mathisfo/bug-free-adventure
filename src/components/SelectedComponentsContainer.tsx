@@ -4,6 +4,7 @@ import Leaderboard from "./Leaderboard";
 import { SelectedEnum } from "@prisma/client";
 import ToDoComp from "./todo/ToDoComp";
 import CourseCard from "./CourseCard";
+import Stats from "./Stats";
 
 interface ISelectedComponentsProps {
   selected: Array<SelectedEnum>;
@@ -20,6 +21,14 @@ const SelectedComponentsContainer = (props: ISelectedComponentsProps) => {
           activity graph
         </div>
         <HistoryGraph />
+      </div>
+    ),
+    STATS: (
+      <div>
+        <div className="text-color mb-6 text-xl font-semibold uppercase opacity-75">
+          stats
+        </div>
+        <Stats />
       </div>
     ),
     LEADERBOARD: (
@@ -64,7 +73,6 @@ const SelectedComponentsContainer = (props: ISelectedComponentsProps) => {
           <div key={compEnum}>{components[compEnum]}</div>
         ))}
       </div>
-      <div className="background-color h-32"></div>
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import { SelectedEnum } from "@prisma/client";
-import { Alert, Button, Card, Checkbox, Label } from "flowbite-react";
+import { Alert, Button, Checkbox, Label } from "flowbite-react";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -11,6 +11,7 @@ import {
   HiArrowLeft,
   HiInformationCircle,
   HiIdentification,
+  HiOutlineCheck,
 } from "react-icons/hi";
 import {
   OnboardingForm,
@@ -18,9 +19,12 @@ import {
 } from "../../server/schema/UserSchema";
 import { api } from "../../utils/api";
 import ToggleTheme from "../ToggleTheme";
-import Image from "next/image";
 import LeaderboardPreview from "../previews/LeaderboardPreview";
 import ExercisePlannerPreview from "../previews/ExercisePlannerPreview";
+import HistoryGraphPreview from "../previews/HistoryGraphPreview";
+import ExerciseHistoryPreview from "../previews/ExerciseHistoryPreview";
+import StatsPreview from "../previews/StatsPreview";
+import { CheckIcon } from "@heroicons/react/24/solid";
 
 const UIOnboarding = () => {
   const {
@@ -54,26 +58,29 @@ const UIOnboarding = () => {
 
   const onSubmit: SubmitHandler<OnboardingForm> = (data: OnboardingForm) => {
     console.log(data);
-    /* mutation.mutate(data, {
+    mutation.mutate(data, {
       onSuccess: () => {
         ctx.invalidate();
         router.reload();
       },
-    }); */
+    });
   };
 
   function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(" ");
   }
 
+  const height = Math.ceil(innerHeight / 2 + 89);
+  console.log(height);
+
   return (
     <div className="back-layer text-color mb-8 h-screen w-full px-32 pb-16">
       <div className="h-8"></div>
-      <div className="background-color relative mx-auto h-full w-full rounded-2xl">
+      <div className="background-color relative mx-auto h-full w-full overflow-y-auto rounded-2xl">
         <div className="absolute right-4 top-4">
           <ToggleTheme />
         </div>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)} className="h-full">
           {page == "welcome" ? (
             <div className="pl-12 pt-12 ">
               <h1 className="text-4xl ">Welcome to Progresso! 👋🏻</h1>
@@ -205,12 +212,12 @@ const UIOnboarding = () => {
               </Button>
             </div>
           ) : page == "components" ? (
-            <div className="pl-12 pt-12 pr-12">
-              <h2 className="text-md font-medium leading-6">
+            <div className="pl-12 pt-12 pr-12 pb-20">
+              <h2 className="text-lg font-medium leading-6">
                 Second, we want to know which components you want to display in
                 your dashboard.
               </h2>
-              <p className="mt-1 text-sm text-gray-400">
+              <p className="text-md mt-1 text-gray-400">
                 This dashboard utilizes a number of different ways to represent
                 your progress and engagement when you complete assignments.
                 Please select the components you want your dashboard to include.
@@ -218,91 +225,118 @@ const UIOnboarding = () => {
                 you don&apos;t like or don&apos;t have any use of. You can
                 always go back into settings to change your preferences later.
               </p>
+              <div
+                className={`mt-5 grid w-full select-none grid-cols-2 gap-x-8 gap-y-4  overflow-auto hover:overscroll-contain`}
+              >
+                <div className="course-card rounded-2xl border border-zinc-400 px-6 pt-6 dark:border-zinc-600">
+                  <h5 className="mb-2 text-2xl font-bold tracking-tight">
+                    Stats
+                  </h5>
 
-              <div className="mt-5 grid select-none grid-cols-3 gap-4">
-                <Card className="course-card relative rounded-2xl border border-gray-400  dark:border-gray-700">
-                  <h5 className="text-2xl font-bold tracking-tight">
+                  <p className="col-start-1 text-sm text-gray-700 dark:text-gray-400">
+                    This component shows you some stats about the work you have
+                    put in the previous week compared to the week before.
+                  </p>
+                  <div className="scale-90">
+                    <StatsPreview />
+                  </div>
+                  <div className="my-6 ml-4 flex items-center gap-2 ">
+                    <Checkbox
+                      {...register("selectedComponents")}
+                      id="select"
+                      value={SelectedEnum.STATS}
+                    />
+                    <label htmlFor="select">Select</label>
+                  </div>
+
+                  <div className="col-start-2 grid items-center "></div>
+                </div>
+                <div className="course-card rounded-2xl border border-zinc-400 px-6 pt-6 dark:border-zinc-600">
+                  <h5 className="mb-2 text-2xl font-bold tracking-tight">
                     History Graph
                   </h5>
-                  <div className="grid grid-cols-3 ">
-                    <p className="col-span-2 col-start-1 text-sm text-gray-700 dark:text-gray-400">
-                      This component shows you how much you work per day
-                      reprented as a graph.
-                    </p>
-                    <div className="col-start-3 ml-4 h-16 w-16 rounded bg-blue-200"></div>
-                    <div className="col-start-1 row-start-2 mt-4 flex items-center gap-2">
-                      <Checkbox
-                        {...register("selectedComponents")}
-                        id="select"
-                        value={SelectedEnum.HISTORYGRAPH}
-                      />
-                      <Label htmlFor="select">Select</Label>
-                    </div>
+
+                  <p className="col-start-1 text-sm text-gray-700 dark:text-gray-400">
+                    This component shows you how much you work per day reprented
+                    as a graph.
+                  </p>
+                  <div className="scale-90">
+                    <HistoryGraphPreview />
                   </div>
-                </Card>
-                <Card className="course-card relative rounded-2xl border border-gray-400  dark:border-gray-700">
-                  <h5 className="text-2xl font-bold tracking-tight">
+                  <div className="my-6 ml-4 flex items-center gap-2 ">
+                    <Checkbox
+                      {...register("selectedComponents")}
+                      id="select"
+                      value={SelectedEnum.HISTORYGRAPH}
+                    />
+                    <label htmlFor="select">Select</label>
+                  </div>
+
+                  <div className="col-start-2 grid items-center "></div>
+                </div>
+                <div className="course-card h-auto grid-cols-1 rounded-2xl border border-zinc-400 px-6 pt-6 dark:border-zinc-600">
+                  <h5 className="mb-2 text-2xl font-bold tracking-tight">
                     Exercise Planner
                   </h5>
-                  <div className="grid grid-cols-3 ">
-                    <p className="col-span-2 col-start-1 text-sm text-gray-700 dark:text-gray-400">
-                      This component enables you to keep track of your
-                      assignments with due dates.
-                    </p>
-                    <div className="col-start-3 ml-4">
+
+                  <p className="text-sm text-gray-700 dark:text-gray-400">
+                    This component enables you to keep track of your assignments
+                    with due dates.
+                  </p>
+                  <div>
+                    <div className="scale-90">
                       <ExercisePlannerPreview />
                     </div>
-                    <div className="col-start-1 row-start-2 mt-4 flex items-center gap-2">
-                      <Checkbox
-                        {...register("selectedComponents")}
-                        id="select"
-                        value={SelectedEnum.TODO}
-                      />
-                      <Label htmlFor="select">Select</Label>
-                    </div>
                   </div>
-                </Card>
-                <Card className="course-card relative rounded-2xl border border-gray-400  dark:border-gray-700">
-                  <h5 className="text-2xl font-bold tracking-tight">
+
+                  <div className="my-6 ml-4 flex items-center gap-2 ">
+                    <Checkbox
+                      {...register("selectedComponents")}
+                      id="select"
+                      value={SelectedEnum.TODO}
+                    />
+
+                    <label htmlFor="select">Select</label>
+                  </div>
+                </div>
+                <div className="course-card grid-cols-1 gap-8 rounded-2xl border border-zinc-400 px-6 pt-6 dark:border-zinc-600">
+                  <h5 className="mb-2 text-2xl font-bold tracking-tight">
                     Activity History
                   </h5>
-                  <div className="grid grid-cols-3 ">
-                    <p className="col-span-2 col-start-1 text-sm text-gray-700 dark:text-gray-400">
-                      This component is more detailed than Activity Graph. It
-                      shows your exercise activty per day, as a list.
-                    </p>
-                    <div className="col-start-3 ml-4 h-16 w-16 rounded bg-blue-200"></div>
-                    <div className="col-start-1 row-start-2 mt-4 flex items-center gap-2">
-                      <Checkbox
-                        {...register("selectedComponents")}
-                        id="select"
-                        value={SelectedEnum.EXERCISEHISTORY}
-                      />
-                      <Label htmlFor="select">Select</Label>
-                    </div>
+
+                  <p className="col-start-1 text-sm text-gray-700 dark:text-gray-400">
+                    This component is more detailed than Activity Graph. It
+                    shows your exercise activty per day, as a list.
+                  </p>
+                  <div className="scale-90">
+                    <ExerciseHistoryPreview />
                   </div>
-                </Card>
+                  <div className="my-6 ml-4 flex items-center gap-2 ">
+                    <Checkbox
+                      {...register("selectedComponents")}
+                      id="select"
+                      value={SelectedEnum.EXERCISEHISTORY}
+                    />
+                    <label htmlFor="select">Select</label>
+                  </div>
+                </div>
               </div>
-              <Button
-                className="absolute left-16 bottom-16"
-                onClick={() => setPage("welcome")}
-              >
-                <HiArrowLeft className="mr-2" /> Go back
-              </Button>
-              <Button
-                className="absolute right-16 bottom-16"
-                onClick={() => setPage("leaderboard")}
-              >
-                Next page
-                <HiArrowRight className="ml-2" />{" "}
-              </Button>
+              <div className="mt-12 flex flex-row justify-center gap-16">
+                <Button onClick={() => setPage("welcome")}>
+                  <HiArrowLeft className="mr-2" /> Go back
+                </Button>
+                <Button onClick={() => setPage("leaderboard")}>
+                  Next page
+                  <HiArrowRight className="ml-2" />{" "}
+                </Button>
+              </div>
             </div>
           ) : page == "leaderboard" ? (
             <div className="pl-12 pt-12 pr-12">
-              <h2 className="text-md font-medium leading-6">
+              <h2 className="text-lg font-medium leading-6">
                 Lastly, we want to know whether you are the competitive type.
               </h2>
-              <p className="mt-1 text-sm text-gray-400">
+              <p className="text-md mt-1 text-gray-400">
                 By participating in the leaderboard you can compete against your
                 classmates to see who completes the most exercises. Your
                 nickname will show up on the leaderboard.
@@ -319,16 +353,16 @@ const UIOnboarding = () => {
                   </a>
                 </Alert>
               )}
-              <div className="mt-5 grid gap-4">
-                <Card className="course-card relative rounded-2xl border border-gray-400  dark:border-gray-700">
-                  <h5 className="text-2xl font-bold tracking-tight">
+              <div className={`mt-5 w-full select-none `}>
+                <div className="course-card w-3/5 rounded-2xl border border-zinc-400 pl-6 pr-2 pt-6 dark:border-zinc-600">
+                  <h5 className="mb-2 text-2xl font-bold tracking-tight">
                     Leaderboard
                   </h5>
-                  <div className="grid grid-cols-4 gap-4 ">
-                    <div className="col-span-2 col-start-1 text-sm text-gray-700 dark:text-gray-400">
+                  <div className="grid grid-cols-2 gap-2">
+                    <div className=" col-start-1 text-sm text-gray-700 dark:text-gray-400">
                       I would like to participate in the leaderboard
                       {showName && (
-                        <div className="p-1">
+                        <div className="">
                           <h2 className="text-md pt-8 font-medium leading-6">
                             We need your nickname to be displayed in the
                             leaderboard
@@ -385,10 +419,10 @@ const UIOnboarding = () => {
                       )}
                     </div>
 
-                    <div className="col-span-2 col-start-3 rounded">
+                    <div className="col-start-2">
                       <LeaderboardPreview />
                     </div>
-                    <div className="col-start-1 row-start-2 mt-4 flex items-center gap-2">
+                    <div className="col-start-1 row-start-2 my-6 flex items-center gap-2">
                       <input
                         {...register("leaderboard")}
                         id="leaderboard"
@@ -400,26 +434,25 @@ const UIOnboarding = () => {
                       <Label htmlFor="select">Select</Label>
                     </div>
                   </div>
-                </Card>
+                </div>
               </div>
 
-              <Button
-                className="absolute left-16 bottom-16"
-                onClick={() => setPage("components")}
-              >
-                <HiArrowLeft className="mr-2" /> Go back
-              </Button>
-              <input
-                className="absolute right-16 bottom-16 mr-2 mb-2 rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-medium text-white hover:cursor-pointer hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                type="submit"
-                value={
-                  mutation.isLoading
-                    ? "Loading.."
-                    : mutation.isSuccess
-                    ? "Success!"
-                    : "Submit"
-                }
-              />
+              <div className="absolute left-1/2 bottom-16  flex -translate-x-1/2 transform flex-row gap-16">
+                <Button onClick={() => setPage("components")}>
+                  <HiArrowLeft className="mr-2" /> Go back
+                </Button>
+                <input
+                  className=" rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-medium text-white hover:cursor-pointer hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                  type="submit"
+                  value={
+                    mutation.isLoading
+                      ? "Loading.."
+                      : mutation.isSuccess
+                      ? "Success!"
+                      : "Submit"
+                  }
+                />
+              </div>
             </div>
           ) : (
             <></>

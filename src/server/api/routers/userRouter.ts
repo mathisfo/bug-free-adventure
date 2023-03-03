@@ -15,7 +15,13 @@ export const userRouter = createTRPCRouter({
         leaderboard: true,
       },
       include: {
-        history: true,
+        history: {
+          where: {
+            NOT: {
+              completedAt: null,
+            },
+          },
+        },
       },
     });
 
@@ -59,7 +65,6 @@ export const userRouter = createTRPCRouter({
       } catch (e) {
         if (e instanceof PrismaClientKnownRequestError) {
           // P2022: Unique constraint failed
-          // Prisma error codes: https://www.prisma.io/docs/reference/api-reference/error-reference#error-codes
           if (e.code === "P2002") {
             throw new TRPCError({
               code: "INTERNAL_SERVER_ERROR",
