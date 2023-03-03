@@ -237,7 +237,9 @@ const UIOnboarding = () => {
                     This component shows you some stats about the work you have
                     put in the previous week compared to the week before.
                   </p>
-                  <StatsPreview />
+                  <div className="scale-90">
+                    <StatsPreview />
+                  </div>
                   <div className="my-6 ml-4 flex items-center gap-2 ">
                     <Checkbox
                       {...register("selectedComponents")}
@@ -258,7 +260,9 @@ const UIOnboarding = () => {
                     This component shows you how much you work per day reprented
                     as a graph.
                   </p>
-                  <HistoryGraphPreview />
+                  <div className="scale-90">
+                    <HistoryGraphPreview />
+                  </div>
                   <div className="my-6 ml-4 flex items-center gap-2 ">
                     <Checkbox
                       {...register("selectedComponents")}
@@ -280,7 +284,9 @@ const UIOnboarding = () => {
                     with due dates.
                   </p>
                   <div>
-                    <ExercisePlannerPreview />
+                    <div className="scale-90">
+                      <ExercisePlannerPreview />
+                    </div>
                   </div>
 
                   <div className="my-6 ml-4 flex items-center gap-2 ">
@@ -302,7 +308,9 @@ const UIOnboarding = () => {
                     This component is more detailed than Activity Graph. It
                     shows your exercise activty per day, as a list.
                   </p>
-                  <ExerciseHistoryPreview />
+                  <div className="scale-90">
+                    <ExerciseHistoryPreview />
+                  </div>
                   <div className="my-6 ml-4 flex items-center gap-2 ">
                     <Checkbox
                       {...register("selectedComponents")}
