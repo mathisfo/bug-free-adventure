@@ -86,7 +86,7 @@ const Sidebar = ({ children }: { children: React.ReactElement }) => {
     <div>
       {session ? (
         <div>
-          {session.user.onBoarded ? (
+          {!session.user.onBoarded ? (
             <UIOnboarding />
           ) : (
             <div className="back-layer grid grid-cols-5 px-2 pt-2 ">

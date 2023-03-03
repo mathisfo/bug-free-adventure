@@ -18,7 +18,6 @@ import {
 } from "../../server/schema/UserSchema";
 import { api } from "../../utils/api";
 import ToggleTheme from "../ToggleTheme";
-import Image from "next/image";
 import LeaderboardPreview from "../previews/LeaderboardPreview";
 import ExercisePlannerPreview from "../previews/ExercisePlannerPreview";
 import HistoryGraphPreview from "../previews/HistoryGraphPreview";
@@ -57,12 +56,12 @@ const UIOnboarding = () => {
 
   const onSubmit: SubmitHandler<OnboardingForm> = (data: OnboardingForm) => {
     console.log(data);
-    /* mutation.mutate(data, {
+    mutation.mutate(data, {
       onSuccess: () => {
         ctx.invalidate();
         router.reload();
       },
-    }); */
+    });
   };
 
   function classNames(...classes: string[]) {
@@ -229,6 +228,27 @@ const UIOnboarding = () => {
               >
                 <div className="course-card rounded-2xl border border-zinc-400 px-6 pt-6 dark:border-zinc-600">
                   <h5 className="mb-2 text-2xl font-bold tracking-tight">
+                    Stats
+                  </h5>
+
+                  <p className="col-start-1 text-sm text-gray-700 dark:text-gray-400">
+                    This component shows you some stats about the work you have
+                    put in the previous week compared to the week before.
+                  </p>
+                  <StatsPreview />
+                  <div className="my-6 ml-4 flex items-center gap-2 ">
+                    <Checkbox
+                      {...register("selectedComponents")}
+                      id="select"
+                      value={SelectedEnum.STATS}
+                    />
+                    <label htmlFor="select">Select</label>
+                  </div>
+
+                  <div className="col-start-2 grid items-center "></div>
+                </div>
+                <div className="course-card rounded-2xl border border-zinc-400 px-6 pt-6 dark:border-zinc-600">
+                  <h5 className="mb-2 text-2xl font-bold tracking-tight">
                     History Graph
                   </h5>
 
@@ -237,7 +257,7 @@ const UIOnboarding = () => {
                     as a graph.
                   </p>
                   <HistoryGraphPreview />
-                  <div className="my-8 ml-4 flex items-center gap-2 ">
+                  <div className="my-6 ml-4 flex items-center gap-2 ">
                     <Checkbox
                       {...register("selectedComponents")}
                       id="select"
@@ -261,7 +281,7 @@ const UIOnboarding = () => {
                     <ExercisePlannerPreview />
                   </div>
 
-                  <div className="my-8 ml-4 flex items-center gap-2 ">
+                  <div className="my-6 ml-4 flex items-center gap-2 ">
                     <Checkbox
                       {...register("selectedComponents")}
                       id="select"
@@ -281,7 +301,7 @@ const UIOnboarding = () => {
                     shows your exercise activty per day, as a list.
                   </p>
                   <ExerciseHistoryPreview />
-                  <div className="my-8 ml-4 flex items-center gap-2 ">
+                  <div className="my-6 ml-4 flex items-center gap-2 ">
                     <Checkbox
                       {...register("selectedComponents")}
                       id="select"
@@ -289,27 +309,6 @@ const UIOnboarding = () => {
                     />
                     <label htmlFor="select">Select</label>
                   </div>
-                </div>
-                <div className="course-card rounded-2xl border border-zinc-400 px-6 pt-6 dark:border-zinc-600">
-                  <h5 className="mb-2 text-2xl font-bold tracking-tight">
-                    Stats
-                  </h5>
-
-                  <p className="col-start-1 text-sm text-gray-700 dark:text-gray-400">
-                    This component shows you some stats about the work you have
-                    put in the previous week compared to the week before.
-                  </p>
-                  <StatsPreview />
-                  <div className="my-8 ml-4 flex items-center gap-2 ">
-                    <Checkbox
-                      {...register("selectedComponents")}
-                      id="select"
-                      value={SelectedEnum.HISTORYGRAPH}
-                    />
-                    <label htmlFor="select">Select</label>
-                  </div>
-
-                  <div className="col-start-2 grid items-center "></div>
                 </div>
               </div>
               <div className="mt-12 flex flex-row justify-center gap-16">

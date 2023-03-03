@@ -3,8 +3,6 @@ import {
   ArrowTrendingDownIcon,
 } from "@heroicons/react/24/solid";
 import { useSession } from "next-auth/react";
-import { list } from "postcss";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { api } from "../utils/api";
 
 function classNames(...classes: string[]) {
@@ -13,6 +11,12 @@ function classNames(...classes: string[]) {
 
 const Stats = () => {
   const { data: session, status } = useSession({ required: true });
+
+  const {
+    data: learnerAnalytics,
+    isSuccess: learnerIsSuccess,
+    isLoading: learnerIsLoading,
+  } = api.learnerActivityRouter.getLearnerActivity.useQuery();
 
   if (status == "loading") {
     return (
@@ -45,12 +49,6 @@ const Stats = () => {
       </div>
     );
   }
-
-  const {
-    data: learnerAnalytics,
-    isSuccess: learnerIsSuccess,
-    isLoading: learnerIsLoading,
-  } = api.learnerActivityRouter.getLearnerActivity.useQuery();
 
   if (learnerIsLoading || !learnerIsSuccess) {
     return (
@@ -113,7 +111,7 @@ const Stats = () => {
   };
 
   return (
-    <div className="text-color m-8 w-1/2 cursor-pointer rounded-lg">
+    <div className="text-color  cursor-pointer rounded-lg">
       <div className="mb-8 mt-4">
         <p className="text-md font-semibold uppercase">
           Average exercises done
@@ -138,18 +136,18 @@ const Stats = () => {
               <div
                 className={classNames(
                   StatsWithType("EXAMPLE").changeInPercentage > 0
-                    ? "bg-[#0de890]"
-                    : "bg-[#DE5B7E]",
-                  "flex flex-row items-center rounded  text-white",
+                    ? "bg-[#0de890] text-gray-700"
+                    : "bg-[#DE5B7E] text-white",
+                  "flex flex-row items-center rounded ",
                   StatsWithType("EXAMPLE").changeInPercentage === 100
                     ? "w-15"
-                    : "w-13"
+                    : "w-14"
                 )}
               >
                 {StatsWithType("EXAMPLE").changeInPercentage > 0 ? (
-                  <ArrowTrendingUpIcon className="mx-1 h-4 w-4" />
+                  <ArrowTrendingUpIcon className="mx-1 h-4 w-4 text-gray-700 " />
                 ) : (
-                  <ArrowTrendingDownIcon className="mx-1 h-4 w-4" />
+                  <ArrowTrendingDownIcon className="mx-1 h-4 w-4 text-white " />
                 )}
                 <p className="text-sm font-semibold">
                   {StatsWithType("EXAMPLE").changeInPercentage}%
@@ -173,18 +171,18 @@ const Stats = () => {
               <div
                 className={classNames(
                   StatsWithType("CHALLENGE").changeInPercentage > 0
-                    ? "bg-[#0de890]"
-                    : "bg-[#DE5B7E]",
-                  "flex flex-row items-center rounded  text-white",
+                    ? "bg-[#0de890] text-gray-700"
+                    : "bg-[#DE5B7E] text-white",
+                  "flex flex-row items-center rounded",
                   StatsWithType("CHALLENGE").changeInPercentage === 100
                     ? "w-15"
-                    : "w-13"
+                    : "w-14"
                 )}
               >
                 {StatsWithType("CHALLENGE").changeInPercentage > 0 ? (
-                  <ArrowTrendingUpIcon className="mx-1 h-4 w-4" />
+                  <ArrowTrendingUpIcon className="mx-1 h-4 w-4 text-gray-700 " />
                 ) : (
-                  <ArrowTrendingDownIcon className="mx-1 h-4 w-4" />
+                  <ArrowTrendingDownIcon className="mx-1 h-4 w-4 text-white " />
                 )}
                 <p className="text-sm font-semibold">
                   {StatsWithType("CHALLENGE").changeInPercentage}%
@@ -208,18 +206,18 @@ const Stats = () => {
               <div
                 className={classNames(
                   StatsWithType("CODING").changeInPercentage > 0
-                    ? "bg-[#0de890]"
-                    : "bg-[#DE5B7E]",
-                  "flex flex-row items-center rounded  text-white",
+                    ? "bg-[#0de890] text-gray-700"
+                    : "bg-[#DE5B7E] text-white",
+                  "flex flex-row items-center rounded",
                   StatsWithType("CODING").changeInPercentage === 100
                     ? "w-15"
-                    : "w-13"
+                    : "w-14"
                 )}
               >
                 {StatsWithType("CODING").changeInPercentage > 0 ? (
-                  <ArrowTrendingUpIcon className="mx-1 h-4 w-4" />
+                  <ArrowTrendingUpIcon className="mx-1 h-4 w-4 text-gray-700 " />
                 ) : (
-                  <ArrowTrendingDownIcon className="mx-1 h-4 w-4" />
+                  <ArrowTrendingDownIcon className="mx-1 h-4 w-4 text-white " />
                 )}
                 <p className="text-sm font-semibold">
                   {StatsWithType("CODING").changeInPercentage}%
@@ -299,12 +297,12 @@ const Stats = () => {
               exercisesDoneLast7Days.length,
               exercisesDone7DaysBefore.length
             ) > 0
-              ? "bg-[#0de890]"
-              : "bg-[#DE5B7E]",
-            "mx-1 w-12 rounded "
+              ? "bg-[#0de890] text-gray-700"
+              : "bg-[#DE5B7E] text-white",
+            "mx-2 w-12 rounded "
           )}
         >
-          <p className="text-center text-white">
+          <p className="text-center">
             {getProgress(
               exercisesDoneLast7Days.length,
               exercisesDone7DaysBefore.length
