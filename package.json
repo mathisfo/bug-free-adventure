@@ -28,6 +28,7 @@
     "d3-selection": "^3.0.0",
     "flowbite": "^1.5.4",
     "flowbite-react": "^0.3.4",
+    "ims-lti": "^3.0.2",
     "next": "12.3.1",
     "next-auth": "~4.10.3",
     "next-themes": "^0.2.1",
