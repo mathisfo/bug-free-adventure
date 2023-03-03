@@ -52,8 +52,8 @@ const LeaderboardPreview = () => {
             <th className="w-1/5 rounded-tl-lg border-r border-[#988efe] px-6 ">
               Ranking
             </th>
-            <th className="w-3/5 py-2 px-6">Name</th>
-            <th className="w-1/5 border-l border-[#988efe] py-2 px-6 ">
+            <th className="w-3/5 py-2 px-8">Name</th>
+            <th className="w-1/5 border-l border-[#988efe] py-2 px-2 ">
               Score
             </th>
           </tr>
@@ -64,7 +64,7 @@ const LeaderboardPreview = () => {
               <tr
                 key={index}
                 className={classNames(
-                  person.userId == "Me"
+                  person.name == "Me"
                     ? `bg-[#BFF7E0] dark:bg-[#BFF7E0] dark:text-gray-700`
                     : `bg-[#fff] dark:bg-[#212124]`,
                   `text-color border-t  font-semibold dark:border-zinc-700 `
@@ -86,8 +86,8 @@ const LeaderboardPreview = () => {
                     {index + 1}
                   </div>
                 </td>
-                <td className="py-2 px-6">{person.name}</td>
-                <td className=" py-2 px-6 text-center">{person.score}</td>
+                <td className="py-2 px-8">{person.name}</td>
+                <td className=" py-2 px-4 text-center">{person.score}</td>
               </tr>
             );
           })}

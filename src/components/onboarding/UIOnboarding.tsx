@@ -1,5 +1,5 @@
 import { SelectedEnum } from "@prisma/client";
-import { Alert, Button, Card, Checkbox, Label } from "flowbite-react";
+import { Alert, Button, Checkbox, Label } from "flowbite-react";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -11,6 +11,7 @@ import {
   HiArrowLeft,
   HiInformationCircle,
   HiIdentification,
+  HiOutlineCheck,
 } from "react-icons/hi";
 import {
   OnboardingForm,
@@ -23,6 +24,7 @@ import ExercisePlannerPreview from "../previews/ExercisePlannerPreview";
 import HistoryGraphPreview from "../previews/HistoryGraphPreview";
 import ExerciseHistoryPreview from "../previews/ExerciseHistoryPreview";
 import StatsPreview from "../previews/StatsPreview";
+import { CheckIcon } from "@heroicons/react/24/solid";
 
 const UIOnboarding = () => {
   const {
@@ -323,10 +325,10 @@ const UIOnboarding = () => {
             </div>
           ) : page == "leaderboard" ? (
             <div className="pl-12 pt-12 pr-12">
-              <h2 className="text-md font-medium leading-6">
+              <h2 className="text-lg font-medium leading-6">
                 Lastly, we want to know whether you are the competitive type.
               </h2>
-              <p className="mt-1 text-sm text-gray-400">
+              <p className="text-md mt-1 text-gray-400">
                 By participating in the leaderboard you can compete against your
                 classmates to see who completes the most exercises. Your
                 nickname will show up on the leaderboard.
@@ -343,16 +345,16 @@ const UIOnboarding = () => {
                   </a>
                 </Alert>
               )}
-              <div className="mt-5 grid gap-4">
-                <Card className="course-card relative rounded-2xl border border-gray-400  dark:border-gray-700">
-                  <h5 className="text-2xl font-bold tracking-tight">
+              <div className={`mt-5 w-full select-none `}>
+                <div className="course-card w-3/5 rounded-2xl border border-zinc-400 pl-6 pr-2 pt-6 dark:border-zinc-600">
+                  <h5 className="mb-2 text-2xl font-bold tracking-tight">
                     Leaderboard
                   </h5>
-                  <div className="grid grid-cols-4 gap-4 ">
-                    <div className="col-span-2 col-start-1 text-sm text-gray-700 dark:text-gray-400">
+                  <div className="grid grid-cols-2 gap-2">
+                    <div className=" col-start-1 text-sm text-gray-700 dark:text-gray-400">
                       I would like to participate in the leaderboard
                       {showName && (
-                        <div className="p-1">
+                        <div className="">
                           <h2 className="text-md pt-8 font-medium leading-6">
                             We need your nickname to be displayed in the
                             leaderboard
@@ -409,10 +411,10 @@ const UIOnboarding = () => {
                       )}
                     </div>
 
-                    <div className="col-span-2 col-start-3 rounded">
+                    <div className="col-start-2">
                       <LeaderboardPreview />
                     </div>
-                    <div className="col-start-1 row-start-2 mt-4 flex items-center gap-2">
+                    <div className="col-start-1 row-start-2 my-6 flex items-center gap-2">
                       <input
                         {...register("leaderboard")}
                         id="leaderboard"
@@ -424,26 +426,25 @@ const UIOnboarding = () => {
                       <Label htmlFor="select">Select</Label>
                     </div>
                   </div>
-                </Card>
+                </div>
               </div>
 
-              <Button
-                className="absolute left-16 bottom-16"
-                onClick={() => setPage("components")}
-              >
-                <HiArrowLeft className="mr-2" /> Go back
-              </Button>
-              <input
-                className="absolute right-16 bottom-16 mr-2 mb-2 rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-medium text-white hover:cursor-pointer hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                type="submit"
-                value={
-                  mutation.isLoading
-                    ? "Loading.."
-                    : mutation.isSuccess
-                    ? "Success!"
-                    : "Submit"
-                }
-              />
+              <div className="absolute left-1/2 bottom-16  flex -translate-x-1/2 transform flex-row gap-16">
+                <Button onClick={() => setPage("components")}>
+                  <HiArrowLeft className="mr-2" /> Go back
+                </Button>
+                <input
+                  className=" rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-medium text-white hover:cursor-pointer hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                  type="submit"
+                  value={
+                    mutation.isLoading
+                      ? "Loading.."
+                      : mutation.isSuccess
+                      ? "Success!"
+                      : "Submit"
+                  }
+                />
+              </div>
             </div>
           ) : (
             <></>
