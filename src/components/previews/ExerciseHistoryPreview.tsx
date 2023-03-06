@@ -12,7 +12,7 @@ const ExerciseHistoryPreview = () => {
     ActivityResource: ActivityResource;
   })[] = [
     {
-      historyId: "mock",
+      historyId: "mock1",
       completedAt: new Date("2023-03-01"),
       visitedAt: new Date("2023-03-01"),
       userId: "mock",
@@ -26,7 +26,7 @@ const ExerciseHistoryPreview = () => {
       },
     },
     {
-      historyId: "mock",
+      historyId: "mock2",
       completedAt: new Date("2023-03-02"),
       visitedAt: new Date("2023-03-02"),
       userId: "mock",
@@ -40,7 +40,7 @@ const ExerciseHistoryPreview = () => {
       },
     },
     {
-      historyId: "mock",
+      historyId: "mock3",
       completedAt: new Date("2023-03-02"),
       visitedAt: new Date("2023-03-02"),
       userId: "mock",

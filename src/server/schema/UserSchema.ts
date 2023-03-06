@@ -1,7 +1,7 @@
 import { SelectedEnum } from "@prisma/client";
 import { z } from "zod";
 
-const selectedComps = z.nativeEnum(SelectedEnum);
+export const selectedComps = z.nativeEnum(SelectedEnum);
 export type selectedCompsEnum = z.infer<typeof selectedComps>;
 
 export const onboardingSchema = z
@@ -39,6 +39,12 @@ export const onboardingSchema = z
     }
   );
 
+export const userPreferenceSchema = z.object({
+  newSelectedComponents: z.array(selectedComps),
+  leaderboard: z.boolean(),
+  name: z.string().optional(),
+});
+
 export const toDoSchema = z.object({
   dueDate: z.date(),
   name: z.string(),
@@ -47,3 +53,4 @@ export const toDoSchema = z.object({
 
 export type ToDoForm = z.infer<typeof toDoSchema>;
 export type OnboardingForm = z.infer<typeof onboardingSchema>;
+export type UserPreferenceForm = z.infer<typeof userPreferenceSchema>;
