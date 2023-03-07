@@ -7,6 +7,7 @@ import {
   toDoSchema,
 } from "../../schema/UserSchema";
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
+import { learnerActivity } from "./learnerActivityRouter";
 
 export const userRouter = createTRPCRouter({
   getLeaderBoard: publicProcedure.query(async ({ ctx }) => {
@@ -146,6 +147,16 @@ export const userRouter = createTRPCRouter({
   updateExerciseHistory: protectedProcedure
     .input(z.object({ activityId: z.string() }))
     .mutation(async ({ ctx, input }) => {
+      const activityAnalytics = (
+        await learnerActivity(ctx.prisma, ctx.session.user)
+      ).activityAnalytics;
+
+      const attempts = [
+        ...activityAnalytics.challenges,
+        ...activityAnalytics.examples,
+        ...activityAnalytics.coding,
+      ].find((e) => e.activityId === input.activityId)?.attempts;
+
       return await ctx.prisma.exerciseHistory.update({
         where: {
           userExerciseHistoryOnActivityResource: {
@@ -155,6 +166,7 @@ export const userRouter = createTRPCRouter({
         },
         data: {
           completedAt: new Date(),
+          attempts: attempts,
         },
       });
     }),

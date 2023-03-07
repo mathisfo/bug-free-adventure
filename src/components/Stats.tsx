@@ -2,6 +2,7 @@ import {
   ArrowTrendingUpIcon,
   ArrowTrendingDownIcon,
 } from "@heroicons/react/24/solid";
+import { type } from "@prisma/client";
 import { useSession } from "next-auth/react";
 import { api } from "../utils/api";
 
@@ -78,6 +79,47 @@ const Stats = () => {
       e.completedAt > fourteenDaysAgo &&
       e.completedAt < sevenDaysAgo
   );
+
+  const exerciseAttemptsLast7Days = (type: type) => {
+    const attempts = history
+      .filter(
+        (e) =>
+          e.ActivityResource.type == type &&
+          e.completedAt !== null &&
+          e.completedAt > sevenDaysAgo &&
+          e.completedAt < today
+      )
+      .map((e) => e.attempts)
+      .reduce((a, b) => a! + b!, 0);
+
+    return attempts ? attempts : 0;
+  };
+
+  const exercisesAttempts7DaysBefore = (type: type) => {
+    const attempts = history
+      .filter(
+        (e) =>
+          e.ActivityResource.type == type &&
+          e.completedAt !== null &&
+          e.completedAt > fourteenDaysAgo &&
+          e.completedAt < sevenDaysAgo
+      )
+      .map((e) => e.attempts)
+      .reduce((a, b) => a! + b!, 0);
+
+    return attempts ? attempts : 0;
+  };
+
+  const exerciseAttempts = (type: type) => {
+    const attemptsLast7Days = exerciseAttemptsLast7Days(type);
+    const attempts7DaysBefore = exercisesAttempts7DaysBefore(type);
+
+    return {
+      attemptsLast7Days: attemptsLast7Days,
+      attempts7DaysBefore: attempts7DaysBefore,
+      changeInPercentage: getProgress(attemptsLast7Days, attempts7DaysBefore),
+    };
+  };
 
   function getProgress(numberLast7Days: number, number7DaysBefore: number) {
     return (numberLast7Days === 0 && exercisesDone7DaysBefore.length === 0) ||
@@ -240,13 +282,20 @@ const Stats = () => {
               Examples
             </p>
             <div className="col-start-1 row-start-2 flex flex-row text-xs">
-              <p className="text-blue-color mr-1 font-semibold">2</p>{" "}
-              <p className="text-color-light "> from 1</p>
+              <p className="text-blue-color mr-1 font-semibold">
+                {exerciseAttempts(type.EXAMPLE).attemptsLast7Days}
+              </p>{" "}
+              <p className="text-color-light ">
+                {" "}
+                from {exerciseAttempts(type.EXAMPLE).attempts7DaysBefore}
+              </p>
             </div>
             <div className="col-start-2 row-span-2 mr-2 flex items-center justify-self-end">
               <div className="w-15 flex flex-row items-center rounded bg-[#0de890] text-white">
                 <ArrowTrendingDownIcon className="mx-1 h-4 w-4" />
-                <p className="text-sm font-semibold">50%</p>
+                <p className="text-sm font-semibold">
+                  {exerciseAttempts(type.EXAMPLE).changeInPercentage}%
+                </p>
               </div>
             </div>
           </div>
@@ -255,13 +304,19 @@ const Stats = () => {
               Challenges
             </p>
             <div className="col-start-1 row-start-2 flex flex-row text-xs">
-              <p className="text-blue-color mr-1 font-semibold">3</p>{" "}
-              <p className="text-color-light ">from 4</p>
+              <p className="text-blue-color mr-1 font-semibold">
+                {exerciseAttempts(type.CHALLENGE).attemptsLast7Days}
+              </p>{" "}
+              <p className="text-color-light ">
+                from {exerciseAttempts(type.EXAMPLE).attempts7DaysBefore}
+              </p>
             </div>
             <div className="col-start-2 row-span-2 mr-2 flex items-center justify-self-end">
               <div className="w-15 flex flex-row items-center rounded bg-[#0de890] text-white">
                 <ArrowTrendingDownIcon className="mx-1 h-4 w-4" />
-                <p className="text-sm font-semibold">4%</p>
+                <p className="text-sm font-semibold">
+                  {exerciseAttempts(type.EXAMPLE).changeInPercentage}%
+                </p>
               </div>
             </div>
           </div>
@@ -270,13 +325,19 @@ const Stats = () => {
               Coding Ex.
             </p>
             <div className="col-start-1 row-start-2 flex flex-row text-xs">
-              <p className="text-blue-color mr-1 font-semibold">1</p>{" "}
-              <p className="text-color-light ">from 2</p>
+              <p className="text-blue-color mr-1 font-semibold">
+                {exerciseAttempts(type.CODING).attemptsLast7Days}
+              </p>{" "}
+              <p className="text-color-light ">
+                from {exerciseAttempts(type.CODING).attempts7DaysBefore}
+              </p>
             </div>
             <div className="col-start-2 row-span-2 mr-2 flex items-center justify-self-end">
               <div className="w-15 flex flex-row items-center rounded bg-[#DE5B7E] text-white">
                 <ArrowTrendingUpIcon className="mx-1 h-4 w-4" />
-                <p className="text-sm font-semibold">10%</p>
+                <p className="text-sm font-semibold">
+                  {exerciseAttempts(type.EXAMPLE).changeInPercentage}%
+                </p>
               </div>
             </div>
           </div>

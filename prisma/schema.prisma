@@ -71,6 +71,7 @@ model ExerciseHistory {
 
   visitedAt   DateTime
   completedAt DateTime?
+  attempts    Int?
 
   userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
