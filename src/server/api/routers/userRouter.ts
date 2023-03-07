@@ -82,6 +82,7 @@ export const userRouter = createTRPCRouter({
   getUserPreferences: protectedProcedure.query(async ({ ctx }) => {
     const preferences = await ctx.prisma.userPreference.findMany({
       where: { userId: ctx.session.user.id },
+      include: { user: true },
       orderBy: { createdAt: "desc" },
       take: 1,
     });

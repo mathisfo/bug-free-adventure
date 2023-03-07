@@ -3,9 +3,10 @@ import { SelectedEnum } from "@prisma/client";
 import { Checkbox } from "flowbite-react";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { HiUser } from "react-icons/hi";
+import { checkServerIdentity } from "tls";
 import ExerciseHistoryPreview from "../../components/previews/ExerciseHistoryPreview";
 import ExercisePlannerPreview from "../../components/previews/ExercisePlannerPreview";
 import HistoryGraphPreview from "../../components/previews/HistoryGraphPreview";
@@ -26,12 +27,37 @@ const Settings: NextPage = () => {
     resolver: zodResolver(userPreferenceSchema),
   });
 
-  const [showName, setShowName] = useState(false);
+  const {
+    data: userPreferences,
+    isSuccess: selectedSuccess,
+    isLoading: selectedLoading,
+  } = api.userRouter.getUserPreferences.useQuery();
+
   const mutation = api.userRouter.updateUserPreferences.useMutation();
+
+  const [checkboxIndexes, setCheckboxIndexes] = useState<SelectedEnum[]>([]);
+  const [checkedLeaderboard, setCheckedLeaderboard] = useState(false);
 
   const router = useRouter();
 
   const ctx = api.useContext();
+
+  useEffect(() => {
+    if (userPreferences) {
+      setCheckboxIndexes(userPreferences.selectedComponents);
+      if (userPreferences.leaderboard) {
+        setCheckedLeaderboard(true);
+      }
+    }
+  }, [userPreferences]);
+
+  console.log(checkboxIndexes);
+
+  if (!selectedSuccess || selectedLoading) {
+    return <div></div>;
+  }
+
+  console.log(checkboxIndexes);
 
   const onSubmit: SubmitHandler<UserPreferenceForm> = (
     data: UserPreferenceForm
@@ -52,14 +78,21 @@ const Settings: NextPage = () => {
   return (
     <div className="background-color col-span-4 mr-4 h-screen w-11/12 rounded-r-lg p-16 ">
       {Object.values(errors).map((error) => (
-        <span>{error?.message}</span>
+        <span key={error?.type}>{error?.message}</span>
       ))}
       <h1 className="text-color mb-6 text-xl font-semibold uppercase opacity-75">
         My chosen components
       </h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mt-5 grid select-none grid-cols-2 gap-x-8 gap-y-4 ">
-          <div className="course-card relative h-auto grid-cols-1 rounded-2xl border border-zinc-400 px-6 pt-6 dark:border-zinc-600">
+          <div
+            className={classNames(
+              checkboxIndexes?.includes("TODO")
+                ? "border-[#0de890] dark:border-[#0de890]"
+                : "border-zinc-400 dark:border-zinc-600",
+              " course-card relative h-auto grid-cols-1 rounded-2xl border-2 border  px-6 pt-6"
+            )}
+          >
             <p className="mb-2 text-2xl font-bold tracking-tight">
               Exercise Planner
             </p>
@@ -73,6 +106,14 @@ const Settings: NextPage = () => {
             </div>
             <div className="absolute bottom-1 my-6 ml-4 flex items-center gap-2">
               <Checkbox
+                onClick={() =>
+                  checkboxIndexes?.includes("TODO")
+                    ? setCheckboxIndexes(
+                        checkboxIndexes.filter((e) => e !== "TODO")
+                      )
+                    : setCheckboxIndexes([...checkboxIndexes, "TODO"])
+                }
+                checked={checkboxIndexes?.includes("TODO") ? true : false}
                 {...register("newSelectedComponents")}
                 id="select"
                 value={SelectedEnum.TODO}
@@ -84,7 +125,14 @@ const Settings: NextPage = () => {
             </div>
           </div>
 
-          <div className="course-card relative rounded-2xl border border-zinc-400 px-6 pt-6 dark:border-zinc-600">
+          <div
+            className={classNames(
+              checkboxIndexes.includes("HISTORYGRAPH")
+                ? "border-[#0de890] dark:border-[#0de890]"
+                : "border-zinc-400 dark:border-zinc-600",
+              " course-card relative h-auto grid-cols-1 rounded-2xl border-2 border  px-6 pt-6"
+            )}
+          >
             <h5 className="mb-2 text-2xl font-bold tracking-tight">
               History Graph
             </h5>
@@ -98,6 +146,16 @@ const Settings: NextPage = () => {
             </div>
             <div className="absolute bottom-1 my-6 ml-4 flex items-center gap-2">
               <Checkbox
+                onClick={() =>
+                  checkboxIndexes?.includes("HISTORYGRAPH")
+                    ? setCheckboxIndexes(
+                        checkboxIndexes.filter((e) => e !== "HISTORYGRAPH")
+                      )
+                    : setCheckboxIndexes([...checkboxIndexes, "HISTORYGRAPH"])
+                }
+                checked={
+                  checkboxIndexes?.includes("HISTORYGRAPH") ? true : false
+                }
                 {...register("newSelectedComponents")}
                 id="select"
                 value={SelectedEnum.HISTORYGRAPH}
@@ -108,7 +166,14 @@ const Settings: NextPage = () => {
               <label htmlFor="select">Select</label>
             </div>
           </div>
-          <div className="course-card relative rounded-2xl border border-zinc-400 px-6 pt-6 dark:border-zinc-600">
+          <div
+            className={classNames(
+              checkboxIndexes.includes("STATS")
+                ? "border-[#0de890] dark:border-[#0de890]"
+                : "border-zinc-400 dark:border-zinc-600",
+              " course-card relative h-auto grid-cols-1 rounded-2xl border-2 border  px-6 pt-6"
+            )}
+          >
             <h5 className="mb-2 text-2xl font-bold tracking-tight">Stats</h5>
 
             <p className="col-start-1 text-sm text-gray-700 dark:text-gray-400">
@@ -120,6 +185,14 @@ const Settings: NextPage = () => {
             </div>
             <div className="absolute bottom-1 my-6 ml-4 flex items-center gap-2 ">
               <Checkbox
+                onClick={() =>
+                  checkboxIndexes?.includes("STATS")
+                    ? setCheckboxIndexes(
+                        checkboxIndexes.filter((e) => e !== "STATS")
+                      )
+                    : setCheckboxIndexes([...checkboxIndexes, "STATS"])
+                }
+                checked={checkboxIndexes?.includes("STATS") ? true : false}
                 {...register("newSelectedComponents")}
                 id="select"
                 value={SelectedEnum.STATS}
@@ -131,7 +204,14 @@ const Settings: NextPage = () => {
             </div>
           </div>
 
-          <div className="course-card relative grid-cols-1 gap-8 rounded-2xl border border-zinc-400 px-6 pt-6 dark:border-zinc-600">
+          <div
+            className={classNames(
+              checkboxIndexes.includes("EXERCISEHISTORY")
+                ? "border-[#0de890] dark:border-[#0de890]"
+                : "border-zinc-400 dark:border-zinc-600",
+              " course-card relative h-auto grid-cols-1 rounded-2xl border-2 border  px-6 pt-6"
+            )}
+          >
             <h5 className="mb-2 text-2xl font-bold tracking-tight">
               Activity History
             </h5>
@@ -145,6 +225,19 @@ const Settings: NextPage = () => {
             </div>
             <div className="absolute bottom-1 my-6 ml-4 flex items-center gap-2 ">
               <Checkbox
+                onClick={() =>
+                  checkboxIndexes?.includes("EXERCISEHISTORY")
+                    ? setCheckboxIndexes(
+                        checkboxIndexes.filter((e) => e !== "EXERCISEHISTORY")
+                      )
+                    : setCheckboxIndexes([
+                        ...checkboxIndexes,
+                        "EXERCISEHISTORY",
+                      ])
+                }
+                checked={
+                  checkboxIndexes?.includes("EXERCISEHISTORY") ? true : false
+                }
                 {...register("newSelectedComponents")}
                 id="select"
                 value={SelectedEnum.EXERCISEHISTORY}
@@ -160,14 +253,21 @@ const Settings: NextPage = () => {
         <p className="text-color mb-6 mt-8 text-xl font-semibold uppercase opacity-75">
           Leaderboard participation
         </p>
-        <div className="course-card relative w-3/5 rounded-2xl border border-zinc-400 pl-6 pr-2 pt-6 dark:border-zinc-600">
+        <div
+          className={classNames(
+            userPreferences?.leaderboard == true
+              ? "border-[#0de890] dark:border-[#0de890]"
+              : " border-zinc-400 dark:border-zinc-600",
+            "W-3/5  course-card relative rounded-2xl border-2 px-6 pt-6"
+          )}
+        >
           <h5 className="mb-2 text-2xl font-bold tracking-tight">
             Leaderboard
           </h5>
           <div className="grid grid-cols-2 gap-2">
             <div className=" col-start-1 text-sm text-gray-700 dark:text-gray-400">
               I would like to participate in the leaderboard
-              {showName && (
+              {checkedLeaderboard && (
                 <div className="">
                   <h2 className="text-md pt-4 font-medium leading-6">
                     Your nickname will be displayed publicly on the leaderboard.
@@ -197,6 +297,11 @@ const Settings: NextPage = () => {
                         />
                       </span>
                       <input
+                        value={
+                          userPreferences?.leaderboard
+                            ? userPreferences.user.name
+                            : undefined
+                        }
                         {...register("name")}
                         type="text"
                         id="name"
@@ -220,7 +325,8 @@ const Settings: NextPage = () => {
             </div>
             <div className="absolute bottom-1 my-6 ml-4 flex items-center gap-2 ">
               <Checkbox
-                onClick={() => setShowName(!showName)}
+                onClick={() => setCheckedLeaderboard(!checkedLeaderboard)}
+                checked={checkedLeaderboard}
                 {...register("leaderboard")}
                 id="select"
                 className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
