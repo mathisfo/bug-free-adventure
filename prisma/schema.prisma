@@ -18,13 +18,13 @@ model Account {
   provider                 String
   providerAccountId        String
   refresh_token            String?
-  refresh_token_expires_in Int
   access_token             String?
   expires_at               Int?
   token_type               String?
   scope                    String?
   id_token                 String?
   session_state            String?
+  refresh_token_expires_in Int
   user                     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
@@ -51,47 +51,42 @@ model User {
   USNEmail      String?
   leaderboard   Boolean?
   accounts      Account[]
-  sessions      Session[]
   history       ExerciseHistory[]
-  preferences   UserPreference[]
+  sessions      Session[]
   todo          ToDo[]
+  preferences   UserPreference[]
 }
 
 model UserPreference {
-  id                 String         @id @default(cuid())
   userId             String
   selectedComponents SelectedEnum[] @default([])
   leaderboard        Boolean        @default(false)
   createdAt          DateTime       @default(now())
+  id                 String         @id @default(cuid())
   user               User           @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model ExerciseHistory {
-  historyId String @id @default(cuid())
-
-  visitedAt   DateTime
-  completedAt DateTime?
-
-  userId String
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-
+  historyId          String           @id @default(cuid())
+  visitedAt          DateTime
+  completedAt        DateTime?
+  userId             String
   activityResourceId String
   ActivityResource   ActivityResource @relation(fields: [activityResourceId], references: [id], onDelete: Cascade)
+  user               User             @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, activityResourceId], name: "userExerciseHistoryOnActivityResource")
 }
 
 model ToDo {
-  todoId String @id @default(cuid())
-
+  todoId      String    @id @default(cuid())
   dueDate     DateTime
   completed   Boolean
   name        String
+  userId      String
   completedAt DateTime?
   createdAt   DateTime  @default(now())
-
-  userId String
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model VerificationToken {
@@ -123,9 +118,9 @@ model Module {
   order            Int
   id               String             @id @default(cuid())
   courseId         String
+  description      String
   ActivityResource ActivityResource[]
   relation         Course             @relation(fields: [courseId], references: [id], onDelete: Cascade)
-  description      String
 }
 
 enum type {
@@ -136,8 +131,8 @@ enum type {
 
 enum SelectedEnum {
   HISTORYGRAPH
-  STATS
   LEADERBOARD
   EXERCISEHISTORY
   TODO
+  STATS
 }

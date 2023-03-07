@@ -15,12 +15,18 @@ const CourseStatus2 = () => {
   const [clickedIndex, setClickedIndex] = useState<number>();
 
   const {
-    data: learnerAnalytics,
+    data: progress,
     isSuccess,
     isLoading,
-  } = api.learnerActivityRouter.getLearnerActivity.useQuery();
+  } = api.learnerActivityRouter.getProgress.useQuery();
 
-  if (!isSuccess || isLoading) {
+  const {
+    data: learnerAnalytics,
+    isSuccess: activitySuccess,
+    isError: activityError,
+  } = api.learnerActivityRouter.getActivityAnalytics.useQuery();
+
+  if (!isSuccess || isLoading || activityError || !activitySuccess) {
     return (
       <div className="mx-auto w-full rounded-md p-4">
         <div className="flex animate-pulse space-x-4">
@@ -36,180 +42,118 @@ const CourseStatus2 = () => {
     );
   }
 
-  const activities = learnerAnalytics.activityAnalytics;
-
-  const ActivityProgressWithType = (
-    type: string,
-    module: string
-  ): { success: number; total: number; asPercentage: number } => {
-    if (type === "challenges") {
-      const success = activities.challenges
-        .filter((act) => act.relatedTopic === module)
-        .filter((act) => act.successRate > 0).length;
-
-      const total = activities.challenges.filter(
-        (act) => act.relatedTopic === module
-      ).length;
-      return {
-        success: success,
-        total: total,
-        asPercentage: (success / total) * 100,
-      };
-    }
-
-    if (type === "examples") {
-      const success = activities.examples
-        .filter((act) => act.relatedTopic === module)
-        .filter((act) => act.attempts > 0).length;
-
-      const total = activities.examples.filter(
-        (act) => act.relatedTopic === module
-      ).length;
-
-      return {
-        success: success,
-        total: total,
-        asPercentage: (success / total) * 100,
-      };
-    }
-
-    if (type === "coding") {
-      const success = activities.coding
-        .filter((act) => act.relatedTopic === module)
-        .filter((act) => act.successRate > 0).length;
-
-      const total = activities.coding.filter(
-        (act) => act.relatedTopic === module
-      ).length;
-      return {
-        success: success,
-        total: total,
-        asPercentage: (success / total) * 100,
-      };
-    }
-
-    return { success: 0, total: 0, asPercentage: 0 };
-  };
-
-  const lengthOfArray = learnerAnalytics?.moduleAnalytics.length;
+  const lengthOfArray = progress?.length;
 
   return (
     <div className="text-color grid grid-cols-2 gap-x-4">
       <div className="col-start-1 grid auto-rows-max gap-y-7">
-        {learnerAnalytics?.moduleAnalytics
-          .slice(0, lengthOfArray / 2)
-          .map((module, index) => {
-            return (
-              <div key={module.name}>
-                <div
-                  onClick={() =>
-                    clickedIndex == index
-                      ? setClickedIndex(-1)
-                      : setClickedIndex(index)
-                  }
-                  className="course-card relative -mb-4 h-16 w-full cursor-pointer items-center rounded-xl"
-                >
-                  <p className="pl-4 pt-2 font-semibold uppercase">
-                    {module.name}
-                  </p>
-                  <div className="mt-2 flex flex-row items-center font-semibold">
-                    <div className="fill-color-light mx-4 h-2 w-1/2 rounded">
-                      <div
-                        className={`green-color h-2 rounded`}
-                        style={{ width: module.overallProgress * 100 + "%" }}
-                      ></div>
-                    </div>
-                    <div className="text-xs">
-                      {Math.ceil(module.overallProgress * 100)} %
-                    </div>
+        {progress.slice(0, lengthOfArray / 2).map((module, index) => {
+          return (
+            <div key={module.moduleName}>
+              <div
+                onClick={() =>
+                  clickedIndex == index
+                    ? setClickedIndex(-1)
+                    : setClickedIndex(index)
+                }
+                className="course-card relative -mb-4 h-16 w-full cursor-pointer items-center rounded-xl"
+              >
+                <p className="pl-4 pt-2 font-semibold uppercase">
+                  {module.moduleName}
+                </p>
+                <div className="mt-2 flex flex-row items-center font-semibold">
+                  <div className="fill-color-light mx-4 h-2 w-1/2 rounded">
+                    <div
+                      className={`green-color h-2 rounded`}
+                      style={{ width: module.overallProgress * 100 + "%" }}
+                    ></div>
                   </div>
-                  {clickedIndex == index ? (
-                    <ChevronDownIcon className="absolute right-4 top-4 h-6 w-6" />
-                  ) : (
-                    <ChevronRightIcon className="absolute right-4 top-5 h-6 w-6" />
-                  )}
+                  <div className="text-xs">
+                    {Math.ceil(module.overallProgress * 100)} %
+                  </div>
                 </div>
-                {clickedIndex == index && (
-                  <div className="fill-color-light rounded-xl pl-4">
-                    <div className="grid grid-cols-3 pt-8 pb-4  text-sm font-semibold uppercase">
-                      {Object.keys(learnerAnalytics.activityAnalytics).map(
-                        (activityType, index) => (
-                          <Link
-                            key={activityType}
-                            href={{
-                              pathname: `Java/${module.name}`,
-                              query: {
-                                type: activityType,
-                              },
-                            }}
-                          >
-                            <div
-                              className={`col-start-${
-                                index + 1
-                              } flex cursor-pointer flex-row items-baseline gap-3`}
-                            >
-                              {activityType}
-                              <div
-                                className={classNames(
-                                  ActivityProgressWithType(
+                {clickedIndex == index ? (
+                  <ChevronDownIcon className="absolute right-4 top-4 h-6 w-6" />
+                ) : (
+                  <ChevronRightIcon className="absolute right-4 top-5 h-6 w-6" />
+                )}
+              </div>
+              {clickedIndex == index && (
+                <div className="fill-color-light rounded-xl pl-4">
+                  <div className="grid grid-cols-3 pt-8 pb-4  text-sm font-semibold uppercase">
+                    {learnerAnalytics.map((act, index) => (
+                      <Link
+                        key={act.activityId}
+                        href={{
+                          pathname: `Java/${act.type}`,
+                          query: {
+                            type: act.type,
+                          },
+                        }}
+                      >
+                        <div
+                          className={`col-start-${
+                            index + 1
+                          } flex cursor-pointer flex-row items-baseline gap-3`}
+                        >
+                          {act.type}
+                          <div
+                            className={classNames(
+                              progress.filter().success /
+                                ActivityProgressWithType(
+                                  activityType,
+                                  module.name
+                                ).total ===
+                                1
+                                ? "green-color"
+                                : ActivityProgressWithType(
                                     activityType,
                                     module.name
                                   ).success /
                                     ActivityProgressWithType(
                                       activityType,
                                       module.name
-                                    ).total ===
-                                    1
-                                    ? "green-color"
-                                    : ActivityProgressWithType(
-                                        activityType,
-                                        module.name
-                                      ).success /
-                                        ActivityProgressWithType(
-                                          activityType,
-                                          module.name
-                                        ).total >
-                                      0
-                                    ? "bg-[#fecd66] text-gray-700"
-                                    : "background-color",
-                                  "flex h-6 w-10 items-center rounded"
-                                )}
-                              >
-                                <p className="mx-auto">
-                                  {
-                                    ActivityProgressWithType(
-                                      activityType,
-                                      module.name
-                                    ).success
-                                  }
-                                  /
-                                  {
-                                    ActivityProgressWithType(
-                                      activityType,
-                                      module.name
-                                    ).total
-                                  }
-                                </p>
-                              </div>
-                            </div>
-                          </Link>
-                        )
-                      )}
-                    </div>
-                    <p className="pb-4 text-sm">{module.description}</p>
-                    <Link href={`Java/${module.name}`}>
-                      <div className="text-md flex cursor-pointer flex-row items-end pb-4 font-semibold uppercase ">
-                        Show all{" "}
-                        <p className="mx-1 text-[#988efe]">{module.name}</p>{" "}
-                        exercises{" "}
-                        <ArrowTopRightOnSquareIcon className="ml-2 h-5 w-5" />
-                      </div>
-                    </Link>
+                                    ).total >
+                                  0
+                                ? "bg-[#fecd66] text-gray-700"
+                                : "background-color",
+                              "flex h-6 w-10 items-center rounded"
+                            )}
+                          >
+                            <p className="mx-auto">
+                              {
+                                ActivityProgressWithType(
+                                  activityType,
+                                  module.name
+                                ).success
+                              }
+                              /
+                              {
+                                ActivityProgressWithType(
+                                  activityType,
+                                  module.name
+                                ).total
+                              }
+                            </p>
+                          </div>
+                        </div>
+                      </Link>
+                    ))}
                   </div>
-                )}
-              </div>
-            );
-          })}
+                  <p className="pb-4 text-sm">{module.description}</p>
+                  <Link href={`Java/${module.name}`}>
+                    <div className="text-md flex cursor-pointer flex-row items-end pb-4 font-semibold uppercase ">
+                      Show all{" "}
+                      <p className="mx-1 text-[#988efe]">{module.name}</p>{" "}
+                      exercises{" "}
+                      <ArrowTopRightOnSquareIcon className="ml-2 h-5 w-5" />
+                    </div>
+                  </Link>
+                </div>
+              )}
+            </div>
+          );
+        })}
       </div>
       <div className="col-start-2 grid auto-rows-max gap-y-7">
         {learnerAnalytics?.moduleAnalytics

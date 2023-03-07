@@ -3,6 +3,7 @@ import CourseStatus2 from "../../components/CourseStatus2";
 import DonutChart from "../../components/DonutChart";
 import { api } from "../../utils/api";
 import Breadcrumbs from "../../components/Breadcrumbs";
+import { ModuleAnalytics } from "../../server/schema/LearnerActivitySchema";
 
 const Courses = () => {
   const {
@@ -31,8 +32,8 @@ const Courses = () => {
 
   const overallProgress = () => {
     return learnerAnalytics.moduleAnalytics
-      .map((e) => e.overallProgress)
-      .reduce((acc, val) => {
+      .map((e: ModuleAnalytics) => e.overallProgress)
+      .reduce((acc: number, val: number) => {
         return acc + (val / learnerAnalytics.moduleAnalytics.length) * 100;
       }, 0);
   };
