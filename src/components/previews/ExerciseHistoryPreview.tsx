@@ -21,8 +21,8 @@ const ExerciseHistoryPreview = () => {
       ActivityResource: {
         id: "mock",
         moduleId: "mock",
-        name: "Java",
-        type: "CHALLENGE",
+        name: "Calculate BMI",
+        type: "CODING",
         url: "https://www.w3schools.com/java/",
       },
     },
@@ -36,7 +36,7 @@ const ExerciseHistoryPreview = () => {
       ActivityResource: {
         id: "mock",
         moduleId: "mock",
-        name: "Java",
+        name: "Iterate over an array",
         type: "CHALLENGE",
         url: "https://www.w3schools.com/java/",
       },
@@ -51,8 +51,8 @@ const ExerciseHistoryPreview = () => {
       ActivityResource: {
         id: "mock",
         moduleId: "mock",
-        name: "Java",
-        type: "CHALLENGE",
+        name: "Concate two strings",
+        type: "EXAMPLE",
         url: "https://www.w3schools.com/java/",
       },
     },

@@ -233,8 +233,9 @@ const UIOnboarding = () => {
                   </h5>
 
                   <p className="col-start-1 text-sm text-gray-700 dark:text-gray-400">
-                    This component shows you some stats about the work you have
-                    put in the previous week compared to the week before.
+                    This component shows number of completed tasks and number of
+                    average attempts you have done in the previous week compared
+                    to the week before.
                   </p>
                   <div className="mb-12 scale-90">
                     <StatsPreview />
@@ -256,10 +257,10 @@ const UIOnboarding = () => {
                   </h5>
 
                   <p className="col-start-1 text-sm text-gray-700 dark:text-gray-400">
-                    This component shows you how much you work per day reprented
-                    as a graph.
+                    This component shows how many tasks completed per day
+                    represented as a graph.
                   </p>
-                  <div className="scale-90">
+                  <div>
                     <HistoryGraphPreview />
                   </div>
                   <div className="absolute bottom-2 my-6 ml-4 flex items-center gap-2">
@@ -305,7 +306,7 @@ const UIOnboarding = () => {
 
                   <p className="col-start-1 text-sm text-gray-700 dark:text-gray-400">
                     This component is more detailed than Activity Graph. It
-                    shows your exercise activty per day, as a list.
+                    shows your completed tasks per day, as a activity log.
                   </p>
                   <div className="mb-12 scale-90">
                     <ExerciseHistoryPreview />

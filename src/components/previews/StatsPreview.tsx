@@ -71,22 +71,7 @@ const StatsPreview = () => {
         <p className="text-color-light text-sm font-semibold uppercase ">
           Last 7 days compared to the 7 days before
         </p>
-        <div className="course-card mt-2 grid grid-cols-3 divide-x rounded px-2 py-4 dark:divide-gray-400">
-          <div className="grid grid-cols-2 justify-items-stretch">
-            <p className="col-start-1 row-start-1  text-sm font-semibold">
-              Examples
-            </p>
-            <div className="col-start-1 row-start-2 flex flex-row text-xs">
-              <p className="text-blue-color mr-1 font-semibold">2</p>{" "}
-              <p className="text-color-light "> from 1</p>
-            </div>
-            <div className="col-start-2 row-span-2 mr-2 flex items-center justify-self-end">
-              <div className="w-15 flex flex-row items-center rounded bg-[#0de890] text-white">
-                <ArrowTrendingDownIcon className="mx-1 h-4 w-4" />
-                <p className="text-sm font-semibold">50%</p>
-              </div>
-            </div>
-          </div>
+        <div className="course-card mt-2 grid grid-cols-2 divide-x rounded px-2 py-4 dark:divide-gray-400">
           <div className="grid grid-cols-2 justify-items-stretch pl-2">
             <p className="col-start-1 row-start-1 text-sm font-semibold">
               Challenges
