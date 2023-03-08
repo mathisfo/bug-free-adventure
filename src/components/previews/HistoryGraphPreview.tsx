@@ -52,7 +52,7 @@ const HistoryGraphPreview = () => {
       completedAt: new Date("2023-03-02"),
       visitedAt: new Date("2023-03-02"),
       userId: "mock",
-      attempts: 3,
+      attempts: 2,
       activityResourceId: "mock",
       ActivityResource: {
         id: "mock",
