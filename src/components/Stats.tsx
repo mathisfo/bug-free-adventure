@@ -94,11 +94,17 @@ const Stats = () => {
       return 0;
     }
 
-    if (number7DaysBefore === 0) {
+    if (
+      number7DaysBefore === 0 ||
+      (number7DaysBefore === 1 && numberLast7Days !== 1)
+    ) {
       return 100;
     }
 
-    if (numberLast7Days === 0) {
+    if (
+      numberLast7Days === 0 ||
+      (numberLast7Days === 1 && number7DaysBefore !== 1)
+    ) {
       return -100;
     }
 
