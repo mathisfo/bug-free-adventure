@@ -90,17 +90,21 @@ const Stats = () => {
   };
 
   function getProgress(numberLast7Days: number, number7DaysBefore: number) {
-    return numberLast7Days === 0 && number7DaysBefore === 0
-      ? 0
-      : numberLast7Days === 0 && number7DaysBefore > 0
-      ? 100
-      : number7DaysBefore === 0
-      ? 100
-      : Math.abs(
-          Math.round(
-            ((numberLast7Days - number7DaysBefore) / number7DaysBefore) * 100
-          )
-        );
+    if (numberLast7Days === 0 && number7DaysBefore === 0) {
+      return 0;
+    }
+
+    if (number7DaysBefore === 0) {
+      return 100;
+    }
+
+    if (numberLast7Days === 0) {
+      return -100;
+    }
+
+    return Math.round(
+      ((number7DaysBefore - numberLast7Days) / numberLast7Days) * 100
+    );
   }
 
   const StatsWithType = (
@@ -116,7 +120,7 @@ const Stats = () => {
     const done7DaysBefore = exercisesDone7DaysBefore.filter(
       (e) => e.ActivityResource.type == type
     ).length;
-    const changeInPercentage = getProgress(doneLast7Days, done7DaysBefore);
+    const changeInPercentage = getProgress(done7DaysBefore, doneLast7Days);
 
     return {
       doneLast7Days: doneLast7Days,
@@ -173,7 +177,7 @@ const Stats = () => {
                   <ArrowTrendingDownIcon className="mx-1 h-4 w-4 text-white " />
                 )}
                 <p className="text-sm font-semibold">
-                  {StatsWithType(type.EXAMPLE).changeInPercentage}%
+                  {Math.abs(StatsWithType(type.EXAMPLE).changeInPercentage)}%
                 </p>
               </div>
             </div>
@@ -187,7 +191,7 @@ const Stats = () => {
                 {StatsWithType(type.CHALLENGE).doneLast7Days}
               </p>{" "}
               <p className="text-color-light ">
-                from {StatsWithType(type.CHALLENGE).done7DaysBefore}
+                from {Math.abs(StatsWithType(type.CHALLENGE).done7DaysBefore)}
               </p>
             </div>
             <div className="col-start-2 row-span-2 mr-2 flex items-center justify-self-end">
@@ -247,7 +251,7 @@ const Stats = () => {
                   <ArrowTrendingDownIcon className="mx-1 h-4 w-4 text-white " />
                 )}
                 <p className="text-sm font-semibold">
-                  {StatsWithType(type.CODING).changeInPercentage}%
+                  {Math.abs(StatsWithType(type.CODING).changeInPercentage)}%
                 </p>
               </div>
             </div>
@@ -277,25 +281,23 @@ const Stats = () => {
             <div className="col-start-2 row-span-2 mr-2 flex items-center justify-self-end">
               <div
                 className={classNames(
-                  exerciseAttempts(type.CHALLENGE).changeInPercentage > 0
+                  exerciseAttempts(type.CHALLENGE).changeInPercentage >= 0
                     ? "bg-[#0de890] text-gray-700"
                     : "bg-[#DE5B7E] text-white",
-                  "flex flex-row items-center rounded",
-                  exerciseAttempts(type.CHALLENGE).changeInPercentage === 100
-                    ? "w-15"
-                    : "w-14"
+                  "flex flex-row items-center rounded"
                 )}
               >
                 {" "}
-                {exerciseAttempts(type.CHALLENGE).changeInPercentage > 0 &&
-                exerciseAttempts(type.CHALLENGE).attemptsLast7Days >
-                  exerciseAttempts(type.CHALLENGE).attempts7DaysBefore ? (
-                  <ArrowTrendingUpIcon className="mx-1 h-4 w-4 text-gray-700 " />
+                {exerciseAttempts(type.CHALLENGE).changeInPercentage < 0 ? (
+                  <ArrowTrendingUpIcon className="mx-1 h-4 w-4 text-white " />
                 ) : (
-                  <ArrowTrendingDownIcon className="mx-1 h-4 w-4 text-white " />
+                  <ArrowTrendingDownIcon className="mx-1 h-4 w-4 text-gray-700 " />
                 )}
                 <p className="text-sm font-semibold">
-                  {exerciseAttempts(type.CHALLENGE).changeInPercentage}%
+                  {Math.abs(
+                    exerciseAttempts(type.CHALLENGE).changeInPercentage
+                  )}
+                  %
                 </p>
               </div>
             </div>
@@ -315,24 +317,19 @@ const Stats = () => {
             <div className="col-start-2 row-span-2 mr-2 flex items-center justify-self-end">
               <div
                 className={classNames(
-                  exerciseAttempts(type.CODING).changeInPercentage > 0
+                  exerciseAttempts(type.CODING).changeInPercentage >= 0
                     ? "bg-[#0de890] text-gray-700"
                     : "bg-[#DE5B7E] text-white",
-                  "flex flex-row items-center rounded",
-                  exerciseAttempts(type.CODING).changeInPercentage === 100
-                    ? "w-15"
-                    : "w-14"
+                  "flex flex-row items-center rounded"
                 )}
               >
-                {exerciseAttempts(type.CODING).changeInPercentage > 0 &&
-                exerciseAttempts(type.CODING).attemptsLast7Days >
-                  exerciseAttempts(type.CODING).attempts7DaysBefore ? (
-                  <ArrowTrendingUpIcon className="mx-1 h-4 w-4 text-gray-700 " />
+                {exerciseAttempts(type.CODING).changeInPercentage < 0 ? (
+                  <ArrowTrendingUpIcon className="text-gray-white mx-1 h-4 w-4 " />
                 ) : (
-                  <ArrowTrendingDownIcon className="mx-1 h-4 w-4 text-white " />
+                  <ArrowTrendingDownIcon className="mx-1 h-4 w-4 text-gray-700 " />
                 )}
                 <p className="text-sm font-semibold">
-                  {exerciseAttempts(type.CODING).changeInPercentage}%
+                  {Math.abs(exerciseAttempts(type.CODING).changeInPercentage)}%
                 </p>
               </div>
             </div>
@@ -350,26 +347,30 @@ const Stats = () => {
       </div>
       <div className="my-4 flex flex-row justify-center font-semibold uppercase">
         <p>You did</p>
-        <div
-          className={classNames(
-            exercisesDone7DaysBefore < exercisesDoneLast7Days
-              ? "bg-[#0de890] text-gray-700"
-              : "bg-[#DE5B7E] text-white",
-            "mx-2 w-12 rounded "
-          )}
-        >
-          <p className="text-center">
-            {getProgress(
-              exercisesDoneLast7Days.length,
-              exercisesDone7DaysBefore.length
+        {!(
+          exercisesDoneLast7Days.length === exercisesDone7DaysBefore.length
+        ) && (
+          <div
+            className={classNames(
+              exercisesDone7DaysBefore < exercisesDoneLast7Days
+                ? "bg-[#0de890] text-gray-700"
+                : "bg-[#DE5B7E] text-white",
+              "mx-2 w-12 rounded "
             )}
-            %
-          </p>
-        </div>
+          >
+            <p className="text-center">
+              {Math.abs(
+                exercisesDoneLast7Days.length - exercisesDone7DaysBefore.length
+              )}
+            </p>
+          </div>
+        )}
         <p>
-          {exercisesDone7DaysBefore > exercisesDoneLast7Days
-            ? "less than last week 📉"
-            : "more than last week 📈"}
+          {exercisesDone7DaysBefore === exercisesDoneLast7Days
+            ? "the same amount of exercises as last week 📈"
+            : exercisesDone7DaysBefore < exercisesDoneLast7Days
+            ? " exercises more than last week 📈"
+            : " exercises less than last week 📉"}
         </p>
       </div>
     </div>
