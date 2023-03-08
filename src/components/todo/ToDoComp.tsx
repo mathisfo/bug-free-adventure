@@ -207,7 +207,7 @@ const ToDoComp = () => {
       </div>
       <div className="tems-center mx-8 mb-8 mt-2 grid grid-cols-2 grid-rows-1">
         <h1 className="col-start-1 mx-auto flex items-center text-4xl font-semibold">
-          TO <p className="text-blue-color">DO</p>S
+          Exercise <p className="text-blue-color">Planner</p>
         </h1>
       </div>
 
