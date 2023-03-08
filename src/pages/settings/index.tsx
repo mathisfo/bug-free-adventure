@@ -86,7 +86,7 @@ const Settings: NextPage = () => {
         <div className="mt-5 grid select-none grid-cols-2 gap-x-8 gap-y-4 ">
           <div
             className={classNames(
-              checkboxIndexes?.includes("TODO")
+              checkboxIndexes?.includes(SelectedEnum.TODO)
                 ? "border-[#0de890] dark:border-[#0de890]"
                 : "border-zinc-400 dark:border-zinc-600",
               " course-card relative h-auto grid-cols-1 rounded-2xl border-2 border  px-6 pt-6"
@@ -106,13 +106,18 @@ const Settings: NextPage = () => {
             <div className="absolute bottom-1 my-6 ml-4 flex items-center gap-2">
               <Checkbox
                 onClick={() =>
-                  checkboxIndexes?.includes("TODO")
+                  checkboxIndexes?.includes(SelectedEnum.TODO)
                     ? setCheckboxIndexes(
-                        checkboxIndexes.filter((e) => e !== "TODO")
+                        checkboxIndexes.filter((e) => e !== SelectedEnum.TODO)
                       )
-                    : setCheckboxIndexes([...checkboxIndexes, "TODO"])
+                    : setCheckboxIndexes([
+                        ...checkboxIndexes,
+                        SelectedEnum.TODO,
+                      ])
                 }
-                checked={checkboxIndexes?.includes("TODO") ? true : false}
+                checked={
+                  checkboxIndexes?.includes(SelectedEnum.TODO) ? true : false
+                }
                 {...register("newSelectedComponents")}
                 id="select"
                 value={SelectedEnum.TODO}
@@ -126,7 +131,7 @@ const Settings: NextPage = () => {
 
           <div
             className={classNames(
-              checkboxIndexes.includes("HISTORYGRAPH")
+              checkboxIndexes.includes(SelectedEnum.HISTORYGRAPH)
                 ? "border-[#0de890] dark:border-[#0de890]"
                 : "border-zinc-400 dark:border-zinc-600",
               " course-card relative h-auto grid-cols-1 rounded-2xl border-2 border  px-6 pt-6"
@@ -146,14 +151,21 @@ const Settings: NextPage = () => {
             <div className="absolute bottom-1 my-6 ml-4 flex items-center gap-2">
               <Checkbox
                 onClick={() =>
-                  checkboxIndexes?.includes("HISTORYGRAPH")
+                  checkboxIndexes?.includes(SelectedEnum.HISTORYGRAPH)
                     ? setCheckboxIndexes(
-                        checkboxIndexes.filter((e) => e !== "HISTORYGRAPH")
+                        checkboxIndexes.filter(
+                          (e) => e !== SelectedEnum.HISTORYGRAPH
+                        )
                       )
-                    : setCheckboxIndexes([...checkboxIndexes, "HISTORYGRAPH"])
+                    : setCheckboxIndexes([
+                        ...checkboxIndexes,
+                        SelectedEnum.HISTORYGRAPH,
+                      ])
                 }
                 checked={
-                  checkboxIndexes?.includes("HISTORYGRAPH") ? true : false
+                  checkboxIndexes?.includes(SelectedEnum.HISTORYGRAPH)
+                    ? true
+                    : false
                 }
                 {...register("newSelectedComponents")}
                 id="select"
@@ -167,7 +179,7 @@ const Settings: NextPage = () => {
           </div>
           <div
             className={classNames(
-              checkboxIndexes.includes("STATS")
+              checkboxIndexes.includes(SelectedEnum.STATS)
                 ? "border-[#0de890] dark:border-[#0de890]"
                 : "border-zinc-400 dark:border-zinc-600",
               " course-card relative h-auto grid-cols-1 rounded-2xl border-2 border  px-6 pt-6"
@@ -185,13 +197,18 @@ const Settings: NextPage = () => {
             <div className="absolute bottom-1 my-6 ml-4 flex items-center gap-2 ">
               <Checkbox
                 onClick={() =>
-                  checkboxIndexes?.includes("STATS")
+                  checkboxIndexes?.includes(SelectedEnum.STATS)
                     ? setCheckboxIndexes(
-                        checkboxIndexes.filter((e) => e !== "STATS")
+                        checkboxIndexes.filter((e) => e !== SelectedEnum.STATS)
                       )
-                    : setCheckboxIndexes([...checkboxIndexes, "STATS"])
+                    : setCheckboxIndexes([
+                        ...checkboxIndexes,
+                        SelectedEnum.STATS,
+                      ])
                 }
-                checked={checkboxIndexes?.includes("STATS") ? true : false}
+                checked={
+                  checkboxIndexes?.includes(SelectedEnum.STATS) ? true : false
+                }
                 {...register("newSelectedComponents")}
                 id="select"
                 value={SelectedEnum.STATS}
@@ -205,7 +222,7 @@ const Settings: NextPage = () => {
 
           <div
             className={classNames(
-              checkboxIndexes.includes("EXERCISEHISTORY")
+              checkboxIndexes.includes(SelectedEnum.EXERCISEHISTORY)
                 ? "border-[#0de890] dark:border-[#0de890]"
                 : "border-zinc-400 dark:border-zinc-600",
               " course-card relative h-auto grid-cols-1 rounded-2xl border-2 border  px-6 pt-6"
@@ -225,9 +242,11 @@ const Settings: NextPage = () => {
             <div className="absolute bottom-1 my-6 ml-4 flex items-center gap-2 ">
               <Checkbox
                 onClick={() =>
-                  checkboxIndexes?.includes("EXERCISEHISTORY")
+                  checkboxIndexes?.includes(SelectedEnum.EXERCISEHISTORY)
                     ? setCheckboxIndexes(
-                        checkboxIndexes.filter((e) => e !== "EXERCISEHISTORY")
+                        checkboxIndexes.filter(
+                          (e) => e !== SelectedEnum.EXERCISEHISTORY
+                        )
                       )
                     : setCheckboxIndexes([
                         ...checkboxIndexes,
@@ -235,7 +254,9 @@ const Settings: NextPage = () => {
                       ])
                 }
                 checked={
-                  checkboxIndexes?.includes("EXERCISEHISTORY") ? true : false
+                  checkboxIndexes?.includes(SelectedEnum.EXERCISEHISTORY)
+                    ? true
+                    : false
                 }
                 {...register("newSelectedComponents")}
                 id="select"
@@ -338,14 +359,14 @@ const Settings: NextPage = () => {
         </div>
         <div className="flex flex-row justify-end">
           <input
-            className=" rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-medium text-white hover:cursor-pointer hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            className="mt-8 rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-medium text-white hover:cursor-pointer hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             type="submit"
             value={
               mutation.isLoading
                 ? "Loading.."
                 : mutation.isSuccess
                 ? "Success!"
-                : "Submit"
+                : "Submit changes"
             }
           />
         </div>
