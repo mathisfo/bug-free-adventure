@@ -227,7 +227,7 @@ const UIOnboarding = () => {
               <div
                 className={`mt-5 grid w-full select-none grid-cols-2 gap-x-8 gap-y-4  overflow-auto hover:overscroll-contain`}
               >
-                <div className="course-card rounded-2xl border border-zinc-400 px-6 pt-6 dark:border-zinc-600">
+                <div className="course-card relative rounded-2xl border border-zinc-400 px-6 pt-6 dark:border-zinc-600">
                   <h5 className="mb-2 text-2xl font-bold tracking-tight">
                     Stats
                   </h5>
@@ -236,10 +236,10 @@ const UIOnboarding = () => {
                     This component shows you some stats about the work you have
                     put in the previous week compared to the week before.
                   </p>
-                  <div className="scale-90">
+                  <div className="mb-12 scale-90">
                     <StatsPreview />
                   </div>
-                  <div className="my-6 ml-4 flex items-center gap-2 ">
+                  <div className="absolute bottom-2 my-6 ml-4 flex items-center gap-2 ">
                     <Checkbox
                       {...register("selectedComponents")}
                       id="select"
@@ -250,7 +250,7 @@ const UIOnboarding = () => {
 
                   <div className="col-start-2 grid items-center "></div>
                 </div>
-                <div className="course-card rounded-2xl border border-zinc-400 px-6 pt-6 dark:border-zinc-600">
+                <div className="course-card relative rounded-2xl border border-zinc-400 px-6 pt-6 dark:border-zinc-600">
                   <h5 className="mb-2 text-2xl font-bold tracking-tight">
                     History Graph
                   </h5>
@@ -262,7 +262,7 @@ const UIOnboarding = () => {
                   <div className="scale-90">
                     <HistoryGraphPreview />
                   </div>
-                  <div className="my-6 ml-4 flex items-center gap-2 ">
+                  <div className="absolute bottom-2 my-6 ml-4 flex items-center gap-2">
                     <Checkbox
                       {...register("selectedComponents")}
                       id="select"
@@ -273,7 +273,7 @@ const UIOnboarding = () => {
 
                   <div className="col-start-2 grid items-center "></div>
                 </div>
-                <div className="course-card h-auto grid-cols-1 rounded-2xl border border-zinc-400 px-6 pt-6 dark:border-zinc-600">
+                <div className="course-card relative h-auto grid-cols-1 rounded-2xl border border-zinc-400 px-6 pt-6 dark:border-zinc-600">
                   <h5 className="mb-2 text-2xl font-bold tracking-tight">
                     Exercise Planner
                   </h5>
@@ -288,7 +288,7 @@ const UIOnboarding = () => {
                     </div>
                   </div>
 
-                  <div className="my-6 ml-4 flex items-center gap-2 ">
+                  <div className="absolute bottom-2 my-6 ml-4 flex items-center gap-2">
                     <Checkbox
                       {...register("selectedComponents")}
                       id="select"
@@ -298,7 +298,7 @@ const UIOnboarding = () => {
                     <label htmlFor="select">Select</label>
                   </div>
                 </div>
-                <div className="course-card grid-cols-1 gap-8 rounded-2xl border border-zinc-400 px-6 pt-6 dark:border-zinc-600">
+                <div className="course-card relative grid-cols-1 gap-8 rounded-2xl border border-zinc-400 px-6 pt-6 dark:border-zinc-600">
                   <h5 className="mb-2 text-2xl font-bold tracking-tight">
                     Activity History
                   </h5>
@@ -307,10 +307,10 @@ const UIOnboarding = () => {
                     This component is more detailed than Activity Graph. It
                     shows your exercise activty per day, as a list.
                   </p>
-                  <div className="scale-90">
+                  <div className="mb-12 scale-90">
                     <ExerciseHistoryPreview />
                   </div>
-                  <div className="my-6 ml-4 flex items-center gap-2 ">
+                  <div className="absolute bottom-2 my-6 ml-4 flex items-center gap-2">
                     <Checkbox
                       {...register("selectedComponents")}
                       id="select"
