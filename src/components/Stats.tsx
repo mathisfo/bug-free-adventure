@@ -35,9 +35,7 @@ const Stats = () => {
     data: history,
     isLoading: historyIsLoading,
     isSuccess: historyIsSuccess,
-  } = api.userRouter.getExerciseHistoryOnUser.useQuery({
-    userId: session.user.id,
-  });
+  } = api.userRouter.getExerciseHistoryOnUser.useQuery();
 
   if (historyIsLoading || !historyIsSuccess) {
     return (
@@ -89,10 +87,11 @@ const Stats = () => {
           e.completedAt > sevenDaysAgo &&
           e.completedAt < today
       )
-      .map((e) => e.attempts)
-      .reduce((a, b) => a! + b!, 0);
+      .map((e) => e.attempts);
 
-    return attempts ? attempts : 0;
+    const sum = attempts.reduce((a, b) => a! + b!, 0);
+
+    return Math.round(sum ? sum / attempts.length : 0);
   };
 
   const exercisesAttempts7DaysBefore = (type: type) => {
@@ -104,10 +103,10 @@ const Stats = () => {
           e.completedAt > fourteenDaysAgo &&
           e.completedAt < sevenDaysAgo
       )
-      .map((e) => e.attempts)
-      .reduce((a, b) => a! + b!, 0);
+      .map((e) => e.attempts);
+    const sum = attempts.reduce((a, b) => a! + b!, 0);
 
-    return attempts ? attempts : 0;
+    return Math.round(sum ? sum / attempts.length : 0);
   };
 
   const exerciseAttempts = (type: type) => {
@@ -276,29 +275,7 @@ const Stats = () => {
         <p className="text-color-light text-sm font-semibold uppercase ">
           Last 7 days compared to the 7 days before
         </p>
-        <div className="course-card mt-2 grid grid-cols-3 divide-x rounded px-2 py-4 dark:divide-gray-400">
-          <div className="grid grid-cols-2 justify-items-stretch">
-            <p className="col-start-1 row-start-1  text-sm font-semibold">
-              Examples
-            </p>
-            <div className="col-start-1 row-start-2 flex flex-row text-xs">
-              <p className="text-blue-color mr-1 font-semibold">
-                {exerciseAttempts(type.EXAMPLE).attemptsLast7Days}
-              </p>{" "}
-              <p className="text-color-light ">
-                {" "}
-                from {exerciseAttempts(type.EXAMPLE).attempts7DaysBefore}
-              </p>
-            </div>
-            <div className="col-start-2 row-span-2 mr-2 flex items-center justify-self-end">
-              <div className="w-15 flex flex-row items-center rounded bg-[#0de890] text-white">
-                <ArrowTrendingDownIcon className="mx-1 h-4 w-4" />
-                <p className="text-sm font-semibold">
-                  {exerciseAttempts(type.EXAMPLE).changeInPercentage}%
-                </p>
-              </div>
-            </div>
-          </div>
+        <div className="course-card mt-2 grid grid-cols-2 divide-x rounded px-2 py-4 dark:divide-gray-400">
           <div className="grid grid-cols-2 justify-items-stretch pl-2">
             <p className="col-start-1 row-start-1 text-sm font-semibold">
               Challenges
@@ -308,14 +285,14 @@ const Stats = () => {
                 {exerciseAttempts(type.CHALLENGE).attemptsLast7Days}
               </p>{" "}
               <p className="text-color-light ">
-                from {exerciseAttempts(type.EXAMPLE).attempts7DaysBefore}
+                from {exerciseAttempts(type.CHALLENGE).attempts7DaysBefore}
               </p>
             </div>
             <div className="col-start-2 row-span-2 mr-2 flex items-center justify-self-end">
               <div className="w-15 flex flex-row items-center rounded bg-[#0de890] text-white">
                 <ArrowTrendingDownIcon className="mx-1 h-4 w-4" />
                 <p className="text-sm font-semibold">
-                  {exerciseAttempts(type.EXAMPLE).changeInPercentage}%
+                  {exerciseAttempts(type.CHALLENGE).changeInPercentage}%
                 </p>
               </div>
             </div>
@@ -336,7 +313,7 @@ const Stats = () => {
               <div className="w-15 flex flex-row items-center rounded bg-[#DE5B7E] text-white">
                 <ArrowTrendingUpIcon className="mx-1 h-4 w-4" />
                 <p className="text-sm font-semibold">
-                  {exerciseAttempts(type.EXAMPLE).changeInPercentage}%
+                  {exerciseAttempts(type.CODING).changeInPercentage}%
                 </p>
               </div>
             </div>

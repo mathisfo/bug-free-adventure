@@ -125,23 +125,21 @@ export const userRouter = createTRPCRouter({
     return unfinishedActivity[0];
   }),
 
-  getExerciseHistoryOnUser: protectedProcedure
-    .input(z.object({ userId: z.string() }))
-    .query(async ({ ctx, input }) => {
-      const history = await ctx.prisma.exerciseHistory.findMany({
-        where: {
-          userId: input.userId,
-          NOT: {
-            completedAt: null,
-          },
+  getExerciseHistoryOnUser: protectedProcedure.query(async ({ ctx }) => {
+    const history = await ctx.prisma.exerciseHistory.findMany({
+      where: {
+        userId: ctx.session.user.id,
+        NOT: {
+          completedAt: null,
         },
-        include: {
-          ActivityResource: true,
-        },
-      });
+      },
+      include: {
+        ActivityResource: true,
+      },
+    });
 
-      return history;
-    }),
+    return history;
+  }),
   addExerciseHistoryToUser: protectedProcedure
     .input(z.object({ activityId: z.string() }))
     .mutation(async ({ ctx, input }) => {

@@ -26,9 +26,7 @@ const Profile = () => {
     data: history,
     isLoading,
     isSuccess,
-  } = api.userRouter.getExerciseHistoryOnUser.useQuery({
-    userId: session.user.id,
-  });
+  } = api.userRouter.getExerciseHistoryOnUser.useQuery();
 
   if (isLoading || !isSuccess) {
     return (
