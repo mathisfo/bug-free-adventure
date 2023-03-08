@@ -40,7 +40,7 @@ model Session {
 
 model User {
   id            String            @id @default(cuid())
-  name          String?
+  name          String
   email         String?           @unique
   emailVerified DateTime?
   image         String?
@@ -74,6 +74,7 @@ model ExerciseHistory {
 
   userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  attempts Int?
 
   activityResourceId String
   ActivityResource   ActivityResource @relation(fields: [activityResourceId], references: [id], onDelete: Cascade)

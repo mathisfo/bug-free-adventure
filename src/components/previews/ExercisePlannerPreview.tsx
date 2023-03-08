@@ -95,9 +95,9 @@ const ExercisePlannerPreview = () => {
           Add your first to do by clicking the plus sign!{" "}
         </div>
       )}
-      <form className="mb-2 flex grid grid-cols-10 grid-rows-1 flex-row">
+      <div className="mb-2 flex grid grid-cols-10 grid-rows-1 flex-row">
         <PlusIcon className="col-start-1 col-end-2 h-7 w-7 self-center" />
-      </form>
+      </div>
 
       <div className="text-color-light absolute bottom-4 right-8 flex flex-row gap-2 text-sm">
         <EyeSlashIcon className="h-4 w-4 place-self-center" />

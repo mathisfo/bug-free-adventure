@@ -24,7 +24,6 @@ import ExercisePlannerPreview from "../previews/ExercisePlannerPreview";
 import HistoryGraphPreview from "../previews/HistoryGraphPreview";
 import ExerciseHistoryPreview from "../previews/ExerciseHistoryPreview";
 import StatsPreview from "../previews/StatsPreview";
-import { CheckIcon } from "@heroicons/react/24/solid";
 
 const UIOnboarding = () => {
   const {
