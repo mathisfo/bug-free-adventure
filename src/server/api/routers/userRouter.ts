@@ -1,10 +1,13 @@
+import { SelectedEnum } from "@prisma/client";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 import {
   onboardingSchema,
+  selectedComps,
   selectedCompsEnum,
   toDoSchema,
+  userPreferenceSchema,
 } from "../../schema/UserSchema";
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import { learnerActivity } from "./learnerActivityRouter";
@@ -80,12 +83,25 @@ export const userRouter = createTRPCRouter({
   getUserPreferences: protectedProcedure.query(async ({ ctx }) => {
     const preferences = await ctx.prisma.userPreference.findMany({
       where: { userId: ctx.session.user.id },
+      include: { user: true },
       orderBy: { createdAt: "desc" },
       take: 1,
     });
     return preferences[0]!;
   }),
 
+  updateUserPreferences: protectedProcedure
+    .input(userPreferenceSchema)
+    .mutation(async ({ ctx, input }) => {
+      return await ctx.prisma.userPreference.create({
+        data: {
+          userId: ctx.session.user.id,
+          selectedComponents: input.newSelectedComponents,
+          createdAt: new Date(),
+          leaderboard: input.leaderboard,
+        },
+      });
+    }),
   getLastUnfinishedActivity: protectedProcedure.query(async ({ ctx }) => {
     const unfinishedActivity = await ctx.prisma.exerciseHistory.findMany({
       where: {

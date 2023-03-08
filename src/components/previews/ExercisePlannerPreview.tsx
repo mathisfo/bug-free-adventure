@@ -28,7 +28,7 @@ const ExercisePlannerPreview = () => {
       todoId: "ghi789",
       dueDate: new Date("2022-03-03"),
       completed: false,
-      name: "Walk the dog",
+      name: "Assignment 2",
       completedAt: null,
       createdAt: new Date("2022-02-28"),
       userId: "user789",
@@ -95,11 +95,13 @@ const ExercisePlannerPreview = () => {
           Add your first to do by clicking the plus sign!{" "}
         </div>
       )}
-      <form className="mb-2 flex grid grid-cols-10 grid-rows-1 flex-row">
+      <div className="mb-2 flex grid grid-cols-10 grid-rows-1 flex-row">
         <PlusIcon className="col-start-1 col-end-2 h-7 w-7 self-center" />
-      </form>
+      </div>
 
-      <div className="text-color-light absolute bottom-4 right-8 flex flex-row gap-2 text-sm">
+      <div className="text-color-light absolute bottom-4 right-8 flex cursor-pointer flex-row gap-2 text-sm">
+        <p>Hide completed tasks</p>
+
         <EyeSlashIcon className="h-4 w-4 place-self-center" />
       </div>
     </div>
