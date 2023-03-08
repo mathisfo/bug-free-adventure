@@ -6,12 +6,12 @@ import Breadcrumbs from "../../components/Breadcrumbs";
 
 const Courses = () => {
   const {
-    data: learnerAnalytics,
-    isSuccess,
-    isLoading,
-  } = api.learnerActivityRouter.getLearnerActivity.useQuery();
+    data: history,
+    isLoading: historyLoading,
+    isSuccess: historySuccess,
+  } = api.userRouter.getExerciseHistoryOnUser.useQuery();
 
-  if (!isSuccess || isLoading) {
+  if (!historySuccess || historyLoading) {
     return (
       <div className="mx-auto mt-32 w-4/5 rounded-md p-4">
         <div className="flex animate-pulse space-x-4">
@@ -27,16 +27,6 @@ const Courses = () => {
     );
   }
 
-  const activities = learnerAnalytics.activityAnalytics;
-
-  const overallProgress = () => {
-    return learnerAnalytics.moduleAnalytics
-      .map((e) => e.overallProgress)
-      .reduce((acc, val) => {
-        return acc + (val / learnerAnalytics.moduleAnalytics.length) * 100;
-      }, 0);
-  };
-
   return (
     <div>
       <Breadcrumbs currentPage={""} currentType={""} />
@@ -51,8 +41,8 @@ const Courses = () => {
               size="176px"
               bg="#d1d5db"
               fillColor="#988efe"
-              progress={overallProgress()}
-            ></DonutChart>
+              progress={history.length / 184}
+            />
           </div>
         </div>
         <CourseStatus2 />

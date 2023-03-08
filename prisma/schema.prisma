@@ -71,10 +71,10 @@ model ExerciseHistory {
 
   visitedAt   DateTime
   completedAt DateTime?
+  attempts    Int?
 
   userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  attempts Int?
 
   activityResourceId String
   ActivityResource   ActivityResource @relation(fields: [activityResourceId], references: [id], onDelete: Cascade)
