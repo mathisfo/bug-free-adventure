@@ -47,7 +47,9 @@ const Profile = () => {
     );
   }
 
-  const datesDoneExercises = history.map((e) => e.completedAt);
+  const datesDoneExercises = {
+    dates: history.map((e) => e.completedAt) as Date[],
+  };
 
   const longestStreak = summary(datesDoneExercises).longestStreak;
 
