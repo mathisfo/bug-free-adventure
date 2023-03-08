@@ -81,9 +81,9 @@ const UIOnboarding = () => {
         </div>
         <form onSubmit={handleSubmit(onSubmit)} className="h-full">
           {page == "welcome" ? (
-            <div className="pl-12 pt-12 ">
-              <h1 className="text-4xl ">Welcome to Progresso! 👋🏻</h1>
-              <h2 className="text-md pt-2">
+            <div className="pl-12 pt-16 ">
+              <h1 className="text-4xl font-medium">Welcome to Progresso! 👋🏻</h1>
+              <h2 className="pt-2 text-lg  font-medium">
                 We will now take you through a few steps to set up your
                 dashboard to your needs.
               </h2>
@@ -212,7 +212,7 @@ const UIOnboarding = () => {
             </div>
           ) : page == "components" ? (
             <div className="pl-12 pt-12 pr-12 pb-20">
-              <h2 className="text-lg font-medium leading-6">
+              <h2 className="text-xl font-medium leading-6">
                 Second, we want to know which components you want to display in
                 your dashboard.
               </h2>
@@ -332,7 +332,7 @@ const UIOnboarding = () => {
             </div>
           ) : page == "leaderboard" ? (
             <div className="pl-12 pt-12 pr-12">
-              <h2 className="text-lg font-medium leading-6">
+              <h2 className="text-xl font-medium leading-6">
                 Lastly, we want to know whether you are the competitive type.
               </h2>
               <p className="text-md mt-1 text-gray-400">
@@ -434,6 +434,10 @@ const UIOnboarding = () => {
                     </div>
                   </div>
                 </div>
+                <p className="text-md mt-8 font-medium text-gray-400">
+                  ☝🏻 Remember, you can always change your chosen components
+                  after submitting. You can do this in the Settings tab.{" "}
+                </p>
               </div>
 
               <div className="absolute left-1/2 bottom-16  flex -translate-x-1/2 transform flex-row gap-16">
