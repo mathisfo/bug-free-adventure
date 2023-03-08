@@ -32,7 +32,7 @@ const ExerciseHistoryPreview = () => {
       visitedAt: new Date("2023-03-02"),
       userId: "mock",
       activityResourceId: "mock",
-      attempts: 2
+      attempts: 2,
       ActivityResource: {
         id: "mock",
         moduleId: "mock",
@@ -46,7 +46,7 @@ const ExerciseHistoryPreview = () => {
       completedAt: new Date("2023-03-02"),
       visitedAt: new Date("2023-03-02"),
       userId: "mock",
-      attempts: 1
+      attempts: 1,
       activityResourceId: "mock",
       ActivityResource: {
         id: "mock",
