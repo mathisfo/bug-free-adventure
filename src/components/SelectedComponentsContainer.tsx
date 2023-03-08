@@ -42,7 +42,7 @@ const SelectedComponentsContainer = (props: ISelectedComponentsProps) => {
     TODO: (
       <div>
         <div className="text-color mb-6  text-xl font-semibold uppercase opacity-75">
-          todo&apos;s
+          Exercise Planner
         </div>
         <ToDoComp />
       </div>

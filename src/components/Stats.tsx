@@ -5,6 +5,7 @@ import {
 import { type } from "@prisma/client";
 import { useSession } from "next-auth/react";
 import { api } from "../utils/api";
+import { summary } from "date-streaks";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -150,6 +151,12 @@ const Stats = () => {
       changeInPercentage: changeInPercentage,
     };
   };
+
+  const datesDoneExercises = {
+    dates: history.map((e) => e.completedAt) as Date[],
+  };
+
+  const currentStreak = summary(datesDoneExercises).currentStreak;
 
   return (
     <div className="text-color  cursor-pointer rounded-lg">
@@ -323,7 +330,9 @@ const Stats = () => {
       <div className="my-4 flex flex-row justify-center text-sm uppercase">
         <div className="flex flex-row justify-self-center">
           <p>Current streak</p>
-          <p className="ml-2 font-semibold uppercase">2 days 🔥</p>
+          <p className="ml-2 font-semibold uppercase">
+            {currentStreak} {currentStreak == 1 ? "day" : "days"} 🔥
+          </p>
         </div>
         {/* <div className="flex flex-row justify-self-center"><p>Longest streak</p><p className="ml-2 uppercase font-semibold"> 6 days 🔥</p></div> */}
       </div>

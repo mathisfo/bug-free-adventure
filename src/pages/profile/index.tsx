@@ -1,7 +1,8 @@
 import { useSession } from "next-auth/react";
 import { TrophyIcon } from "@heroicons/react/24/outline";
 import { api } from "../../utils/api";
-import Stats from "../../components/Stats";
+
+import { summary } from "date-streaks";
 
 const Profile = () => {
   const { data: session, status } = useSession({ required: true });
@@ -44,9 +45,14 @@ const Profile = () => {
     );
   }
 
+  const datesDoneExercises = {
+    dates: history.map((e) => e.completedAt) as Date[],
+  };
+
+  const longestStreak = summary(datesDoneExercises).longestStreak;
+
   return (
     <div>
-      <Stats />
       <div className="background-color text-color mr-4 w-1/2 rounded-r-lg p-16 ">
         <div className="mb-16 mt-12">
           <div className="grid grid-cols-3 items-baseline border-b dark:border-zinc-700">
@@ -79,6 +85,12 @@ const Profile = () => {
             Exercises done
           </p>
           <p className=" col-span-2 col-start-2 text-lg">{history.length}</p>
+        </div>
+        <div className="my-8 grid grid-cols-3 items-baseline border-b dark:border-zinc-700">
+          <p className=" col-start-1 text-sm font-semibold uppercase">
+            Longest streak
+          </p>
+          <p className=" col-span-2 col-start-2 text-lg">{longestStreak} 🔥 </p>
         </div>
       </div>
     </div>
