@@ -6,7 +6,6 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { HiUser } from "react-icons/hi";
-import { checkServerIdentity } from "tls";
 import ExerciseHistoryPreview from "../../components/previews/ExerciseHistoryPreview";
 import ExercisePlannerPreview from "../../components/previews/ExercisePlannerPreview";
 import HistoryGraphPreview from "../../components/previews/HistoryGraphPreview";

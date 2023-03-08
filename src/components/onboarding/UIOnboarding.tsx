@@ -11,6 +11,7 @@ import {
   HiArrowLeft,
   HiInformationCircle,
   HiIdentification,
+  HiOutlineCheck,
 } from "react-icons/hi";
 import {
   OnboardingForm,
