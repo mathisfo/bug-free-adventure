@@ -1,10 +1,11 @@
 // src/pages/_app.tsx
 import type { Session } from "next-auth";
-import { SessionProvider } from "next-auth/react";
+import { SessionProvider, signIn, useSession } from "next-auth/react";
 import { ThemeProvider } from "next-themes";
 import type { AppType } from "next/app";
 import Head from "next/head";
 import Sidebar from "../components/Sidebar";
+import { getServerAuthSession } from "../server/auth";
 import "../styles/globals.css";
 import { api } from "../utils/api";
 
