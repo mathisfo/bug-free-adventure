@@ -29,6 +29,7 @@
     "flowbite": "^1.5.4",
     "flowbite-react": "^0.3.4",
     "ims-lti": "^3.0.2",
+    "jsonwebtoken": "^9.0.0",
     "next": "12.3.1",
     "next-auth": "~4.10.3",
     "next-themes": "^0.2.1",
@@ -47,6 +48,7 @@
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.3",
+    "@types/jsonwebtoken": "^9.0.1",
     "@types/node": "^18.11.8",
     "@types/nodemailer": "^6.4.7",
     "@types/react": "18.0.14",

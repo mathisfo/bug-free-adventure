@@ -1,14 +1,33 @@
 import GitHubProvider from "next-auth/providers/github";
+import CredentialsProvider from "next-auth/providers/credentials";
 
 // Prisma adapter for NextAuth, optional and can be removed
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { env } from "../../../env/server.mjs";
 import { prisma } from "../../../server/db";
-import NextAuth, { NextAuthOptions } from "next-auth";
+import NextAuth, { NextAuthOptions, Session, User } from "next-auth";
+import { verify } from "jsonwebtoken";
+import { sign } from "jsonwebtoken";
+import { JWT } from "next-auth/jwt/types.js";
+
+const decodeJwt = async (token: string) => {
+  try {
+    return verify(token, env.LTI_CLIENT_SECRET);
+  } catch (error) {
+    return null;
+  }
+};
 
 export const authOptions: NextAuthOptions = {
   // Include user.id on session
   callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id;
+        token.email = user.email;
+      }
+      return token;
+    },
     async session({ session, user }: any) {
       if (session.user) {
         session.user.id = user.id;
@@ -28,39 +47,22 @@ export const authOptions: NextAuthOptions = {
       clientId: env.GITHUB_CLIENT_ID,
       clientSecret: env.GITHUB_CLIENT_SECRET,
     }),
-    {
-      id: "lti",
-      name: "LTI Integration",
-      type: "oauth",
-      clientSecret: env.LTI_CLIENT_SECRET,
-      clientId: env.LTI_CLIENT_ID,
-      authorization: {},
-      version: "2.0",
-      accessTokenUrl: "https://kauth.kakao.com/oauth/token",
 
-      token: {
-        url: "http://localhost:8888/moodle401/mod/lti/token.php",
-        params: {
-          oauth_callback: "about:blank",
-          oauth_consumer_key: env.LTI_CLIENT_ID,
-          access_token: "9fccb1f206d5c587c2079abf9f0504d8",
-          oauth_signature: env.LTI_CLIENT_SECRET,
-          oauth_nonce: "1234567890",
-          oauth_signature_method: "HMAC-SHA1",
-          oauth_timestamp: "1234567890",
-          oauth_version: "2.0",
-        },
+    CredentialsProvider({
+      name: "LTI",
+      credentials: {},
+      authorize: async (credentials: any) => {
+        // The user object is already provided in the credentials object
+        const user = credentials.user;
+
+        if (user) {
+          return Promise.resolve(user);
+        } else {
+          return Promise.resolve(null);
+        }
       },
-      userinfo: "https://kapi.kakao.com/v2/user/me",
-      profile(profile) {
-        return {
-          id: profile.id,
-          name: profile.kakao_account?.profile.nickname,
-          email: profile.kakao_account?.email,
-          image: profile.kakao_account?.profile.profile_image_url,
-        };
-      },
-    },
+    }),
+
     // ...add more providers here
   ],
 };
