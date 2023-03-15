@@ -181,7 +181,7 @@ const ModuleStatistics = () => {
                 .map((activity) => {
                   return (
                     <a
-                      key={activity.activityName}
+                      key={activity.activityId}
                       target="_blank"
                       href={
                         activity.url +

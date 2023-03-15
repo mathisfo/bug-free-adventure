@@ -92,8 +92,10 @@ export function reMapLearnerActivityUtil(
       activity.relatedTopic = key;
       activity.activityId = type;
       activity.activityName =
-        names.find((e) => e.id === type)?.name ?? "Unnamed Activity";
+        names.find((e) => e.id.toLowerCase() === type.toLowerCase())?.name ??
+        "Unnamed Activity";
       activity.url = names.find((e) => e.id === type)?.url ?? "NO URL";
+
       if (api.learner.state.activities[key].Examples[type].values.p == 1) {
         activity.visited = true;
       }
@@ -166,8 +168,11 @@ export function reMapLearnerActivityUtil(
       activity.type = "CODING";
       activity.activityId = type;
       activity.activityName =
-        names.find((e) => e.id === type)?.name ?? "Unamed Activity";
-      activity.url = names.find((e) => e.id === type)?.url ?? "NO URL";
+        names.find((e) => e.id.toLowerCase() === type.toLowerCase())?.name ??
+        "Unamed Activity";
+      activity.url =
+        names.find((e) => e.id.toLowerCase() === type.toLowerCase())?.url ??
+        "NO URL";
       if (api.learner.state.activities[key].Coding[type].values.p == 1) {
         activity.visited = true;
       }
