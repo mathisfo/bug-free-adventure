@@ -7,7 +7,7 @@ export type selectedCompsEnum = z.infer<typeof selectedComps>;
 export const onboardingSchema = z
   .object({
     name: z.string().optional(),
-    USNEmail: z.string().email().endsWith("@usn.no", {
+    USNEmail: z.string().email().endsWith("usn.no", {
       message: "Your email must be an USN email.",
     }),
     protusId: z
