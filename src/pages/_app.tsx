@@ -1,12 +1,12 @@
 // src/pages/_app.tsx
 import type { Session } from "next-auth";
-import { SessionProvider, signIn, useSession } from "next-auth/react";
+import { SessionProvider } from "next-auth/react";
 import { ThemeProvider } from "next-themes";
 import type { AppType } from "next/app";
 import Head from "next/head";
 import Sidebar from "../components/Sidebar";
-import { getServerAuthSession } from "../server/auth";
 import "../styles/globals.css";
+import { Analytics } from "@vercel/analytics/react";
 import { api } from "../utils/api";
 
 const MyApp: AppType<{ session: Session | null }> = ({
@@ -28,6 +28,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
           </Sidebar>
         </div>
       </SessionProvider>
+      <Analytics />
     </ThemeProvider>
   );
 };
