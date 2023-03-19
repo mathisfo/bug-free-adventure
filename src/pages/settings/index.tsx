@@ -317,13 +317,9 @@ const Settings: NextPage = () => {
                         />
                       </span>
                       <input
-                        value={
-                          userPreferences?.leaderboard
-                            ? userPreferences.user.name
-                            : undefined
-                        }
                         {...register("name")}
                         type="text"
+                        defaultValue={userPreferences.user.name}
                         id="name"
                         className={classNames(
                           errors.name
