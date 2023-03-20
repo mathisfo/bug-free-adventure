@@ -1,4 +1,4 @@
-import { SelectedEnum } from "@prisma/client";
+import { Prisma, PrismaClient, SelectedEnum, User } from "@prisma/client";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
@@ -11,6 +11,21 @@ import {
 } from "../../schema/UserSchema";
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
 import { learnerActivity } from "./learnerActivityRouter";
+
+const updateUserName = async (
+  prisma: PrismaClient,
+  userId: string,
+  name: string | undefined
+) => {
+  return await prisma.user.update({
+    where: {
+      id: userId,
+    },
+    data: {
+      name: name,
+    },
+  });
+};
 
 export const userRouter = createTRPCRouter({
   getLeaderBoard: publicProcedure.query(async ({ ctx }) => {
@@ -93,7 +108,7 @@ export const userRouter = createTRPCRouter({
   updateUserPreferences: protectedProcedure
     .input(userPreferenceSchema)
     .mutation(async ({ ctx, input }) => {
-      return await ctx.prisma.userPreference.create({
+      await ctx.prisma.userPreference.create({
         data: {
           userId: ctx.session.user.id,
           selectedComponents: input.newSelectedComponents,
@@ -101,6 +116,7 @@ export const userRouter = createTRPCRouter({
           leaderboard: input.leaderboard,
         },
       });
+      updateUserName(ctx.prisma, ctx.session.user.id, input.name);
     }),
   getLastUnfinishedActivity: protectedProcedure.query(async ({ ctx }) => {
     const unfinishedActivity = await ctx.prisma.exerciseHistory.findMany({
