@@ -159,9 +159,9 @@ const UIOnboarding = () => {
                 </label>
                 <p className="my-1 text-sm text-gray-400">
                   Your ID will be sent to you on the email you have associated
-                  to your GitHub account. It is a five digit number starting
-                  with 22 (ex: 22170). If you have not received a email please
-                  contact{" "}
+                  with your GitHub account. It is a five digit number starting
+                  with 22 (ex: 22170). If you have not received an email two
+                  hours after signin, please contact{" "}
                   <a
                     className="text-indigo-600"
                     href="mailto:boban.vesin@ntnu.no"
