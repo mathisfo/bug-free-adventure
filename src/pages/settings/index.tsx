@@ -4,7 +4,7 @@ import { Checkbox } from "flowbite-react";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler, get } from "react-hook-form";
 import { HiUser } from "react-icons/hi";
 import ExerciseHistoryPreview from "../../components/previews/ExerciseHistoryPreview";
 import ExercisePlannerPreview from "../../components/previews/ExercisePlannerPreview";
@@ -19,49 +19,49 @@ import { api } from "../../utils/api";
 
 const Settings: NextPage = () => {
   const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<UserPreferenceForm>({
-    resolver: zodResolver(userPreferenceSchema),
-  });
-
-  const {
     data: userPreferences,
     isSuccess: selectedSuccess,
     isLoading: selectedLoading,
   } = api.userRouter.getUserPreferences.useQuery();
 
-  const mutation = api.userRouter.updateUserPreferences.useMutation();
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    setValue,
+    formState: { errors },
+  } = useForm<UserPreferenceForm>({
+    defaultValues: {
+      newSelectedComponents: userPreferences?.selectedComponents,
+      leaderboard: userPreferences?.leaderboard,
+    },
+    resolver: zodResolver(userPreferenceSchema),
+  });
 
   const [checkboxIndexes, setCheckboxIndexes] = useState<SelectedEnum[]>([]);
   const [checkedLeaderboard, setCheckedLeaderboard] = useState(false);
+  useEffect(() => {
+    if (userPreferences) {
+      setValue("newSelectedComponents", userPreferences.selectedComponents);
+      setValue("leaderboard", userPreferences.leaderboard);
+      setCheckboxIndexes(userPreferences.selectedComponents);
+      setCheckedLeaderboard(userPreferences.leaderboard);
+    }
+  }, [userPreferences, setValue]);
+
+  const mutation = api.userRouter.updateUserPreferences.useMutation();
 
   const router = useRouter();
 
   const ctx = api.useContext();
 
-  useEffect(() => {
-    if (userPreferences) {
-      setCheckboxIndexes(userPreferences.selectedComponents);
-      if (userPreferences.leaderboard) {
-        setCheckedLeaderboard(true);
-      }
-    }
-  }, [userPreferences]);
-
-  console.log(checkboxIndexes);
-
   if (!selectedSuccess || selectedLoading) {
     return <div></div>;
   }
 
-  console.log(checkboxIndexes);
-
   const onSubmit: SubmitHandler<UserPreferenceForm> = (
     data: UserPreferenceForm
   ) => {
-    console.log(data);
     mutation.mutate(data, {
       onSuccess: () => {
         ctx.invalidate();
@@ -76,9 +76,6 @@ const Settings: NextPage = () => {
 
   return (
     <div className="background-color col-span-4 mr-4 h-screen w-11/12 rounded-r-lg p-16 ">
-      {Object.values(errors).map((error) => (
-        <span key={error?.type}>{error?.message}</span>
-      ))}
       <h1 className="text-color mb-6 text-xl font-semibold uppercase opacity-75">
         My chosen components
       </h1>
@@ -86,7 +83,7 @@ const Settings: NextPage = () => {
         <div className="mt-5 grid select-none grid-cols-2 gap-x-8 gap-y-4 ">
           <div
             className={classNames(
-              checkboxIndexes?.includes(SelectedEnum.TODO)
+              checkboxIndexes.includes(SelectedEnum.TODO)
                 ? "border-[#0de890] dark:border-[#0de890]"
                 : "border-zinc-400 dark:border-zinc-600",
               " course-card relative h-auto grid-cols-1 rounded-2xl border-2 border  px-6 pt-6"
@@ -115,11 +112,11 @@ const Settings: NextPage = () => {
                         SelectedEnum.TODO,
                       ])
                 }
-                checked={
-                  checkboxIndexes?.includes(SelectedEnum.TODO) ? true : false
-                }
                 {...register("newSelectedComponents")}
                 id="select"
+                defaultChecked={userPreferences?.selectedComponents?.includes(
+                  SelectedEnum.TODO
+                )}
                 value={SelectedEnum.TODO}
                 className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                 required={false}
@@ -150,6 +147,9 @@ const Settings: NextPage = () => {
             </div>
             <div className="absolute bottom-1 my-6 ml-4 flex items-center gap-2">
               <Checkbox
+                defaultChecked={userPreferences?.selectedComponents?.includes(
+                  SelectedEnum.HISTORYGRAPH
+                )}
                 onClick={() =>
                   checkboxIndexes?.includes(SelectedEnum.HISTORYGRAPH)
                     ? setCheckboxIndexes(
@@ -161,11 +161,6 @@ const Settings: NextPage = () => {
                         ...checkboxIndexes,
                         SelectedEnum.HISTORYGRAPH,
                       ])
-                }
-                checked={
-                  checkboxIndexes?.includes(SelectedEnum.HISTORYGRAPH)
-                    ? true
-                    : false
                 }
                 {...register("newSelectedComponents")}
                 id="select"
@@ -206,9 +201,9 @@ const Settings: NextPage = () => {
                         SelectedEnum.STATS,
                       ])
                 }
-                checked={
-                  checkboxIndexes?.includes(SelectedEnum.STATS) ? true : false
-                }
+                defaultChecked={userPreferences?.selectedComponents?.includes(
+                  SelectedEnum.STATS
+                )}
                 {...register("newSelectedComponents")}
                 id="select"
                 value={SelectedEnum.STATS}
@@ -250,14 +245,12 @@ const Settings: NextPage = () => {
                       )
                     : setCheckboxIndexes([
                         ...checkboxIndexes,
-                        "EXERCISEHISTORY",
+                        SelectedEnum.EXERCISEHISTORY,
                       ])
                 }
-                checked={
-                  checkboxIndexes?.includes(SelectedEnum.EXERCISEHISTORY)
-                    ? true
-                    : false
-                }
+                defaultChecked={userPreferences?.selectedComponents?.includes(
+                  SelectedEnum.EXERCISEHISTORY
+                )}
                 {...register("newSelectedComponents")}
                 id="select"
                 value={SelectedEnum.EXERCISEHISTORY}
@@ -332,6 +325,9 @@ const Settings: NextPage = () => {
                       />
                     </div>
                   </div>
+                  {Object.values(errors).map((error) => (
+                    <span key={error?.type}>{error?.message}</span>
+                  ))}
                 </div>
               )}
             </div>
@@ -343,6 +339,7 @@ const Settings: NextPage = () => {
               <Checkbox
                 onClick={() => setCheckedLeaderboard(!checkedLeaderboard)}
                 checked={checkedLeaderboard}
+                defaultChecked={userPreferences?.leaderboard}
                 {...register("leaderboard")}
                 id="select"
                 className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
