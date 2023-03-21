@@ -2,6 +2,7 @@ import { Prisma, PrismaClient, SelectedEnum, User } from "@prisma/client";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
+import Leaderboard from "../../../components/Leaderboard";
 import {
   onboardingSchema,
   selectedComps,
@@ -15,7 +16,8 @@ import { learnerActivity } from "./learnerActivityRouter";
 const updateUserName = async (
   prisma: PrismaClient,
   userId: string,
-  name: string | undefined
+  name: string | undefined,
+  leaderboard: boolean
 ) => {
   return await prisma.user.update({
     where: {
@@ -23,6 +25,7 @@ const updateUserName = async (
     },
     data: {
       name: name,
+      leaderboard: leaderboard,
     },
   });
 };
@@ -116,7 +119,12 @@ export const userRouter = createTRPCRouter({
           leaderboard: input.leaderboard,
         },
       });
-      updateUserName(ctx.prisma, ctx.session.user.id, input.name);
+      updateUserName(
+        ctx.prisma,
+        ctx.session.user.id,
+        input.name,
+        input.leaderboard
+      );
     }),
   getLastUnfinishedActivity: protectedProcedure.query(async ({ ctx }) => {
     const unfinishedActivity = await ctx.prisma.exerciseHistory.findMany({
