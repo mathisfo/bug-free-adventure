@@ -46,15 +46,34 @@ const HistoryGraph = () => {
     );
   }
 
-  const grouped = history.reduce((acc: any, curr: any) => {
-    const date = new Date(curr.completedAt).toDateString();
-    if (!acc[date]) {
-      acc[date] = [];
+  function grouped(arr: typeof history): typeof history[] {
+    if (!arr) {
+      return [[]];
     }
+    // Use reduce to create a map with completedAt dates as keys and arrays of objects as values
+    const groupedMap = arr.reduce(
+      (
+        acc: Map<string, typeof history>,
+        obj: ExerciseHistory & {
+          ActivityResource: ActivityResource;
+        }
+      ) => {
+        const dateKey = obj.completedAt!.toISOString().split("T")[0] as string; // Get only the date part of the completedAt field
 
-    acc[date]?.push(curr);
-    return acc;
-  }, {} as { [key: string]: Array<ExerciseHistory & { ActivityResource: ActivityResource }> });
+        if (!acc.has(dateKey)) {
+          acc.set(dateKey, []);
+        }
+        acc.get(dateKey)!.push(obj);
+        return acc;
+      },
+      new Map<string, typeof history>()
+    );
+
+    // Convert the map values to an array of arrays
+    const groupedArray = Array.from(groupedMap.values());
+
+    return groupedArray as typeof history[];
+  }
 
   ChartJS.register(
     CategoryScale,
@@ -87,17 +106,16 @@ const HistoryGraph = () => {
     },
   };
 
-  const labels = Object.keys(grouped);
-  const dataPoints: Array<
-    ExerciseHistory & { ActivityResource: ActivityResource }
-  >[] = Object.values(grouped);
+  const labels = grouped(history).map(
+    (d) => d![0]?.completedAt?.toISOString().split("T")[0]
+  );
 
   const data = {
     labels,
     datasets: [
       {
         label: "Java",
-        data: dataPoints.map((d) => d.length),
+        data: grouped(history).map((d) => d!.length),
         borderColor: "rgb(255, 99, 132)",
         backgroundColor: "rgba(255, 99, 132, 0.5)",
       },
