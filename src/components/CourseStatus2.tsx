@@ -60,7 +60,7 @@ const CourseStatus2 = () => {
     if (type === "examples") {
       const success = activities.examples
         .filter((act) => act.relatedTopic === module)
-        .filter((act) => act.attempts > 0).length;
+        .filter((act) => act.visited).length;
 
       const total = activities.examples.filter(
         (act) => act.relatedTopic === module

@@ -95,7 +95,7 @@ const ActivityCard = (props: ActivityCardProps) => {
               props.type === "EXAMPLE"
                 ? props.type === e.type &&
                   props.moduleName === e.relatedTopic &&
-                  e.attempts > 0
+                  e.visited
                 : props.type === e.type &&
                   props.moduleName === e.relatedTopic &&
                   e.successRate > 0

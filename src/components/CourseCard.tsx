@@ -37,7 +37,7 @@ const CourseCard = ({ courseName }: { courseName: string }) => {
 
   const exercisesDone = listOfExercises.filter(
     (e: Activity) =>
-      (e.type === "EXAMPLE" && e.attempts > 0) ||
+      (e.type === "EXAMPLE" && e.visited) ||
       ((e.type === "CHALLENGE" || e.type === "CODING") && e.successRate > 0)
   ).length;
 
