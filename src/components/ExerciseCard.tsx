@@ -23,7 +23,8 @@ const ExerciseCard = ({
       className={`grid h-72 w-full rounded-xl ${
         successRate > 0 || (visited && type == "EXAMPLE")
           ? `lighter-green-color`
-          : attempts > 0 && successRate == 0 && type !== "EXAMPLE"
+          : (attempts > 0 && successRate == 0) ||
+            (type == "EXAMPLE" && attempts > 0 && !visited)
           ? `bg-yellow-100 dark:bg-yellow-200`
           : `course-card`
       }`}
