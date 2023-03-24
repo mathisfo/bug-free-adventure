@@ -41,7 +41,7 @@ const Courses = () => {
               size="176px"
               bg="#d1d5db"
               fillColor="#988efe"
-              progress={history.length / 184}
+              progress={(history.length / 184) * 100}
             />
           </div>
         </div>
