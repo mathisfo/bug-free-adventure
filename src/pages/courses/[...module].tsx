@@ -74,8 +74,11 @@ const ModuleStatistics = () => {
 
       case "examples": {
         return learnerAnalytics.activityAnalytics.examples.sort(
-          (firstActivity, secondActivity) =>
-            firstActivity.attempts - secondActivity.attempts
+          (firstActivity, secondActivity) => {
+            if (firstActivity.visited && !secondActivity.visited) return 1;
+            if (!firstActivity.visited && secondActivity.visited) return -1;
+            return 0;
+          }
         );
       }
 
@@ -202,6 +205,7 @@ const ModuleStatistics = () => {
                         type={activity.type}
                         successRate={activity.successRate}
                         attempts={activity.attempts}
+                        visited={activity.visited}
                       />
                     </a>
                   );

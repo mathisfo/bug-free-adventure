@@ -80,9 +80,9 @@ const ProgressionGrid = (props: ProgressionGridInterface) => {
                   onMouseEnter={() => handleHover(item)}
                   onMouseLeave={() => setIsShowing(null)}
                   className={`${boxStyling} ${
-                    item.attempts > 0
+                    item.visited
                       ? "green-color"
-                      : item.successRate === 0 && item.visited
+                      : !item.visited && item.attempts > 0
                       ? "lighter-green-color"
                       : "bg-gray-200 dark:bg-[#404143]"
                   } `}

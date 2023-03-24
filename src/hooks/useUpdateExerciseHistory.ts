@@ -1,10 +1,10 @@
-import { contextProps } from "@trpc/react-query/shared";
 import { useState, useEffect } from "react";
+import { LearnerAnalyticsAPIResponse } from "../server/schema/LearnerActivitySchema";
 
 import { api } from "../utils/api";
 
 export const useUpdateExerciseHistory = (
-  learnerAnalytics: any,
+  learnerAnalytics: LearnerAnalyticsAPIResponse | undefined,
   selectedId: string | undefined
 ) => {
   const ctx = api.useContext();
@@ -50,8 +50,8 @@ export const useUpdateExerciseHistory = (
         if (
           dataPrevious.type === "EXAMPLE" &&
           selected.type === "EXAMPLE" &&
-          dataPrevious.attempts === 0 &&
-          selected.attempts > 0 &&
+          !dataPrevious.visited &&
+          selected.visited &&
           selectedId
         ) {
           mutation.mutate({ activityId: selectedId });
