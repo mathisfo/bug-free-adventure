@@ -31,9 +31,7 @@ const ExerciseCard = ({
     >
       <p
         className={`text-color px-4 pt-4 text-lg font-semibold ${
-          successRate > 0 || (visited && type == "EXAMPLE")
-            ? `text-slate-800 dark:text-slate-800`
-            : attempts > 0 && successRate == 0 && type !== "EXAMPLE"
+          successRate > 0 || attempts > 0
             ? `text-slate-800 dark:text-slate-800`
             : `text-color`
         }`}
@@ -45,7 +43,8 @@ const ExerciseCard = ({
           className={`flex h-28 w-28 flex-row items-stretch rounded-full p-4 ${
             successRate > 0 || (visited && type == "EXAMPLE")
               ? `green-color`
-              : attempts > 0 && successRate == 0 && type !== "EXAMPLE"
+              : (attempts > 0 && successRate == 0 && type !== "EXAMPLE") ||
+                (type == "EXAMPLE" && !visited && attempts > 0)
               ? `bg-[#fecd66]`
               : `bg-gray-200 dark:bg-[#303335]`
           }`}
@@ -64,9 +63,7 @@ const ExerciseCard = ({
       <div className="mx-4 flex flex-row justify-between">
         <p
           className={`text-color text-sm font-semibold ${
-            successRate > 0 || (visited && type == "EXAMPLE")
-              ? `text-slate-800 dark:text-slate-800`
-              : attempts > 0 && successRate == 0 && type !== "EXAMPLE"
+            successRate > 0 || attempts > 0
               ? `text-slate-800 dark:text-slate-800`
               : `text-color`
           }`}
@@ -78,9 +75,7 @@ const ExerciseCard = ({
         ) : (
           <p
             className={`text-color text-sm font-semibold ${
-              successRate > 0 || (visited && type == "EXAMPLE")
-                ? `text-slate-800 dark:text-slate-800`
-                : attempts > 0 && successRate == 0 && type !== "EXAMPLE"
+              successRate > 0 || attempts > 0
                 ? `text-slate-800 dark:text-slate-800`
                 : `text-color`
             }`}

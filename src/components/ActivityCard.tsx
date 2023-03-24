@@ -62,6 +62,23 @@ const ActivityCard = (props: ActivityCardProps) => {
     </svg>
   );
 
+  const percentage = Math.ceil(
+    (listOfExercises.filter((e: Activity) =>
+      props.type === "EXAMPLE"
+        ? props.type === e.type &&
+          props.moduleName === e.relatedTopic &&
+          e.visited
+        : props.type === e.type &&
+          props.moduleName === e.relatedTopic &&
+          e.successRate > 0
+    ).length /
+      listOfExercises.filter(
+        (e: Activity) =>
+          props.type === e.type && props.moduleName === e.relatedTopic
+      ).length) *
+      100
+  );
+
   return (
     <div
       className={`${
@@ -90,22 +107,7 @@ const ActivityCard = (props: ActivityCardProps) => {
           size="110px"
           bg="white"
           fillColor={props.fillColor}
-          progress={Math.ceil(
-            (listOfExercises.filter((e: Activity) =>
-              props.type === "EXAMPLE"
-                ? props.type === e.type &&
-                  props.moduleName === e.relatedTopic &&
-                  e.visited
-                : props.type === e.type &&
-                  props.moduleName === e.relatedTopic &&
-                  e.successRate > 0
-            ).length /
-              listOfExercises.filter(
-                (e: Activity) =>
-                  props.type === e.type && props.moduleName === e.relatedTopic
-              ).length) *
-              100
-          )}
+          progress={Number.isNaN(percentage) ? 100 : percentage}
         />
       </div>
       <div className="col-span-3 col-start-1 flex flex-row items-center space-x-1 p-4 text-sm">

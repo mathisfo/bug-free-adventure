@@ -105,7 +105,7 @@ const Stats = () => {
       numberLast7Days === 0 ||
       (numberLast7Days === 1 && number7DaysBefore !== 1)
     ) {
-      return -100;
+      return 100;
     }
 
     return Math.round(
@@ -287,17 +287,21 @@ const Stats = () => {
             <div className="col-start-2 row-span-2 mr-2 flex items-center justify-self-end">
               <div
                 className={classNames(
-                  exerciseAttempts(type.CHALLENGE).changeInPercentage >= 0
+                  exerciseAttempts(type.CHALLENGE).attempts7DaysBefore >
+                    exerciseAttempts(type.CHALLENGE).attemptsLast7Days ||
+                    exerciseAttempts(type.CHALLENGE).changeInPercentage == 0
                     ? "bg-[#0de890] text-gray-700"
                     : "bg-[#DE5B7E] text-white",
                   "flex flex-row items-center rounded"
                 )}
               >
                 {" "}
-                {exerciseAttempts(type.CHALLENGE).changeInPercentage < 0 ? (
-                  <ArrowTrendingUpIcon className="mx-1 h-4 w-4 text-white " />
-                ) : (
+                {exerciseAttempts(type.CHALLENGE).attempts7DaysBefore >
+                  exerciseAttempts(type.CHALLENGE).attemptsLast7Days ||
+                exerciseAttempts(type.CHALLENGE).changeInPercentage == 0 ? (
                   <ArrowTrendingDownIcon className="mx-1 h-4 w-4 text-gray-700 " />
+                ) : (
+                  <ArrowTrendingUpIcon className="mx-1 h-4 w-4 text-white " />
                 )}
                 <p className="text-sm font-semibold">
                   {Math.abs(
@@ -323,16 +327,20 @@ const Stats = () => {
             <div className="col-start-2 row-span-2 mr-2 flex items-center justify-self-end">
               <div
                 className={classNames(
-                  exerciseAttempts(type.CODING).changeInPercentage >= 0
+                  exerciseAttempts(type.CODING).attempts7DaysBefore >
+                    exerciseAttempts(type.CODING).attemptsLast7Days ||
+                    exerciseAttempts(type.CODING).changeInPercentage == 0
                     ? "bg-[#0de890] text-gray-700"
                     : "bg-[#DE5B7E] text-white",
                   "flex flex-row items-center rounded"
                 )}
               >
-                {exerciseAttempts(type.CODING).changeInPercentage < 0 ? (
-                  <ArrowTrendingUpIcon className="text-gray-white mx-1 h-4 w-4 " />
-                ) : (
+                {exerciseAttempts(type.CODING).attempts7DaysBefore >
+                  exerciseAttempts(type.CODING).attemptsLast7Days ||
+                exerciseAttempts(type.CODING).changeInPercentage == 0 ? (
                   <ArrowTrendingDownIcon className="mx-1 h-4 w-4 text-gray-700 " />
+                ) : (
+                  <ArrowTrendingUpIcon className="text-gray-white mx-1 h-4 w-4 " />
                 )}
                 <p className="text-sm font-semibold">
                   {Math.abs(exerciseAttempts(type.CODING).changeInPercentage)}%
